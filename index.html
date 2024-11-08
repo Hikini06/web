@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #menu-nav {
+            display: none;
+        }
+        #menu-nav.active {
+            display: block;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #menu-toggle {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #menu-toggle:hover {
+            background-color: #45a049;
+        }
+
+        #menu-nav {
+            display: none;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #menu-nav.active {
+            display: block;
+        }
+
+        #menu-nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #menu-nav ul li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #menu-nav ul li:last-child {
+            border-bottom: none;
+        }
+
+        #menu-nav ul li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        #menu-nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        #searchBox {
+            padding: 10px;
+            margin-top: 20px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #007B9A;
+        }
+    </style>
+</head>
+<body>
+    <h1>######</h1>
+    <button id="menu-toggle">Menu</button>
+    <nav id="menu-nav">
+        <ul>
+            <li><a href="#home">Trang chủ</a></li>
+            <li><a href="src/components/product/product.html">Sản phẩm</a></li>
+            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="#contact">Liên hệ</a></li>
+        </ul>
+    </nav>
+    <input type="text" id="searchBox" placeholder="Nhập sản phẩm cần tìm">
+    <button onclick="searchProduct()">Tìm kiếm</button>
+
+    <script>
+        function searchProduct() {
+            const query = document.getElementById('searchBox').value;
+            alert('Tìm kiếm: ' + query);
+        }
+
+        // Thêm chức năng toggle menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuNav = document.getElementById('menu-nav');
+
+        menuToggle.addEventListener('click', function() {
+            menuNav.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
