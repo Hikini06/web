@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Các thẻ meta và link hiện có -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="home.css">
@@ -8,41 +10,82 @@
 </head>
 
 <body>
+    <!-- <header>     
+        <div class="logo-container">
+            <a href="index.html" class="logo">Tiệm hoa mimi</a>
+        </div>
+        <div class="header-left">
+            <button id="menu-toggle" class="hamburger-menu" aria-label="Toggle menu">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+                <span class="menu-text">Menu</span>
+            </button>
+        </div>
+        <nav id="menu-nav" class="menu-nav">
+                <ul>
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="product.html">Sản phẩm</a></li>
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>    
+                    <div class="search-icon-container">
+                        <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
+                        <div class="search-container">
+                            <input type="text" id="searchBox" placeholder="Tìm kiếm...">
+                         </div>
+                    </div> 
+    </header> -->
     <header>     
         <div class="header-left">
             <button id="menu-toggle" class="hamburger-menu" aria-label="Toggle menu">
                 <span class="hamburger-box">
                     <span class="hamburger-inner"></span>
                 </span>
+                <span class="menu-text">Menu</span>
             </button>
+        </div>
+        <div class="logo-container">
             <a href="index.html" class="logo">Tiệm hoa mimi</a>
         </div>
-
-
-
-        <div class="header-right">
-            <nav id="function">
-                <ul>
-                    <li><a href="#home">Trang chủ</a></li>
-                    <li><a href="product.html">Sản phẩm</a></li>
-                    <li><a href="#about">Giới thiệu</a></li>
-                    <li><a href="#contact">Liên hệ</a></li>
-                    <li class="search-icon-container">
-                        <i class="fas fa-search search-icon"></i>
-                    </li>
-                </ul>
-            </nav>
+        <div class="search-icon-container">
+            <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
             <div class="search-container">
-                <input type="text" id="searchBox" placeholder="Nhập sản phẩm cần tìm">
+                <input type="text" id="searchBox" placeholder="Tìm kiếm...">
             </div>
         </div>
+        <nav id="menu-nav" class="menu-nav">
+            <ul>
+                <li><a href="#home">Trang chủ</a></li>
+                <li><a href="product.html">Sản phẩm</a></li>
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#contact">Liên hệ</a></li>    
+            </ul>
+        </nav>
     </header>
-
     <main>
-        <!-- Nội dung chính của trang -->
+        <section id="featured-products">
+            <h2>Sản phẩm nổi bật</h2>
+            <div class="product-grid">
+                <!-- Thêm các sản phẩm nổi bật ở đây -->
+                <div class="product-card">
+                    <img src="path/to/product1.jpg" alt="Sản phẩm 1">
+                    <h3>Sản phẩm 1</h3>
+                    <p>Mô tả ngắn về sản phẩm 1</p>
+                    <button>Xem chi tiết</button>
+                </div>
+                <!-- Thêm các sản phẩm khác tương tự -->
+            </div>
+        </section>
+
+        <section id="about-us">
+            <h2>Về chúng tôi</h2>
+            <p>Tiệm hoa mimi là nơi bạn có thể tìm thấy những bó hoa tươi đẹp nhất với giá cả phải chăng. Chúng tôi cam kết mang đến cho khách hàng những trải nghiệm mua sắm tuyệt vời nhất.</p>
+        </section>
     </main>
 
+    <footer>
+        <p>&copy; 2023 Tiệm hoa mimi. All rights reserved.</p>
+    </footer>
+    </body>
     <script src="home.js"></script>
-</body>
 </html>
-
