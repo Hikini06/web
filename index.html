@@ -1,39 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Các thẻ meta và link hiện có -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="home.css">
     <title>Tiệm hoa mimi</title>
 </head>
+
 <body>
-    <h1><a href="index.html" id="logo">Tiệm hoa mimi</a></h1>
-    <button id="menu-toggle">Menu</button>
-    <nav id="menu-nav">
-        <ul>
-            <li><a href="#home">Trang chủ</a></li>
-            <li><a href="product.html">Sản phẩm</a></li>
-            <li><a href="#about">Giới thiệu</a></li>
-            <li><a href="#contact">Liên hệ</a></li>
-        </ul>
-    </nav>
-    <input type="text" id="searchBox" placeholder="Nhập sản phẩm cần tìm">
-    <button onclick="searchProduct()">Tìm kiếm</button>
+    <header>     
+        <div class="header-left">
+            <button id="menu-toggle" class="hamburger-menu" aria-label="Toggle menu">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+            <a href="index.html" class="logo">Tiệm hoa mimi</a>
+        </div>
 
-    <script>
-        function searchProduct() {
-            const query = document.getElementById('searchBox').value;
-            alert('Tìm kiếm: ' + query);
-        }
 
-        // Thêm chức năng toggle menu
-        const menuToggle = document.getElementById('menu-toggle');
-        const menuNav = document.getElementById('menu-nav');
 
-        menuToggle.addEventListener('click', function() {
-            menuNav.classList.toggle('active');
-        });
-    </script>
+        <div class="header-right">
+            <nav id="function">
+                <ul>
+                    <li><a href="#home">Trang chủ</a></li>
+                    <li><a href="product.html">Sản phẩm</a></li>
+                    <li><a href="#about">Giới thiệu</a></li>
+                    <li><a href="#contact">Liên hệ</a></li>
+                    <li class="search-icon-container">
+                        <i class="fas fa-search search-icon"></i>
+                    </li>
+                </ul>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="searchBox" placeholder="Nhập sản phẩm cần tìm">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Nội dung chính của trang -->
+    </main>
+
+    <script src="home.js"></script>
 </body>
 </html>
+

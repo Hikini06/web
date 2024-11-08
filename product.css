@@ -110,11 +110,35 @@ font-size: 1.2em;
 max-width: 600px;
 margin: 0 auto;
 }
-#logo {
+.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    color: #FF69B4; /* Màu hồng đậm */
     text-decoration: none;
-    color: inherit;
+    display: inline-block;
+    padding: 10px 20px;
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-#logo:hover {
-    color: #4CAF50;
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #FF69B4, #FF1493);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
