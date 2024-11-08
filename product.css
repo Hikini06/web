@@ -110,3 +110,11 @@ font-size: 1.2em;
 max-width: 600px;
 margin: 0 auto;
 }
+#logo {
+    text-decoration: none;
+    color: inherit;
+}
+
+#logo:hover {
+    color: #4CAF50;
+}
