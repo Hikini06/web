@@ -80,40 +80,40 @@
 //     //      }
 //     //  });
 // //  });
-document.addEventListener('DOMContentLoaded', function() {
-    const searchIcon = document.querySelector('.search-icon');
-    const searchContainer = document.querySelector('.search-container');
-    const searchBox = document.getElementById('searchBox');
+// document.addEventListener('DOMContentLoaded', function() {
+//     const searchIcon = document.querySelector('.search-icon');
+//     const searchContainer = document.querySelector('.search-container');
+//     const searchBox = document.getElementById('searchBox');
 
-    searchIcon.addEventListener('click', function(e) {
-        e.preventDefault();
-        searchContainer.classList.toggle('active');
-    });
+//     searchIcon.addEventListener('click', function(e) {
+//         e.preventDefault();
+//         searchContainer.classList.toggle('active');
+//     });
 
-    // Ẩn ô tìm kiếm khi click bên ngoài
-    document.addEventListener('click', function(e) {
-        if (!searchIcon.contains(e.target) && !searchContainer.contains(e.target)) {
-            searchContainer.classList.remove('active');
-        }
-    });
+//     // Ẩn ô tìm kiếm khi click bên ngoài
+//     document.addEventListener('click', function(e) {
+//         if (!searchIcon.contains(e.target) && !searchContainer.contains(e.target)) {
+//             searchContainer.classList.remove('active');
+//         }
+//     });
 
-    // Hàm tìm kiếm
-    function search() {
-        const searchTerm = searchBox.value.toLowerCase();
-        const products = document.querySelectorAll('.product-item');
+//     // Hàm tìm kiếm
+//     function search() {
+//         const searchTerm = searchBox.value.toLowerCase();
+//         const products = document.querySelectorAll('.product-item');
 
-        products.forEach(product => {
-            const productName = product.querySelector('h3').textContent.toLowerCase();
-            const productDescription = product.querySelector('p').textContent.toLowerCase();
+//         products.forEach(product => {
+//             const productName = product.querySelector('h3').textContent.toLowerCase();
+//             const productDescription = product.querySelector('p').textContent.toLowerCase();
 
-            if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
-                product.style.display = 'block';
-            } else {
-                product.style.display = 'none';
-            }
-        });
-    }
+//             if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
+//                 product.style.display = 'block';
+//             } else {
+//                 product.style.display = 'none';
+//             }
+//         });
+//     }
 
-    // Thêm sự kiện lắng nghe cho ô tìm kiếm
-    searchBox.addEventListener('input', search);
-});
+//     // Thêm sự kiện lắng nghe cho ô tìm kiếm
+//     searchBox.addEventListener('input', search);
+// });
