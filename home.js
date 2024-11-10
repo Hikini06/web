@@ -20,11 +20,20 @@ document.addEventListener("DOMContentLoaded", function () {
   searchToggle.addEventListener("click", function (e) {
     e.preventDefault();
     searchContainer.classList.toggle("active");
-    if (searchContainer.classList.contains("active")) {
-      searchBox.focus();
+    // if (searchContainer.classList.contains("active")) {
+    //   searchBox.focus();
+    // }
+  });
+  // Đóng ô tìm kiếm khi click bên ngoài
+  document.addEventListener("click", function (e) {
+    if (
+      !searchContainer.contains(e.target) &&
+      !searchToggle.contains(e.target)
+    ) {
+      searchContainer.classList.remove("active");
     }
   });
-
+  ///////////////////
   searchForm.addEventListener("submit", function (e) {
     if (searchBox.value.trim() === "") {
       e.preventDefault();
@@ -34,6 +43,14 @@ document.addEventListener("DOMContentLoaded", function () {
       if (e.key === "Enter") {
         e.preventDefault(); // Ngăn chặn hành vi mặc định của form
         searchForm.submit(); // Submit form
+      }
+    });
+    document.addEventListener("click", function (e) {
+      if (
+        !searchContainer.contains(e.target) &&
+        !searchToggle.contains(e.target)
+      ) {
+        searchContainer.classList.remove("active");
       }
     });
   });

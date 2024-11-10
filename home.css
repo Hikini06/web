@@ -95,20 +95,22 @@ header {
   display: block;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition: all 0.3s, ease-in-out;
   position: absolute;
-  right: 0;
+  right: -300px;
+  width: 300px;
   top: 100%;
   padding: 1rem;
   background: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 2002;
+  z-index: 1001;
 }
 
 .search-container.active {
+  right: 0;
   opacity: 1;
   visibility: visible;
-  display: block;
+  /* display: block; */
 }
 .search-container form {
   display: flex;
