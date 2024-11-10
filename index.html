@@ -1,134 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tiệm hoa mimi</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="home.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
     <header>
-        <div class="header-left">
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-            <label for="menu-toggle" class="hamburger-menu" aria-label="Toggle menu">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-            </label>
+      <div class="header-left">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+        <label
+          for="menu-toggle"
+          class="hamburger-menu"
+          aria-label="Toggle menu"
+        >
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </label>
+      </div>
+      <div class="logo-container">
+        <a href="index.html" class="logo">Tiệm hoa mimi</a>
+      </div>
+      <div class="header-right">
+        <div class="search-icon-container">
+          <a href="#" class="search-icon" id="searchToggle">
+            <i class="fas fa-search"></i>
+          </a>
+          <div class="search-container" id="searchContainer">
+            <form id="searchForm" action="search-results.html" method="get">
+              <input
+                type="text"
+                id="searchBox"
+                name="query"
+                placeholder="Tìm kiếm..."
+              />
+              <button type="submit" class="search-button">
+                <i class="fas fa-search"></i>
+              </button>
+            </form>
+          </div>
         </div>
-        <div class="logo-container">
-            <a href="index.html" class="logo">Tiệm hoa mimi</a>
-        </div>
-        <div class="header-right">
-            <div class="search-icon-container">
-                <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
-                <div class="search-container">
-                    <input type="text" id="searchBox" placeholder="Tìm kiếm...">
-                </div>
-            </div>
-        </div>
-        <nav id="menu-nav" class="menu-nav">
-            <ul>
-                <li><a href="#home">Trang chủ</a></li>
-                <li><a href="product.html">Sản phẩm</a></li>
-                <li><a href="#about">Giới thiệu</a></li>
-                <li><a href="#contact">Liên hệ</a></li>    
-            </ul>
-        </nav>
+      </div>
+
+      <nav id="menu-nav" class="menu-nav">
+        <ul>
+          <li><a href="#home">Trang chủ</a></li>
+          <li><a href="product.html">Sản phẩm</a></li>
+          <li><a href="about.html">Giới thiệu</a></li>
+          <li><a href="#contact">Liên hệ</a></li>
+        </ul>
+      </nav>
     </header>
 
-
-
-<main>
-    <section id="hero-banner">
+    <main>
+      <section id="hero-banner">
         <div class="hero-content">
-            <h1>Chào mừng đến với Tiệm hoa mimi</h1>
-            <p>Khám phá bộ sưu tập hoa tươi đẹp nhất của chúng tôi</p>
-            <a href="product.html" class="cta-button">Mua ngay</a>
+          <h1>Chào mừng đến với Tiệm hoa mimi</h1>
+          <p>Khám phá bộ sưu tập hoa tươi đẹp nhất của chúng tôi</p>
+          <a href="product.html" class="cta-button">Mua ngay</a>
         </div>
-    </section>
+      </section>
 
-    <section id="featured-products">
+      <section id="featured-products">
         <h2>Sản phẩm nổi bật</h2>
         <div class="product-grid">
-            <div class="product-card">
-                <img src="path/to/product1.jpg" alt="Sản phẩm 1">
-                <h3>Bó hoa hồng đỏ</h3>
-                <p>Bó hoa 12 bông hồng đỏ tươi thắm</p>
-                <button>Xem chi tiết</button>
-            </div>
-            <div class="product-card">
-                <img src="path/to/product2.jpg" alt="Sản phẩm 2">
-                <h3>Hoa cưới cầm tay</h3>
-                <p>Bó hoa cưới đẹp lung linh cho cô dâu</p>
-                <button>Xem chi tiết</button>
-            </div>
-            <div class="product-card">
-                <img src="path/to/product3.jpg" alt="Sản phẩm 3">
-                <h3>Hoa chúc mừng khai trương</h3>
-                <p>Lẵng hoa tươi chúc mừng khai trương</p>
-                <button>Xem chi tiết</button>
-            </div>
-            <div class="product-card">
-                <img src="path/to/product4.jpg" alt="Sản phẩm 4">
-                <h3>Hoa sinh nhật</h3>
-                <p>Bó hoa tươi thắm cho ngày sinh nhật</p>
-                <button>Xem chi tiết</button>
-            </div>
+          <div class="product-card">
+            <img src="path/to/product1.jpg" alt="Sản phẩm 1" />
+            <h3>Bó hoa hồng đỏ</h3>
+            <p>Bó hoa 12 bông hồng đỏ tươi thắm</p>
+            <button>Xem chi tiết</button>
+          </div>
+          <div class="product-card">
+            <img src="path/to/product2.jpg" alt="Sản phẩm 2" />
+            <h3>Hoa cưới cầm tay</h3>
+            <p>Bó hoa cưới đẹp lung linh cho cô dâu</p>
+            <button>Xem chi tiết</button>
+          </div>
+          <div class="product-card">
+            <img src="path/to/product3.jpg" alt="Sản phẩm 3" />
+            <h3>Hoa chúc mừng khai trương</h3>
+            <p>Lẵng hoa tươi chúc mừng khai trương</p>
+            <button>Xem chi tiết</button>
+          </div>
+          <div class="product-card">
+            <img src="path/to/product4.jpg" alt="Sản phẩm 4" />
+            <h3>Hoa sinh nhật</h3>
+            <p>Bó hoa tươi thắm cho ngày sinh nhật</p>
+            <button>Xem chi tiết</button>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <section id="product-categories">
+      <section id="product-categories">
         <h2>Danh mục sản phẩm</h2>
         <div class="category-grid">
-            <a href="product.html#wedding" class="category-item">
-                <img src="path/to/wedding-category.jpg" alt="Hoa cưới">
-                <h3>Hoa cưới</h3>
-            </a>
-            <a href="product.html#birthday" class="category-item">
-                <img src="path/to/birthday-category.jpg" alt="Hoa sinh nhật">
-                <h3>Hoa sinh nhật</h3>
-            </a>
-            <a href="product.html#congratulations" class="category-item">
-                <img src="path/to/congrats-category.jpg" alt="Hoa chúc mừng">
-                <h3>Hoa chúc mừng</h3>
-            </a>
-            <a href="product.html#love" class="category-item">
-                <img src="path/to/love-category.jpg" alt="Hoa tình yêu">
-                <h3>Hoa tình yêu</h3>
-            </a>
+          <a href="product.html#wedding" class="category-item">
+            <img src="path/to/wedding-category.jpg" alt="Hoa cưới" />
+            <h3>Hoa cưới</h3>
+          </a>
+          <a href="product.html#birthday" class="category-item">
+            <img src="path/to/birthday-category.jpg" alt="Hoa sinh nhật" />
+            <h3>Hoa sinh nhật</h3>
+          </a>
+          <a href="product.html#congratulations" class="category-item">
+            <img src="path/to/congrats-category.jpg" alt="Hoa chúc mừng" />
+            <h3>Hoa chúc mừng</h3>
+          </a>
+          <a href="product.html#love" class="category-item">
+            <img src="path/to/love-category.jpg" alt="Hoa tình yêu" />
+            <h3>Hoa tình yêu</h3>
+          </a>
         </div>
-    </section>
+      </section>
 
-    <section id="about-us">
+      <section id="about-us">
         <h2>Về chúng tôi</h2>
-        <p>Tiệm hoa mimi là nơi bạn có thể tìm thấy những bó hoa tươi đẹp nhất với giá cả phải chăng. Chúng tôi cam kết mang đến cho khách hàng những trải nghiệm mua sắm tuyệt vời nhất.</p>
-    </section>
+        <p>
+          Tiệm hoa mimi là nơi bạn có thể tìm thấy những bó hoa tươi đẹp nhất
+          với giá cả phải chăng. Chúng tôi cam kết mang đến cho khách hàng những
+          trải nghiệm mua sắm tuyệt vời nhất.
+        </p>
+      </section>
 
-    <section id="customer-reviews">
+      <section id="customer-reviews">
         <h2>Khách hàng nói gì về chúng tôi</h2>
         <div class="review-grid">
-            <div class="review-item">
-                <p>"Hoa luôn tươi và đẹp, dịch vụ rất tốt!"</p>
-                <p class="reviewer">- Nguyễn Văn A</p>
-            </div>
-            <div class="review-item">
-                <p>"Đặt hoa rất nhanh chóng và thuận tiện."</p>
-                <p class="reviewer">- Trần Thị B</p>
-            </div>
-            <div class="review-item">
-                <p>"Giá cả hợp lý, chất lượng sản phẩm tuyệt vời."</p>
-                <p class="reviewer">- Lê Văn C</p>
-            </div>
+          <div class="review-item">
+            <p>"Hoa luôn tươi và đẹp, dịch vụ rất tốt!"</p>
+            <p class="reviewer">- Nguyễn Văn A</p>
+          </div>
+          <div class="review-item">
+            <p>"Đặt hoa rất nhanh chóng và thuận tiện."</p>
+            <p class="reviewer">- Trần Thị B</p>
+          </div>
+          <div class="review-item">
+            <p>"Giá cả hợp lý, chất lượng sản phẩm tuyệt vời."</p>
+            <p class="reviewer">- Lê Văn C</p>
+          </div>
         </div>
-    </section>
-</main>
+      </section>
+    </main>
 
-<footer>
-    <p>&copy; 2023 Tiệm hoa mimi. All rights reserved.</p>
-</footer>
+    <footer>
+      <p>&copy; 2023 Tiệm hoa mimi. All rights reserved.</p>
+    </footer>
 
-<script src="home.js"></script>
-dy>
-ml>
+    <script src="home.js" defer></script>
+  </body>
+</html>
