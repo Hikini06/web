@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchContainer = document.getElementById("searchContainer");
   const searchForm = document.getElementById("searchForm");
   const searchBox = document.getElementById("searchBox");
+  //   const searchForm = document.getElementById("searchForm");
+  //   const searchBox = document.getElementById("searchBox");
 
   document.addEventListener("click", function (event) {
     if (
@@ -28,5 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault();
       alert("Vui lòng nhập từ khóa tìm kiếm");
     }
+    searchBox.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault(); // Ngăn chặn hành vi mặc định của form
+        searchForm.submit(); // Submit form
+      }
+    });
   });
 });

@@ -115,12 +115,18 @@ header {
   align-items: center;
 }
 .search-container input [type="text"] {
-  padding: 10px 5px;
+  padding: 10px 20px;
   border: 1px solid #ccc;
-  border-radius: 50px;
-  width: 200px;
+  border-radius: 50px; /*tạo hình oval cho khung tìm kiếm */
+  width: 200px; /*Thay đổi chiều rộng */
   font-size: 16px;
   outline: none;
+  transition: all 0.3s ease;
+}
+.search-container input[type="text"]:focus {
+  width: 250px;
+  border-color: var(--main-color);
+  box-shadow: 0 0 5px rgba(194, 47, 80, 0.3);
 }
 .search-container .search-button {
   background-color: var(--main-color);
