@@ -425,3 +425,12 @@ footer {
     transform: rotate(-90deg);
   }
 }
+
+/*//////////////////////////////////////////*/
+/* image */
+#hero-banner {
+  background-image: url("image/banner.webp");
+  background-size: cover;
+  background-position: center;
+  /* Các thuộc tính khác giữ nguyên */
+}
