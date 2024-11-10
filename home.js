@@ -68,7 +68,7 @@ function showSlides() {
   slideIndex++;
   if (slideIndex > slides.length) {slideIndex = 1}
   slides[slideIndex-1].classList.add("active");
-  setTimeout(showSlides, 5000); // Thay đổi ảnh mỗi 5 giây
+  setTimeout(showSlides, 3000); // Thay đổi ảnh mỗi 5 giây
 }
 
 function plusSlides(n) {
