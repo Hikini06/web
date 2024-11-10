@@ -10,33 +10,35 @@
 <body>
     <header>
         <div class="header-left">
-            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
-                <span class="menu-icon">
-                    <span class="menu-icon-bar"></span>
-                    <span class="menu-icon-bar"></span>
-                    <span class="menu-icon-bar"></span>
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="hamburger-menu" aria-label="Toggle menu">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
                 </span>
-                <span class="menu-text">Menu</span>
-            </button>
+            </label>
         </div>
         <div class="logo-container">
             <a href="index.html" class="logo">Tiệm hoa mimi</a>
         </div>
-        <div class="search-icon-container">
-            <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
-            <div class="search-container">
-                <input type="text" id="searchBox" placeholder="Tìm kiếm...">
+        <div class="header-right">
+            <div class="search-icon-container">
+                <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
+                <div class="search-container">
+                    <input type="text" id="searchBox" placeholder="Tìm kiếm...">
+                </div>
             </div>
         </div>
         <nav id="menu-nav" class="menu-nav">
             <ul>
                 <li><a href="#home">Trang chủ</a></li>
                 <li><a href="product.html">Sản phẩm</a></li>
-                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="#about">Giới thiệu</a></li>
                 <li><a href="#contact">Liên hệ</a></li>    
             </ul>
         </nav>
-</header>
+    </header>
+
+
 
 <main>
     <section id="hero-banner">

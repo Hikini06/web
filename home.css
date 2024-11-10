@@ -4,6 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+:root {
+    --main-color: rgb(255, 211, 219);
+    --text-color: rgb(194, 47, 80);
+}
 
 body {
     font-family: Arial, sans-serif;
@@ -24,13 +28,36 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
+    height: 80px;
+}
+.header-left{
+    order: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.header-right{
+    order: 3;
+    display: flex;
+    align-items: center;
+    height: 100%;
 }
 
 .logo {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    color: #FF69B4;
+    color: var(--main-color);
     text-decoration: none;
+    font-family: 'Pacifico', cursive;
+}
+.logo-container{
+    order: 2;
+    flex: 2;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .menu-nav ul {
@@ -50,22 +77,24 @@ header {
 }
 
 .menu-nav ul li a:hover {
-    color: #FF69B4;
+    color: var(--main-color);
 }
 
 /* Search icon styles */
 .search-icon-container {
-    position: relative;
+    position: fixed;
+    
 }
 
 .search-icon {
-    font-size: 1.2rem;
+    font-size: 2rem;
     color: #333;
+    text-align: center;
 }
 
 .search-container {
     display: none;
-    position: absolute;
+    position: relative ;
     right: 0;
     top: 100%;
     padding: 1rem;
@@ -113,7 +142,7 @@ main {
 .cta-button {
     display: inline-block;
     padding: 0.8rem 2rem;
-    background-color: #FF69B4;
+    background-color: var(--main-color);
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -121,7 +150,7 @@ main {
 }
 
 .cta-button:hover {
-    background-color: #FF1493;
+    background-color: var(--main-color);
 }
 
 /* Featured products styles */
@@ -169,7 +198,7 @@ main {
     width: 90%;
     margin: 1rem auto;
     padding: 0.8rem;
-    background-color: #FF69B4;
+    background-color: var(--main-color);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -178,7 +207,7 @@ main {
 }
 
 .product-card button:hover {
-    background-color: #FF1493;
+    background-color: var(--main-color);
 }
 
 /* Product categories styles */
@@ -254,4 +283,96 @@ footer {
     color: #fff;
     text-align: center;
     padding: 2rem 0;
+}
+/* Menu toggle styles */
+.menu-toggle {
+    display: none;
+}
+
+.hamburger-menu {
+    display: none;
+    cursor: pointer;
+    align-items: center;
+    height: 35%;
+}
+
+.hamburger-box {
+    width: 30px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+}
+
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 30px;
+    height: 2px;
+    background-color: #333;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+}
+
+.hamburger-inner {
+    top: 50%;
+    display: block;
+    margin-top: -2px;
+}
+
+.hamburger-inner::before, .hamburger-inner::after {
+    content: "";
+    display: block;
+}
+
+.hamburger-inner::before {
+    top: -10px;
+}
+
+.hamburger-inner::after {
+    bottom: -10px;
+}
+
+/* Menu styles for mobile */
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block;
+    }
+
+    .menu-nav {
+        position: fixed;
+        top: 80px; /* Adjust based on your header height */
+        left: -100%;
+        width: 100%;
+        height: calc(100% - 80px);
+        background-color: #fff;
+        transition: left 0.3s ease;
+    }
+
+    .menu-toggle:checked ~ .menu-nav {
+        left: 0;
+    }
+
+    .menu-nav ul {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .menu-nav ul li {
+        margin: 10px 0;
+    }
+
+    /* Animate hamburger menu */
+    .menu-toggle:checked ~ .hamburger-menu .hamburger-inner {
+        transform: rotate(45deg);
+    }
+
+    .menu-toggle:checked ~ .hamburger-menu .hamburger-inner::before {
+        top: 0;
+        opacity: 0;
+    }
+
+    .menu-toggle:checked ~ .hamburger-menu .hamburger-inner::after {
+        bottom: 0;
+        transform: rotate(-90deg);
+    }
 }
