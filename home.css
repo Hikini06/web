@@ -177,19 +177,19 @@ main {
   flex-direction: column;
   overflow: hidden;
 }
-#hero-banner::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url(image/banner.webp);
-    background-size: cover;
-    z-index: -1;
+#hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url(image/banner.webp);
+  background-size: cover;
+  z-index: -1;
 }
-.mySlides{
-    width: auto;
+.mySlides {
+  width: auto;
 }
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
@@ -248,12 +248,12 @@ main {
   border-radius: 5px;
   transition: background-color 1s ease;
   font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .cta-button:hover {
-  background-color: darken(var(--main-color),10%);
+  background-color: darken(var(--main-color), 10%);
   transform: translateY(-3px);
 }
 
@@ -502,112 +502,129 @@ footer {
   /* Các thuộc tính khác giữ nguyên */
 }
 .hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 /* Trình chiếu */
 .slideshow-container {
-    position: relative;
-    height: 500px; /* Điều chỉnh theo nhu cầu */
-    overflow: hidden;
-  }
-  
-  .mySlides {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-  }
-  
-  .mySlides.active {
-    opacity: 1;
-  }
-  
-  .prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-  }
-  
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-  }
-  
-  .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-  }
-  
-  .hero-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    z-index: 1;
-  }
+  position: relative;
+  height: 500px; /* Điều chỉnh theo nhu cầu */
+  overflow: hidden;
+}
 
-  /* nút back lại trình chiếu */
-/* Styles cho mũi tên điều hướng */
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 30px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    background-color: rgba(0,0,0,0.3);
-    text-decoration: none;
+.mySlides {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.mySlides.active {
+  opacity: 1;
+}
+.mySlides.active {
+  animation: zoomEffect 20s ease-in-out infinite alternate;
+}
+@keyframes zoomEffect {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+/* Thêm overlay để lầm nổi bật nội dung */
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
 }
 
 .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.hero-content {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+/* nút back lại trình chiếu */
+/* Styles cho mũi tên điều hướng */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
 }
 
 .prev {
-    left: 0;
+  left: 0;
 }
 
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* Thêm hiệu ứng khi hover */
-.prev:hover, .next:hover {
-    transform: scale(1.1);
+.prev:hover,
+.next:hover {
+  transform: scale(1.1);
 }
 
 /* Thêm icon cho mũi tên (nếu bạn sử dụng font awesome hoặc các icon khác) */
 .prev:before {
-    content: "\f104"; /* Unicode cho icon mũi tên trái */
-    font-family: FontAwesome;
+  content: "\f104"; /* Unicode cho icon mũi tên trái */
+  font-family: FontAwesome;
 }
 
 .next:before {
-    content: "\f105"; /* Unicode cho icon mũi tên phải */
-    font-family: FontAwesome;
+  content: "\f105"; /* Unicode cho icon mũi tên phải */
+  font-family: FontAwesome;
 }
