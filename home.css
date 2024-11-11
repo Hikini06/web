@@ -622,9 +622,11 @@ footer {
 .prev:before {
   content: "\f104"; /* Unicode cho icon mũi tên trái */
   font-family: FontAwesome;
+  display: none;
 }
 
 .next:before {
   content: "\f105"; /* Unicode cho icon mũi tên phải */
   font-family: FontAwesome;
+  display: none;
 }
