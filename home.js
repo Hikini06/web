@@ -190,3 +190,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+// slider jim làm test
+let currentIndex = 0;
+const itemsToShow = 4; // Số lượng sản phẩm hiển thị mỗi lần
+const totalItems = 10; // Tổng số sản phẩm
+
+function updateSliderPosition() {
+    const slider = document.querySelector('.slider');
+    const itemWidth = document.querySelector('.slider-item-one').offsetWidth;
+    slider.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
+}
+
+function slideLeft() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        updateSliderPosition();
+    }
+}
+
+function slideRight() {
+    if (currentIndex < totalItems - itemsToShow) {
+        currentIndex++;
+        updateSliderPosition();
+    }
+}
+
+window.addEventListener('resize', updateSliderPosition); // Cập nhật khi thay đổi kích thước

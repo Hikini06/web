@@ -355,6 +355,8 @@ main {
   font-size: 35px;
 }
 .product-grid {
+  width: 100%;
+  height: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
@@ -749,6 +751,8 @@ footer {
   display: none;
 }
 #product-list {
+  height: 600px;
+  width: 60%;
   padding: 40px 0;
 }
 
@@ -829,7 +833,7 @@ footer {
   transition: transform 0.5s ease;
   gap: 20px;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .product-item {
@@ -936,4 +940,55 @@ footer {
     width: 35px;
     height: 35px;
   }
+}
+
+/* slider product jim làm */
+.slider-container-one {
+  position: relative;
+  width: 60%;
+  overflow: hidden;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.3s ease;
+  width: calc(100% * 10); /* Đặt chiều rộng theo số sản phẩm */
+}
+
+.slider-item-one {
+  min-width: calc(100% / 4); /* Hiển thị 4 sản phẩm mỗi lần (tuỳ theo kích thước mong muốn) */
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  border: none;
+  z-index: 10;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+.slider-container-one img {
+  width: 50px;
+  height: 50px;
 }
