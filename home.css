@@ -95,7 +95,7 @@ header {
 }
 
 .search-container {
-  display: block;
+  display: inline-block;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s, ease-in-out;
@@ -423,6 +423,7 @@ main {
   background-color: var(--background-color);
 }
 
+
 /* Product categories styles */
 .category-grid {
   display: grid;
@@ -711,6 +712,7 @@ footer {
   user-select: none;
   background-color: rgba(0, 0, 0, 0.3);
   text-decoration: none;
+
 }
 
 .next {
@@ -725,6 +727,7 @@ footer {
 .prev:hover,
 .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
+
 }
 
 /* Thêm hiệu ứng khi hover */
@@ -745,27 +748,192 @@ footer {
   font-family: FontAwesome;
   display: none;
 }
+#product-list {
+  padding: 40px 0;
+}
 
-/* section 3 jim làm test k nghịch k là bug */ 
-/* .section-container {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-.item {
-  width: 24%;
-  margin: 1%;
-  box-sizing: border-box;
+#product-list h2 {
   text-align: center;
-  display: none;
+  margin-bottom: 30px;
 }
-.item img {
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.product-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+}
+
+.product-item img {
   width: 100%;
-  height: auto;
+  height: 200px;
+  object-fit: cover;
 }
-.show-more-btn {
+
+.product-info {
+  padding: 15px;
+}
+
+.product-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-weight: bold;
+  color: #e74c3c;
+  margin-bottom: 15px;
+}
+
+.product-button {
   display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-} */
+  transition: background-color 0.3s ease;
+}
+
+.product-button:hover {
+  background-color: #2980b9;
+}
+
+
+/* Styles cho product slider */
+.product-slider {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 0;
+  margin: 0 auto;
+  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+}
+
+.product-grid {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 20px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.product-item {
+  flex: 0 0 calc(25% - 15px); /* Hiển thị 4 sản phẩm mỗi lần, trừ đi gap */
+  max-width: calc(25% - 15px);
+}
+
+.slider-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  pointer-events: 0 10px; /* Cho phép click xuyên qua vùng controls */
+}
+
+.product-slider-container {
+  position: relative;
+}
+
+.slider-button {
+  position: absolute;
+  top: auto;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  color: var(--text-color);
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.slider-button.prev {
+  left: 10px;
+}
+
+.slider-button.next {
+  right: 10px;
+}
+
+.product-grid {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-item {
+  flex: 0 0 auto;
+  width: 25%; /* Điều chỉnh theo số lượng sản phẩm bạn muốn hiển thị cùng lúc */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.slider-button.prev {
+  left: 10px;
+}
+
+.slider-button.next {
+  right: 10px;
+}
+
+.slider-button.prev::before {
+  content: "\2039";
+}
+
+.slider-button.next::before {
+  content: "\203A";
+}
+
+@media (max-width: 768px) {
+  .product-item {
+    flex: 0 0 200px;
+  }
+  
+  .slider-controls {
+    padding: 0 5px;
+  }
+  
+  .slider-button {
+    padding: 10px;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-item {
+    flex: 0 0 150px;
+  }
+  
+  .slider-button {
+    padding: 8px;
+    font-size: 18px;
+    width: 35px;
+    height: 35px;
+  }
+}

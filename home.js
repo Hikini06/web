@@ -121,3 +121,72 @@ document.addEventListener("DOMContentLoaded", function() {
 //       showMoreItems();
 //   </script> -->
 //   <!-- end test ở đây -->
+// document.addEventListener('DOMContentLoaded', function() {
+//   const productGrid = document.querySelector('.product-grid');
+//   const prevButton = document.querySelector('.slider-button.prev');
+//   const nextButton = document.querySelector('.slider-button.next');
+//   const productItems = document.querySelectorAll('.product-item');
+  
+//   let currentIndex = 0;
+//   const itemWidth = productItems[0].offsetWidth + 20; // 20 là giá trị gap
+//   const maxIndex = productItems.length - Math.floor(productGrid.offsetWidth / itemWidth);
+
+//   function updateSliderPosition() {
+//       productGrid.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+//   }
+
+//   function updateButtonState() {
+//       prevButton.style.opacity = currentIndex === 0 ? '0.5' : '1';
+//       nextButton.style.opacity = currentIndex === maxIndex ? '0.5' : '1';
+//   }
+
+//   prevButton.addEventListener('click', () => {
+//       if (currentIndex > 0) {
+//           currentIndex--;
+//           updateSliderPosition();
+//           updateButtonState();
+//       }
+//   });
+
+//   nextButton.addEventListener('click', () => {
+//       if (currentIndex < maxIndex) {
+//           currentIndex++;
+//           updateSliderPosition();
+//           updateButtonState();
+//       }
+//   });
+
+//   // Khởi tạo trạng thái ban đầu của các nút
+//   updateButtonState();
+
+//   // Xử lý responsive
+//   window.addEventListener('resize', () => {
+//       const newMaxIndex = productItems.length - Math.floor(productGrid.offsetWidth / itemWidth);
+//       if (newMaxIndex !== maxIndex) {
+//           maxIndex = newMaxIndex;
+//           currentIndex = Math.min(currentIndex, maxIndex);
+//           updateSliderPosition();
+//           updateButtonState();
+//       }
+//   });
+// });
+document.addEventListener('DOMContentLoaded', function() {
+  const productGrid = document.querySelector('#product-list .product-grid');
+  const prevButton = document.querySelector('#product-list #prevButton');
+  const nextButton = document.querySelector('#product-list #nextButton');
+  let currentPosition = 0;
+
+  nextButton.addEventListener('click', () => {
+    if (currentPosition > -(productGrid.children.length - 4) * 25) {
+      currentPosition -= 25;
+      productGrid.style.transform = `translateX(${currentPosition}%)`;
+    }
+  });
+
+  prevButton.addEventListener('click', () => {
+    if (currentPosition < 0) {
+      currentPosition += 25;
+      productGrid.style.transform = `translateX(${currentPosition}%)`;
+    }
+  });
+});
