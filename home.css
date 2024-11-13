@@ -803,12 +803,12 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  transition: transform 0.4s ease;
 }
 
-.slider {
+.slider-container-one .slider {
   display: flex;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease;
   width: calc(100% * 10); /* Đặt chiều rộng theo số sản phẩm */
 }
 
@@ -864,6 +864,7 @@ footer {
   color: var(--text-color-dark);
   font-size: 20px;
   font-weight: bolder;
+  transition: transform 1s ease;
 }
 
 .product-slider-btn {
