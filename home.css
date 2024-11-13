@@ -825,6 +825,7 @@ footer {
   justify-content: space-between;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  border-radius: 8px;
 }
 
 .arrow {
@@ -852,6 +853,11 @@ footer {
   width: 100%;
   height: 400px;
   object-fit: cover;
+  border-top: 0px solid white; /* Đặt border chỉ ở phía trên */
+  border-left: 0px solid white; /* Đặt border ở góc trên trái */
+  border-right: 0px solid white; /* Đặt border ở góc trên phải */
+  border-bottom: none; /* Không có border ở phía dưới */
+  border-radius: 8px 8px 0 0; /* Làm bo tròn chỉ hai góc trên */
 }
 
 .slider-container-one p {
@@ -901,7 +907,7 @@ footer {
 
 .slider-container-one-upper h2 {
   text-align: center;
-  padding-bottom: 1rem;
+  padding-bottom: 4rem;
   padding-top: 4rem;
   color: var(--text-color-dark);
   font-weight: bolder;
