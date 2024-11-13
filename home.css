@@ -916,3 +916,67 @@ footer {
   line-height: 1.2;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* 2 banner sản phẩm start  */
+.two-product-banner {
+  width: 100%;
+  height: auto;
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  flex-direction: column; /* Sắp xếp các phần tử con theo chiều dọc */
+  align-items: center;    /* Căn giữa các phần tử con theo chiều ngang */
+}
+.two-product-banner h2 {
+  color: var(--text-color-dark);
+  text-align: center;
+  padding-top: 4rem;
+  font-weight: bolder;
+  font-size: 35px;
+  line-height: 1.2;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.two-product-banner-child {
+  width: 50%;
+  height: 500px;
+}
+.two-product-banner .two-product-banner-child-two img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+.two-product-banner-cont {
+  width: 60%;
+  height: auto;
+  display: flex;
+  
+}
+.two-product-banner .two-product-banner-child-two {
+  flex: 1;
+  width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+}
+/* .two-product-banner .img-one {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+} */
+.two-product-banner .two-product-banner-child-two .img-one {
+  width: 440px;
+  height: 287px;
+  object-fit: cover;
+  position: absolute;
+  left: 144px;
+  top: 80px;
+}
+
+.two-product-banner .two-product-banner-child-two .img-two {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  position: absolute;
+  left: 0px;
+  top: 128px;
+}
