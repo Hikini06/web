@@ -3,9 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sản phẩm - Tiệm hoa mimi</title>
+    <title>Liên hệ - Tiệm hoa mimi</title>
     <link rel="stylesheet" href="header.css" />
-    <!-- <link rel="stylesheet" href="product.css" /> -->
+    <link rel="stylesheet" href="contact.css" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
   <body>
     <header>
@@ -17,7 +22,7 @@
           <ul>
             <li><a href="index.html">Trang chủ</a></li>
             <li><a href="product.html">Sản phẩm</a></li>
-            <li><a href="new.html">Tin tức</a></li>
+            <li><a href="news.html">Tin tức</a></li>
             <li><a href="about.html">Giới thiệu</a></li>
             <li><a href="contact.html">Liên hệ</a></li>
           </ul>
@@ -26,11 +31,86 @@
     </header>
 
     <main>
-      <!-- Code -->
-    </main>
+      <section id="contact-form">
+        <h1>Liên hệ với chúng tôi</h1>
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="name">Họ tên:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Nội dung:</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit">Gửi tin nhắn</button>
+        </form>
+      </section>
 
-    <footer>
-      <p>&copy; 2023 Tiệm hoa mimi. Tất cả quyền được bảo lưu.</p>
-    </footer>
-  </body>
-</html>
+      <section id="social-media">
+        <h2>Kết nối với chúng tôi</h2>
+        <div class="social-icons">
+          <a
+            href="https://www.facebook.com/people/Ti%E1%BB%87m-hoa-MiMi/61560867710445/"
+            target="_blank"
+            class="social-icon facebook"
+          >
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a
+            href="https://www.tiktok.com/@phannthaonguyen?is_from_webapp=1&sender_device=pc"
+            target="_blank"
+            class="social-icon tiktok"
+          >
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a
+            href="https://zalo.me/84354235669 "
+            target="_blank"
+            class="social-icon zalo"
+          >
+            <img src="images/zalo-icon.png" alt="Zalo" />
+          </a>
+          <a
+            href="https://shopee.vn/thanhhuyen2461?uls_trackid=51863q2r013q&utm_content=3NaZbdkZNur7PgnAshh7FCtqhhxB"
+            target="_blank"
+            class="social-icon shopee"
+          >
+            <img src="images/shopee-icon.png" alt="Shopee" />
+          </a>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="location">
+    <h2>Vị trí của chúng tôi</h2>
+    <div id="map"></div>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2023 Tiệm hoa mimi. Tất cả quyền được bảo lưu.</p>
+</footer>
+
+<!-- Google Maps JavaScript API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+<script>
+  function initMap() {
+    const tiemHoaMimi = { lat: 10.762622, lng: 106.660172 }; // Thay đổi tọa độ này thành vị trí thực tế của Tiệm hoa mimi
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 15,
+      center: tiemHoaMimi,
+    });
+    const marker = new google.maps.Marker({
+      position: tiemHoaMimi,
+      map: map,
+      title: "Tiệm hoa mimi"
+    });
+  }
+</script>
+body>
+ml>
