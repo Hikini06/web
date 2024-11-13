@@ -199,7 +199,7 @@ const totalItems = 10; // Tổng số sản phẩm
 function updateSliderPosition() {
     const slider = document.querySelector('.slider');
     const itemWidth = document.querySelector('.slider-item-one').offsetWidth;
-    slider.style.transform = `translateX(${-currentIndex * itemWidth * 1}px)`;
+    slider.style.transform = `translateX(${-currentIndex * itemWidth * 2}px)`;
 }
 
 function slideLeft() {
