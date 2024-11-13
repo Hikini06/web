@@ -810,6 +810,7 @@ footer {
   display: flex;
   transition: transform 0.4s ease;
   width: calc(100% * 10); /* Đặt chiều rộng theo số sản phẩm */
+  margin-bottom: 4rem;
 }
 
 .slider-item-one {

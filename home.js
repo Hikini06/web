@@ -217,3 +217,32 @@ function slideRight() {
 }
 
 window.addEventListener('resize', updateSliderPosition); // Cập nhật khi thay đổi kích thước
+// slider jim làm test end
+
+// slider jim làm test phần 2
+let currentIndexTwo = 0;
+const itemsToShowTwo = 4; // Số lượng sản phẩm hiển thị mỗi lần
+const totalItemsTwo = 10; // Tổng số sản phẩm
+
+function updateSliderPositions() {
+    const sliderTwo = document.querySelector('.slider-two');
+    const itemWidthTwo = document.querySelector('.slider-item-two').offsetWidth;
+    sliderTwo.style.transform = `translateX(${-currentIndexTwo * itemWidthTwo * 2}px)`;
+}
+
+function slideLeftTwo() {
+    if (currentIndexTwo > 0) {
+        currentIndexTwo--;
+        updateSliderPositions();
+    }
+}
+
+function slideRightTwo() {
+    if (currentIndexTwo < totalItemsTwo - itemsToShowTwo) {
+        currentIndexTwo++;
+        updateSliderPositions();
+    }
+}
+
+window.addEventListener('resize', updateSliderPositions);
+// slider jim làm test phần 2 end
