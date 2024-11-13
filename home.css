@@ -981,3 +981,137 @@ footer {
   top: 128px;
 }
 /* 2 banner sản phẩm end  */
+
+/* slider sản phẩm 2 jim làm */
+.slider-container-two {
+  position: relative;
+  width: 60%;
+  overflow: hidden;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.4s ease;
+}
+
+.slider-container-two .slider-two {
+  display: flex;
+  transition: transform 0.4s ease;
+  width: calc(100% * 10); /* Đặt chiều rộng theo số sản phẩm */
+  margin-bottom: 4rem;
+}
+
+.slider-item-two {
+  min-width: calc(96.5% / 4);
+  margin: 5px;
+  text-align: center;
+  border: 0px solid #ccc;
+  display: flex;
+  flex-direction: column; /* Sắp xếp các thẻ con theo cột */
+  align-items: center;
+  /* width: 23%; */
+  height: auto;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  border: none;
+  z-index: 10;
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+.slider-container-two img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-top: 0px solid white; /* Đặt border chỉ ở phía trên */
+  border-left: 0px solid white; /* Đặt border ở góc trên trái */
+  border-right: 0px solid white; /* Đặt border ở góc trên phải */
+  border-bottom: none; /* Không có border ở phía dưới */
+  border-radius: 8px 8px 0 0; /* Làm bo tròn chỉ hai góc trên */
+}
+
+.slider-container-two p {
+  color: var(--text-color-dark);
+  font-size: 20px;
+  font-weight: bolder;
+  transition: transform 1s ease;
+}
+
+.product-slider-btn-two {
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  width: 90%;
+  margin: 1rem auto;
+  padding: 0.8rem;
+  background-color: white;
+  color: var(--text-color);
+  border: 2px solid var(--text-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: auto;
+}
+.product-slider-btn-two:hover {
+  background-color: var(--background-color);
+}
+.slider-container-two .arrow-two {
+  background-color: #ccc;
+  opacity: 0.8;
+  border-radius: 2px;
+  color: var(--text-color-dark);
+}
+.slider-container-two .arrow-two:hover {
+  color: white;
+  opacity: 0.8;
+  background-color: #666;
+  cursor: pointer;
+}
+.slider-item-two:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.arrow-two {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  border: none;
+  z-index: 10;
+}
+/* slider sản phẩm 2 jim làm end */
+.slider-container-one-upper-two h2 {
+  text-align: center;
+  padding-bottom: 4rem;
+  padding-top: 4rem;
+  color: var(--text-color-dark);
+  font-weight: bolder;
+  font-size: 35px;
+  line-height: 1.2;
+  font-family: Arial, Helvetica, sans-serif;
+}
