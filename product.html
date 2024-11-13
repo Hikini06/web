@@ -1,55 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sản phẩm</title>
-    <link rel="stylesheet" href="product.css">
-    <!-- Các thẻ meta và title hiện có -->
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="home.css">
-    <!-- hoặc <link rel="stylesheet" href="product.css"> cho trang product -->
-</head>
-<body>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sản phẩm - Tiệm hoa mimi</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="product.css" />
+  </head>
+  <body>
     <header>
-        <a href="index.html" class="logo">Tiệm hoa mimi</a>
-        <!-- Các phần khác của header -->
-         
+      <nav>
+        <div class="logo-container">
+          <a href="index.html" class="logo">Tiệm hoa mimi</a>
+        </div>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+        <label for="menu-toggle" class="hamburger-menu">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </label>
+        <div class="menu-nav" id="menu-nav">
+          <ul>
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a href="product.html">Sản phẩm</a></li>
+            <li><a href="news.html">Tin tức</a></li>
+            <li><a href="about.html">Giới thiệu</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+          </ul>
+        </div>
+      </nav>
     </header>
-    <!-- Phần còn lại của body -->
-</body>
 
-<header class="product-header">
-    <h1>Danh mục sản phẩm</h1>
-    <p>Khám phá bộ sưu tập đa dạng các sản phẩm chất lượng cao của chúng tôi</p>
-</header>
+    <main>
+      <section class="product-header">
+        <h1>Danh mục sản phẩm</h1>
+        <p>
+          Khám phá bộ sưu tập đa dạng các sản phẩm chất lượng cao của chúng tôi
+        </p>
+      </section>
 
-<div class="product-list">
-    <div class="product-list">
+      <section class="product-list">
         <div class="product-item">
-            <img src="https://via.placeholder.com/150" alt="Sản phẩm 1">
-            <h3>Sản phẩm 1</h3>
-            <p>Mô tả ngắn về sản phẩm 1</p>
+          <img src="https://via.placeholder.com/150" alt="Sản phẩm 1" />
+          <h3>Sản phẩm 1</h3>
+          <p>Mô tả ngắn về sản phẩm 1</p>
         </div>
         <div class="product-item">
-            <img src="https://via.placeholder.com/150" alt="Sản phẩm 2">
-            <h3>Sản phẩm 2</h3>
-            <p>Mô tả ngắn về sản phẩm 2</p>
+          <img src="https://via.placeholder.com/150" alt="Sản phẩm 2" />
+          <h3>Sản phẩm 2</h3>
+          <p>Mô tả ngắn về sản phẩm 2</p>
         </div>
         <div class="product-item">
-            <img src="https://via.placeholder.com/150" alt="Sản phẩm 3">
-            <h3>Sản phẩm 3</h3>
-            <p>Mô tả ngắn về sản phẩm 3</p>
+          <img src="https://via.placeholder.com/150" alt="Sản phẩm 3" />
+          <h3>Sản phẩm 3</h3>
+          <p>Mô tả ngắn về sản phẩm 3</p>
         </div>
-    </div>
+        <!-- Thêm các sản phẩm khác tại đây -->
+      </section>
+    </main>
 
+    <footer>
+      <p>&copy; 2023 Tiệm hoa mimi. Tất cả quyền được bảo lưu.</p>
+    </footer>
     <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const menuNav = document.getElementById('menu-nav');
+      const menuToggle = document.getElementById("menu-toggle");
+      const menuNav = document.getElementById("menu-nav");
 
-        menuToggle.addEventListener('click', function() {
-            menuNav.classList.toggle('active');
-        });
+      menuToggle.addEventListener("change", function () {
+        menuNav.classList.toggle("active", this.checked);
+      });
     </script>
-</body>
+  </body>
 </html>

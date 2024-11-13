@@ -1,0 +1,142 @@
+/* Header styles */
+header {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 20%;
+  height: 80px;
+}
+.header-left {
+  order: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.header-right {
+  order: 3;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--main-color);
+  text-decoration: none;
+  font-family: "Pacifico", cursive;
+}
+.logo-container {
+  order: 2;
+  flex: 2;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.menu-nav ul {
+  display: flex;
+  list-style: none;
+}
+
+.menu-nav ul li {
+  margin-right: 2rem;
+}
+
+.menu-nav ul li a {
+  text-decoration: none;
+  color: var(--text-color-dark);
+  font-weight: bolder;
+  transition: color 0.3s ease;
+  font-size: 20px;
+}
+
+.menu-nav ul li a:hover {
+  color: var(--text-color);
+}
+
+/* Search icon styles */
+.search-icon-container {
+  position: relative;
+}
+
+.search-icon {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+}
+
+.search-container {
+  display: inline-block;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s, ease-in-out;
+  position: absolute;
+  right: -300px;
+  width: 300px;
+  top: 100%;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+}
+
+.search-container.active {
+  right: 0;
+  opacity: 1;
+  visibility: visible;
+  /* display: block; */
+}
+.search-container form {
+  display: flex;
+  align-items: center;
+}
+.search-container input [type="text"] {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 50px; /*tạo hình oval cho khung tìm kiếm */
+  width: 200px; /*Thay đổi chiều rộng */
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+.search-container input[type="text"]:focus {
+  width: 250px;
+  border-color: var(--main-color);
+  box-shadow: 0 0 5px rgba(194, 47, 80, 0.3);
+}
+.search-container .search-button {
+  background-color: var(--main-color);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+.search-container .search-button:hover {
+  background-color: var(--text-color);
+}
+.search-container .search-icon {
+  display: none;
+}
+
+#searchBox {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 200px;
+}
+.search-container .search-icon {
+  display: none;
+}
