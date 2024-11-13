@@ -243,7 +243,7 @@ main {
 
 .product-card img {
   width: 100%;
-  height: 100%;
+  height: 400px;
   object-fit: cover;
 }
 
@@ -618,7 +618,7 @@ footer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
-  padding: 0 20px;
+  padding: none;
 }
 
 .product-item {
