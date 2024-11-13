@@ -1118,3 +1118,17 @@ footer {
   line-height: 1.2;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* banner slider chia 2 start */
+.banner-divine-to-two-child {
+  height: 200px;
+  width: 400px;
+}
+
+.hero-banner-cont {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+}
