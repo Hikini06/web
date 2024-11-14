@@ -221,7 +221,7 @@ main {
 }
 #featured-products h2 {
   text-align: center;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
   color: var(--text-color-dark);
   font-weight: 900;
   font-size: 2rem;
@@ -366,13 +366,6 @@ main {
   margin-top: 1rem;
 }
 
-/* Footer styles */
-footer {
-  background: #333;
-  color: #fff;
-  text-align: center;
-  padding: 2rem 0;
-}
 /* Menu toggle styles */
 .menu-toggle {
   display: none;
@@ -1313,4 +1306,31 @@ footer {
 .product-banner-jim .product-banner-jim-ultwo > li:hover {
  color: var(--text-color);
  cursor: pointer;
+}
+
+/* footer */
+.footer {
+  border-bottom: 2px solid var(--text-color-dark);
+  color: var(--text-color-dark);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  background-color: rgb(240, 241, 243);
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.footer .footer-cont {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 60%;
+}
+.footer .footer-contact ul {
+  list-style-type: none;
+}
+.footer .footer-cont h3 {
+  font-weight: 900;
+  font-size: 1rem;
+  padding-bottom: 1rem;
 }
