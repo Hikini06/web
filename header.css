@@ -28,7 +28,9 @@ header {
   width: 100%;
   box-sizing: border-box;
 }
-
+#menu-nav-ul li a {
+  font-size: 5px;
+}
 
 .header-cont {
   width: 60%;
@@ -77,7 +79,7 @@ header {
 }
 
 .menu-nav ul li {
-  margin-left: 2rem;
+  width: 80%;
 }
 
 .menu-nav ul li a {
@@ -86,6 +88,8 @@ header {
   font-weight: bolder;
   transition: color 0.3s ease;
   font-size: 20px;
+  width: 100%;
+  text-align: center;
 }
 
 .menu-nav ul li a:hover {
@@ -186,17 +190,27 @@ header {
 }
 
 .dropdown-content {
+  justify-content: space-between;
+  height: 58rem;
+  right: -347%;
   display: none;
+  width: 81rem;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  /* min-width: 160px; */
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+}
+.dropdown-content .dropdown-content-list {
+  flex: 1;
+}
+.dropdown-content .dropbtn-all {
+padding: none;
 }
 
 .dropdown-content a {
   color: var(--text-color-dark);
-  padding: 12px 16px;
+  padding: 12px 0px;
   text-decoration: none;
   display: inline-block;
 }
@@ -206,7 +220,7 @@ header {
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  display: flex;
 }
 
 /* .dropdown:hover .dropbtn {
@@ -220,7 +234,7 @@ header {
   position: relative;
   display: inline-block;
   color: var(--text-color-dark);
-  padding: 16px;
+  padding: none;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -260,7 +274,7 @@ header {
   position: relative;
   display: inline-block;
   color: var(--text-color-dark);
-  padding: 16px;
+  padding: none;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -300,7 +314,7 @@ header {
   position: relative;
   display: inline-block;
   color: var(--text-color-dark);
-  padding: 16px;
+  padding: none;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -340,7 +354,7 @@ header {
   position: relative;
   display: inline-block;
   color: var(--text-color-dark);
-  padding: 16px;
+  padding: none;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -380,7 +394,7 @@ header {
   position: relative;
   display: inline-block;
   color: var(--text-color-dark);
-  padding: 16px;
+  padding: none;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -420,7 +434,7 @@ header {
   position: relative;
   display: inline-block;
   color: var(--text-color-dark);
-  padding: 16px;
+  padding: none;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -454,3 +468,19 @@ header {
   background-color: var(--hover-color);
   color: white;
 } */
+
+/* danh sach san pham con start */
+.dropdown .dropdown-content-list-ul {
+  display: flex;
+  flex-direction: column; 
+  width: 100%;
+  height: 100%;
+  align-items: flex-end;
+}
+.dropdown .dropdown-content-list-ul a {
+  font-size: 13px;
+  font-weight: 10;
+  width: 100%;
+  text-align: left; 
+  display: block; 
+}
