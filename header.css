@@ -1,3 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --main-color: rgb(255, 211, 219);
+  --text-color: rgb(194, 47, 80);
+  --text-color-dark: rgb(0, 32, 77);
+  --hover-color: rgb(53, 16, 25);
+  --background-color: rgb(255, 248, 249);
+}
+
 /* Header styles */
 header {
   background-color: #fff;
@@ -27,7 +40,7 @@ header {
 }
 .header-left {
   order: 1;
-  display: flex;
+  display: none;
   align-items: center;
   height: 100%;
 }
