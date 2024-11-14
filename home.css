@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 :root {
   --main-color: rgb(255, 211, 219);
   --text-color: rgb(194, 47, 80);
@@ -13,7 +14,10 @@
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; 
+  font-style: normal;
   line-height: 1.6;
   color: #333;
 }
@@ -219,7 +223,7 @@ main {
   text-align: center;
   padding-bottom: 4rem;
   color: var(--text-color-dark);
-  font-weight: 500;
+  font-weight: 900;
   font-size: 2rem;
 }
 .product-grid {
@@ -950,7 +954,7 @@ footer {
   padding-bottom: 2rem;
   padding-top: 4rem;
   color: var(--text-color-dark);
-  font-weight: 500;
+  font-weight: 900;
   font-size: 2rem;
   line-height: 1.2;
   
@@ -970,10 +974,10 @@ footer {
 }
 
 .two-product-banner h2 {
-  color: var(--text-color-dark);
+  color: var(--text-color-dark) ;
   text-align: center;
   padding-top: 0px;
-  font-weight: 500;
+  font-weight: 900;
   font-size: 2rem;
   line-height: 1.2;
   padding-bottom: 2rem;
@@ -1152,7 +1156,7 @@ footer {
   padding-bottom: 2rem;
   padding-top: 4rem;
   color: var(--text-color-dark);
-  font-weight: 500;
+  font-weight: 900;
   font-size: 2rem;
   line-height: 1.2;
 }
