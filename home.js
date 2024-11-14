@@ -255,10 +255,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const button = container.querySelector(".banner-divine-to-two-child-btn");
 
   container.addEventListener("mouseenter", function () {
-    button.style.bottom = "20px";
+    button.style.bottom = "37%";
   });
 
   container.addEventListener("mouseleave", function () {
-    button.style.bottom = "-50px";
+    button.style.bottom = "-50%";
   });
 });
