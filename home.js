@@ -78,7 +78,7 @@ function plusSlides(n) {
   slideIndex += n;
   let slides = document.getElementsByClassName("mySlides");
   if (slideIndex > slides.length) {
-    slideIndex = 1 ;
+    slideIndex = 1;
   }
   if (slideIndex < 1) {
     slideIndex = slides.length;
@@ -89,7 +89,7 @@ function plusSlides(n) {
   slides[slideIndex - 1].classList.add("active");
 }
 // Khởi tạo trình chiếu khi trang được tải
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   showSlides();
 });
 
@@ -98,25 +98,25 @@ document.addEventListener("DOMContentLoaded", function() {
 //       // JavaScript để hiển thị lần lượt 4 thẻ div con
 //       let itemsPerPage = 4;
 //       let currentPage = 0;
-  
+
 //       function showMoreItems() {
 //           const items = document.querySelectorAll('.item');
 //           const totalItems = items.length;
 //           const start = currentPage * itemsPerPage;
 //           const end = start + itemsPerPage;
-  
+
 //           for (let i = start; i < end && i < totalItems; i++) {
 //               items[i].style.display = 'block';
 //           }
-  
+
 //           currentPage++;
-  
+
 //           // Ẩn nút "Xem thêm" khi hiển thị hết các phần tử
 //           if (end >= totalItems) {
 //               document.querySelector('.show-more-btn').style.display = 'none';
 //           }
 //       }
-  
+
 //       // Gọi hàm showMoreItems() để hiển thị 4 thẻ div đầu tiên khi tải trang
 //       showMoreItems();
 //   </script> -->
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
 //   const prevButton = document.querySelector('.slider-button.prev');
 //   const nextButton = document.querySelector('.slider-button.next');
 //   const productItems = document.querySelectorAll('.product-item');
-  
+
 //   let currentIndex = 0;
 //   const itemWidth = productItems[0].offsetWidth + 20; // 20 là giá trị gap
 //   const maxIndex = productItems.length - Math.floor(productGrid.offsetWidth / itemWidth);
@@ -170,20 +170,20 @@ document.addEventListener("DOMContentLoaded", function() {
 //       }
 //   });
 // });
-document.addEventListener('DOMContentLoaded', function() {
-  const productGrid = document.querySelector('#product-list .product-grid');
-  const prevButton = document.querySelector('#product-list #prevButton');
-  const nextButton = document.querySelector('#product-list #nextButton');
+document.addEventListener("DOMContentLoaded", function () {
+  const productGrid = document.querySelector("#product-list .product-grid");
+  const prevButton = document.querySelector("#product-list #prevButton");
+  const nextButton = document.querySelector("#product-list #nextButton");
   let currentPosition = 0;
 
-  nextButton.addEventListener('click', () => {
+  nextButton.addEventListener("click", () => {
     if (currentPosition > -(productGrid.children.length - 4) * 25) {
       currentPosition -= 25;
       productGrid.style.transform = `translateX(${currentPosition}%)`;
     }
   });
 
-  prevButton.addEventListener('click', () => {
+  prevButton.addEventListener("click", () => {
     if (currentPosition < 0) {
       currentPosition += 25;
       productGrid.style.transform = `translateX(${currentPosition}%)`;
@@ -197,26 +197,26 @@ const itemsToShow = 4; // Số lượng sản phẩm hiển thị mỗi lần
 const totalItems = 10; // Tổng số sản phẩm
 
 function updateSliderPosition() {
-    const slider = document.querySelector('.slider');
-    const itemWidth = document.querySelector('.slider-item-one').offsetWidth;
-    slider.style.transform = `translateX(${-currentIndex * itemWidth * 2}px)`;
+  const slider = document.querySelector(".slider");
+  const itemWidth = document.querySelector(".slider-item-one").offsetWidth;
+  slider.style.transform = `translateX(${-currentIndex * itemWidth * 2}px)`;
 }
 
 function slideLeft() {
-    if (currentIndex > 0) {
-        currentIndex--;
-        updateSliderPosition();
-    }
+  if (currentIndex > 0) {
+    currentIndex--;
+    updateSliderPosition();
+  }
 }
 
 function slideRight() {
-    if (currentIndex < totalItems - itemsToShow) {
-        currentIndex++;
-        updateSliderPosition();
-    }
+  if (currentIndex < totalItems - itemsToShow) {
+    currentIndex++;
+    updateSliderPosition();
+  }
 }
 
-window.addEventListener('resize', updateSliderPosition); // Cập nhật khi thay đổi kích thước
+window.addEventListener("resize", updateSliderPosition); // Cập nhật khi thay đổi kích thước
 // slider jim làm test end
 
 // slider jim làm test phần 2
@@ -225,24 +225,39 @@ const itemsToShowTwo = 4; // Số lượng sản phẩm hiển thị mỗi lần
 const totalItemsTwo = 10; // Tổng số sản phẩm
 
 function updateSliderPositions() {
-    const sliderTwo = document.querySelector('.slider-two');
-    const itemWidthTwo = document.querySelector('.slider-item-two').offsetWidth;
-    sliderTwo.style.transform = `translateX(${-currentIndexTwo * itemWidthTwo * 2}px)`;
+  const sliderTwo = document.querySelector(".slider-two");
+  const itemWidthTwo = document.querySelector(".slider-item-two").offsetWidth;
+  sliderTwo.style.transform = `translateX(${
+    -currentIndexTwo * itemWidthTwo * 2
+  }px)`;
 }
 
 function slideLeftTwo() {
-    if (currentIndexTwo > 0) {
-        currentIndexTwo--;
-        updateSliderPositions();
-    }
+  if (currentIndexTwo > 0) {
+    currentIndexTwo--;
+    updateSliderPositions();
+  }
 }
 
 function slideRightTwo() {
-    if (currentIndexTwo < totalItemsTwo - itemsToShowTwo) {
-        currentIndexTwo++;
-        updateSliderPositions();
-    }
+  if (currentIndexTwo < totalItemsTwo - itemsToShowTwo) {
+    currentIndexTwo++;
+    updateSliderPositions();
+  }
 }
 
-window.addEventListener('resize', updateSliderPositions);
+window.addEventListener("resize", updateSliderPositions);
 // slider jim làm test phần 2 end
+
+document.addEventListener("DOMContentLoaded", function () {
+  const container = document.querySelector(".banner-divine-to-two-child-cont");
+  const button = container.querySelector(".banner-divine-to-two-child-btn");
+
+  container.addEventListener("mouseenter", function () {
+    button.style.bottom = "20px";
+  });
+
+  container.addEventListener("mouseleave", function () {
+    button.style.bottom = "-50px";
+  });
+});
