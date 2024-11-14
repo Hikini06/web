@@ -28,8 +28,11 @@ header {
   width: 100%;
   box-sizing: border-box;
 }
+#menu-nav {
+  width: 100%;
+}
 #menu-nav-ul li a {
-  font-size: 5px;
+  font-size: 20px;
 }
 
 .header-cont {
@@ -46,6 +49,7 @@ header {
   height: 100%;
 }
 .header-right {
+  width: 55%;
   order: 3;
   display: flex;
   align-items: center;
@@ -98,6 +102,7 @@ header {
 
 /* Search icon styles */
 .search-icon-container {
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
@@ -183,7 +188,7 @@ header {
   position: relative;
   display: inline-block;
   color: var(--text-color-dark);
-  padding: 16px;
+  padding: 0px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -191,8 +196,8 @@ header {
 
 .dropdown-content {
   justify-content: space-between;
-  height: 58rem;
-  right: -347%;
+  height: 74rem;
+  left: -591%;
   display: none;
   width: 81rem;
   position: absolute;
