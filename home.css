@@ -1225,7 +1225,7 @@ footer {
 .product-banner-jim .product-banner-jim-a {
   color: var(--text-color-dark);
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1rem;
   text-align: center;
   display: block;
   width: 100%;
@@ -1235,7 +1235,7 @@ footer {
 .product-banner-jim .product-banner-jim-ul {
   z-index: 2;
   background-color: white;
-  width: 400%;
+  width: 59.6vw;
   list-style-type: none; 
   padding: 0;            
   margin: 0;
@@ -1245,7 +1245,16 @@ footer {
 .product-banner-jim .product-banner-jim-ul-one {
   height: auto;
 }
-.product-banner-jim-sanpham:hover .product-banner-jim-ul {
+.product-banner-jim-sanpham-one:hover .product-banner-jim-ul {
+  display: flex;
+}
+.product-banner-jim-sanpham-three:hover .product-banner-jim-ul {
+  display: flex;
+}
+.product-banner-jim-sanpham-four:hover .product-banner-jim-ul {
+  display: flex;
+}
+.product-banner-jim-sanpham-two:hover .product-banner-jim-ul {
   display: flex;
 }
 .product-banner-jim-sanpham:hover .product-banner-jim-a {
@@ -1261,6 +1270,7 @@ footer {
   left: -300%;
 }
 .product-banner-jim .product-banner-jim-ul .product-banner-jim-li {
+  font-size: 1rem;
   font-weight: 600;
   color: var(--text-color);
   flex: 1;
@@ -1269,6 +1279,7 @@ footer {
 }
 
 .product-banner-jim .product-banner-jim-ultwo  {
+  
   color: var(--text-color-dark);
   list-style-type: none;
   padding-top: 1rem;
@@ -1276,8 +1287,8 @@ footer {
 }
 .product-banner-jim .product-banner-jim-ultwo > li {
   padding-bottom: 0.5rem;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 .product-banner-jim .product-banner-jim-ultwo > li:hover {
  color: var(--text-color);
