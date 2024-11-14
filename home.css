@@ -219,8 +219,8 @@ main {
   text-align: center;
   padding-bottom: 4rem;
   color: var(--text-color-dark);
-  font-weight: bolder;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 2rem;
 }
 .product-grid {
   width: 100%;
@@ -947,13 +947,13 @@ footer {
 
 .slider-container-one-upper h2 {
   text-align: center;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
   padding-top: 4rem;
   color: var(--text-color-dark);
-  font-weight: bolder;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 2rem;
   line-height: 1.2;
-  font-family: Arial, Helvetica, sans-serif;
+  
 }
 /* 2 banner sản phẩm start  */
 .two-product-banner {
@@ -968,14 +968,15 @@ footer {
   flex-direction: column; /* Sắp xếp các phần tử con theo chiều dọc */
   align-items: center; /* Căn giữa các phần tử con theo chiều ngang */
 }
+
 .two-product-banner h2 {
   color: var(--text-color-dark);
   text-align: center;
   padding-top: 0px;
-  font-weight: bolder;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 2rem;
   line-height: 1.2;
-  font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 2rem;
 }
 .two-product-banner-child {
   width: 50%;
@@ -1148,13 +1149,12 @@ footer {
 /* slider sản phẩm 2 jim làm end */
 .slider-container-one-upper-two h2 {
   text-align: center;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
   padding-top: 4rem;
   color: var(--text-color-dark);
-  font-weight: bolder;
-  font-size: 35px;
+  font-weight: 500;
+  font-size: 2rem;
   line-height: 1.2;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* banner slider chia 2 start */
