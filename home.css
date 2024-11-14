@@ -959,7 +959,9 @@ footer {
 .two-product-banner {
   width: 100%;
   height: auto;
-  height: 38rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  /* height: 38rem; */
   background-color: var(--background-color);
   display: flex;
   justify-content: center;
@@ -977,7 +979,7 @@ footer {
 }
 .two-product-banner-child {
   width: 50%;
-  height: 26rem;
+  /* height: 26rem; */
 }
 .two-product-banner .two-product-banner-child-two img {
   width: 100%;
@@ -1004,11 +1006,12 @@ footer {
 } */
 .two-product-banner .two-product-banner-child-two .img-one {
   width: 80%;
-  height: 20rem;
+  /* height: 20rem; */
   object-fit: cover;
-  position: absolute;
+  /* position: absolute; */
   right: 0px;
   top: 80px;
+  margin-left: auto;
 }
 
 .two-product-banner .two-product-banner-child-two .img-two {
@@ -1018,7 +1021,7 @@ footer {
   object-fit: cover;
   position: absolute;
   left: 0px;
-  top: 128px;
+  top: 20%;
 }
 /* slider sản phẩm 2 jim làm */
 .slider-container-two {
