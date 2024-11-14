@@ -28,9 +28,8 @@ header {
   width: 100%;
   box-sizing: border-box;
 }
-.menu-nav ul {
-  margin-bottom: none !important;
-}
+
+
 .header-cont {
   width: 60%;
   display: flex;
@@ -73,6 +72,8 @@ header {
 .menu-nav ul {
   display: flex;
   list-style: none;
+  align-items: center;
+  margin-bottom: none !important;
 }
 
 .menu-nav ul li {
