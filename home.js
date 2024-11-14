@@ -249,6 +249,7 @@ function slideRightTwo() {
 window.addEventListener("resize", updateSliderPositions);
 // slider jim làm test phần 2 end
 
+// Hover vào ảnh trên banner
 document.addEventListener("DOMContentLoaded", function () {
   const container = document.querySelector(".banner-divine-to-two-child-cont");
   const button = container.querySelector(".banner-divine-to-two-child-btn");

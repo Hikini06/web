@@ -101,7 +101,7 @@ header {
 .menu-nav ul li a {
   text-decoration: none;
   color: var(--text-color-dark);
-  font-weight: bolder;
+  /* font-weight: bolder; */
   transition: color 0.3s ease;
   font-size: 20px;
   width: 100%;
@@ -222,7 +222,7 @@ header {
   flex: 1;
 }
 .dropdown-content .dropbtn-all {
-padding: none;
+  padding: none;
 }
 
 .dropdown-content a {
@@ -489,7 +489,7 @@ padding: none;
 /* danh sach san pham con start */
 .dropdown .dropdown-content-list-ul {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   width: 100%;
   height: 100%;
   align-items: flex-end;
@@ -498,6 +498,6 @@ padding: none;
   font-size: 13px;
   font-weight: 10;
   width: 100%;
-  text-align: left; 
-  display: block; 
+  text-align: left;
+  display: block;
 }
