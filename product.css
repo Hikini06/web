@@ -134,40 +134,59 @@
 }
 
 /* GUIDE SECTION SLIDER CSS START HERE */
+.guideSection-h {
+    padding-top: 4rem;
+    background-color: var(--background-color);
+    align-items: center;
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+}
 .guideSection-cont {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    background-color: var(--background-color);
     width: 100%;
 }
 .guideSection-slider-wrapper {
     position: relative;
     width: 60%;
-    height: 300px;
-    margin: 20px auto;
+    height: 200px;
+    margin: 0px auto;
     overflow: hidden;
-    border: 2px solid #ccc;
+    /* border: 2px solid #ccc; */
 }
 
 .guideSection-image-slider-container {
+    height: 100%;
     width: 100%;
     overflow: hidden;
 }
 
 .guideSection-image-slider {
+    height: 100%;
     display: flex;
     transition: transform 0.5s ease-in-out;
     width: 167%; /* Tổng chiều rộng của tất cả ảnh */
 
 }
+.guideSection-image-slider a{
+    height: 100%;
+    width: 100%;
+    padding-right: 5px;
+}
 
 .guideSection-image-card {
     position: relative;
     width: 100%; /* Mỗi ảnh chiếm 1/3 chiều rộng container */
-    height: 300px;
+    height: 100%; /* Chiều cao cố định */
+    overflow: hidden; /* Ẩn phần ảnh thừa */
 }
 
 .guideSection-image-card img {
-    width: 100%; /* Đảm bảo ảnh lấp đầy thẻ */
-    height: 100%; /* Chiều cao ảnh khớp với chiều cao card */
-    object-fit: cover;
+    width: 100%; /* Hình ảnh co theo chiều rộng thẻ cha */
+    height: 100%; /* Chiều cao cố định */
+    object-fit: cover; /* Ảnh lấp đầy không gian thẻ cha, phần dư bị cắt */
 }
 
 .guideSection-play-btn {
