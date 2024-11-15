@@ -264,8 +264,8 @@ function renderProducts(page) {
         const productImg = document.createElement('img');
         productImg.src = product.image;
         productImg.alt = `Hình ảnh của ${product.name}`;
-        productImg.style.width = '150px';
-        productImg.style.height = '150px';
+        // productImg.style.width = '150px';
+        // productImg.style.height = '150px';
 
         // Tạo tên và mô tả
         const productName = document.createElement('span');
