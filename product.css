@@ -73,9 +73,10 @@
 
 
 .product p {
+    font-weight: 900;
     height: 2.5rem;
-    font-size: 14px;
-    color: var(--text-color-dark);
+    font-size: 1rem;
+    color: var(--text-color);
     line-height: 1.5;
     margin-bottom: 1rem;
 }
@@ -372,6 +373,12 @@
    color: var(--text-color);
    cursor: pointer;
   }
+  /* section product banner jim bổ sung riêng cho trang product*/
+  .product-banner-jim a:last-child {
+    color: var(--text-color) !important;
+  }
+
+
   /* section product banner jim end */
 
 

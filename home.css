@@ -69,6 +69,8 @@ text-decoration: none;
 
 .profile-card {
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
   /* max-width: 150px; */
 }
 .profile-card img {
@@ -77,6 +79,7 @@ text-decoration: none;
   /* height: 100%; */
   border-radius: 50%;
   object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .profile-card p {
   margin-top: 10px;
@@ -864,18 +867,7 @@ main {
   border-radius: 8px;
 }
 
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #000;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  border: none;
-  z-index: 10;
-}
+
 
 .left {
   left: 10px;
@@ -897,10 +889,13 @@ main {
 }
 
 .slider-container-one p {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   color: var(--text-color-dark);
   font-size: 20px;
   font-weight: bolder;
   transition: transform 1s ease;
+
 }
 
 .product-slider-btn {
@@ -923,15 +918,24 @@ main {
   background-color: var(--background-color);
 }
 .slider-container-one .arrow {
-  background-color: #ccc;
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba(211, 211, 211, 0.5);
   opacity: 0.8;
-  border-radius: 2px;
-  color: var(--text-color-dark);
+  border-radius: 50%;
+  color: var(--text-color);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-200%);
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 2rem;
+  border: 1px solid var(--text-color) ;
+  z-index: 10;
 }
+
 .slider-container-one .arrow:hover {
-  color: white;
-  opacity: 0.8;
-  background-color: #666;
+  background-color: rgba(255, 248, 249, 0.5);
   cursor: pointer;
 }
 .slider-item-one:hover {
@@ -1056,18 +1060,8 @@ main {
   border-radius: 8px;
 }
 
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #000;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  border: none;
-  z-index: 10;
-}
+
+  
 
 .left {
   left: 10px;
@@ -1089,6 +1083,8 @@ main {
 }
 
 .slider-container-two p {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   color: var(--text-color-dark);
   font-size: 20px;
   font-weight: bolder;
@@ -1115,33 +1111,30 @@ main {
   background-color: var(--background-color);
 }
 .slider-container-two .arrow-two {
-  background-color: #ccc;
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba(211, 211, 211, 0.5);
   opacity: 0.8;
-  border-radius: 2px;
-  color: var(--text-color-dark);
+  border-radius: 50%;
+  color: var(--text-color);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-200%);
+  font-weight: 900;
+  cursor: pointer;
+  font-size: 2rem;
+  border: 1px solid var(--text-color) ;
+  z-index: 10;
+  
 }
 .slider-container-two .arrow-two:hover {
-  color: white;
-  opacity: 0.8;
-  background-color: #666;
+  background-color: rgba(255, 248, 249, 0.5);
   cursor: pointer;
 }
 .slider-item-two:hover {
   transform: translateY(-5px);
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.arrow-two {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #000;
-  color: #fff;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  border: none;
-  z-index: 10;
 }
 /* slider sản phẩm 2 jim làm end */
 .slider-container-one-upper-two h2 {
@@ -1218,7 +1211,7 @@ main {
   position: relative;
 }
 .product-banner-jim {
-  margin-top: 5rem;
+  margin-top: 3.6rem;
   width: 100%;
   height: 3rem;
   background-color: var(--main-color);
