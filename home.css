@@ -1305,6 +1305,7 @@ main {
 
 /* GUIDE SECTION SLIDER CSS START HERE */
 .guideSection-h {
+  color: var(--text-color-dark);
   padding-top: 4rem;
   background-color: var(--background-color);
   align-items: center;
