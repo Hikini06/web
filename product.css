@@ -107,7 +107,9 @@
     margin-right: 0.3rem;
     padding: 5px;
     height: 2rem;
+    
 }
+
 .pagination button.active {
     background-color: var(--main-color); 
     color: var(--text-color);
@@ -130,7 +132,7 @@
     height: 2rem;
     margin-left: 0.5rem;
     width: 2.5rem;
-    font-weight: 9000;
+    font-weight: 900;
 }
 
 /* GUIDE SECTION SLIDER CSS START HERE */
@@ -158,6 +160,7 @@
 }
 
 .guideSection-image-slider-container {
+    text-decoration: none;
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -171,6 +174,7 @@
 
 }
 .guideSection-image-slider a{
+    text-decoration: none;
     height: 100%;
     width: 100%;
     padding-right: 5px;
@@ -185,38 +189,59 @@
 
 .guideSection-image-card img {
     width: 100%; /* Hình ảnh co theo chiều rộng thẻ cha */
-    height: 100%; /* Chiều cao cố định */
+    height: 85%; /* Chiều cao cố định */
     object-fit: cover; /* Ảnh lấp đầy không gian thẻ cha, phần dư bị cắt */
 }
 
 .guideSection-play-btn {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); 
+    text-align: center;
+    width: 4rem;
+    height: 4rem;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 211,1 , 0);
+    border: 5px solid white;
     color: white;
-    border: none;
-    font-size: 24px;
+    font-size: 2rem;
     cursor: pointer;
-    padding: 10px;
+    padding: none;
     border-radius: 50%;
     z-index: 2;
     display: block;
+    font-weight: 900;
+}
+.guideSection-play-btn:hover {
+    transform: translate(-50%, -55%); /* Nâng lên thêm 5% */
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.5); /* Tăng bóng đổ */
+}
+.guideSection-play-btn:active {
+    transform: translate(-50%, -50%); /* Trở về vị trí ban đầu khi nhấn */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Bóng đổ như trạng thái gốc */
 }
 
 .guideSection-slider-prev-btn,
 .guideSection-slider-next-btn {
+    width: 2rem;
+    height: 2rem;
     position: absolute;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    font-size: 24px;
+    background-color: rgba(211, 211, 211, 0.5);
+    color: var(--text-color);
+    border: 1px solid var(--text-color) ;
+    border-radius: 50%;
+    font-size: 1rem;
     cursor: pointer;
-    padding: 10px;
+    /* padding: 10px; */
     z-index: 10;
+    font-weight: 900;
+}
+.guideSection-slider-prev-btn:hover,
+.guideSection-slider-next-btn:hover {
+    background-color: rgba(255, 248, 249, 0.5);
 }
 
 .guideSection-slider-prev-btn {
@@ -231,6 +256,15 @@
 .guideSection-slider-next-btn:disabled {
     background-color: rgba(0, 0, 0, 0.2);
     cursor: not-allowed;
+}
+.guideSection-image-description {
+    text-decoration: none;
+    height: auto;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.4;
+    color: var(--text-color-dark);
 }
 
 

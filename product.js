@@ -380,44 +380,72 @@ const guideSectionNextButton = document.querySelector('.guideSection-slider-next
 
 let guideSectionCurrentIndex = 0;
 const guideSectionVisibleImages = 3; // Hiển thị 3 ảnh
-let guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages; // Tính chiều rộng ảnh dựa trên container
+let guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages; // Tính chiều rộng mỗi ảnh
 const guideSectionTotalImages = document.querySelectorAll('.guideSection-image-slider .guideSection-image-card').length;
+let guideSectionAutoSlideInterval; // Biến lưu interval cho auto slide
 
+// Hàm cập nhật vị trí slider
 function guideSectionUpdateSlider() {
-    // Tính toán vị trí của slider
     guideSectionImageSlider.style.transform = `translateX(-${guideSectionCurrentIndex * guideSectionSlideWidth}px)`;
     guideSectionUpdateButtons();
 }
 
+// Hàm cập nhật trạng thái của nút Prev và Next
 function guideSectionUpdateButtons() {
-    // Cập nhật trạng thái nút
     guideSectionPrevButton.disabled = guideSectionCurrentIndex === 0;
     guideSectionNextButton.disabled = guideSectionCurrentIndex >= guideSectionTotalImages - guideSectionVisibleImages;
 }
 
+// Hàm tự động chuyển slide
+function guideSectionAutoSlide() {
+    guideSectionCurrentIndex++;
+    if (guideSectionCurrentIndex > guideSectionTotalImages - guideSectionVisibleImages) {
+        guideSectionCurrentIndex = 0; // Quay về slide đầu tiên
+    }
+    guideSectionUpdateSlider();
+}
+
+// Hàm dừng tự động slide
+function guideSectionStopAutoSlide() {
+    clearInterval(guideSectionAutoSlideInterval);
+}
+
+// Hàm khởi động lại tự động slide
+function guideSectionRestartAutoSlide() {
+    guideSectionStopAutoSlide();
+    guideSectionAutoSlideInterval = setInterval(guideSectionAutoSlide, 7000); // Đặt lại 10 giây
+}
+
+// Sự kiện khi nhấn nút Prev
 guideSectionPrevButton.addEventListener('click', () => {
     if (guideSectionCurrentIndex > 0) {
         guideSectionCurrentIndex--;
         guideSectionUpdateSlider();
     }
+    guideSectionRestartAutoSlide(); // Khởi động lại timer sau khi nhấn
 });
 
+// Sự kiện khi nhấn nút Next
 guideSectionNextButton.addEventListener('click', () => {
     if (guideSectionCurrentIndex < guideSectionTotalImages - guideSectionVisibleImages) {
         guideSectionCurrentIndex++;
         guideSectionUpdateSlider();
     }
+    guideSectionRestartAutoSlide(); // Khởi động lại timer sau khi nhấn
 });
 
-// Thêm sự kiện resize để tính lại slide width khi thay đổi kích thước màn hình
+// Tự động điều chỉnh chiều rộng ảnh khi thay đổi kích thước màn hình
 window.addEventListener('resize', () => {
     guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages;
     guideSectionUpdateSlider();
 });
 
-// Initialize slider
+// Kích hoạt tự động slide mỗi 10 giây
+guideSectionAutoSlideInterval = setInterval(guideSectionAutoSlide, 3000);
+
+// Khởi tạo slider
 guideSectionUpdateButtons();
 
-
 // GUIDE SECTION SLIDER JS END HERE
+
 
