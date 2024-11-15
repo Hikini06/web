@@ -1307,8 +1307,11 @@ main {
  color: var(--text-color);
  cursor: pointer;
 }
+/* section product banner jim end */
 
-/* footer */
+
+
+/* footer start */
 .footer {
   flex-direction: column;
   color: var(--text-color-dark);
@@ -1355,3 +1358,4 @@ main {
   width: 2rem;
   height: 2rem;
 }
+/* footer end */

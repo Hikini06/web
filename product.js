@@ -19,220 +19,318 @@ products[0] = {
     id: 1,
     name: 'Laptop Asus vớ vẩn đểu',
     image: 'https://cdn.phuckhangmobile.com/image/iphone-13-128gb-hong-quocte-phuckhangmobile-27954j.jpg',
-    description: 'Laptop Asus với cấu hình mạnh mẽ',
+    description: '385.000đ',
     url: 'https://www.google.com/'
 };
-
 products[1] = {
     id: 2,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '128.000đ',
     url: 'iphone-13.html'
 };
 products[2] = {
     id: 3,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '294.000đ',
     url: 'iphone-13.html'
 };
 products[3] = {
     id: 4,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '450.000đ',
     url: 'iphone-13.html'
 };
 products[4] = {
     id: 5,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '92.000đ',
     url: 'iphone-13.html'
 };
 products[5] = {
     id: 6,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '333.000đ',
     url: 'iphone-13.html'
 };
 products[6] = {
     id: 7,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '75.000đ',
     url: 'iphone-13.html'
 };
 products[7] = {
     id: 8,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '482.000đ',
     url: 'iphone-13.html'
 };
 products[8] = {
     id: 9,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '108.000đ',
     url: 'iphone-13.html'
 };
 products[9] = {
     id: 10,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '299.000đ',
     url: 'iphone-13.html'
 };
 products[10] = {
     id: 11,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '467.000đ',
     url: 'iphone-13.html'
 };
 products[11] = {
     id: 12,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '81.000đ',
     url: 'iphone-13.html'
 };
 products[12] = {
     id: 13,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '371.000đ',
     url: 'iphone-13.html'
 };
 products[13] = {
     id: 14,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '265.000đ',
     url: 'iphone-13.html'
 };
 products[14] = {
     id: 15,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '495.000đ',
     url: 'iphone-13.html'
 };
 products[15] = {
     id: 16,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '310.000đ',
     url: 'iphone-13.html'
 };
 products[16] = {
     id: 17,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '138.000đ',
     url: 'iphone-13.html'
 };
 products[17] = {
     id: 18,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '204.000đ',
     url: 'iphone-13.html'
 };
 products[18] = {
     id: 19,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '480.000đ',
     url: 'iphone-13.html'
 };
 products[19] = {
     id: 20,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '359.000đ',
     url: 'iphone-13.html'
 };
 products[20] = {
     id: 21,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '295.000đ',
     url: 'iphone-13.html'
 };
 products[21] = {
     id: 22,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '132.000đ',
     url: 'iphone-13.html'
 };
 products[22] = {
     id: 23,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '432.000đ',
     url: 'iphone-13.html'
 };
 products[23] = {
     id: 24,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
+    description: '370.000đ',
     url: 'iphone-13.html'
 };
 products[24] = {
     id: 25,
     name: 'Điện thoại tàu khựa',
     image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
-    url: 'iphone-13.html'
-};
+    description: '451.000đ',
+}
 products[25] = {
     id: 26,
-    name: 'Điện thoại tàu khựa',
-    image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
-    url: 'iphone-13.html'
+    name: 'Điện thoại Xiaomi giá rẻ',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+26',
+    description: '278.000đ',
+    url: 'xiaomi-26.html'
 };
 products[26] = {
     id: 27,
-    name: 'Điện thoại tàu khựa',
-    image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
-    url: 'iphone-13.html'
+    name: 'Máy tính bảng Huawei',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+27',
+    description: '312.000đ',
+    url: 'huawei-tablet.html'
 };
 products[27] = {
     id: 28,
-    name: 'Điện thoại tàu khựa',
-    image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
-    url: 'iphone-13.html'
+    name: 'Laptop Dell Inspiron',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+28',
+    description: '456.000đ',
+    url: 'dell-inspiron.html'
 };
 products[28] = {
     id: 29,
-    name: 'Điện thoại tàu khựa',
-    image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
-    url: 'iphone-13.html'
+    name: 'Tai nghe Bluetooth Sony',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+29',
+    description: '125.000đ',
+    url: 'sony-headphones.html'
 };
 products[29] = {
     id: 30,
-    name: 'Điện thoại tàu khựa',
-    image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
-    url: 'iphone-13.html'
+    name: 'Điện thoại Oppo Reno',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+30',
+    description: '388.000đ',
+    url: 'oppo-reno.html'
 };
 products[30] = {
     id: 31,
-    name: 'Điện thoại tàu khựa',
-    image: 'https://onewaymobile.vn/images/products/2022/06/18/large/iphone-13-pro-oneway-1_1655520789.webp',
-    description: 'iPhone 13 với thiết kế thời thượng và hiệu năng vượt trội.',
-    url: 'iphone-13.html'
+    name: 'Đồng hồ thông minh Garmin',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+31',
+    description: '489.000đ',
+    url: 'garmin-watch.html'
 };
+products[31] = {
+    id: 32,
+    name: 'Loa Bluetooth JBL',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+32',
+    description: '174.000đ',
+    url: 'jbl-speaker.html'
+};
+products[32] = {
+    id: 33,
+    name: 'Chuột không dây Logitech',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+33',
+    description: '95.000đ',
+    url: 'logitech-mouse.html'
+};
+products[33] = {
+    id: 34,
+    name: 'Bàn phím cơ Keychron',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+34',
+    description: '342.000đ',
+    url: 'keychron-keyboard.html'
+};
+products[34] = {
+    id: 35,
+    name: 'Máy ảnh Canon EOS',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+35',
+    description: '472.000đ',
+    url: 'canon-eos.html'
+};
+products[35] = {
+    id: 36,
+    name: 'Smartphone Vivo V27',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+36',
+    description: '391.000đ',
+    url: 'vivo-v27.html'
+};
+products[36] = {
+    id: 37,
+    name: 'Ổ cứng di động WD',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+37',
+    description: '238.000đ',
+    url: 'wd-external.html'
+};
+products[37] = {
+    id: 38,
+    name: 'Màn hình LG UltraWide',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+38',
+    description: '499.000đ',
+    url: 'lg-ultrawide.html'
+};
+products[38] = {
+    id: 39,
+    name: 'Sạc dự phòng Anker',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+39',
+    description: '155.000đ',
+    url: 'anker-powerbank.html'
+};
+products[39] = {
+    id: 40,
+    name: 'Tablet Samsung Galaxy',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+40',
+    description: '298.000đ',
+    url: 'samsung-tablet.html'
+};
+products[40] = {
+    id: 41,
+    name: 'Điện thoại Nokia 3310',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+41',
+    description: '52.000đ',
+    url: 'nokia-3310.html'
+};
+products[41] = {
+    id: 42,
+    name: 'Máy tính để bàn Lenovo',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+42',
+    description: '418.000đ',
+    url: 'lenovo-desktop.html'
+};
+products[42] = {
+    id: 43,
+    name: 'Smart TV Sony Bravia',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+43',
+    description: '473.000đ',
+    url: 'sony-tv.html'
+};
+products[43] = {
+    id: 44,
+    name: 'Đèn thông minh Xiaomi',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+44',
+    description: '92.000đ',
+    url: 'xiaomi-lamp.html'
+};
+products[44] = {
+    id: 45,
+    name: 'Router Wi-Fi TP-Link',
+    image: 'https://via.placeholder.com/200x200.png?text=Product+45',
+    description: '164.000đ',
+    url: 'tp-link-router.html'
+};
+
+
 
 
 // Hàm hiển thị sản phẩm theo trang (đúng)
@@ -413,7 +511,7 @@ function guideSectionStopAutoSlide() {
 // Hàm khởi động lại tự động slide
 function guideSectionRestartAutoSlide() {
     guideSectionStopAutoSlide();
-    guideSectionAutoSlideInterval = setInterval(guideSectionAutoSlide, 7000); // Đặt lại 10 giây
+    guideSectionAutoSlideInterval = setInterval(guideSectionAutoSlide, 10000); // Đặt lại 10 giây
 }
 
 // Sự kiện khi nhấn nút Prev
