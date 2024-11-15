@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sản phẩm - Tiệm hoa mimi</title>
+    <!-- FONT CHỮ -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -22,7 +24,7 @@
 
 </head>
 <body>
-    <!-- Thẻ header -->
+  <!-- Thẻ header -->
     <header>
         <div class="header-left">
           <input type="checkbox" id="menu-toggle" class="menu-toggle" />
@@ -62,7 +64,7 @@
           </div>
         </div>
       </header>
-      <!-- list sản phẩm main -->
+  <!-- list sản phẩm main -->
     <section class="product-all-cont">
         <div class="products-container" id="products-container">
             <!-- Sản phẩm sẽ được hiển thị tại đây -->
@@ -72,6 +74,47 @@
             <!-- Nút phân trang sẽ được hiển thị tại đây -->
         </div>
     </section>
+  <!-- guide section slider -->
+   <section class="guideSection-cont">
+    <div class="guideSection-slider-wrapper">
+      <button class="guideSection-slider-prev-btn">&lt;</button>
+      <div class="guideSection-image-slider-container">
+          <div class="guideSection-image-slider">
+              <a href="https://example.com/1" target="_blank">
+                  <div class="guideSection-image-card">
+                      <img src="https://via.placeholder.com/600x300?text=Image+1" alt="Slide 1">
+                      <button class="guideSection-play-btn">▶</button>
+                  </div>
+              </a>
+              <a href="https://example.com/2" target="_blank">
+                  <div class="guideSection-image-card">
+                      <img src="https://via.placeholder.com/600x300?text=Image+2" alt="Slide 2">
+                      <button class="guideSection-play-btn">▶</button>
+                  </div>
+              </a>
+              <a href="https://example.com/3" target="_blank">
+                  <div class="guideSection-image-card">
+                      <img src="https://via.placeholder.com/600x300?text=Image+3" alt="Slide 3">
+                      <button class="guideSection-play-btn">▶</button>
+                  </div>
+              </a>
+              <a href="https://example.com/4" target="_blank">
+                  <div class="guideSection-image-card">
+                      <img src="https://via.placeholder.com/600x300?text=Image+4" alt="Slide 4">
+                      <button class="guideSection-play-btn">▶</button>
+                  </div>
+              </a>
+              <a href="https://example.com/5" target="_blank">
+                  <div class="guideSection-image-card">
+                      <img src="https://via.placeholder.com/600x300?text=Image+5" alt="Slide 5">
+                      <button class="guideSection-play-btn">▶</button>
+                  </div>
+              </a>
+          </div>
+      </div>
+      <button class="guideSection-slider-next-btn">&gt;</button>
+    </div>
+  </section>
 <script src="product.js"></script>
 </body>
 </html>

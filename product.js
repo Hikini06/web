@@ -19,7 +19,7 @@ products[0] = {
     id: 1,
     name: 'Laptop Asus vớ vẩn đểu',
     image: 'https://cdn.phuckhangmobile.com/image/iphone-13-128gb-hong-quocte-phuckhangmobile-27954j.jpg',
-    description: 'Laptop Asus với cấu hình mạnh mẽ, phù hợp cho mọi nhu cầu làm việc.',
+    description: 'Laptop Asus với cấu hình mạnh mẽ',
     url: 'https://www.google.com/'
 };
 
@@ -294,7 +294,7 @@ function renderPagination() {
 
     // Nút "Trước"
     const prevButton = document.createElement('button');
-    prevButton.textContent = 'Trước';
+    prevButton.textContent = '⬅';
     prevButton.className = currentPage === 1 ? 'disabled' : '';
     prevButton.addEventListener('click', () => changePage(currentPage - 1));
     paginationContainer.appendChild(prevButton);
@@ -330,7 +330,7 @@ function renderPagination() {
 
     // Nút "Tiếp"
     const nextButton = document.createElement('button');
-    nextButton.textContent = 'Tiếp';
+    nextButton.textContent = '⮕';
     nextButton.className = currentPage === totalPages ? 'disabled' : '';
     nextButton.addEventListener('click', () => changePage(currentPage + 1));
     paginationContainer.appendChild(nextButton);
@@ -360,7 +360,64 @@ function changePage(page) {
     currentPage = page;
     renderProducts(page);
     renderPagination();
+    // Cuộn lên đầu trang
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Cuộn mượt
+    });
 }
 
 // Hiển thị trang đầu tiên
 changePage(1);
+
+
+
+// GUIDE SECTION SLIDER JS START HERE
+const guideSectionImageSlider = document.querySelector('.guideSection-image-slider');
+const guideSectionImageSliderContainer = document.querySelector('.guideSection-image-slider-container');
+const guideSectionPrevButton = document.querySelector('.guideSection-slider-prev-btn');
+const guideSectionNextButton = document.querySelector('.guideSection-slider-next-btn');
+
+let guideSectionCurrentIndex = 0;
+const guideSectionVisibleImages = 3; // Hiển thị 3 ảnh
+let guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages; // Tính chiều rộng ảnh dựa trên container
+const guideSectionTotalImages = document.querySelectorAll('.guideSection-image-slider .guideSection-image-card').length;
+
+function guideSectionUpdateSlider() {
+    // Tính toán vị trí của slider
+    guideSectionImageSlider.style.transform = `translateX(-${guideSectionCurrentIndex * guideSectionSlideWidth}px)`;
+    guideSectionUpdateButtons();
+}
+
+function guideSectionUpdateButtons() {
+    // Cập nhật trạng thái nút
+    guideSectionPrevButton.disabled = guideSectionCurrentIndex === 0;
+    guideSectionNextButton.disabled = guideSectionCurrentIndex >= guideSectionTotalImages - guideSectionVisibleImages;
+}
+
+guideSectionPrevButton.addEventListener('click', () => {
+    if (guideSectionCurrentIndex > 0) {
+        guideSectionCurrentIndex--;
+        guideSectionUpdateSlider();
+    }
+});
+
+guideSectionNextButton.addEventListener('click', () => {
+    if (guideSectionCurrentIndex < guideSectionTotalImages - guideSectionVisibleImages) {
+        guideSectionCurrentIndex++;
+        guideSectionUpdateSlider();
+    }
+});
+
+// Thêm sự kiện resize để tính lại slide width khi thay đổi kích thước màn hình
+window.addEventListener('resize', () => {
+    guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages;
+    guideSectionUpdateSlider();
+});
+
+// Initialize slider
+guideSectionUpdateButtons();
+
+
+// GUIDE SECTION SLIDER JS END HERE
+
