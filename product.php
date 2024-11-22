@@ -35,7 +35,7 @@
           </label>
         </div>
         <div class="logo-container">
-          <a href="index.html" class="logo">Tiệm hoa mimi</a>
+          <a href="index.php" class="logo">Tiệm hoa mimi</a>
         </div>
         <div class="header-right">
           <div class="search-icon-container">
@@ -54,8 +54,8 @@
             </div>
             <nav id="menu-nav" class="menu-nav">
               <ul>
-                <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="product.html">Sản phẩm</a></li>
+                <li><a href="index.php">Trang chủ</a></li>
+                <li><a href="product.php">Sản phẩm</a></li>
                 <li><a href="new.html">Tin Tức</a></li>
                 <li><a href="about.html">Giới thiệu</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
@@ -250,7 +250,7 @@
           </ul>
         </div>
         <div class="product-banner-jim-sanpham product-banner-jim-sanpham-all">
-          <a class="product-banner-jim-a" href="./product.html">TẤT CẢ SẢN PHẨM</a>
+          <a class="product-banner-jim-a" href="./product.php">TẤT CẢ SẢN PHẨM</a>
         </div>
       </div>
       

@@ -57,7 +57,7 @@
             
                 <li>
                   <div class="dropdown">
-                    <a href="product.html" class="dropbtn">Sản phẩm</a>
+                    <a href="product.php" class="dropbtn">Sản phẩm</a>
                     <div class="dropdown-content">
                       <div class="dropdown_1 dropdown-content-list">
                         <a href="sp1" class="dropbtn_1 dropbtn-all">Đèn ngủ</a>
@@ -351,7 +351,7 @@
           </ul>
         </div>
         <div class="product-banner-jim-sanpham product-banner-jim-sanpham-all">
-          <a class="product-banner-jim-a" href="./product.html">TẤT CẢ SẢN PHẨM</a>
+          <a class="product-banner-jim-a" href="./product.php">TẤT CẢ SẢN PHẨM</a>
         </div>
       </div>
 
@@ -465,7 +465,7 @@
             <img src="image/3.webp" alt="" />
             <a
               class="banner-divine-to-two-child-btn"
-              href="product.html"
+              href="product.php"
               class="cta-button"
               >Mua ngay</a
             >
@@ -681,19 +681,19 @@
     <!-- <section id="product-categories">
       <h2>Danh mục sản phẩm</h2>
       <div class="category-grid">
-        <a href="product.html#wedding" class="category-item">
+        <a href="product.php#wedding" class="category-item">
           <img src="path/to/wedding-category.jpg" alt="Hoa cưới" />
           <h3>Hoa cưới</h3>
         </a>
-        <a href="product.html#birthday" class="category-item">
+        <a href="product.php#birthday" class="category-item">
           <img src="path/to/birthday-category.jpg" alt="Hoa sinh nhật" />
           <h3>Hoa sinh nhật</h3>
         </a>
-        <a href="product.html#congratulations" class="category-item">
+        <a href="product.php#congratulations" class="category-item">
           <img src="path/to/congrats-category.jpg" alt="Hoa chúc mừng" />
           <h3>Hoa chúc mừng</h3>
         </a>
-        <a href="product.html#love" class="category-item">
+        <a href="product.php#love" class="category-item">
           <img src="path/to/love-category.jpg" alt="Hoa tình yêu" />
           <h3>Hoa tình yêu</h3>
         </a>
