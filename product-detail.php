@@ -40,6 +40,8 @@ try {
     <title>Tiệm hoa Mimi</title>
     <link rel="stylesheet" href = "product-detail.css" > 
     <link rel="stylesheet" href = "header.css" > 
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <header>
@@ -202,10 +204,17 @@ try {
                 </div>
                 <button class="product-detail-pic-text-buynow">Mua ngay</button>
                 <div class="product-detail-pic-text-quickbuy">
-                    <!-- Quick buy section -->
+                    <h4>MUA NHANH</h4>
+                    <div class = "product-detail-pic-text-quickbuy-input">
+                      <input type="text" placeholder="Số điện thoại" />
+                      <button>Gửi</button>
+                    </div>
                 </div>
                 <div class="product-detail-pic-text-dis">
-                    <!-- Product description -->
+                    <p>- Giao hàng hoả tốc khu vực Hà Nội</p>
+                    <p>- Lỗi 1 đổi 1 hoặc hoàn tiền</p>
+                    <p>- Bảo hành 14 ngày</p>
+                    <p>- Cam kết sản phẩm giống với hình ảnh</p>
                 </div>
             </div>
         </div>
