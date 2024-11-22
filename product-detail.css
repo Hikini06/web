@@ -21,6 +21,9 @@ body {
     color: var(--text-color-dark);
   }
 
+
+/* product-detail-pic-cont HIỂN THỊ 1 SẢN PHẨM CHÍNH */
+
 .product-detail-pic-cont {
     display: flex;
     justify-content: center;
@@ -177,3 +180,32 @@ background-color: var(--background-color);
     background-color: var(--background-color);
     border-radius: 3px;
 }
+
+/* product-detail-pic-cont HIỂN THỊ 1 SẢN PHẨM CHÍNH - END */
+
+.product-detail-common-cont {
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.product-detail-common {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+.product-detail-common-items {
+    background-color: blanchedalmond;
+    width: 24%;
+    border: 0px solid red;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* Hiệu ứng shadow */
+}
+.product-detail-common-items img {
+    width: 100%; 
+    aspect-ratio: 1; 
+    object-fit: cover; 
+    display: block; 
+}
+

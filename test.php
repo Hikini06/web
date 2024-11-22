@@ -1,3 +1,16 @@
+
+
+
+<!-- THẺ NÀY CHỈ DÙNG ĐỂ TEST VÀ BACKUP. K LIÊN QUAN ĐẾN WEB -->
+
+
+
+
+
+
+
+
+
 <?php
 include 'db-connect.php';
 
@@ -226,22 +239,21 @@ $items = ($item_id_for_common !== null) ? getRandomItems($pdo, $item_id_for_comm
 
 
     </header>
-    <!-- HIỂN THỊ SẢN PHẨM CHÍNH -->
+   <!-- HIỂN THỊ SẢN PHẨM CHÍNH -->
     <div class="product-detail-pic-cont">
         <div class="product-detail-pic">
-            <!-- Phần ảnh sản phẩm -->
             <div class="product-detail-pic-img">
                 <div class="product-detail-pic-img-mainimg">
-                    <!-- Hiển thị ảnh sản phẩm -->
                     <img src="<?php echo $productImg; ?>" alt="<?php echo $productName; ?>" style="width: 100%; height: 100%;">
                 </div>
-                <div class="product-detail-pic-img-moreimg">
-                    <!-- Phần dành cho ảnh phụ -->
-                </div>
             </div>
-
-            <!-- Phần thông tin sản phẩm -->
             <div class="product-detail-pic-text">
+                <h1><?php echo $productName; ?></h1>
+                <h3><?php echo $productPrice; ?></h3>
+            </div>
+        </div>
+        <!-- Phần thông tin sản phẩm -->
+        <div class="product-detail-pic-text">
                 <div class="product-detail-pic-text-nameandprice">
                     <h1><?php echo $productName; ?></h1>
                     <h3><?php echo $productPrice; ?></h3>
@@ -261,25 +273,26 @@ $items = ($item_id_for_common !== null) ? getRandomItems($pdo, $item_id_for_comm
                     <p>- Cam kết sản phẩm giống với hình ảnh</p>
                 </div>
             </div>
+    </div>
+
+
+    <!-- HIỂN THỊ SẢN PHẨM GỢI Ý -->
+    <div class="product-detail-common-cont">
+        <div class="product-detail-common">
+            <?php if (!empty($items)): ?>
+                <?php foreach ($items as $item): ?>
+                    <div class="product-detail-common-items">
+                        <img src="<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
+                        <h1><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h1>
+                        <h3><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h3>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Không tìm thấy sản phẩm nào.</p>
+            <?php endif; ?>
         </div>
     </div>
 
-    <!-- CÁC SẢN PHẨM GỢI Ý -->
-    <div class="product-detail-common-cont">
-      <div class="product-detail-common">
-          <?php if (!empty($items) && is_array($items)): ?>
-              <?php foreach ($items as $item): ?>
-                  <div class="product-detail-common-items">
-                      <img src="<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
-                      <h1><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h1>
-                      <h3><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h3>
-                  </div>
-              <?php endforeach; ?>
-          <?php else: ?>
-              <p>Không tìm thấy sản phẩm nào.</p>
-          <?php endif; ?>
-      </div>
-    </div>
 
 
 
@@ -289,5 +302,5 @@ $items = ($item_id_for_common !== null) ? getRandomItems($pdo, $item_id_for_comm
 
 </body>
 </html>
-<!-- KẾT NỐI VỚI DATABASE BẰNG MÁY LOCAL -->
+
 
