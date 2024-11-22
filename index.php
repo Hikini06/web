@@ -3,7 +3,7 @@
   >
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tiệm hoa mimi</title>
+    <title>Tiệm hoa MiMi</title>
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
@@ -11,15 +11,18 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     /> -->
-      <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS -->
     <!-- <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     /> -->
+    <link rel= "stylesheet" href= "header.css"/>
     <link rel="stylesheet" href="home.css" />
-    <link rel="stylesheet" href="header.css" />
+
+   
+
   </head>
   <body>
     <header>
@@ -37,8 +40,42 @@
           </label>
         </div>
         <div class="logo-container">
-          <a href="index.html" class="logo">Tiệm hoa mimi</a>
+          <a href="index.php" class="logo">Tiệm hoa MiMi</a>
         </div>
+        <div class = "shearch-bar-cont">
+          <div class = "shearch-bar"></div>
+        </div>
+        <div class = "header-contact-number">
+          <a href="https://zalo.me/84354235669" target="_blank" ><h1>035.4235.669</h1></a>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!-- <div class="header-right">
           <div class="search-icon-container">
             <div class="search-container" id="searchContainer">
@@ -171,16 +208,14 @@
         <div class="product-banner-jim-sanpham product-banner-jim-sanpham-one">
           <a class="product-banner-jim-a" href="">ĐÈN NGỦ ▶</a>
           <ul class="product-banner-jim-ul product-banner-jim-ul-one">
-            <li class="product-banner-jim-li">ĐÈN TRÒN
+            <li class="product-banner-jim-li">ĐÈN DẠNG TRÒN
               <ul class="product-banner-jim-ultwo">
                 <li>Đèn tròn hoa tulip</li>
                 <li>Đèn tròn hoa hồng</li>
-                <!-- <li>a</li>
-                <li>b</li>
-                <li>b</li> -->
+                <li>Hoa anh đào</li>
               </ul>
             </li>
-            <li class="product-banner-jim-li">ĐÈN VUÔNG
+            <li class="product-banner-jim-li">ĐÈN DẠNG VUÔNG
               <ul class="product-banner-jim-ultwo">
                 <li>Đèn vuông hoa tulip</li>
                 <li>Đèn vuông hoa hồng</li>
@@ -189,7 +224,7 @@
                 <li>c</li> -->
               </ul>
             </li>
-            <li class="product-banner-jim-li">ĐÈN MÂY
+            <li class="product-banner-jim-li">ĐÈN ĐÁM MÂY
               <ul class="product-banner-jim-ultwo">
                 <li>Đèn mây hoa tulip</li>
                 <li>Đèn mây hoa hồng</li>
@@ -221,87 +256,100 @@
         <div class="product-banner-jim-sanpham product-banner-jim-sanpham-two">
           <a class="product-banner-jim-a" href="">HOA GẤU BÔNG ▶</a>
           <ul class="product-banner-jim-ul product-banner-jim-ul-two">
-            <li class="product-banner-jim-li">GẤU ÔM HOA SÁP
+            <li class="product-banner-jim-li">BÓ HOA LEN, HOA SÁP
               <ul class="product-banner-jim-ultwo">
-                <li>Hồng đậm</li>
-                <li>Hồng nhạt</li>
-                <!-- <li>a</li>
-                <li>b</li>
-                <li>b</li> -->
+                <li>Hoa len thỏ</li>
+                <li>Bó hoa len</li>
+                <li>Hoa sáp</li>
               </ul>
             </li>
-            <li class="product-banner-jim-li">GẤU DÂU BÓNG MICA
+            <li class="product-banner-jim-li">BÓ HOA GẤU BÔNG
               <ul class="product-banner-jim-ultwo">
-                <li>Mica to hồng đậm</li>
-                <li>Mica to hồng nhạt</li>
-                <li>Moca lotso</li>
-                <!-- <li>c</li>
-                <li>c</li> -->
+                <li>Bó hoa gấu hoạt hình</li>
+                <li>Bó dạng đứng để bàn</li>
+                <li>Hộp hoa gấu bông</li>
+                <li>Hoa gấu hình kem</li>
+                <li>Hoa gấu lông xù</li>
+                <li>Gấu ôm hoa sáp</li>
+                <li>Hoa heo hồng đất sét</li>
+                <li>Hoa gấu 1 bông</li>
+                <li>Bó hoa tí hon</li>
+                <li>Các bó gấu Loopy</li>
+                <li>Bó Loopy tai thỏ</li>
+                <li>Các mẫu Capybara</li>
+                <li>Các mẫu gấu trúc</li>
+                <li>Các mẫu gấu dâu</li>
               </ul>
             </li>
-            <li class="product-banner-jim-li">GẤU LÔNG XÙ
-              <ul class="product-banner-jim-ultwo">
-                <li>Mù mặt to</li>
-                <li>Xù gấu</li>
-                <!-- <li>d</li>
-                <li>d</li>
-                <li>d</li> -->
-              </ul>
-            </li>
-            <li class="product-banner-jim-li">HOA LEN
-              <ul class="product-banner-jim-ultwo">
-                <li>Hoa len hồng</li>
-                <li>Hoa len xanh</li>
-                <li>Hoa len hướng dương vàng</li>
-                <!-- <li>e</li>
-                <li>e</li> -->
-              </ul>
-            </li>
-            <li class="product-banner-jim-li">HỘP HOA GẤU
-              <ul class="product-banner-jim-ultwo">
-                <li>Hộp xanh</li>
-                <li>Hộp đỏ</li>
-                <li>Hộp vàng</li>
-                <li>Hộp tím</li>
-                <li>Hộp hồng</li>
-                <li>Hộp da cam</li>
-                <li>Hộp tím than</li>
-                <li>Hộp xanh biển</li>
-                <li>Hộp xanh biển nhạt</li>
-                <li>Hộp xanh biển đậm</li>
-                <li>Hộp abc</li>
-                <li>Hộp xyz</li>
-              </ul>
+           </ul>
             </li>
           </ul>
         </div>
         <div class="product-banner-jim-sanpham product-banner-jim-sanpham-three">
           <a class="product-banner-jim-a" href="">SET QUÀ TẶNG ▶</a>
           <ul class="product-banner-jim-ul product-banner-jim-ul-three">
-            <li class="product-banner-jim-li">SET NOEL
+            <li class="product-banner-jim-li">SET Loopy
               <ul class="product-banner-jim-ultwo">
-                <li>Set tất noel</li>
-                <li>Baby three nel</li>
-                <li>Labubu noel</li>
-              </ul>
-            </li>
-            <li class="product-banner-jim-li">SET LOOPY
-              <ul class="product-banner-jim-ultwo">
-                <li>Loopy mũ hươu</li>
-                <li>Mũ dâu</li>
-                <li>Mũ cá</li>
-                <li>Mũ lợn</li>
-                <li>Mũ gà</li>
-              </ul>
-            </li>
-            <li class="product-banner-jim-li">SET VỊT DỖI
-              <ul class="product-banner-jim-ultwo">
-                <li>Vịt dỗi vàng</li>
-                <li>Vịt dỗi xanh</li>
-                <li>Vịt dỗi đỏ</li>
-                <li>Vịt dỗi tím</li>
-                <li>Vịt dỗi hồng</li>
+                <li>Loopy heo</li>
+                <li>Loopy gấu dâu</li>
+                <li>Loopy Kuromi</li>
+                <li>Loopy cá hề</li>
+                <li>Loopy gấu vàng</li>
+                <li>Loopy ong vàng</li>
+                <li>Loopy cá xanh khủng long</li>
+                <li>Loopy mũ cá</li>
+                <li>Set ghim cài 1</li>
+                <li>Set ghim cài 2</li>
+                <li>Set ghim cài Capybara</li>
                 
+              </ul>
+            </li>
+            <li class="product-banner-jim-li">SET vịt hoa
+              <ul class="product-banner-jim-ultwo">
+                <li>Vịt mặt hoa</li>
+                <li>Vịt mũ ếch</li>
+                <li>Vịt mũ xanh</li>
+                <li>Vịt ôm cá</li>
+                <li>Vịt ôm gối</li>
+                <li>Vịt nơ hồng</li>
+              </ul>
+            </li>
+            <li class="product-banner-jim-li">SET Baby Three
+              <ul class="product-banner-jim-ultwo">
+                <li>Thỏ hồng</li>
+                <li>Cáo</li>
+                <li>Voi xanh</li>
+                <li>Cừu</li>
+                <li>Gấu trúc</li>
+                <li>Khủng long</li>
+              </ul>
+            </li>
+            <li class="product-banner-jim-li">SET Labubu
+              <ul class="product-banner-jim-ultwo">
+                <li>Labubu xanh</li>
+                <li>Labubu hồng</li>
+                <li>Labubu tím</li>
+                <li>Labubu nâu</li>
+                
+              </ul>
+            </li>
+            <li class="product-banner-jim-li">SET tất và nến
+              <ul class="product-banner-jim-ultwo">
+                <li>Set tiểu Cường</li>
+                <li>Nến xanh lá</li>
+                <li>Nến xanh neon</li>
+                <li>Nến vàng</li>
+                <li>Nến đỏ</li>
+               
+              </ul>
+            </li>
+            <li class="product-banner-jim-li">SET Capybara
+              <ul class="product-banner-jim-ultwo">
+                <li>Capybara hồng</li>
+                <li>Capybara kem hồng</li>
+                <li>Capybara kem nâu</li>
+                <li>Capybara kem xanh</li>
+              
               </ul>
             </li>
           </ul>
@@ -311,32 +359,69 @@
         <div class="product-banner-jim-sanpham product-banner-jim-sanpham-four">
           <a class="product-banner-jim-a" href="">GẤU BÔNG ▶</a>
           <ul class="product-banner-jim-ul product-banner-jim-ul-four">
-            <li class="product-banner-jim-li">Loopy
+            <li class="product-banner-jim-li">Gấu bông lớn
               <ul class="product-banner-jim-ultwo">
-                <li>Loopy mũ hươu</li>
-                <li>mũ gà</li>
-                <li>Mũ vịt</li>
-                <li>Mũ lợn</li>
-                <li>Mũ dê</li>
+                <li>Capybara</li>
+                <li>Capybara thể thao</li>
               </ul>
             </li>
-            <li class="product-banner-jim-li">Capybara
+            <li class="product-banner-jim-li">Móc khoá
               <ul class="product-banner-jim-ultwo">
-                <li>Ôm đàn</li>
-                <li>Cầm hoa</li>
-                <li>Rút mũi</li>
-                <li>Rút tai</li>
-                <li>Mặc áo ông già</li>
-                <li>Mặc áo bà già</li>
+                <li>Loopy đội mũ</li>
+                <li>Baby Three</li>
+                <li>Labubu hoa quả</li>
+                <li>Labubu nơ</li>
+                <li>Labubu bánh vòng</li>
+                <li>Labubu mặt hoa</li>
+                <li>Capybara móc khoá</li>
+                <li>Kem Capybara</li>
+                <li>Vịt</li>
+                <li>Tiểu Cường</li>
+                
               </ul>
             </li>
-            <li class="product-banner-jim-li">GẤU ÔM HOA SÁP
+            <li class="product-banner-jim-li">GHIM CÀI ÁO
               <ul class="product-banner-jim-ultwo">
-                <li>Hoa sáp đỏ</li>
-                <li>Hoa sáp hồng</li>
-                <li>Hoa sáp tím</li>
-                <li>Hoa sáp xanh</li>
-                <li>Hoa sáp bảy màu đẹp</li>
+                <li>Ghim Loopy</li>
+                <li>Ghim Labubu</li>
+                <li>Ghim Pet</li>
+                <li>Ghim Capybara</li>
+              
+              </ul>
+            </li>
+            <!-- <li class="product-banner-jim-li">ĐÈN THÚ
+              <ul class="product-banner-jim-ultwo">
+                <li>Đèn thú heo hồng</li>
+                <li>Đèn thú vịt vàng</li>
+                <li>Đèn thú thỏ trắng</li> -->
+                <!-- <li>e</li>
+                <li>e</li> -->
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="product-banner-jim-sanpham product-banner-jim-sanpham-five">
+          <a class="product-banner-jim-a" href="">KHÁC ▶</a>
+          <ul class="product-banner-jim-ul product-banner-jim-ul-five">
+            <li class="product-banner-jim-li">Nến thơm
+              <ul class="product-banner-jim-ultwo">
+                <li>Nến bông tuyết</li>
+                <li>Nến cây thông dạng dẹt</li>
+                <li>Nến cây thông dạng đứng</li>
+              </ul>
+            </li>
+            <li class="product-banner-jim-li">Balo túi xách
+              <ul class="product-banner-jim-ultwo">
+                <li>Balo Capybara</li>
+                <li>Túi xách gấu trúc</li>
+                <li>Túi xách gà</li>
+                               
+              </ul>
+            </li>
+            <li class="product-banner-jim-li">Đồ theo Trend
+              <ul class="product-banner-jim-ultwo">
+                <li>Gấu bông Trư Bát Giới</li>
+               
               </ul>
             </li>
             <!-- <li class="product-banner-jim-li">ĐÈN THÚ

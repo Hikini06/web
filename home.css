@@ -1207,7 +1207,7 @@ main {
 /* section product banner jim */
 .product-banner-jim-sanpham {
   background-color: var(--main-color);
-  width: 25%;
+  width: auto;
   position: relative;
 }
 .product-banner-jim {
@@ -1226,6 +1226,7 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative; /* Đặt vị trí tương đối để các bảng sổ ra căn cứ */
 }
 
 .product-banner-jim .product-banner-jim-a {
@@ -1234,46 +1235,69 @@ main {
   font-size: 1rem;
   text-align: center;
   display: block;
-  width: 100%;
+  /* width: 100%; */
   text-decoration: none;
   text-decoration: none;
 }
 .product-banner-jim .product-banner-jim-ul {
   z-index: 2;
   background-color: white;
-  width: 59.6vw;
-  list-style-type: none; 
-  padding: 0;            
+  width: 60%; /* Chiều rộng của bảng */
+  list-style-type: none;
+  padding: 0;
   margin: 0;
-  display: none; 
-  position: absolute;
+  display: none;
+  position: absolute; /* Để căn chỉnh theo tọa độ */
+  top: 100%; /* Hiển thị ngay dưới phần được hover */
+  left: 50%; /* Đưa bảng về giữa trang */
+  transform: translateX(-50%); /* Căn giữa hoàn toàn */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng nhẹ */
 }
 .product-banner-jim .product-banner-jim-ul-one {
   height: auto;
 }
-.product-banner-jim-sanpham-one:hover .product-banner-jim-ul {
+.product-banner-jim-sanpham-one:hover .product-banner-jim-ul,
+.product-banner-jim-sanpham-two:hover .product-banner-jim-ul,
+.product-banner-jim-sanpham-three:hover .product-banner-jim-ul,
+.product-banner-jim-sanpham-four:hover .product-banner-jim-ul,
+.product-banner-jim-sanpham-five:hover .product-banner-jim-ul {
   display: flex;
+  flex-direction: column; /* Đảm bảo các mục trong danh sách sắp xếp theo cột */
+  align-items: flex-start; /* Căn chỉnh nội dung trong bảng */
 }
-.product-banner-jim-sanpham-three:hover .product-banner-jim-ul {
-  display: flex;
+.product-banner-jim .product-banner-jim-ul {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng nhẹ */
 }
-.product-banner-jim-sanpham-four:hover .product-banner-jim-ul {
-  display: flex;
+.product-banner-jim-ul li:hover {
+  color: var(--text-color);
+  background-color: rgba(255, 211, 219, 0.2); /* Hiệu ứng nền khi hover */
 }
-.product-banner-jim-sanpham-two:hover .product-banner-jim-ul {
-  display: flex;
+.product-banner-jim-ul li {
+  font-size: 1rem;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: var(--text-color-dark);
+  cursor: pointer;
 }
-.product-banner-jim-sanpham:hover .product-banner-jim-a {
+/* .product-banner-jim-sanpham:hover .product-banner-jim-a {
   color: var(--text-color);
 }
 .product-banner-jim .product-banner-jim-ul-two {
-  left: -100%;
+  left: -95%;
 }
 .product-banner-jim .product-banner-jim-ul-three {
-  left: -200%;
+  left: -241%;
 }
 .product-banner-jim .product-banner-jim-ul-four {
-  left: -300%;
+  left: -490%;
+}
+.product-banner-jim .product-banner-jim-ul-five {
+  right: -310%;
+} */
+.product-banner-jim-sanpham:hover .product-banner-jim-ul {
+  display: flex;
+  flex-direction: column; /* Sắp xếp các mục trong bảng */
+  align-items: flex-start; /* Căn chỉnh nội dung trong bảng */
 }
 .product-banner-jim .product-banner-jim-ul .product-banner-jim-li {
   font-size: 1rem;
