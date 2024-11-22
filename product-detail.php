@@ -1,9 +1,8 @@
 <?php
 include 'db-connect.php';
 
-// Lấy ID sản phẩm từ URL (ví dụ: ?id=1)
+// CHỨC NĂNG HIỂN THỊ SẢN PHẨM MAIN
 $product_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
-
 // Truy vấn lấy thông tin sản phẩm chính
 try {
     $query = "SELECT * FROM items_detail WHERE id = :id LIMIT 1";
@@ -45,7 +44,6 @@ function getRandomItems($pdo, $item_id, $limit = 4) {
         die("Lỗi: " . $e->getMessage());
     }
 }
-
 // Ánh xạ dải ID sản phẩm chính và `item_id` gợi ý
 $itemMapping = [
     '1-4' => 1,
@@ -53,7 +51,6 @@ $itemMapping = [
     '10-15' => 3,
     // Thêm các dải khác nếu cần
 ];
-
 // Lấy `item_id` gợi ý dựa trên sản phẩm đang hiển thị
 function getItemIdFromRange($productId, $itemMapping) {
     foreach ($itemMapping as $range => $item_id) {
@@ -64,12 +61,32 @@ function getItemIdFromRange($productId, $itemMapping) {
     }
     return null;
 }
-
 // Xác định `item_id` cho sản phẩm gợi ý
 $item_id_for_common = getItemIdFromRange($product_id, $itemMapping);
-
 // Lấy danh sách sản phẩm gợi ý theo `item_id`
 $items = ($item_id_for_common !== null) ? getRandomItems($pdo, $item_id_for_common, 4) : [];
+
+// CHỨC NĂNG LẤY 4 SẢN PHẨM NGẪU NHIÊN
+function getRandomSuggestItems($pdo, $limit = 4) {
+  try {
+      $query = "
+          SELECT * 
+          FROM items_detail 
+          ORDER BY RAND() 
+          LIMIT :limit
+      ";
+      $stmt = $pdo->prepare($query);
+      $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+      $stmt->execute();
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return $result ?: [];
+  } catch (PDOException $e) {
+      die("Lỗi: " . $e->getMessage());
+  }
+}
+// Lấy danh sách sản phẩm ngẫu nhiên
+$suggestItems = getRandomSuggestItems($pdo, 4);
+
 ?>
 
 
@@ -246,9 +263,9 @@ $items = ($item_id_for_common !== null) ? getRandomItems($pdo, $item_id_for_comm
                     <h1><?php echo $productName; ?></h1>
                     <h3><?php echo $productPrice; ?></h3>
                 </div>
-                <button class="product-detail-pic-text-buynow">Mua ngay</button>
+                <button class="product-detail-pic-text-buynow">Đặt Hàng</button>
                 <div class="product-detail-pic-text-quickbuy">
-                    <h4>MUA NHANH</h4>
+                    <h4>MUA HÀNG NHANH</h4>
                     <div class = "product-detail-pic-text-quickbuy-input">
                       <input type="text" placeholder="Số điện thoại" />
                       <button>Gửi</button>
@@ -266,20 +283,76 @@ $items = ($item_id_for_common !== null) ? getRandomItems($pdo, $item_id_for_comm
 
     <!-- CÁC SẢN PHẨM GỢI Ý -->
     <div class="product-detail-common-cont">
+      <h2 class = "product-detail-common-cont-title">Sản phẩm tương tự</h2>
       <div class="product-detail-common">
-          <?php if (!empty($items) && is_array($items)): ?>
-              <?php foreach ($items as $item): ?>
-                  <div class="product-detail-common-items">
+        <?php if (!empty($items) && is_array($items)): ?>
+            <?php foreach ($items as $item): ?>
+                <a href="product-detail.php?id=<?php echo htmlspecialchars($item['id']); ?>" class="product-detail-common-items">
+                    <img src="<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
+                    <h3><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h3>
+                    <h4><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h4>
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Không tìm thấy sản phẩm nào.</p>
+        <?php endif; ?>
+      </div>
+
+    </div>
+
+    <!-- CÁC SẢN PHẨM NGẪU NHIÊN -->
+    <div class="product-detail-suggest-cont">
+      <h2 class="product-detail-suggest-cont-title">Sản phẩm bạn có thể thích</h2>
+      <div class="product-detail-suggest">
+          <?php if (!empty($suggestItems) && is_array($suggestItems)): ?>
+              <?php foreach ($suggestItems as $item): ?>
+                  <a href="product-detail.php?id=<?php echo htmlspecialchars($item['id']); ?>" class="product-detail-suggest-items">
                       <img src="<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
-                      <h1><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h1>
-                      <h3><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h3>
-                  </div>
+                      <h3><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h3>
+                      <h4><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h4>
+                  </a>
               <?php endforeach; ?>
           <?php else: ?>
               <p>Không tìm thấy sản phẩm nào.</p>
           <?php endif; ?>
       </div>
     </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-cont">
+        <div class="footer-adress">
+          <h3>
+            ĐỊA CHỈ
+          </h3>
+          <p>
+            Ngõ 2 Tân Mỹ, Mỹ Đình, Nam Từ Liêm, Hà Nội
+          </p>
+        </div>
+        <div class="footer-contact">
+          <h3>
+            LIÊN HỆ VỚI BỌN MÌNH
+          </h3>
+          <div class="footer-icon">
+            <a href="https://www.facebook.com/people/Ti%E1%BB%87m-hoa-MiMi/61560867710445/" target="_blank"><div><img src="image/icon/icon-facebook.png" alt=""></div></a>
+            <a href="" target="_blank"><div><img src="image/icon/icon-insta.webp"  alt=""></div></a>
+            <a href="https://vn.shp.ee/FofnRRP" target="_blank"><div><img src="image/icon/icon-shopee.webp"  alt=""></div></a>
+          </div>
+          <div class="footer-icon">
+            <a href="" target="_blank"><div><img src="image/icon/icon-threads.webp"  alt=""></div></a>
+            <a href="https://www.tiktok.com/@phannthaonguyen" target="_blank"><div><img src="image/icon/icon-tiktok.webp" alt=""></div></a>
+            <a href="https://zalo.me/84354235669" target="_blank"><div><img src="image/icon/icon-zalo.png" alt=""></div></a>
+          </div>
+        </div>
+        <div class="footer-payment">
+          <h3>PHƯƠNG THỨC THANH TOÁN</h3>
+          <h4>TECHCOMBANK</h4>
+          <P>19033199069019</P>
+          <P>PHAN THẢO NGUYÊN</P>
+        </div>
+      </div>
+      <h5 class="footer-h">Tiệm hoa MiMi - Since 2020</h5>
+    </footer>
 
 
 
@@ -289,5 +362,5 @@ $items = ($item_id_for_common !== null) ? getRandomItems($pdo, $item_id_for_comm
 
 </body>
 </html>
-<!-- KẾT NỐI VỚI DATABASE BẰNG MÁY LOCAL -->
+
 
