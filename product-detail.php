@@ -1,3 +1,36 @@
+<?php
+include 'db-connect.php';
+
+// Lấy ID sản phẩm từ URL (ví dụ: ?id=1)
+$product_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+
+try {
+    // Truy vấn lấy thông tin sản phẩm từ bảng items_detail
+    $query = "SELECT * FROM items_detail WHERE id = :id LIMIT 1";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':id', $product_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Lấy dữ liệu sản phẩm
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($product) {
+        // Lấy giá trị từ database
+        $productName = htmlspecialchars($product['name']);
+        $productPrice = number_format($product['price'], 0, ',', '.') . "đ";
+        $productImg = htmlspecialchars($product['img']);
+    } else {
+        // Nếu không tìm thấy sản phẩm
+        $productName = "Sản phẩm không tồn tại";
+        $productPrice = "0đ";
+        $productImg = "default.jpg"; // Đường dẫn ảnh mặc định nếu không có sản phẩm
+    }
+} catch (PDOException $e) {
+    die("Lỗi: " . $e->getMessage());
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -148,38 +181,41 @@
 
 
     </header>
-    <div class= "product-detail-pic-cont">
-        <div class = "product-detail-pic">
-            <div class = "product-detail-pic-img">
-                <div class = "product-detail-pic-img-mainimg">
-                    <img src="" alt="">
+    <div class="product-detail-pic-cont">
+        <div class="product-detail-pic">
+            <!-- Phần ảnh sản phẩm -->
+            <div class="product-detail-pic-img">
+                <div class="product-detail-pic-img-mainimg">
+                    <!-- Hiển thị ảnh sản phẩm -->
+                    <img src="<?php echo $productImg; ?>" alt="<?php echo $productName; ?>" style="width: 100%; height: 100%;">
                 </div>
-                <div class = "product-detail-pic-img-moreimg">
-
+                <div class="product-detail-pic-img-moreimg">
+                    <!-- Phần dành cho ảnh phụ -->
                 </div>
             </div>
-            <div class = "product-detail-pic-text">
-                <div class = "product-detail-pic-text-nameandprice" >
-                    <h1>alo</h3>
-                    <h3>190.000đ</h3>
+
+            <!-- Phần thông tin sản phẩm -->
+            <div class="product-detail-pic-text">
+                <div class="product-detail-pic-text-nameandprice">
+                    <h1><?php echo $productName; ?></h1>
+                    <h3><?php echo $productPrice; ?></h3>
                 </div>
-                <button class = "product-detail-pic-text-buynow">
-
-                </button>
-                <div class = "product-detail-pic-text-quickbuy" >
-
+                <button class="product-detail-pic-text-buynow">Mua ngay</button>
+                <div class="product-detail-pic-text-quickbuy">
+                    <!-- Quick buy section -->
                 </div>
-                <div class = "product-detail-pic-text-dis">
-
+                <div class="product-detail-pic-text-dis">
+                    <!-- Product description -->
                 </div>
             </div>
         </div>
     </div>
-    <div class= "product-detail-dis-cont">
 
+    <div class="product-detail-dis-cont">
+        <!-- Additional description -->
     </div>
-    <div class = "product-detail-common-cont">
-
+    <div class="product-detail-common-cont">
+        <!-- Common products -->
     </div>
 
 
@@ -191,8 +227,4 @@
 </body>
 </html>
 <!-- KẾT NỐI VỚI DATABASE BẰNG MÁY LOCAL -->
-<?php
 
-include 'db-connect.php';
-
-?>
