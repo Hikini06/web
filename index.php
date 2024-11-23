@@ -12,6 +12,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     /> -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-eNSSmF8SZQHIVUlR3I2f3kgzbYbK1nKbb60eN1edkLc2k19uSYD5UOY3dHohj5Ev" crossorigin="anonymous">
 
     <!-- Bootstrap CSS -->
     <!-- <link
@@ -44,8 +45,11 @@
           <div class="logo-container">
             <a href="index.php" class="logo">Tiệm hoa MiMi</a>
           </div>
-          <div class = "shearch-bar-cont">
-            <div class = "shearch-bar"></div>
+          <div class="search-bar-cont">
+            <form action="filter.php" method="GET" class="search-form">
+                <input type="text" name="q" placeholder="Tìm kiếm sản phẩm..." required />
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
           </div>
           <div class = "header-contact-number">
             <a href="https://zalo.me/84354235669" target="_blank" ><h1>035.4235.669</h1></a>
@@ -80,7 +84,7 @@
         <div class="product-banner-jim-table">
           <ul class="product-banner-jim-table-ul product-banner-jim-table-ul-one">
             <li class="product-banner-jim-li">
-              <a href="#">ĐÈN DẠNG TRÒN</a>
+              <a href="./categories.php?subcategory_id=11">ĐÈN DẠNG TRÒN</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=47">Đèn tròn hoa tulip</a></li>
                 <li><a href="./items.php?item_id=48">Đèn tròn hoa hồng</a></li>
@@ -88,7 +92,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">ĐÈN DẠNG VUÔNG</a>
+              <a href="./categories.php?subcategory_id=12">ĐÈN DẠNG VUÔNG</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=56">Đèn vuông hoa tulip</a></li>
                 <li><a href="./items.php?item_id=57">Đèn vuông hoa hồng</a></li>
@@ -96,14 +100,14 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">ĐÈN ĐÁM MÂY</a>
+              <a href="./categories.php?subcategory_id=13">ĐÈN ĐÁM MÂY</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=53">Đèn mây hoa tulip</a></li>
                 <li><a href="./items.php?item_id=54">Đèn mây hoa hồng</a></li>
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">ĐÈN THÚ</a>
+              <a href="./categories.php?subcategory_id=14">ĐÈN THÚ</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./product-detail.php?id=335">Đèn thú heo hồng</a></li>
                 <li><a href="./product-detail.php?id=333">Đèn thú vịt vàng</a></li>
@@ -115,7 +119,7 @@
         <div class="product-banner-jim-table-two">
           <ul class="product-banner-jim-table-ul product-banner-jim-table-ul-one">
             <li class="product-banner-jim-li">
-              <a href="#">BÓ HOA LEN, HOA SÁP</a>
+              <a href="./categories.php?subcategory_id=1">BÓ HOA LEN, HOA SÁP</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=1">Hoa len thỏ</a></li>
                 <li><a href="./items.php?item_id=2">Bó hoa len</a></li>
@@ -123,7 +127,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">BÓ HOA GẤU BÔNG</a>
+              <a href="./categories.php?subcategory_id=2">BÓ HOA GẤU BÔNG</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=4">Bó hoa gấu hoạt hình</a></li>
                 <li><a href="./items.php?item_id=5">Bó dạng đứng để bàn</a></li>
@@ -146,7 +150,7 @@
         <div class="product-banner-jim-table-three">
           <ul class="product-banner-jim-table-ul product-banner-jim-table-ul-one">
             <li class="product-banner-jim-li">
-              <a href="#">SET Loopy</a>
+              <a href="./items.php?item_id=34">SET Loopy</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./product-detail.php?id=250">Loopy heo</a></li>
                 <li><a href="./product-detail.php?id=251">Loopy gấu dâu</a></li>
@@ -162,7 +166,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">SET vịt hoa</a>
+              <a href="./items.php?item_id=35">SET vịt hoa</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./product-detail.php?id=261">Vịt mặt hoa</a></li>
                 <li><a href="./product-detail.php?id=262">Vịt mũ ếch</a></li>
@@ -173,7 +177,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">SET Baby Three</a>
+              <a href="./items.php?item_id=36">SET Baby Three</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./product-detail.php?id=267">Thỏ hồng</a></li>
                 <li><a href="./product-detail.php?id=268">Cáo</a></li>
@@ -184,7 +188,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">SET Labubu</a>
+              <a href="./items.php?item_id=37">SET Labubu</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./product-detail.php?id=273">Labubu xanh</a></li>
                 <li><a href="./product-detail.php?id=274">Labubu hồng</a></li>
@@ -193,7 +197,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">SET tất và nến</a>
+              <a href="./items.php?item_id=38">SET tất và nến</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./product-detail.php?id=277">Set tiểu Cường</a></li>
                 <li><a href="./product-detail.php?id=278">Nến xanh lá</a></li>
@@ -203,7 +207,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">SET Capybara</a>
+              <a href="./items.php?item_id=39">SET Capybara</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./product-detail.php?id=282">Capybara hồng</a></li>
                 <li><a href="./product-detail.php?id=283">Capybara kem hồng</a></li>
@@ -216,17 +220,17 @@
         <div class="product-banner-jim-table-four">
           <ul class="product-banner-jim-table-ul product-banner-jim-table-ul-one">
             <li class="product-banner-jim-li">
-              <a href="#">Gấu bông lớn</a>
+              <a href="./categories.php?subcategory_id=3">Gấu bông lớn</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=18">Capybara</a></li>
                 <li><a href="./items.php?item_id=19">Capybara thể thao</a></li>
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">Móc khoá</a>
+              <a href="./categories.php?subcategory_id=4">Móc khoá</a>
               <ul class="product-banner-jim-ultwo">
-                <li><a href="./items.php?item_id=20">Baby Three</a></li>
-                <li><a href="./items.php?item_id=21">Loopy đội mũ</a></li>
+                <li><a href="./items.php?item_id=21">Baby Three</a></li>
+                <li><a href="./items.php?item_id=20">Loopy đội mũ</a></li>
                 <li><a href="./items.php?item_id=22">Labubu hoa quả</a></li>
                 <li><a href="./items.php?item_id=23">Labubu nơ</a></li>
                 <li><a href="./items.php?item_id=24">Labubu bánh vòng</a></li>
@@ -238,7 +242,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">GHIM CÀI ÁO</a>
+              <a href="./categories.php?subcategory_id=5">GHIM CÀI ÁO</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=30">Ghim Loopy</a></li>
                 <li><a href="./items.php?item_id=31">Ghim Labubu</a></li>
@@ -251,7 +255,7 @@
         <div class="product-banner-jim-table-five">
           <ul class="product-banner-jim-table-ul product-banner-jim-table-ul-one">
             <li class="product-banner-jim-li">
-              <a href="#">Nến thơm</a>
+              <a href="./categories.php?subcategory_id=7">Nến thơm</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=40">Nến bông tuyết</a></li>
                 <li><a href="./items.php?item_id=41">Nến cây thông dạng dẹt</a></li>
@@ -259,7 +263,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">Balo túi xách</a>
+              <a href="./categories.php?subcategory_id=8">Balo túi xách</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=43">Balo Capybara</a></li>
                 <li><a href="./items.php?item_id=44">Túi xách gấu trúc</a></li>
@@ -267,7 +271,7 @@
               </ul>
             </li>
             <li class="product-banner-jim-li">
-              <a href="#">Đồ theo Trend</a>
+              <a href="./categories.php?subcategory_id=10">Đồ theo Trend</a>
               <ul class="product-banner-jim-ultwo">
                 <li><a href="./items.php?item_id=46">Gấu bông Trư Bát Giới</a></li>
               </ul>

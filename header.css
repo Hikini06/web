@@ -25,6 +25,20 @@ body {
   flex-direction: column;
   height: auto;
 }
+/* thanh tim kiem */
+.search-bar-cont {
+  width: 50%;
+}
+.search-bar-cont  input {
+  border: 1px solid var(--text-color-dark);
+  height: 1.5rem;
+  border-radius: 10px;
+  width: 80%;
+}
+
+
+
+
 
 /* Header styles */
 
