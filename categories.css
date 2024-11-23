@@ -5,7 +5,7 @@
     box-sizing: border-box;
   }
   
-:root {
+  :root {
     --main-color: rgb(255, 211, 219);
     --text-color: rgb(194, 47, 80);
     --text-color-dark: rgb(0, 32, 77);
@@ -13,7 +13,7 @@
     --background-color: rgb(255, 248, 249);
   }
   
-body {
+  body {
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400; 
@@ -25,72 +25,79 @@ body {
 
 
 
-/* Căn chỉnh danh sách filter */
-.items-filter {
-    width: 60%;
-}
-.items-filter-cont {
-    margin-top: 16rem;
+/* Style for the filter section */
+.categories-filter-cont{
+    margin-top: 14rem;
+    margin-bottom: 4rem;
+    height: auto;
     display: flex;
+    align-items: center;
     justify-content: center;
-}
-.items-filter ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 10px;
-}
-
-.items-filter ul li a {
-    text-decoration: none;
-    color: #333;
-    padding: 8px 16px;
-    background-color: #f4f4f4;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.items-filter ul li a:hover,
-.items-filter ul li a.active {
-    background-color: #ff6f61;
-    color: #fff;
-}
-
-/* Căn chỉnh hiển thị sản phẩm */
-.items-cont {
+    position: relative;
     width: 100%;
+}
+.categories-filter {
+    overflow: hidden; /* Giới hạn nội dung hiển thị */
+    width: 58%;
+    display: flex;
+    align-items: center;
+}
+.categories-filter ul {
+    display: flex;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    transition: transform 0.3s ease; /* Hiệu ứng trượt */
+    list-style-type: none;
+}
+
+.categories-filter ul li {
+    flex: 0 0 auto; /* Duy trì kích thước cố định */
+    border: 2px solid var(--text-color-dark);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
     display: flex;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0.5rem;
+    min-width: 150px; /* Đặt chiều rộng tối thiểu */
 }
-.items {
+
+.categories-filter ul li a {
+    text-decoration: none;
+    color: var(--text-color-dark);
+    transition: color 0.3s;
+    text-align: center;
+}
+
+.categories-filter ul li a:hover {
+    color: var(--text-color);
+}
+
+/* Style for the products */
+.categories {
     width: 60%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    
+    gap: 1.5rem;
+    margin: 2rem auto;
 }
 
 .product {
-    border: 0px solid #eaeaea;
-    border-radius: 5px;
+    border: 0px solid #ddd;
     text-align: center;
+    border-radius: 5px;
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.product a {
-    text-decoration: none;
-    color: var(--text-color-dark);
-}
+
 .product img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 5px;
-}
-
-.product:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .product h3 {
@@ -103,9 +110,20 @@ body {
     font-size: 1rem;
     color: var(--text-color);
     padding-bottom: 1rem;
+
 }
 
-/* Phân trang */
+.product a {
+    text-decoration: none;
+    color: var(--text-color-dark);
+}
+
+.product:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Pagination styles */
 .pagination {
     margin: 2rem auto;
     text-align: center;
@@ -133,22 +151,51 @@ body {
     color: var(--text-color);
     pointer-events: none;
 }
+.arrow {
+    background-color: rgba(255, 248, 249, 0.2);
+    color: var(--text-color-dark);
+    border: none;
+    /* padding: 0.5rem 1rem; */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    /* opacity: 0.2; */
+}
+
+.arrow:hover {
+    background-color: rgba(255, 248, 249, 0.5);
+    color: var(--text-color);
+}
+
+.left-arrow {
+    left: 20%;
+    padding-right: 0.5rem;
+}
+
+.right-arrow {
+    right: 20%;
+    padding-left: 0.5rem;
+}
+.categories-filter ul li.active {
+    border: 2px solid var(--text-color); /* Màu đỏ của viền */
+    background-color: rgba(255, 211, 219, 0.2); /* Màu nền nhẹ */
+}
+
+.categories-filter ul li.active a {
+    color: var(--text-color); /* Màu chữ đỏ */
+}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-/* FOOTER */
 /* footer start */
 .footer {
     margin-top: 4rem;

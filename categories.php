@@ -1,37 +1,57 @@
 <?php
-require 'db-connect.php';
+require 'db-connect.php'; 
 
-// Lấy danh sách item_id từ bảng items
-$queryItems = $pdo->prepare("SELECT id, name FROM items");
-$queryItems->execute();
-$items = $queryItems->fetchAll(PDO::FETCH_ASSOC);
+// Lấy danh sách subcategories từ bảng subcategories
+$query = $pdo->prepare("SELECT * FROM subcategories");
+$query->execute();
+$subcategories = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Lấy item_id được chọn (nếu có)
-$item_id = isset($_GET['item_id']) ? intval($_GET['item_id']) : null;
+// Lấy subcategory_id từ URL (nếu có)
+$subcategory_id = isset($_GET['subcategory_id']) ? intval($_GET['subcategory_id']) : null;
 
-// Pagination variables
+// Số sản phẩm tối đa mỗi trang
+$items_per_page = 16;
+
+// Trang hiện tại
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$limit = 16; // Hiển thị 16 sản phẩm mỗi trang
-$offset = ($page - 1) * $limit;
+$page = max(1, $page); // Đảm bảo trang >= 1
+$offset = ($page - 1) * $items_per_page;
 
-// Nếu có item_id, lấy danh sách sản phẩm từ items_detail
+// Nếu có subcategory_id, truy vấn danh sách sản phẩm từ bảng items_detail
+$total_products = 0;
 $products = [];
-if ($item_id) {
-    $queryProducts = $pdo->prepare("
-        SELECT * FROM items_detail
-        WHERE item_id = ?
-        LIMIT $limit OFFSET $offset
-    ");
-    $queryProducts->execute([$item_id]);
-    $products = $queryProducts->fetchAll(PDO::FETCH_ASSOC);
-
+if ($subcategory_id) {
     // Đếm tổng số sản phẩm
-    $queryTotal = $pdo->prepare("SELECT COUNT(*) FROM items_detail WHERE item_id = ?");
-    $queryTotal->execute([$item_id]);
-    $totalProducts = $queryTotal->fetchColumn();
-    $totalPages = ceil($totalProducts / $limit);
+    $count_query = $pdo->prepare("
+        SELECT COUNT(*) AS total
+        FROM items_detail
+        INNER JOIN items ON items_detail.item_id = items.id
+        WHERE items.subcategory_id = :subcategory_id
+    ");
+    $count_query->bindValue(':subcategory_id', $subcategory_id, PDO::PARAM_INT);
+    $count_query->execute();
+    $total_products = $count_query->fetch(PDO::FETCH_ASSOC)['total'];
+
+    // Truy vấn sản phẩm có phân trang
+    $query = $pdo->prepare("
+        SELECT items_detail.*
+        FROM items_detail
+        INNER JOIN items ON items_detail.item_id = items.id
+        WHERE items.subcategory_id = :subcategory_id
+        LIMIT :limit OFFSET :offset
+    ");
+    $query->bindValue(':subcategory_id', $subcategory_id, PDO::PARAM_INT);
+    $query->bindValue(':limit', $items_per_page, PDO::PARAM_INT);
+    $query->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $query->execute();
+    $products = $query->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Tính tổng số trang
+$total_pages = ceil($total_products / $items_per_page);
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -39,14 +59,13 @@ if ($item_id) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Danh mục sản phẩm</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel= "stylesheet" href= "items.css"/>
+    <link rel="stylesheet" href="categories.css"/>
     <link rel="stylesheet" href="header.css" />
 </head>
 <body>
-
-<!-- HEADER ĐI THEO MỌI TRANG -->
+    <!-- HEADER ĐI THEO MỌI TRANG -->
     <section class="main-header-important">
       <header>
         <div class="header-cont">
@@ -303,52 +322,51 @@ if ($item_id) {
         </div>
       </section>
     </section>
-<!-- FILTER DANH MỤC -->
-    <div class="items-filter-cont">
-        <div class="items-filter">
-            <ul>
-                <?php foreach ($items as $item): ?>
-                    <li>
-                        <a href="items.php?item_id=<?= $item['id'] ?>">
-                            <?= htmlspecialchars($item['name']) ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+    <!-- Categories Filter -->
+    <div class="categories-filter-cont">
+        <button class="arrow left-arrow">&lt;</button>
+        <div class="categories-filter">
+        <ul>
+            <?php foreach ($subcategories as $subcategory): ?>
+                <li class="<?= $subcategory['id'] === $subcategory_id ? 'active' : '' ?>">
+                    <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory['id']) ?>">
+                        <?= htmlspecialchars($subcategory['name']) ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
         </div>
+        <button class="arrow right-arrow">&gt;</button>
+    </div>
+    <!-- Categories Products -->
+    <div class="categories">
+        <?php if (!empty($products)): ?>
+            <?php foreach ($products as $product): ?>
+                <div class="product">
+                    <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
+                        <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                        <h3><?= htmlspecialchars($product['name']) ?></h3>
+                        <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Không có sản phẩm nào trong danh mục này.</p>
+        <?php endif; ?>
     </div>
 
-<!-- HIỂN THỊ SẢN PHẨM -->
-    <div class="items-cont">
-        <div class="items">
-            <?php if (!empty($products)): ?>
-                <?php foreach ($products as $product): ?>
-                    <div class="product">
-                        <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
-                            <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
-                            <h3><?= htmlspecialchars($product['name']) ?></h3>
-                            <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
-                        </a>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Không có sản phẩm nào được tìm thấy.</p>
-            <?php endif; ?>
-        </div>
-    </div>
-
-<!-- PHÂN TRANG -->
-    <?php if (!empty($products) && $totalPages > 1): ?>
-        <div class="pagination">
-            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <a href="items.php?item_id=<?= $item_id ?>&page=<?= $i ?>" 
-                class="<?= $i == $page ? 'active' : '' ?>">
-                <?= $i ?>
+    <!-- Pagination -->
+    <div class="pagination">
+        <?php if ($total_pages > 1): ?>
+            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&page=<?= $i ?>"
+                   class="<?= $i == $page ? 'active' : '' ?>">
+                    <?= $i ?>
                 </a>
             <?php endfor; ?>
-        </div>
-    <?php endif; ?>
-<!-- FOOTER -->
+        <?php endif; ?>
+    </div>
+    <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-cont">
         <div class="footer-adress">
@@ -385,13 +403,7 @@ if ($item_id) {
     </footer>
 
 
-
-
-
-
-
-
-
 <script src="header.js"></script>
+<script src="categories.js"></script>
 </body>
 </html>
