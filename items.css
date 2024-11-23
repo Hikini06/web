@@ -28,10 +28,11 @@ body {
 /* Căn chỉnh danh sách filter */
 .items-filter {
     width: 60%;
+    
 }
 .items-filter-cont {
     margin-top: 16rem;
-    display: flex;
+    display: none;
     justify-content: center;
 }
 .items-filter ul {
@@ -58,6 +59,7 @@ body {
 
 /* Căn chỉnh hiển thị sản phẩm */
 .items-cont {
+    margin-top: 12rem;
     width: 100%;
     display: flex;
     justify-content: center;
