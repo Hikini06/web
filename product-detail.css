@@ -186,6 +186,7 @@ background-color: var(--background-color);
 
 /* DANH SÁCH SẢN PHẨM GỢI Ý START */
 .product-detail-common-cont-title {
+    /* margin-top: 4rem; */
     line-height: 1.4;
     font-weight: 900;
     font-size: 2rem;
@@ -195,6 +196,7 @@ background-color: var(--background-color);
 
 .product-detail-common-cont {
     width: 100%;
+    margin-top: 6rem;
     height: auto;
     display: flex;
     /* justify-content: center; */

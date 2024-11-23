@@ -19,6 +19,13 @@ body {
   color: var(--text-color-dark);
 }
 
+.main-header-important {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
 /* Header styles */
 
 
@@ -29,12 +36,12 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
   /* padding: 1rem 20%; */
-  height: 80px;
+  height: 4rem;
   width: 100%;
   box-sizing: border-box;
 }
@@ -533,3 +540,136 @@ header {
 .header-contact-number:hover {
   cursor: pointer;
 }
+
+header + .product-banner-jim {
+  margin-top: 4rem; /* Same as header height */
+}
+
+/* section product banner jim */
+
+.product-banner-jim-sanpham {
+  background-color: var(--main-color);
+  width: auto;
+  position: relative;
+  
+}
+.product-banner-jim-sanpham-one {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.product-banner-jim-table-two,
+.product-banner-jim-table-three,
+.product-banner-jim-table-four,
+.product-banner-jim-table-five,
+.product-banner-jim-table {
+  display: none;
+  width: 60%;
+  position: absolute;
+  background-color: white;
+  top: 100%;
+  z-index: 999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.product-banner-jim-table-ul {
+  list-style-type: none;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.product-banner-jim {
+  
+  z-index: 999;
+  position: fixed;
+  /* margin-top: 2.4rem; */
+  width: 100%;
+  height: auto;
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.product-banner-jim .product-banner-jim-child {
+  background-color: var(--main-color);
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; 
+}
+
+.product-banner-jim .product-banner-jim-a {
+  color: var(--text-color-dark);
+  font-size: 1rem;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  text-decoration: none;
+}
+.product-banner-jim-ul {
+  z-index: 2;
+  background-color: white;
+  width: 60%; 
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  position: absolute; 
+  top: 100%; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+}
+.product-banner-jim-ul-one {
+  height: auto;
+}
+.product-banner-jim .product-banner-jim-ul {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+}
+.product-banner-jim-ul li:hover {
+  color: var(--text-color);
+  background-color: rgba(255, 211, 219, 0.2); 
+}
+.product-banner-jim-ul li {
+  font-size: 1rem;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: var(--text-color-dark);
+  cursor: pointer;
+}
+.product-banner-jim-sanpham:hover .product-banner-jim-ul {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start; 
+}
+.product-banner-jim-li {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+ 
+  padding-top: 0.5rem;
+ 
+}
+
+.product-banner-jim-ultwo  {
+  
+  color: var(--text-color-dark);
+  list-style-type: none;
+  padding-top: 1rem;
+  font-weight: 300;
+}
+.product-banner-jim-ultwo > li {
+  padding-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.product-banner-jim-ultwo > li:last-child {
+  padding-bottom: 2rem;
+}
+.product-banner-jim-ultwo > li:hover {
+ color: var(--text-color);
+ cursor: pointer;
+}
+/* section product banner jim end */

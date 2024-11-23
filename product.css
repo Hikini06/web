@@ -26,6 +26,7 @@
     justify-content: center;
 }
 #products-container {
+    margin-top: 11rem;
     width: 60%;
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
@@ -278,109 +279,6 @@
 
 
 
-/* section product banner jim */
-.product-banner-jim-sanpham {
-    background-color: var(--main-color);
-    width: 25%;
-    position: relative;
-  }
-  .product-banner-jim {
-    margin-top: 5rem;
-    width: 100%;
-    height: 3rem;
-    background-color: var(--main-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .product-banner-jim .product-banner-jim-child {
-    background-color: var(--main-color);
-    width: 60%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .product-banner-jim .product-banner-jim-a {
-    color: var(--text-color-dark);
-    /* font-weight: bold; */
-    font-size: 1rem;
-    text-align: center;
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    text-decoration: none;
-  }
-  .product-banner-jim .product-banner-jim-ul {
-    z-index: 2;
-    background-color: white;
-    width: 59.6vw;
-    list-style-type: none; 
-    padding: 0;            
-    margin: 0;
-    display: none; 
-    position: absolute;
-  }
-  .product-banner-jim .product-banner-jim-ul-one {
-    height: auto;
-  }
-  .product-banner-jim-sanpham-one:hover .product-banner-jim-ul {
-    display: flex;
-  }
-  .product-banner-jim-sanpham-three:hover .product-banner-jim-ul {
-    display: flex;
-  }
-  .product-banner-jim-sanpham-four:hover .product-banner-jim-ul {
-    display: flex;
-  }
-  .product-banner-jim-sanpham-two:hover .product-banner-jim-ul {
-    display: flex;
-  }
-  .product-banner-jim-sanpham:hover .product-banner-jim-a {
-    color: var(--text-color);
-  }
-  .product-banner-jim .product-banner-jim-ul-two {
-    left: -100%;
-  }
-  .product-banner-jim .product-banner-jim-ul-three {
-    left: -200%;
-  }
-  .product-banner-jim .product-banner-jim-ul-four {
-    left: -300%;
-  }
-  .product-banner-jim .product-banner-jim-ul .product-banner-jim-li {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-color);
-    flex: 1;
-    padding-top: 0.5rem;
-    padding-left: 1rem;
-  }
-  
-  .product-banner-jim .product-banner-jim-ultwo  {
-    
-    color: var(--text-color-dark);
-    list-style-type: none;
-    padding-top: 1rem;
-    font-weight: 300;
-  }
-  .product-banner-jim .product-banner-jim-ultwo > li {
-    padding-bottom: 0.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-  .product-banner-jim .product-banner-jim-ultwo > li:hover {
-   color: var(--text-color);
-   cursor: pointer;
-  }
-  /* section product banner jim bổ sung riêng cho trang product*/
-  .product-banner-jim a:last-child {
-    color: var(--text-color) !important;
-  }
-
-
-  /* section product banner jim end */
 
 
   /* footer start */
