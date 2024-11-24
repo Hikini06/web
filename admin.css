@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --main-color: rgb(255, 211, 219);
+    --text-color: rgb(194, 47, 80);
+    --text-color-dark: rgb(0, 32, 77);
+    --hover-color: rgb(53, 16, 25);
+    --background-color: rgb(255, 248, 249);
+  }
+  
+  body {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; 
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--text-color-dark);
+  }
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 15rem; /* Bạn có thể điều chỉnh độ rộng theo ý muốn */
+    background-color: #f1f1f1; /* Màu nền, có thể thay đổi */
+    overflow: auto; /* Thêm thanh cuộn nếu nội dung vượt quá chiều cao */
+}
+.user {
+    color: var(--text-color);
+}

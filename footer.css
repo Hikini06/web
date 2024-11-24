@@ -1,6 +1,3 @@
-
-
-
 /* GUIDE SECTION SLIDER CSS START HERE */
 .guideSection-h {
   color: var(--text-color-dark);
@@ -66,9 +63,9 @@
   width: 4rem;
   height: 4rem;
   position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 30%;
+  left: 40%;
+  /* transform: translate(-50%, -50%); */
   background-color: rgba(255, 211, 1, 0);
   border: 5px solid white;
   color: white;
@@ -82,13 +79,10 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng mượt */
 }
 .guideSection-play-btn:hover {
-  transform: translate(-50%, -55%); /* Nâng lên thêm 5% */
-  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.5); /* Tăng bóng đổ */
+  transform: scale(1.1);
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.5);
 }
-.guideSection-play-btn:active {
-  transform: translate(-50%, -50%); /* Trở về vị trí ban đầu khi nhấn */
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Bóng đổ như trạng thái gốc */
-}
+
 
 .guideSection-slider-prev-btn,
 .guideSection-slider-next-btn {
@@ -136,6 +130,9 @@
   color: var(--text-color-dark);
 }
 /* GUIDE SECTION SLIDER CSS END HERE */
+
+
+
 
 
 /* footer start */

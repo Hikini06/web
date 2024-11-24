@@ -45,21 +45,21 @@
       <section class="product-banner-jim">
         <div class="product-banner-jim-child">
           <div class="product-banner-jim-sanpham product-banner-jim-sanpham-one">
-            <a class="product-banner-jim-a" href="">ĐÈN NGỦ ▶</a>
+            <a class="product-banner-jim-a" href="">ĐÈN NGỦ <i class="fa-solid fa-chevron-down"></i></a>
           </div>
           <div class="product-banner-jim-sanpham product-banner-jim-sanpham-two">
-            <a class="product-banner-jim-a" href="">HOA GẤU BÔNG ▶</a>
+            <a class="product-banner-jim-a" href="">HOA GẤU BÔNG <i class="fa-solid fa-chevron-down"></i></a>
           </div>
           <div class="product-banner-jim-sanpham product-banner-jim-sanpham-three">
-            <a class="product-banner-jim-a" href="">SET QUÀ TẶNG ▶</a>
+            <a class="product-banner-jim-a" href="">SET QUÀ TẶNG <i class="fa-solid fa-chevron-down"></i></a>
                         
           </div>
           <div class="product-banner-jim-sanpham product-banner-jim-sanpham-four">
-            <a class="product-banner-jim-a" href="">GẤU BÔNG ▶</a>
+            <a class="product-banner-jim-a" href="">GẤU BÔNG <i class="fa-solid fa-chevron-down"></i></a>
             
           </div>
           <div class="product-banner-jim-sanpham product-banner-jim-sanpham-five">
-            <a class="product-banner-jim-a" href="">KHÁC ▶</a>
+            <a class="product-banner-jim-a" href="">KHÁC <i class="fa-solid fa-chevron-down"></i></a>
             
           </div>
           <div class="product-banner-jim-sanpham product-banner-jim-sanpham-all">

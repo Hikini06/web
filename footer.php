@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="filter.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="footer.css" />
 </head>
 <body>
@@ -14,7 +15,7 @@
   <h3 class="guideSection-h">HƯỚNG DẪN</h3>
   <section class="guideSection-cont">
     <div class="guideSection-slider-wrapper">
-      <button class="guideSection-slider-prev-btn">⬅</button>
+      <button class="guideSection-slider-prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="guideSection-image-slider-container">
           <div class="guideSection-image-slider">
               <a href="https://example.com/1" target="_blank">
@@ -59,7 +60,7 @@
               </a>
           </div>
       </div>
-      <button class="guideSection-slider-next-btn">⮕</button>
+      <button class="guideSection-slider-next-btn"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
   </section>
     <footer class="footer">

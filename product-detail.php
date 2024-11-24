@@ -1,6 +1,31 @@
 <?php
 include 'db-connect.php';
 
+// Xử lý dữ liệu từ form Quick Buy
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt'])) {
+    $sdt = trim($_POST['sdt']);
+
+    // Kiểm tra số điện thoại trên máy chủ
+    if (preg_match('/^\d{9,10}$/', $sdt)) {
+        try {
+            // Chuẩn bị câu lệnh INSERT
+            $query = "INSERT INTO khachhang (sdt, thoigiandathang) VALUES (:sdt, CURRENT_TIMESTAMP)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':sdt', $sdt);
+
+            // Thực thi câu lệnh
+            $stmt->execute();
+
+            // Hiển thị thông báo thành công
+            $successMessage = "Bọn mình sẽ liên lạc với bạn liền nha!";
+        } catch (PDOException $e) {
+            $errorMessage = "Lỗi khi lưu dữ liệu: " . $e->getMessage();
+        }
+    } else {
+        $errorMessage = "Vui lòng nhập đúng số điện thoại";
+    }
+}
+
 // CHỨC NĂNG HIỂN THỊ SẢN PHẨM MAIN
 $product_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 // Truy vấn lấy thông tin sản phẩm chính
@@ -133,9 +158,21 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                 <button class="product-detail-pic-text-buynow">Đặt Hàng</button>
                 <div class="product-detail-pic-text-quickbuy">
                     <h4>MUA HÀNG NHANH</h4>
-                    <div class = "product-detail-pic-text-quickbuy-input">
-                      <input type="text" placeholder="Số điện thoại" />
-                      <button>Gửi</button>
+                    <div class="product-detail-pic-text-quickbuy-input">
+                        <form id="quick-buy-form" method="post">
+                            <input
+                                type="text"
+                                name="sdt"
+                                placeholder="Số điện thoại"
+                                pattern="\d{9,10}"
+                                required
+                                title="Vui lòng nhập số điện thoại có 9 đến 10 chữ số"
+                            />
+                            <button type="submit">Gửi</button>
+                        </form>
+                        <?php if (isset($errorMessage)): ?>
+                            <div class="error-message"><?php echo htmlspecialchars($errorMessage); ?></div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="product-detail-pic-text-dis">
@@ -187,6 +224,34 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
 
     <!-- FOOTER -->
     <?php include 'footer.php'; ?>
+    <!-- Popup thông báo -->
+    <div id="popup-message" class="popup-message">
+        <span id="popup-text"></span>
+    </div>
+
+    <script src="product_detail.js"></script>
+    
+    <script>
+        // JavaScript kiểm tra và hiển thị popup
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if (isset($successMessage)): ?>
+                // Nếu có thông báo thành công từ PHP
+                showPopup("<?php echo htmlspecialchars($successMessage); ?>");
+            <?php endif; ?>
+        });
+
+        function showPopup(message) {
+            var popup = document.getElementById('popup-message');
+            var popupText = document.getElementById('popup-text');
+            popupText.textContent = message;
+            popup.classList.add('show');
+
+            // Ẩn popup sau 3 giây
+            setTimeout(function() {
+                popup.classList.remove('show');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
 

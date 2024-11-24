@@ -33,13 +33,14 @@ body {
 }
 .product-detail-pic {
     display: flex;
-    gap: 5px;
+    gap: 2rem;
     justify-content: space-between;
     padding-top: 4rem;
     width: 60%;
     /* text-align: center; */
     height: 50rem;
 }
+
 .product-detail-pic-img {
     display: flex;
     flex-direction: column;
@@ -142,11 +143,17 @@ background-color: var(--background-color);
 .product-detail-pic-text-quickbuy-input {
     padding-top: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 0.5rem;
     color: var(--text-color-dark);
     width: 50%;
+    position: relative;
+}
+.product-detail-pic-text-quickbuy-input form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 .product-detail-pic-text-quickbuy-input input {
     font-family: "Nunito", sans-serif;
@@ -316,3 +323,40 @@ background-color: var(--background-color);
 /* DÁNH SÁCH SẢN PHẨM NGẪU NHIÊN END */
 
 
+
+
+/* Thông báo lỗi */
+.error-message {
+    color: red;
+    margin-top: 0.5rem;
+}
+
+/* CSS cho popup thông báo */
+.popup-message {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background-color: var(--background-color); 
+    color: var(--text-color);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    border: 3px solid var(--text-color);
+    z-index: 1000; 
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+/* Hiệu ứng mờ dần */
+.popup-message.show {
+    display: block;
+    animation: fadeOut 3s forwards; 
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}

@@ -655,6 +655,9 @@ header + .product-banner-jim {
   position: relative;
   
 }
+.product-banner-jim-sanpham i {
+  font-size: 0.7rem;
+}
 .product-banner-jim-sanpham-one {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -796,3 +799,4 @@ header + .product-banner-jim {
  cursor: pointer;
 }
 /* section product banner jim end */
+
