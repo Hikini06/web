@@ -22,7 +22,7 @@ if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
     <div class="sidebar">
         <!-- Thêm nội dung của bạn ở đây -->
         <h1>Chào đại ca <div class="user"><?php echo htmlspecialchars($_SESSION['admin_username']); ?></div></h1>
-
+        
     </div>
     
    
