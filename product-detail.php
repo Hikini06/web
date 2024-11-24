@@ -224,6 +224,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
 
     <!-- FOOTER -->
     <?php include 'footer.php'; ?>
+   
     <!-- Popup thông báo -->
     <div id="popup-message" class="popup-message">
         <span id="popup-text"></span>

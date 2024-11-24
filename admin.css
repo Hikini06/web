@@ -1,25 +1,30 @@
+/* admin.css */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  :root {
+}
+
+:root {
     --main-color: rgb(255, 211, 219);
     --text-color: rgb(194, 47, 80);
     --text-color-dark: rgb(0, 32, 77);
     --hover-color: rgb(53, 16, 25);
     --background-color: rgb(255, 248, 249);
-  }
-  
-  body {
+}
+
+body {
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400; 
     font-style: normal;
     line-height: 1.6;
     color: var(--text-color-dark);
-  }
+    background-color: var(--background-color);
+    padding-left: 15rem; /* Đảm bảo nội dung không bị che bởi sidebar */
+    transition: padding-left 0.3s ease;
+}
 
 .sidebar {
     position: fixed;
@@ -29,7 +34,230 @@
     width: 15rem; /* Bạn có thể điều chỉnh độ rộng theo ý muốn */
     background-color: #f1f1f1; /* Màu nền, có thể thay đổi */
     overflow: auto; /* Thêm thanh cuộn nếu nội dung vượt quá chiều cao */
+    padding: 20px; /* Thêm padding để nội dung không bị dính sát cạnh */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 .user {
     color: var(--text-color);
+}
+
+.customer-infor-bar, .product-infor-bar {
+    margin-top: 20px; /* Thêm khoảng cách từ trên xuống nút */
+}
+
+.customer-infor-bar-btn, .product-infor-bar-btn {
+    padding: 10px 20px;
+    background-color: var(--main-color);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-color-dark);
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%; /* Làm nút rộng toàn bộ chiều rộng của sidebar */
+    margin-bottom: 10px; /* Thêm khoảng cách giữa các nút */
+}
+
+.customer-infor-bar-btn:hover, .product-infor-bar-btn:hover {
+    background-color: var(--hover-color);
+    color: #fff;
+}
+
+.logout {
+    padding-top: 20px;
+}
+
+.logout a {
+    text-decoration: none;
+    color: var(--text-color-dark);
+    font-weight: bold;
+}
+
+.logout a:hover {
+    color: var(--text-color);
+}
+
+/* Định dạng cho các nút lọc */
+.filter-buttons {
+    margin: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: var(--main-color);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-color-dark);
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: var(--hover-color);
+    color: #fff;
+}
+
+.filter-btn.active {
+    background-color: var(--hover-color);
+    color: #fff;
+}
+
+/* Định dạng cho bảng thông tin khách hàng và sản phẩm */
+.customer-info-cont, .product-info-cont {
+    display: none; /* Ẩn bảng thông tin ban đầu */
+    padding: 20px;
+    transition: all 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
+}
+
+.customer-info-cont.active, .product-info-cont.active {
+    display: block; /* Hiển thị bảng khi có lớp 'active' */
+}
+
+/* Định dạng cho bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 10px 15px; /* Thay đổi padding nếu cần */
+    border: 1px solid var(--text-color-dark);
+    vertical-align: top;
+}
+
+table th {
+    background-color: var(--main-color);
+    color: var(--text-color-dark);
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#productsTable img {
+    max-width: 100px;
+    height: auto;
+}
+
+.edit-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.save-btn, .cancel-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+.save-btn {
+    background-color: #4CAF50; /* Màu xanh lá */
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #f44336; /* Màu đỏ */
+    color: white;
+}
+
+.upload-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    background-color: #008CBA; /* Màu xanh dương */
+    color: white;
+}
+
+.upload-btn:hover {
+    background-color: #005f6a;
+}
+
+/* admin.css */
+
+/* Phân Trang */
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-list li {
+    margin: 0 5px;
+}
+
+.pagination-list li a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.pagination-list li a:hover {
+    background-color: #f1f1f1;
+}
+
+.pagination-list li.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}
+
+.pagination-list li.disabled {
+    color: #ccc;
+    border: 1px solid #ddd;
+    cursor: not-allowed;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding-left: 0; /* Loại bỏ padding khi trên thiết bị nhỏ */
+    }
+
+    .sidebar {
+        width: 100%; /* Làm cho sidebar rộng toàn màn hình trên thiết bị nhỏ */
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .customer-infor-bar-btn, .product-infor-bar-btn {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .filter-buttons {
+        flex-direction: column;
+    }
+
+    .filter-buttons a {
+        width: 100%;
+        text-align: center;
+    }
 }
