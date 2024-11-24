@@ -101,7 +101,55 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
 }
 
 // Nếu không phải AJAX, hiển thị trang HTML
+
+// Lấy danh sách ID của các sản phẩm đang hiển thị
+$currentProductIDs = array_column($results, 'id');
+
+// Tính giá trị trung bình của các ID
+if (!empty($currentProductIDs)) {
+    $averageID = array_sum($currentProductIDs) / count($currentProductIDs);
+} else {
+    $averageID = 0;
+}
+
+// Chuẩn bị placeholders cho câu lệnh SQL
+$placeholders = implode(',', array_fill(0, count($currentProductIDs), '?'));
+
+// Truy vấn lấy sản phẩm gợi ý
+$suggestedSql = "SELECT * FROM items_detail
+                 WHERE id NOT IN ($placeholders)
+                 ORDER BY ABS(id - ?)
+                 LIMIT 16";
+
+$suggestedQuery = $pdo->prepare($suggestedSql);
+
+// Gán giá trị cho placeholders
+$i = 1;
+foreach ($currentProductIDs as $id) {
+    $suggestedQuery->bindValue($i++, $id, PDO::PARAM_INT);
+}
+
+// Gán giá trị cho averageID
+$suggestedQuery->bindValue($i, $averageID, PDO::PARAM_INT);
+
+// Thực thi truy vấn
+$suggestedQuery->execute();
+$suggestedProducts = $suggestedQuery->fetchAll(PDO::FETCH_ASSOC);
+// Kiểm tra mảng $suggestedProducts
+foreach ($suggestedProducts as $index => $product) {
+    if (empty($product) || !isset($product['id'])) {
+        echo "Sản phẩm tại vị trí $index bị rỗng hoặc không hợp lệ.";
+    }
+}
+
 ?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -109,31 +157,65 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
     <link rel="stylesheet" href="filter.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="search-results">
-        <h1>Kết quả tìm kiếm cho: "<?= htmlspecialchars($searchQuery) ?>"</h1>
-        <?php if (!empty($results)): ?>
-            <div id="product-container">
-                <div class="product-grid">
-                    <?php foreach ($results as $result): ?>
-                        <div class="product-item">
-                            <a href="product-detail.php?id=<?= htmlspecialchars($result['id']) ?>">
-                                <img src="<?= htmlspecialchars($result['img']) ?>" alt="<?= htmlspecialchars($result['name']) ?>">
-                                <h3><?= htmlspecialchars($result['name']) ?></h3>
-                                <p><?= htmlspecialchars(number_format($result['price'])) ?>đ</p>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
+    <?php include 'header.php'; ?>
+
+    <div class="search-results-cont">
+        <div class="search-results">
+            <h1>Kết quả tìm kiếm cho: "<?= htmlspecialchars($searchQuery) ?>"</h1>
+            <?php if (!empty($results)): ?>
+                <div id="product-container">
+                    <div class="product-grid">
+                        <?php foreach ($results as $result): ?>
+                            <div class="product-item">
+                                <a href="product-detail.php?id=<?= htmlspecialchars($result['id']) ?>">
+                                    <img src="<?= htmlspecialchars($result['img']) ?>" alt="<?= htmlspecialchars($result['name']) ?>">
+                                    <h3><?= htmlspecialchars($result['name']) ?></h3>
+                                    <p><?= htmlspecialchars(number_format($result['price'])) ?>đ</p>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
-            <?php if ($hasMore): ?>
-                <button id="load-more" data-offset="<?= $offset + $limit ?>" data-query="<?= htmlspecialchars($searchQuery) ?>">Xem thêm</button>
+                <?php if ($hasMore): ?>
+                    <button id="load-more" data-offset="<?= $offset + $limit ?>" data-query="<?= htmlspecialchars($searchQuery) ?>">Xem thêm</button>
+                <?php endif; ?>
+            <?php else: ?>
+                <p>Không tìm thấy sản phẩm nào phù hợp.</p>
             <?php endif; ?>
-        <?php else: ?>
-            <p>Không tìm thấy sản phẩm nào phù hợp.</p>
-        <?php endif; ?>
+        </div>
     </div>
+    
+    <div class="suggested-products">
+        <h2>Sản phẩm gợi ý</h2>
+        <div class="suggested-carousel">
+            <button class="carousel-btn carousel-prev">&lt;</button>
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                <?php foreach ($suggestedProducts as $index => $product): ?>
+                    <?php if (!empty($product) && isset($product['id'])): ?>
+                        <li class="carousel-slide" data-index="<?= $index ?>">
+                            <div class="carousel-slide-inner">
+                                <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
+                                    <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                                    <h3><?= htmlspecialchars($product['name']) ?></h3>
+                                    <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
+                                </a>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+            <button class="carousel-btn carousel-next">&gt;</button>
+        </div>
+    </div>
+
+    
+
+    <?php include 'footer.php'; ?>
     <script src="filter.js"></script>
 </body>
 </html>
