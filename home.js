@@ -1,271 +1,126 @@
+// home.js
+
 console.log("JavaScript file loaded");
-// khung search
+
+// Khung search
 document.addEventListener("DOMContentLoaded", function () {
-  const searchToggle = document.getElementById("searchToggle");
-  const searchContainer = document.getElementById("searchContainer");
-  const searchForm = document.getElementById("searchForm");
-  const searchBox = document.getElementById("searchBox");
-  //   const searchForm = document.getElementById("searchForm");
-  //   const searchBox = document.getElementById("searchBox");
+    const searchToggle = document.getElementById("searchToggle");
+    const searchContainer = document.getElementById("searchContainer");
+    const searchForm = document.getElementById("searchForm");
+    const searchBox = document.getElementById("searchBox");
 
-  document.addEventListener("click", function (event) {
-    if (
-      !searchContainer.contains(event.target) &&
-      !searchToggle.contains(event.target)
-    ) {
-      searchContainer.classList.remove("active");
-    }
-  });
+    document.addEventListener("click", function (event) {
+        if (
+            !searchContainer.contains(event.target) &&
+            !searchToggle.contains(event.target)
+        ) {
+            searchContainer.classList.remove("active");
+        }
+    });
 
-  searchToggle.addEventListener("click", function (e) {
-    e.preventDefault();
-    searchContainer.classList.toggle("active");
-    // if (searchContainer.classList.contains("active")) {
-    //   searchBox.focus();
-    // }
-  });
-  // Đóng ô tìm kiếm khi click bên ngoài
-  document.addEventListener("click", function (e) {
-    if (
-      !searchContainer.contains(e.target) &&
-      !searchToggle.contains(e.target)
-    ) {
-      searchContainer.classList.remove("active");
-    }
-  });
-  ///////////////////
-  searchForm.addEventListener("submit", function (e) {
-    if (searchBox.value.trim() === "") {
-      e.preventDefault();
-      alert("Vui lòng nhập từ khóa tìm kiếm");
-    }
-    searchBox.addEventListener("keypress", function (e) {
-      if (e.key === "Enter") {
-        e.preventDefault(); // Ngăn chặn hành vi mặc định của form
-        searchForm.submit(); // Submit form
-      }
+    searchToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        searchContainer.classList.toggle("active");
     });
-    document.addEventListener("click", function (e) {
-      if (
-        !searchContainer.contains(e.target) &&
-        !searchToggle.contains(e.target)
-      ) {
-        searchContainer.classList.remove("active");
-      }
+
+    searchForm.addEventListener("submit", function (e) {
+        if (searchBox.value.trim() === "") {
+            e.preventDefault();
+            alert("Vui lòng nhập từ khóa tìm kiếm");
+        }
     });
-  });
 });
-// trình chiếu hình ảnh
+
+// Trình chiếu hình ảnh
 let slideIndex = 0;
 showSlides();
 const slides = document.getElementsByClassName("mySlides");
 
 function showSlides() {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].classList.remove("active");
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {
-    slideIndex = 1;
-  }
-  slides[slideIndex - 1].classList.add("active");
-  setTimeout(showSlides, 5000); // Thay đổi ảnh mỗi 5 giây
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].classList.add("active");
+    setTimeout(showSlides, 5000); // Thay đổi ảnh mỗi 5 giây
 }
 
 function plusSlides(n) {
-  slideIndex += n;
-  let slides = document.getElementsByClassName("mySlides");
-  if (slideIndex > slides.length) {
-    slideIndex = 1;
-  }
-  if (slideIndex < 1) {
-    slideIndex = slides.length;
-  }
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].classList.remove("active");
-  }
-  slides[slideIndex - 1].classList.add("active");
+    slideIndex += n;
+    let slides = document.getElementsByClassName("mySlides");
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    if (slideIndex < 1) {
+        slideIndex = slides.length;
+    }
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].classList.remove("active");
+    }
+    slides[slideIndex - 1].classList.add("active");
 }
-// Khởi tạo trình chiếu khi trang được tải
-document.addEventListener("DOMContentLoaded", function () {
-  showSlides();
-});
 
-// <!-- js test -->
-//     <!-- <script>
-//       // JavaScript để hiển thị lần lượt 4 thẻ div con
-//       let itemsPerPage = 4;
-//       let currentPage = 0;
+// Slider 1
+let currentIndexSlider1 = 0;
+const itemsToShowSlider1 = 4; // Số sản phẩm hiển thị mỗi lần
 
-//       function showMoreItems() {
-//           const items = document.querySelectorAll('.item');
-//           const totalItems = items.length;
-//           const start = currentPage * itemsPerPage;
-//           const end = start + itemsPerPage;
-
-//           for (let i = start; i < end && i < totalItems; i++) {
-//               items[i].style.display = 'block';
-//           }
-
-//           currentPage++;
-
-//           // Ẩn nút "Xem thêm" khi hiển thị hết các phần tử
-//           if (end >= totalItems) {
-//               document.querySelector('.show-more-btn').style.display = 'none';
-//           }
-//       }
-
-//       // Gọi hàm showMoreItems() để hiển thị 4 thẻ div đầu tiên khi tải trang
-//       showMoreItems();
-//   </script> -->
-//   <!-- end test ở đây -->
-// document.addEventListener('DOMContentLoaded', function() {
-//   const productGrid = document.querySelector('.product-grid');
-//   const prevButton = document.querySelector('.slider-button.prev');
-//   const nextButton = document.querySelector('.slider-button.next');
-//   const productItems = document.querySelectorAll('.product-item');
-
-//   let currentIndex = 0;
-//   const itemWidth = productItems[0].offsetWidth + 20; // 20 là giá trị gap
-//   const maxIndex = productItems.length - Math.floor(productGrid.offsetWidth / itemWidth);
-
-//   function updateSliderPosition() {
-//       productGrid.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-//   }
-
-//   function updateButtonState() {
-//       prevButton.style.opacity = currentIndex === 0 ? '0.5' : '1';
-//       nextButton.style.opacity = currentIndex === maxIndex ? '0.5' : '1';
-//   }
-
-//   prevButton.addEventListener('click', () => {
-//       if (currentIndex > 0) {
-//           currentIndex--;
-//           updateSliderPosition();
-//           updateButtonState();
-//       }
-//   });
-
-//   nextButton.addEventListener('click', () => {
-//       if (currentIndex < maxIndex) {
-//           currentIndex++;
-//           updateSliderPosition();
-//           updateButtonState();
-//       }
-//   });
-
-//   // Khởi tạo trạng thái ban đầu của các nút
-//   updateButtonState();
-
-//   // Xử lý responsive
-//   window.addEventListener('resize', () => {
-//       const newMaxIndex = productItems.length - Math.floor(productGrid.offsetWidth / itemWidth);
-//       if (newMaxIndex !== maxIndex) {
-//           maxIndex = newMaxIndex;
-//           currentIndex = Math.min(currentIndex, maxIndex);
-//           updateSliderPosition();
-//           updateButtonState();
-//       }
-//   });
-// });
-document.addEventListener("DOMContentLoaded", function () {
-  const productGrid = document.querySelector("#product-list .product-grid");
-  const prevButton = document.querySelector("#product-list #prevButton");
-  const nextButton = document.querySelector("#product-list #nextButton");
-  let currentPosition = 0;
-
-  nextButton.addEventListener("click", () => {
-    if (currentPosition > -(productGrid.children.length - 4) * 25) {
-      currentPosition -= 25;
-      productGrid.style.transform = `translateX(${currentPosition}%)`;
-    }
-  });
-
-  prevButton.addEventListener("click", () => {
-    if (currentPosition < 0) {
-      currentPosition += 25;
-      productGrid.style.transform = `translateX(${currentPosition}%)`;
-    }
-  });
-});
-
-// slider jim làm test
-let currentIndex = 0;
-const itemsToShow = 4; // Số lượng sản phẩm hiển thị mỗi lần
-const totalItems = 10; // Tổng số sản phẩm
-
-function updateSliderPosition() {
-  const slider = document.querySelector(".slider");
-  const itemWidth = document.querySelector(".slider-item-one").offsetWidth;
-  slider.style.transform = `translateX(${-currentIndex * itemWidth * 2}px)`;
+function updateSliderPositionSlider1() {
+    const slider = document.querySelector(".slider-container-one .slider");
+    const itemWidth = document.querySelector(".slider-item-one").offsetWidth;
+    slider.style.transform = `translateX(${-currentIndexSlider1 * (itemWidth + 20)}px)`; // 20px là khoảng cách giữa các item
 }
 
 function slideLeft() {
-  if (currentIndex > 0) {
-    currentIndex--;
-    updateSliderPosition();
-  }
+    if (currentIndexSlider1 > 0) {
+        currentIndexSlider1--;
+        updateSliderPositionSlider1();
+    }
 }
 
 function slideRight() {
-  if (currentIndex < totalItems - itemsToShow) {
-    currentIndex++;
-    updateSliderPosition();
-  }
+    const slider = document.querySelector(".slider-container-one .slider");
+    const totalItems = slider.children.length;
+    const visibleItems = itemsToShowSlider1;
+    if (currentIndexSlider1 < totalItems - visibleItems) {
+        currentIndexSlider1++;
+        updateSliderPositionSlider1();
+    }
 }
 
-window.addEventListener("resize", updateSliderPosition); // Cập nhật khi thay đổi kích thước
-// slider jim làm test end
+// Slider 2
+let currentIndexSlider2 = 0;
+const itemsToShowSlider2 = 4; // Số sản phẩm hiển thị mỗi lần
 
-// slider jim làm test phần 2
-let currentIndexTwo = 0;
-const itemsToShowTwo = 4; // Số lượng sản phẩm hiển thị mỗi lần
-const totalItemsTwo = 10; // Tổng số sản phẩm
-
-function updateSliderPositions() {
-  const sliderTwo = document.querySelector(".slider-two");
-  const itemWidthTwo = document.querySelector(".slider-item-two").offsetWidth;
-  sliderTwo.style.transform = `translateX(${
-    -currentIndexTwo * itemWidthTwo * 2
-  }px)`;
+function updateSliderPositionSlider2() {
+    const slider = document.querySelector(".slider-container-two .slider-two");
+    const itemWidth = document.querySelector(".slider-item-two").offsetWidth;
+    slider.style.transform = `translateX(${-currentIndexSlider2 * (itemWidth + 20)}px)`; // 20px là khoảng cách giữa các item
 }
 
 function slideLeftTwo() {
-  if (currentIndexTwo > 0) {
-    currentIndexTwo--;
-    updateSliderPositions();
-  }
+    if (currentIndexSlider2 > 0) {
+        currentIndexSlider2--;
+        updateSliderPositionSlider2();
+    }
 }
 
 function slideRightTwo() {
-  if (currentIndexTwo < totalItemsTwo - itemsToShowTwo) {
-    currentIndexTwo++;
-    updateSliderPositions();
-  }
+    const slider = document.querySelector(".slider-container-two .slider-two");
+    const totalItems = slider.children.length;
+    const visibleItems = itemsToShowSlider2;
+    if (currentIndexSlider2 < totalItems - visibleItems) {
+        currentIndexSlider2++;
+        updateSliderPositionSlider2();
+    }
 }
 
-window.addEventListener("resize", updateSliderPositions);
-// slider jim làm test phần 2 end
-
-// Hover vào ảnh trên banner
-document.addEventListener("DOMContentLoaded", function () {
-  const container = document.querySelector(".banner-divine-to-two-child-cont");
-  const button = container.querySelector(".banner-divine-to-two-child-btn");
-
-  container.addEventListener("mouseenter", function () {
-    button.style.bottom = "37%";
-  });
-
-  container.addEventListener("mouseleave", function () {
-    button.style.bottom = "-50%";
-  });
+// Cập nhật lại vị trí slider khi thay đổi kích thước cửa sổ
+window.addEventListener("resize", function() {
+    updateSliderPositionSlider1();
+    updateSliderPositionSlider2();
 });
-
-
-
-
-
-
-

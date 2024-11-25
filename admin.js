@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var toggleProductBtn = document.getElementById('toggleProductInfo');
     var productInfoCont = document.getElementById('productInfoCont');
 
+    // Xử lý nút "Chọn sản phẩm cho slider"
+    var toggleSliderBtn = document.getElementById('toggleIndexSliderInfo');
+    var sliderInfoCont = document.getElementById('indexSliderInfoCont');
+
     // Hàm để ẩn tất cả các bảng
     function hideAllSections(except = null) {
         if (except !== 'customer') {
@@ -20,6 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
             productInfoCont.style.display = 'none';
             toggleProductBtn.setAttribute('aria-expanded', 'false');
             localStorage.setItem('showProductInfo', 'false');
+        }
+        if (except !== 'slider') {
+            sliderInfoCont.style.display = 'none';
+            toggleSliderBtn.setAttribute('aria-expanded', 'false');
+            localStorage.setItem('showSliderInfo', 'false');
         }
     }
 
@@ -33,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
             productInfoCont.style.display = 'block';
             toggleProductBtn.setAttribute('aria-expanded', 'true');
             localStorage.setItem('showProductInfo', 'true');
+        } else if (section === 'slider') {
+            sliderInfoCont.style.display = 'block';
+            toggleSliderBtn.setAttribute('aria-expanded', 'true');
+            localStorage.setItem('showSliderInfo', 'true');
         }
     }
 
@@ -56,21 +69,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 toggleProductBtn.setAttribute('aria-expanded', 'false');
                 localStorage.setItem('showProductInfo', 'false');
             }
+        } else if (section === 'slider') {
+            if (sliderInfoCont.style.display === 'none' || sliderInfoCont.style.display === '') {
+                hideAllSections('slider');
+                showSection('slider');
+            } else {
+                sliderInfoCont.style.display = 'none';
+                toggleSliderBtn.setAttribute('aria-expanded', 'false');
+                localStorage.setItem('showSliderInfo', 'false');
+            }
         }
     }
 
     // Khởi tạo trạng thái ban đầu từ localStorage
     var showCustomerInfo = localStorage.getItem('showCustomerInfo') === 'true';
     var showProductInfo = localStorage.getItem('showProductInfo') === 'true';
+    var showSliderInfo = localStorage.getItem('showSliderInfo') === 'true';
 
-    if (showCustomerInfo && !showProductInfo) {
+    if (showCustomerInfo && !showProductInfo && !showSliderInfo) {
         customerInfoCont.style.display = 'block';
         toggleCustomerBtn.setAttribute('aria-expanded', 'true');
-    } else if (showProductInfo && !showCustomerInfo) {
+    } else if (showProductInfo && !showCustomerInfo && !showSliderInfo) {
         productInfoCont.style.display = 'block';
         toggleProductBtn.setAttribute('aria-expanded', 'true');
-    } else if (showCustomerInfo && showProductInfo) {
+    } else if (showSliderInfo && !showCustomerInfo && !showProductInfo) {
+        sliderInfoCont.style.display = 'block';
+        toggleSliderBtn.setAttribute('aria-expanded', 'true');
+    } else if (showCustomerInfo && showProductInfo && !showSliderInfo) {
         // Nếu cả hai đều được lưu là hiển thị, chỉ hiển thị bảng khách hàng
+        hideAllSections('customer');
+        showSection('customer');
+    } else if (showCustomerInfo && showSliderInfo && !showProductInfo) {
+        hideAllSections('slider');
+        showSection('slider');
+    } else if (showProductInfo && showSliderInfo && !showCustomerInfo) {
+        hideAllSections('product');
+        showSection('slider');
+    } else if (showCustomerInfo && showProductInfo && showSliderInfo) {
+        // Nếu cả ba đều được lưu là hiển thị, chỉ hiển thị bảng khách hàng
         hideAllSections('customer');
         showSection('customer');
     }
@@ -89,6 +125,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Thêm sự kiện click cho nút "Chọn sản phẩm cho slider"
+    if (toggleSliderBtn && sliderInfoCont) {
+        toggleSliderBtn.addEventListener('click', function() {
+            toggleSection('slider');
+        });
+    }
+
     // Xử lý chỉnh sửa các ô có lớp 'editable' trong cả hai bảng
     var editableCells = document.querySelectorAll('.editable');
 
@@ -102,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var input = document.createElement('input');
             input.type = field === 'price' ? 'number' : 'text';
-            input.value = currentText;
+            input.value = field === 'price' ? parseFloat(currentText.replace(/[^0-9.-]+/g,"")) : currentText;
             input.className = 'edit-input';
             input.style.width = '100%';
 
@@ -131,6 +174,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     return;
                 }
 
+                // Nếu trường là 'price', đảm bảo giá trị là số
+                if (field === 'price' && isNaN(newValue)) {
+                    alert('Giá trị phải là số.');
+                    return;
+                }
+
                 // Gửi yêu cầu AJAX để cập nhật dữ liệu
                 var xhr = new XMLHttpRequest();
                 xhr.open('POST', 'update_product.php', true);
@@ -143,7 +192,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             try {
                                 var response = JSON.parse(xhr.responseText);
                                 if (response.success) {
-                                    cell.textContent = newValue;
+                                    if (field === 'price') {
+                                        cell.textContent = numberWithCommas(parseFloat(newValue)) + 'đ';
+                                    } else {
+                                        cell.textContent = newValue;
+                                    }
                                     saveBtn.style.display = 'none';
                                     cancelBtn.style.display = 'none';
                                 } else {
@@ -161,4 +214,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }, { once: true }); // Sử dụng { once: true } để đảm bảo sự kiện chỉ chạy một lần
         });
     });
+
+    // Hàm định dạng số với dấu phẩy
+    function numberWithCommas(x) {
+        if (isNaN(x)) return x;
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 });

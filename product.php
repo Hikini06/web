@@ -80,7 +80,7 @@ try {
         <!-- Phân trang -->
         <div class="pagination">
             <?php if ($page > 1): ?>
-                <a href="?page=<?= $page - 1 ?>" class="pagination-btn">&laquo;</a>
+                <a href="?page=<?= $page - 1 ?>" class="pagination-btn"><i class="fa-solid fa-chevron-left"></i></a>
             <?php endif; ?>
 
             <!-- Luôn hiển thị trang 1 -->
@@ -128,7 +128,7 @@ try {
             <?php endif; ?>
 
             <?php if ($page < $totalPages): ?>
-                <a href="?page=<?= $page + 1 ?>" class="pagination-btn">&raquo;</a>
+                <a href="?page=<?= $page + 1 ?>" class="pagination-btn"><i class="fa-solid fa-chevron-right"></i></a>
             <?php endif; ?>
         </div>
 

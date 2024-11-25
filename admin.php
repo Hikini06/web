@@ -15,8 +15,8 @@ $customer_records_per_page = 15;
 $product_records_per_page = 15;
 
 // Xác định trang hiện tại từ URL, mặc định là 1
-$customer_page = isset($_GET['customer_page']) && is_numeric($_GET['customer_page']) ? (int) $_GET['customer_page'] : 1;
-$product_page = isset($_GET['product_page']) && is_numeric($_GET['product_page']) ? (int) $_GET['product_page'] : 1;
+$customer_page = isset($_GET['customer_page']) && is_numeric($_GET['customer_page']) ? (int)$_GET['customer_page'] : 1;
+$product_page = isset($_GET['product_page']) && is_numeric($_GET['product_page']) ? (int)$_GET['product_page'] : 1;
 
 // Tính toán OFFSET cho khách hàng và sản phẩm
 $customer_offset = ($customer_page - 1) * $customer_records_per_page;
@@ -24,6 +24,73 @@ $product_offset = ($product_page - 1) * $product_records_per_page;
 
 // Kiểm tra xem có đang lọc khách hàng hôm nay không
 $customer_isTodayFilter = isset($_GET['today']) && $_GET['today'] == '1';
+
+// Xử lý các form gửi từ slider selection
+$successMessage = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['save_slider1']) && isset($_POST['slider1_products'])) {
+        $slider_type = 'slider1';
+        $selected_products = $_POST['slider1_products'];
+        
+        // Xóa các sản phẩm cũ cho slider1
+        try {
+            $sql_delete = "DELETE FROM index_sliders WHERE slider_type = 'slider1'";
+            $stmt_delete = $pdo->prepare($sql_delete);
+            $stmt_delete->execute();
+        } catch (PDOException $e) {
+            die("Lỗi khi xóa sản phẩm cũ cho slider1: " . $e->getMessage());
+        }
+
+        // Thêm các sản phẩm mới cho slider1
+        try {
+            $sql_insert = "INSERT INTO index_sliders (slider_type, product_id, display_order) VALUES (:slider_type, :product_id, :display_order)";
+            $stmt_insert = $pdo->prepare($sql_insert);
+            foreach ($selected_products as $order => $product_id) {
+                $stmt_insert->execute([
+                    ':slider_type' => $slider_type,
+                    ':product_id' => $product_id,
+                    ':display_order' => $order + 1
+                ]);
+            }
+        } catch (PDOException $e) {
+            die("Lỗi khi thêm sản phẩm cho slider1: " . $e->getMessage());
+        }
+
+        $successMessage = "Đã lưu sản phẩm cho Slider 1 thành công!";
+    }
+
+    if (isset($_POST['save_slider2']) && isset($_POST['slider2_products'])) {
+        $slider_type = 'slider2';
+        $selected_products = $_POST['slider2_products'];
+        
+        // Xóa các sản phẩm cũ cho slider2
+        try {
+            $sql_delete = "DELETE FROM index_sliders WHERE slider_type = 'slider2'";
+            $stmt_delete = $pdo->prepare($sql_delete);
+            $stmt_delete->execute();
+        } catch (PDOException $e) {
+            die("Lỗi khi xóa sản phẩm cũ cho slider2: " . $e->getMessage());
+        }
+
+        // Thêm các sản phẩm mới cho slider2
+        try {
+            $sql_insert = "INSERT INTO index_sliders (slider_type, product_id, display_order) VALUES (:slider_type, :product_id, :display_order)";
+            $stmt_insert = $pdo->prepare($sql_insert);
+            foreach ($selected_products as $order => $product_id) {
+                $stmt_insert->execute([
+                    ':slider_type' => $slider_type,
+                    ':product_id' => $product_id,
+                    ':display_order' => $order + 1
+                ]);
+            }
+        } catch (PDOException $e) {
+            die("Lỗi khi thêm sản phẩm cho slider2: " . $e->getMessage());
+        }
+
+        $successMessage = "Đã lưu sản phẩm cho Slider 2 thành công!";
+    }
+}
 
 // Truy vấn dữ liệu khách hàng với ORDER BY, LIMIT và OFFSET
 try {
@@ -96,7 +163,6 @@ try {
     die("Lỗi truy vấn tổng số sản phẩm: " . $e->getMessage());
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -120,9 +186,91 @@ try {
                 Sản phẩm
             </button>
         </div>
+        <!-- index-slider selection -->
+        <div class="index-slider-bar">
+            <button class="index-slider-bar-btn" id="toggleIndexSliderInfo" aria-expanded="false" aria-controls="indexSliderInfoCont">
+                Chọn sản phẩm cho slider
+            </button>
+        </div>
         <div class="logout"><a href="logout.php">Đăng xuất</a></div>
     </div>
     <!-- SIDE BAR END -->
+
+    <!-- PHẦN CHỌN SẢN PHẨM CHO SLIDER -->
+    <div class="index-slider-info-cont" id="indexSliderInfoCont" style="display: none; padding: 20px;">
+        <div class="index-slider-info">
+            <h2>Chọn sản phẩm cho Slider 1</h2>
+            <form method="POST" action="admin.php">
+                <input type="hidden" name="slider_type" value="slider1">
+                <div class="product-selection">
+                    <?php
+                    // Fetch all products
+                    try {
+                        $sql_all_products = "SELECT id, name FROM items_detail ORDER BY name ASC";
+                        $stmt_all_products = $pdo->prepare($sql_all_products);
+                        $stmt_all_products->execute();
+                        $all_products = $stmt_all_products->fetchAll(PDO::FETCH_ASSOC);
+                    } catch (PDOException $e) {
+                        die("Lỗi truy vấn sản phẩm: " . $e->getMessage());
+                    }
+
+                    // Fetch selected products for slider1
+                    try {
+                        $sql_selected_slider1 = "SELECT product_id FROM index_sliders WHERE slider_type = 'slider1'";
+                        $stmt_selected_slider1 = $pdo->prepare($sql_selected_slider1);
+                        $stmt_selected_slider1->execute();
+                        $selected_slider1 = $stmt_selected_slider1->fetchAll(PDO::FETCH_COLUMN);
+                    } catch (PDOException $e) {
+                        die("Lỗi truy vấn sản phẩm đã chọn cho slider1: " . $e->getMessage());
+                    }
+
+                    // Display products with checkboxes
+                    foreach ($all_products as $product) {
+                        $checked = in_array($product['id'], $selected_slider1) ? 'checked' : '';
+                        echo '<div class="product-checkbox">';
+                        echo '<input type="checkbox" name="slider1_products[]" value="' . htmlspecialchars($product['id']) . '" ' . $checked . '>';
+                        echo '<label>' . htmlspecialchars($product['name']) . '</label>';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+                <button type="submit" name="save_slider1">Lưu Slider 1</button>
+            </form>
+
+            <h2>Chọn sản phẩm cho Slider 2</h2>
+            <form method="POST" action="admin.php">
+                <input type="hidden" name="slider_type" value="slider2">
+                <div class="product-selection">
+                    <?php
+                    // Fetch selected products for slider2
+                    try {
+                        $sql_selected_slider2 = "SELECT product_id FROM index_sliders WHERE slider_type = 'slider2'";
+                        $stmt_selected_slider2 = $pdo->prepare($sql_selected_slider2);
+                        $stmt_selected_slider2->execute();
+                        $selected_slider2 = $stmt_selected_slider2->fetchAll(PDO::FETCH_COLUMN);
+                    } catch (PDOException $e) {
+                        die("Lỗi truy vấn sản phẩm đã chọn cho slider2: " . $e->getMessage());
+                    }
+
+                    // Display products with checkboxes
+                    foreach ($all_products as $product) {
+                        $checked = in_array($product['id'], $selected_slider2) ? 'checked' : '';
+                        echo '<div class="product-checkbox">';
+                        echo '<input type="checkbox" name="slider2_products[]" value="' . htmlspecialchars($product['id']) . '" ' . $checked . '>';
+                        echo '<label>' . htmlspecialchars($product['name']) . '</label>';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+                <button type="submit" name="save_slider2">Lưu Slider 2</button>
+            </form>
+        </div>
+    </div>
+    <!-- PHẦN CHỌN SẢN PHẨM CHO SLIDER END -->
+
+    <?php if (isset($successMessage)): ?>
+        <div class="success-message"><?php echo htmlspecialchars($successMessage); ?></div>
+    <?php endif; ?>
 
     <!-- PHẦN BẢNG KHÁCH HÀNG -->
     <div class="customer-info-cont" id="customerInfoCont">
@@ -245,7 +393,7 @@ try {
                                 <td>
                                     <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="Ảnh sản phẩm" width="100">
                                 </td>
-                                <td class="editable" data-field="price"><?php echo htmlspecialchars($product['price']); ?></td>
+                                <td class="editable" data-field="price"><?php echo htmlspecialchars(number_format($product['price'], 0, ',', '.') . 'đ'); ?></td>
                                 <td>
                                     <button class="save-btn" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="display: none;">Lưu</button>
                                     <button class="cancel-btn" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="display: none;">Hủy</button>
@@ -331,7 +479,8 @@ try {
                 }
                 ?>
             </div>
-
+        </div>
+    </div>
     <!-- PHẦN BẢNG SẢN PHẨM END -->
 
     <!-- Bao gồm tệp JavaScript -->
@@ -340,6 +489,6 @@ try {
 </html>
 
 <?php
-// Đóng kết nối (không bắt buộc với PDO, nhưng bạn có thể đặt biến $pdo thành null nếu muốn)
+// Đóng kết nối
 $pdo = null;
 ?>

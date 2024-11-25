@@ -103,7 +103,11 @@ body {
     align-items: center;
     justify-content: center;
 }
-
+.pagination-btn i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .pagination-btn:hover {
     background-color: var(--main-color);
     cursor: pointer;

@@ -234,7 +234,10 @@ body {
   font-size: 1.2rem;
   color: var(--text-color-dark);
 }
-
+.no-succgestion {
+  margin-top: 4rem;
+  text-align: center;
+}
 
 
 

@@ -131,6 +131,9 @@
 }
 
 .pagination a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     margin: 0 5px;
     padding: 10px 15px;
@@ -195,9 +198,10 @@
 
   /* thông tin danh mục */
   .subcategory-info {
+    padding-bottom: 4rem;
     margin-top: 6rem;
     text-align: center;
-    padding-top: 3rem;
+    padding-top: 5rem;
     background-color: var(--background-color);
     border-bottom: 0px solid var(--text-color-dark);
 }

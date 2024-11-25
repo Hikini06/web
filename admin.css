@@ -44,11 +44,11 @@ body {
     color: var(--text-color);
 }
 
-.customer-infor-bar, .product-infor-bar {
+.customer-infor-bar, .product-infor-bar, .index-slider-bar {
     margin-top: 20px; /* Thêm khoảng cách từ trên xuống nút */
 }
 
-.customer-infor-bar-btn, .product-infor-bar-btn {
+.customer-infor-bar-btn, .product-infor-bar-btn, .index-slider-bar-btn {
     padding: 10px 20px;
     background-color: var(--main-color);
     border: none;
@@ -61,7 +61,7 @@ body {
     margin-bottom: 10px; /* Thêm khoảng cách giữa các nút */
 }
 
-.customer-infor-bar-btn:hover, .product-infor-bar-btn:hover {
+.customer-infor-bar-btn:hover, .product-infor-bar-btn:hover, .index-slider-bar-btn:hover {
     background-color: var(--hover-color);
     color: #fff;
 }
@@ -111,13 +111,18 @@ body {
 }
 
 /* Định dạng cho bảng thông tin khách hàng và sản phẩm */
-.customer-info-cont, .product-info-cont {
+.customer-info-cont, .product-info-cont, .index-slider-info-cont {
     display: none; /* Ẩn bảng thông tin ban đầu */
     padding: 20px;
     transition: all 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.customer-info-cont.active, .product-info-cont.active {
+.customer-info-cont.active, .product-info-cont.active, .index-slider-info-cont.active {
     display: block; /* Hiển thị bảng khi có lớp 'active' */
 }
 
@@ -188,8 +193,6 @@ table tr:nth-child(even) {
     background-color: #005f6a;
 }
 
-/* admin.css */
-
 /* Phân Trang */
 .pagination-cont {
     margin-left: auto;
@@ -200,19 +203,21 @@ table tr:nth-child(even) {
     align-items: center;
 }
 
-
 .pagination {
     margin-top: 20px;
 }
+
 .pagination span {
     padding: 1rem 1rem;
     border: 1px solid var(--background-color);
 }
+
 .pagination a {
     text-decoration: none;
     padding: 1rem 1rem;
     border: 1px solid var(--background-color);
 }
+
 .pagination-list {
     list-style: none;
     padding: 0;
@@ -255,7 +260,6 @@ table tr:nth-child(even) {
     cursor: not-allowed;
 }
 
-
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
@@ -271,7 +275,7 @@ table tr:nth-child(even) {
         align-items: center;
     }
 
-    .customer-infor-bar-btn, .product-infor-bar-btn {
+    .customer-infor-bar-btn, .product-infor-bar-btn, .index-slider-bar-btn {
         width: 90%;
         margin-bottom: 10px;
     }
@@ -283,5 +287,10 @@ table tr:nth-child(even) {
     .filter-buttons a {
         width: 100%;
         text-align: center;
+    }
+
+    /* Hiển thị tất cả các phần khi trên thiết bị nhỏ */
+    .customer-info-cont, .product-info-cont, .index-slider-info-cont {
+        width: 90%;
     }
 }
