@@ -5,47 +5,87 @@ document.addEventListener('DOMContentLoaded', function() {
     var toggleCustomerBtn = document.getElementById('toggleCustomerInfo');
     var customerInfoCont = document.getElementById('customerInfoCont');
 
-    if (toggleCustomerBtn && customerInfoCont) {
-        var showCustomerInfo = localStorage.getItem('showCustomerInfo');
-        if (showCustomerInfo === 'true') {
+    // Xử lý nút "Sản phẩm"
+    var toggleProductBtn = document.getElementById('toggleProductInfo');
+    var productInfoCont = document.getElementById('productInfoCont');
+
+    // Hàm để ẩn tất cả các bảng
+    function hideAllSections(except = null) {
+        if (except !== 'customer') {
+            customerInfoCont.style.display = 'none';
+            toggleCustomerBtn.setAttribute('aria-expanded', 'false');
+            localStorage.setItem('showCustomerInfo', 'false');
+        }
+        if (except !== 'product') {
+            productInfoCont.style.display = 'none';
+            toggleProductBtn.setAttribute('aria-expanded', 'false');
+            localStorage.setItem('showProductInfo', 'false');
+        }
+    }
+
+    // Hàm để hiển thị một bảng
+    function showSection(section) {
+        if (section === 'customer') {
             customerInfoCont.style.display = 'block';
             toggleCustomerBtn.setAttribute('aria-expanded', 'true');
+            localStorage.setItem('showCustomerInfo', 'true');
+        } else if (section === 'product') {
+            productInfoCont.style.display = 'block';
+            toggleProductBtn.setAttribute('aria-expanded', 'true');
+            localStorage.setItem('showProductInfo', 'true');
         }
+    }
 
-        toggleCustomerBtn.addEventListener('click', function() {
+    // Hàm để toggle một bảng
+    function toggleSection(section) {
+        if (section === 'customer') {
             if (customerInfoCont.style.display === 'none' || customerInfoCont.style.display === '') {
-                customerInfoCont.style.display = 'block';
-                toggleCustomerBtn.setAttribute('aria-expanded', 'true');
-                localStorage.setItem('showCustomerInfo', 'true');
+                hideAllSections('customer');
+                showSection('customer');
             } else {
                 customerInfoCont.style.display = 'none';
                 toggleCustomerBtn.setAttribute('aria-expanded', 'false');
                 localStorage.setItem('showCustomerInfo', 'false');
             }
-        });
-    }
-
-    // Xử lý nút "Sản phẩm"
-    var toggleProductBtn = document.getElementById('toggleProductInfo');
-    var productInfoCont = document.getElementById('productInfoCont');
-
-    if (toggleProductBtn && productInfoCont) {
-        var showProductInfo = localStorage.getItem('showProductInfo');
-        if (showProductInfo === 'true') {
-            productInfoCont.style.display = 'block';
-            toggleProductBtn.setAttribute('aria-expanded', 'true');
-        }
-
-        toggleProductBtn.addEventListener('click', function() {
+        } else if (section === 'product') {
             if (productInfoCont.style.display === 'none' || productInfoCont.style.display === '') {
-                productInfoCont.style.display = 'block';
-                toggleProductBtn.setAttribute('aria-expanded', 'true');
-                localStorage.setItem('showProductInfo', 'true');
+                hideAllSections('product');
+                showSection('product');
             } else {
                 productInfoCont.style.display = 'none';
                 toggleProductBtn.setAttribute('aria-expanded', 'false');
                 localStorage.setItem('showProductInfo', 'false');
             }
+        }
+    }
+
+    // Khởi tạo trạng thái ban đầu từ localStorage
+    var showCustomerInfo = localStorage.getItem('showCustomerInfo') === 'true';
+    var showProductInfo = localStorage.getItem('showProductInfo') === 'true';
+
+    if (showCustomerInfo && !showProductInfo) {
+        customerInfoCont.style.display = 'block';
+        toggleCustomerBtn.setAttribute('aria-expanded', 'true');
+    } else if (showProductInfo && !showCustomerInfo) {
+        productInfoCont.style.display = 'block';
+        toggleProductBtn.setAttribute('aria-expanded', 'true');
+    } else if (showCustomerInfo && showProductInfo) {
+        // Nếu cả hai đều được lưu là hiển thị, chỉ hiển thị bảng khách hàng
+        hideAllSections('customer');
+        showSection('customer');
+    }
+
+    // Thêm sự kiện click cho nút "Thông tin khách hàng"
+    if (toggleCustomerBtn && customerInfoCont) {
+        toggleCustomerBtn.addEventListener('click', function() {
+            toggleSection('customer');
+        });
+    }
+
+    // Thêm sự kiện click cho nút "Sản phẩm"
+    if (toggleProductBtn && productInfoCont) {
+        toggleProductBtn.addEventListener('click', function() {
+            toggleSection('product');
         });
     }
 

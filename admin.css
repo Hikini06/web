@@ -191,10 +191,28 @@ table tr:nth-child(even) {
 /* admin.css */
 
 /* Phân Trang */
+.pagination-cont {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .pagination {
     margin-top: 20px;
 }
-
+.pagination span {
+    padding: 1rem 1rem;
+    border: 1px solid var(--background-color);
+}
+.pagination a {
+    text-decoration: none;
+    padding: 1rem 1rem;
+    border: 1px solid var(--background-color);
+}
 .pagination-list {
     list-style: none;
     padding: 0;
@@ -204,6 +222,8 @@ table tr:nth-child(even) {
 
 .pagination-list li {
     margin: 0 5px;
+    /* width: 1.5rem; */
+    /* height: 5rem; */
 }
 
 .pagination-list li a {
@@ -223,6 +243,10 @@ table tr:nth-child(even) {
     background-color: #007bff;
     color: white;
     border: 1px solid #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
 }
 
 .pagination-list li.disabled {

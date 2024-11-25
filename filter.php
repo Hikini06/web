@@ -5,8 +5,9 @@ $searchQuery = isset($_GET['q']) ? trim($_GET['q']) : '';
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
 $limit = 16;
 
+// Kiểm tra độ dài của từ khóa tìm kiếm
 if (strlen($searchQuery) < 2) {
-    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
         // Yêu cầu AJAX
         $response = ['error' => "Vui lòng nhập ít nhất 2 ký tự."];
         echo json_encode($response);
@@ -93,8 +94,12 @@ $totalProducts = $countQuery->fetchColumn();
 $hasMore = $offset + $limit < $totalProducts;
 
 // Xử lý yêu cầu AJAX
-if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
-    $response = ['results' => $results, 'hasMore' => $hasMore];
+if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+    if (!empty($results)) {
+        $response = ['results' => $results, 'hasMore' => $hasMore];
+    } else {
+        $response = ['error' => 'Không có kết quả phù hợp.'];
+    }
     header('Content-Type: application/json');
     echo json_encode($response);
     exit;
@@ -112,44 +117,41 @@ if (!empty($currentProductIDs)) {
     $averageID = 0;
 }
 
-// Chuẩn bị placeholders cho câu lệnh SQL
-$placeholders = implode(',', array_fill(0, count($currentProductIDs), '?'));
+$suggestedProducts = [];
 
 // Truy vấn lấy sản phẩm gợi ý
-$suggestedSql = "SELECT * FROM items_detail
-                 WHERE id NOT IN ($placeholders)
-                 ORDER BY ABS(id - ?)
-                 LIMIT 16";
-
-$suggestedQuery = $pdo->prepare($suggestedSql);
-
-// Gán giá trị cho placeholders
-$i = 1;
-foreach ($currentProductIDs as $id) {
-    $suggestedQuery->bindValue($i++, $id, PDO::PARAM_INT);
-}
-
-// Gán giá trị cho averageID
-$suggestedQuery->bindValue($i, $averageID, PDO::PARAM_INT);
-
-// Thực thi truy vấn
-$suggestedQuery->execute();
-$suggestedProducts = $suggestedQuery->fetchAll(PDO::FETCH_ASSOC);
-// Kiểm tra mảng $suggestedProducts
-foreach ($suggestedProducts as $index => $product) {
-    if (empty($product) || !isset($product['id'])) {
-        echo "Sản phẩm tại vị trí $index bị rỗng hoặc không hợp lệ.";
+if (!empty($currentProductIDs)) {
+    // Chuẩn bị placeholders cho câu lệnh SQL
+    $placeholders = implode(',', array_fill(0, count($currentProductIDs), '?'));
+    
+    // Truy vấn lấy sản phẩm gợi ý
+    $suggestedSql = "SELECT * FROM items_detail
+                     WHERE id NOT IN ($placeholders)
+                     ORDER BY ABS(id - ?)
+                     LIMIT 16";
+    
+    $suggestedQuery = $pdo->prepare($suggestedSql);
+    
+    // Gán giá trị cho placeholders
+    $i = 1;
+    foreach ($currentProductIDs as $id) {
+        $suggestedQuery->bindValue($i++, $id, PDO::PARAM_INT);
     }
+    
+    // Gán giá trị cho averageID
+    $suggestedQuery->bindValue($i, $averageID, PDO::PARAM_INT);
+    
+    // Thực thi truy vấn
+    $suggestedQuery->execute();
+    $suggestedProducts = $suggestedQuery->fetchAll(PDO::FETCH_ASSOC);
+} else {
+    // Nếu không có sản phẩm hiện tại, chọn ngẫu nhiên các sản phẩm
+    $suggestedSql = "SELECT * FROM items_detail ORDER BY RAND() LIMIT 16";
+    $suggestedQuery = $pdo->prepare($suggestedSql);
+    $suggestedQuery->execute();
+    $suggestedProducts = $suggestedQuery->fetchAll(PDO::FETCH_ASSOC);
 }
-
 ?>
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -183,7 +185,7 @@ foreach ($suggestedProducts as $index => $product) {
                     <button id="load-more" data-offset="<?= $offset + $limit ?>" data-query="<?= htmlspecialchars($searchQuery) ?>">Xem thêm</button>
                 <?php endif; ?>
             <?php else: ?>
-                <p>Không tìm thấy sản phẩm nào phù hợp.</p>
+                <p>Không có kết quả phù hợp.</p>
             <?php endif; ?>
         </div>
     </div>
@@ -212,8 +214,6 @@ foreach ($suggestedProducts as $index => $product) {
             <button class="carousel-btn carousel-next">&gt;</button>
         </div>
     </div>
-
-    
 
     <?php include 'footer.php'; ?>
     <script src="filter.js"></script>

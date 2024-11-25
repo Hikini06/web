@@ -176,41 +176,43 @@ try {
             </table>
 
             <!-- Phân Trang Khách Hàng -->
-            <div class="pagination">
-                <?php 
-                    // Hàm để xây dựng URL phân trang khách hàng
-                    function build_customer_url($page, $isTodayFilter) {
-                        $params = [];
-                        if ($isTodayFilter) {
-                            $params['today'] = '1';
+            <div class="pagination-cont">
+                <div class="pagination">
+                    <?php 
+                        // Hàm để xây dựng URL phân trang khách hàng
+                        function build_customer_url($page, $isTodayFilter) {
+                            $params = [];
+                            if ($isTodayFilter) {
+                                $params['today'] = '1';
+                            }
+                            if ($page > 1) {
+                                $params['customer_page'] = $page;
+                            }
+                            return 'admin.php' . (count($params) > 0 ? '?' . http_build_query($params) : '');
                         }
-                        if ($page > 1) {
-                            $params['customer_page'] = $page;
-                        }
-                        return 'admin.php' . (count($params) > 0 ? '?' . http_build_query($params) : '');
-                    }
-                ?>
+                    ?>
 
-                <?php if ($customer_page > 1): ?>
-                    <a href="<?php echo build_customer_url($customer_page - 1, $customer_isTodayFilter); ?>">&laquo; Trang trước</a>
-                <?php endif; ?>
+                    <?php if ($customer_page > 1): ?>
+                        <a href="<?php echo build_customer_url($customer_page - 1, $customer_isTodayFilter); ?>">&laquo; Trang trước</a>
+                    <?php endif; ?>
 
-                <?php
-                // Hiển thị số trang cho khách hàng
-                for ($i = 1; $i <= $total_pages_customers; $i++):
-                    if ($i == $customer_page):
-                ?>
-                        <span><?php echo $i; ?></span>
-                <?php else: ?>
-                        <a href="<?php echo build_customer_url($i, $customer_isTodayFilter); ?>"><?php echo $i; ?></a>
-                <?php
-                    endif;
-                endfor;
-                ?>
+                    <?php
+                    // Hiển thị số trang cho khách hàng
+                    for ($i = 1; $i <= $total_pages_customers; $i++):
+                        if ($i == $customer_page):
+                    ?>
+                            <span><?php echo $i; ?></span>
+                    <?php else: ?>
+                            <a href="<?php echo build_customer_url($i, $customer_isTodayFilter); ?>"><?php echo $i; ?></a>
+                    <?php
+                        endif;
+                    endfor;
+                    ?>
 
-                <?php if ($customer_page < $total_pages_customers): ?>
-                    <a href="<?php echo build_customer_url($customer_page + 1, $customer_isTodayFilter); ?>">Trang sau &raquo;</a>
-                <?php endif; ?>
+                    <?php if ($customer_page < $total_pages_customers): ?>
+                        <a href="<?php echo build_customer_url($customer_page + 1, $customer_isTodayFilter); ?>">Trang sau &raquo;</a>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>
