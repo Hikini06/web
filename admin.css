@@ -260,6 +260,70 @@ table tr:nth-child(even) {
     cursor: not-allowed;
 }
 
+/* Selection Grid Styles */
+.product-selection {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Chia thành 4 cột */
+    gap: 15px;
+    overflow: auto; /* Thêm thanh cuộn nếu cần */
+}
+
+.product-checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.product-checkbox:hover {
+    background-color: #e9e9e9;
+}
+
+.product-checkbox input[type="checkbox"] {
+    margin-bottom: 10px;
+    transform: scale(1.2);
+}
+
+.product-checkbox label {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-color-dark);
+}
+
+/* Save Button Styles */
+.save-button {
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 10px 20px;
+    background-color: var(--text-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+    background-color: var(--hover-color);
+}
+
+/* Container cho hai form slider */
+.slider-forms-container {
+    display: flex;
+    gap: 20px; /* Khoảng cách giữa hai form */
+    flex-wrap: wrap;
+}
+
+.slider-form {
+    flex: 1 1 45%; /* Mỗi form chiếm khoảng 45% chiều rộng cha */
+    min-width: 300px; /* Đảm bảo mỗi form có chiều rộng tối thiểu */
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     body {
@@ -292,5 +356,18 @@ table tr:nth-child(even) {
     /* Hiển thị tất cả các phần khi trên thiết bị nhỏ */
     .customer-info-cont, .product-info-cont, .index-slider-info-cont {
         width: 90%;
+    }
+
+    /* Adjust product grid for smaller screens */
+    .product-selection {
+        grid-template-columns: repeat(2, 1fr); /* Giảm xuống 2 cột trên thiết bị nhỏ */
+    }
+
+    .slider-forms-container {
+        flex-direction: column;
+    }
+
+    .slider-form {
+        flex: 1 1 100%; /* Mỗi form chiếm toàn bộ chiều rộng trên thiết bị nhỏ */
     }
 }

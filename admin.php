@@ -199,71 +199,79 @@ try {
     <!-- PHẦN CHỌN SẢN PHẨM CHO SLIDER -->
     <div class="index-slider-info-cont" id="indexSliderInfoCont" style="display: none; padding: 20px;">
         <div class="index-slider-info">
-            <h2>Chọn sản phẩm cho Slider 1</h2>
-            <form method="POST" action="admin.php">
-                <input type="hidden" name="slider_type" value="slider1">
-                <div class="product-selection">
-                    <?php
-                    // Fetch all products
-                    try {
-                        $sql_all_products = "SELECT id, name FROM items_detail ORDER BY name ASC";
-                        $stmt_all_products = $pdo->prepare($sql_all_products);
-                        $stmt_all_products->execute();
-                        $all_products = $stmt_all_products->fetchAll(PDO::FETCH_ASSOC);
-                    } catch (PDOException $e) {
-                        die("Lỗi truy vấn sản phẩm: " . $e->getMessage());
-                    }
+            <div class="slider-forms-container">
+                <!-- Form Slider 1 -->
+                <div class="slider-form">
+                    <h2>Chọn sản phẩm cho Slider 1</h2>
+                    <form method="POST" action="admin.php">
+                        <input type="hidden" name="slider_type" value="slider1">
+                        <div class="product-selection">
+                            <?php
+                            // Fetch all products
+                            try {
+                                $sql_all_products = "SELECT id, name FROM items_detail ORDER BY name ASC";
+                                $stmt_all_products = $pdo->prepare($sql_all_products);
+                                $stmt_all_products->execute();
+                                $all_products = $stmt_all_products->fetchAll(PDO::FETCH_ASSOC);
+                            } catch (PDOException $e) {
+                                die("Lỗi truy vấn sản phẩm: " . $e->getMessage());
+                            }
 
-                    // Fetch selected products for slider1
-                    try {
-                        $sql_selected_slider1 = "SELECT product_id FROM index_sliders WHERE slider_type = 'slider1'";
-                        $stmt_selected_slider1 = $pdo->prepare($sql_selected_slider1);
-                        $stmt_selected_slider1->execute();
-                        $selected_slider1 = $stmt_selected_slider1->fetchAll(PDO::FETCH_COLUMN);
-                    } catch (PDOException $e) {
-                        die("Lỗi truy vấn sản phẩm đã chọn cho slider1: " . $e->getMessage());
-                    }
+                            // Fetch selected products for slider1
+                            try {
+                                $sql_selected_slider1 = "SELECT product_id FROM index_sliders WHERE slider_type = 'slider1'";
+                                $stmt_selected_slider1 = $pdo->prepare($sql_selected_slider1);
+                                $stmt_selected_slider1->execute();
+                                $selected_slider1 = $stmt_selected_slider1->fetchAll(PDO::FETCH_COLUMN);
+                            } catch (PDOException $e) {
+                                die("Lỗi truy vấn sản phẩm đã chọn cho slider1: " . $e->getMessage());
+                            }
 
-                    // Display products with checkboxes
-                    foreach ($all_products as $product) {
-                        $checked = in_array($product['id'], $selected_slider1) ? 'checked' : '';
-                        echo '<div class="product-checkbox">';
-                        echo '<input type="checkbox" name="slider1_products[]" value="' . htmlspecialchars($product['id']) . '" ' . $checked . '>';
-                        echo '<label>' . htmlspecialchars($product['name']) . '</label>';
-                        echo '</div>';
-                    }
-                    ?>
+                            // Display products with checkboxes
+                            foreach ($all_products as $product) {
+                                $checked = in_array($product['id'], $selected_slider1) ? 'checked' : '';
+                                echo '<div class="product-checkbox">';
+                                echo '<input type="checkbox" name="slider1_products[]" value="' . htmlspecialchars($product['id']) . '" ' . $checked . '>';
+                                echo '<label>' . htmlspecialchars($product['name']) . '</label>';
+                                echo '</div>';
+                            }
+                            ?>
+                        </div>
+                        <button type="submit" name="save_slider1" class="save-button">Lưu Slider 1</button>
+                    </form>
                 </div>
-                <button type="submit" name="save_slider1">Lưu Slider 1</button>
-            </form>
 
-            <h2>Chọn sản phẩm cho Slider 2</h2>
-            <form method="POST" action="admin.php">
-                <input type="hidden" name="slider_type" value="slider2">
-                <div class="product-selection">
-                    <?php
-                    // Fetch selected products for slider2
-                    try {
-                        $sql_selected_slider2 = "SELECT product_id FROM index_sliders WHERE slider_type = 'slider2'";
-                        $stmt_selected_slider2 = $pdo->prepare($sql_selected_slider2);
-                        $stmt_selected_slider2->execute();
-                        $selected_slider2 = $stmt_selected_slider2->fetchAll(PDO::FETCH_COLUMN);
-                    } catch (PDOException $e) {
-                        die("Lỗi truy vấn sản phẩm đã chọn cho slider2: " . $e->getMessage());
-                    }
+                <!-- Form Slider 2 -->
+                <div class="slider-form">
+                    <h2>Chọn sản phẩm cho Slider 2</h2>
+                    <form method="POST" action="admin.php">
+                        <input type="hidden" name="slider_type" value="slider2">
+                        <div class="product-selection">
+                            <?php
+                            // Fetch selected products for slider2
+                            try {
+                                $sql_selected_slider2 = "SELECT product_id FROM index_sliders WHERE slider_type = 'slider2'";
+                                $stmt_selected_slider2 = $pdo->prepare($sql_selected_slider2);
+                                $stmt_selected_slider2->execute();
+                                $selected_slider2 = $stmt_selected_slider2->fetchAll(PDO::FETCH_COLUMN);
+                            } catch (PDOException $e) {
+                                die("Lỗi truy vấn sản phẩm đã chọn cho slider2: " . $e->getMessage());
+                            }
 
-                    // Display products with checkboxes
-                    foreach ($all_products as $product) {
-                        $checked = in_array($product['id'], $selected_slider2) ? 'checked' : '';
-                        echo '<div class="product-checkbox">';
-                        echo '<input type="checkbox" name="slider2_products[]" value="' . htmlspecialchars($product['id']) . '" ' . $checked . '>';
-                        echo '<label>' . htmlspecialchars($product['name']) . '</label>';
-                        echo '</div>';
-                    }
-                    ?>
+                            // Display products with checkboxes
+                            foreach ($all_products as $product) {
+                                $checked = in_array($product['id'], $selected_slider2) ? 'checked' : '';
+                                echo '<div class="product-checkbox">';
+                                echo '<input type="checkbox" name="slider2_products[]" value="' . htmlspecialchars($product['id']) . '" ' . $checked . '>';
+                                echo '<label>' . htmlspecialchars($product['name']) . '</label>';
+                                echo '</div>';
+                            }
+                            ?>
+                        </div>
+                        <button type="submit" name="save_slider2" class="save-button">Lưu Slider 2</button>
+                    </form>
                 </div>
-                <button type="submit" name="save_slider2">Lưu Slider 2</button>
-            </form>
+            </div>
         </div>
     </div>
     <!-- PHẦN CHỌN SẢN PHẨM CHO SLIDER END -->
