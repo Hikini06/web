@@ -40,6 +40,7 @@ try {
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="header.css"/>
     <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body>
     <!-- HEADER ĐI THEO MỌI TRANG -->
@@ -170,26 +171,21 @@ try {
     <!-- PHẦN SẢN PHẨM NỔI BẬT END -->
 
     <!-- PHẦN SLIDER 1 - DANH SÁCH SẢN PHẨM -->
-    <div class="slider-container-one-upper">
-        <h2>Danh sách sản phẩm kẹc kẹc gì đó</h2>
-    </div>
-    <div class="slider-container-one">
-        <button class="arrow left" onclick="slideLeft()">&#10094;</button>
-        <!-- Mũi tên trái -->
-
-        <div class="slider">
+    <div class="swiper slider-container-one">
+        <div class="swiper-wrapper">
             <?php foreach ($slider1_products as $product): ?>
-                <div class="slider-item-one">
+                <div class="swiper-slide slider-item-one">
                     <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
                     <p><?php echo htmlspecialchars($product['name']); ?></p>
                     <button class="product-slider-btn"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></button>
                 </div>
             <?php endforeach; ?>
         </div>
-
-        <button class="arrow right" onclick="slideRight()">&#10095;</button>
-        <!-- Mũi tên phải -->
+        <!-- Navigation buttons -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
+
     <!-- PHẦN SLIDER 1 END -->
 
     <!-- PHẦN 2 BANNER SẢN PHẨM -->
@@ -223,26 +219,21 @@ try {
     <!-- PHẦN 2 BANNER SẢN PHẨM END -->
 
     <!-- PHẦN SLIDER 2 - DANH SÁCH SẢN PHẨM -->
-    <div class="slider-container-one-upper-two">
-        <h2>Danh sách thứ 2 cho sản phẩm kẹc kẹc gì đó</h2>
-    </div>
-    <div class="slider-container-two">
-        <button class="arrow-two left" onclick="slideLeftTwo()">&#10094;</button>
-        <!-- Mũi tên trái -->
-
-        <div class="slider-two">
+    <div class="swiper slider-container-two">
+        <div class="swiper-wrapper">
             <?php foreach ($slider2_products as $product): ?>
-                <div class="slider-item-two">
+                <div class="swiper-slide slider-item-two">
                     <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
                     <p><?php echo htmlspecialchars($product['name']); ?></p>
                     <button class="product-slider-btn-two"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></button>
                 </div>
             <?php endforeach; ?>
         </div>
-
-        <button class="arrow-two right" onclick="slideRightTwo()">&#10095;</button>
-        <!-- Mũi tên phải -->
+        <!-- Navigation buttons -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
+
     <!-- PHẦN SLIDER 2 END -->
 
     <!-- FOOTER -->
@@ -251,5 +242,7 @@ try {
     <!-- Bao gồm tệp JavaScript -->
     <script src="home.js" defer></script>
     <script src="header.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+
 </body>
 </html>

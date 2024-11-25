@@ -1203,6 +1203,17 @@ main {
 /* banner slider chia 2 end */
 
 
+.swiper {
+  width: 100%;
+  height: auto;
+}
+
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
 
 
