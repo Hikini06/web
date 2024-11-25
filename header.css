@@ -214,6 +214,9 @@ header {
 
   font-size: 2rem;
 }
+.logo-container .logo-mobi {
+  display: none;
+}
 .menu-nav ul {
   display: flex;
   list-style: none;

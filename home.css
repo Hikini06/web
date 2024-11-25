@@ -160,39 +160,7 @@ main {
   height: 50%;
 }
 
-/* Media queries for responsiveness */
-@media (max-width: 768px) {
-  #hero-banner {
-    height: 60vh;
-  }
 
-  .hero-content h1 {
-    font-size: 2rem;
-  }
-
-  .hero-content p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  #hero-banner {
-    height: 50vh;
-  }
-
-  .hero-content h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-content p {
-    font-size: 0.9rem;
-  }
-
-  .cta-button {
-    padding: 0.6rem 1.5rem;
-    font-size: 0.9rem;
-  }
-}
 /* .hero-content {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 2rem;
@@ -429,50 +397,7 @@ main {
   bottom: -10px;
 }
 
-/* Menu styles for mobile */
-@media (max-width: 768px) {
-  .hamburger-menu {
-    display: block;
-  }
 
-  .menu-nav {
-    position: fixed;
-    top: 80px; /* Adjust based on your header height */
-    left: -100%;
-    width: 100%;
-    height: calc(100% - 80px);
-    background-color: #fff;
-    transition: left 0.3s ease;
-  }
-
-  .menu-toggle:checked ~ .menu-nav {
-    left: 0;
-  }
-
-  .menu-nav ul {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .menu-nav ul li {
-    margin: 10px 0;
-  }
-
-  /* Animate hamburger menu */
-  .menu-toggle:checked ~ .hamburger-menu .hamburger-inner {
-    transform: rotate(45deg);
-  }
-
-  .menu-toggle:checked ~ .hamburger-menu .hamburger-inner::before {
-    top: 0;
-    opacity: 0;
-  }
-
-  .menu-toggle:checked ~ .hamburger-menu .hamburger-inner::after {
-    bottom: 0;
-    transform: rotate(-90deg);
-  }
-}
 /* Dropdown styles */
 .dropdown {
   position: relative;
@@ -809,36 +734,6 @@ main {
 
 .slider-button.next::before {
   content: "\203A";
-}
-
-@media (max-width: 768px) {
-  .product-item {
-    flex: 0 0 200px;
-  }
-
-  .slider-controls {
-    padding: 0 5px;
-  }
-
-  .slider-button {
-    padding: 10px;
-    font-size: 20px;
-    width: 40px;
-    height: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .product-item {
-    flex: 0 0 150px;
-  }
-
-  .slider-button {
-    padding: 8px;
-    font-size: 18px;
-    width: 35px;
-    height: 35px;
-  }
 }
 
 /* slider product jim làm */

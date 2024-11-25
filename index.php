@@ -52,6 +52,7 @@ try {
     <link rel="stylesheet" href="header.css"/>
     <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="index-responsive.css" />
 </head>
 <body>
     <!-- HEADER ĐI THEO MỌI TRANG -->

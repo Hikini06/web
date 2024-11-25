@@ -1,3 +1,4 @@
+// home.js
 document.addEventListener("DOMContentLoaded", function () {
     // Khởi tạo Swiper cho Slider 1
     const swiper1 = new Swiper(".slider-container-one", {
@@ -11,6 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
         autoplay: {
             delay: 5000,
             disableOnInteraction: false,
+        },
+        breakpoints: {
+            320: { slidesPerView: 1, spaceBetween: 10 },
+            480: { slidesPerView: 2, spaceBetween: 15 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 20 },
         },
     });
 
@@ -26,6 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
         autoplay: {
             delay: 5000,
             disableOnInteraction: false,
+        },
+        breakpoints: {
+            320: { slidesPerView: 1, spaceBetween: 10 },
+            480: { slidesPerView: 2, spaceBetween: 15 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 20 },
         },
     });
 

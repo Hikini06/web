@@ -1,0 +1,119 @@
+@media (max-width: 768px) {
+    :root {
+        --main-color: rgb(255, 211, 219);
+        --text-color: rgb(194, 47, 80);
+        --text-color-dark: rgb(0, 32, 77);
+        --hover-color: rgb(53, 16, 25);
+        --background-color: rgb(255, 248, 249);
+    }
+
+    body {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400; 
+        font-style: normal;
+        line-height: 1.6;
+        color: var(--text-color-dark);
+    }
+
+    /* Ẩn menu product-banner-jim-child mặc định */
+    .product-banner-jim .product-banner-jim-child {
+        display: none;
+        display: none;
+        width: 100%;
+        flex-direction: column; 
+        background-color: var(--background-color);
+    }
+   
+    /* Hiển thị menu khi có lớp active */
+    .product-banner-jim-child.active {
+        display: flex;
+    }
+
+    .header-cont {
+        width: 100%;
+        margin: 1rem;
+    }
+    .logo-container {
+        padding-left: 1.5rem;
+    }
+    .logo-container a {
+        font-size: 0.1rem;
+    }
+
+    .logo-container .logo {
+        display: none;
+    }
+
+    .logo-container .logo-mobi {
+        display: block;
+        font-size: 2rem;
+        font-family: 'Pacifico', cursive;
+        color: var(--main-color);
+        text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.6);
+        letter-spacing: 2px;
+        text-align: center;
+        display: inline-block;
+        padding: 10px;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .search-bar-cont {
+        display: none; /* Ẩn thanh tìm kiếm trên thiết bị nhỏ */
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .hamburger {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 24px;
+        width: 30px;
+        padding: 0;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .hamburger-line {
+        width: 100%;
+        height: 3px;
+        background-color: var(--text-color-dark);
+        transition: all 0.3s ease;
+    }
+
+    /* Thay đổi hamburger khi active */
+    .hamburger.active {
+        transform: rotate(90deg);
+    }
+    .hamburger.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(10px, -10px);
+    }
+
+    /* Điều chỉnh các bảng sản phẩm khi hiển thị */
+    .product-banner-jim {
+        width: 100%;
+        height: auto;
+    }
+
+    .product-banner-jim-sanpham {
+        padding: 1rem;
+        background-color: var(--background-color);
+    }
+
+    /* Các điều chỉnh khác nếu cần thiết */
+}

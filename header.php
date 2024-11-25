@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel= "stylesheet" href= "header.css"/>
+    <link rel= "stylesheet" href= "header-responsive.css"/>
 </head>
 <body>
        <!-- HEADER ĐI THEO MỌI TRANG -->
@@ -14,19 +15,16 @@
       <header>
         <div class="header-cont">
           <div class="header-left">
-            <input type="checkbox" id="menu-toggle" class="menu-toggle" />
-            <label
-              for="menu-toggle"
-              class="hamburger-menu"
-              aria-label="Toggle menu"
-            >
-              <span class="hamburger-box">
-                <span class="hamburger-inner"></span>
-              </span>
-            </label>
+            <!-- Nút Hamburger -->
+            <button class="hamburger" id="hamburger">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+            </button>
           </div>
           <div class="logo-container">
             <a href="index.php" class="logo">Tiệm hoa MiMi</a>
+            <a href="index.php" class="logo-mobi">MiMi</a>
           </div>
           <div class="search-bar-cont">
             <form action="filter.php" method="GET" class="search-form">
@@ -266,7 +264,7 @@
 
       </section>
     </section>
-
+<script src="header-responsive.js" defer></script>
 <script src="header.js"></script>
 </body>
 </html>
