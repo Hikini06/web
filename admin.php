@@ -29,6 +29,37 @@ $customer_isTodayFilter = isset($_GET['today']) && $_GET['today'] == '1';
 $successMessage = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['save_profiles']) && isset($_POST['profile_products'])) {
+        $selected_products = $_POST['profile_products'];
+
+        // Kiểm tra số lượng sản phẩm không vượt quá 9
+        if (count($selected_products) > 9) {
+            die("Chỉ có thể chọn tối đa 9 sản phẩm cho phần đầu trang.");
+        }
+
+        // Xóa các sản phẩm cũ trong bảng index_profiles
+        try {
+            $sql_delete_profiles = "DELETE FROM index_profiles";
+            $stmt_delete_profiles = $pdo->prepare($sql_delete_profiles);
+            $stmt_delete_profiles->execute();
+        } catch (PDOException $e) {
+            die("Lỗi khi xóa sản phẩm cũ: " . $e->getMessage());
+        }
+
+        // Thêm các sản phẩm mới
+        try {
+            $sql_insert_profiles = "INSERT INTO index_profiles (product_id) VALUES (:product_id)";
+            $stmt_insert_profiles = $pdo->prepare($sql_insert_profiles);
+            foreach ($selected_products as $product_id) {
+                $stmt_insert_profiles->execute([':product_id' => $product_id]);
+            }
+        } catch (PDOException $e) {
+            die("Lỗi khi thêm sản phẩm mới: " . $e->getMessage());
+        }
+
+        $successMessage = "Đã lưu sản phẩm đầu trang thành công!";
+    }
+
     if (isset($_POST['save_slider1']) && isset($_POST['slider1_products'])) {
         $slider_type = 'slider1';
         $selected_products = $_POST['slider1_products'];
@@ -162,6 +193,7 @@ try {
 } catch (PDOException $e) {
     die("Lỗi truy vấn tổng số sản phẩm: " . $e->getMessage());
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -176,11 +208,19 @@ try {
     <!-- SIDE BAR -->
     <div class="sidebar">
         <h1>Chào đại ca <span class="user"><?php echo htmlspecialchars($_SESSION['admin_username']); ?></span></h1>
+        <!-- xem thông tin khách hàng -->
         <div class="customer-infor-bar">
             <button class="customer-infor-bar-btn" id="toggleCustomerInfo" aria-expanded="false" aria-controls="customerInfoCont">
                 Thông tin khách hàng
             </button>
         </div>
+        <!-- Chọn sản phẩm đầu trang -->
+        <div class="profile-selection-bar">
+            <button class="profile-selection-bar-btn" id="toggleProfileSelection" aria-expanded="false" aria-controls="profileSelectionCont">
+                Chọn sản phẩm đầu trang
+            </button>
+        </div>
+        <!-- chọn slider sản phẩm -->
         <div class="product-infor-bar">
             <button class="product-infor-bar-btn" id="toggleProductInfo" aria-expanded="false" aria-controls="productInfoCont">
                 Sản phẩm
@@ -490,6 +530,49 @@ try {
         </div>
     </div>
     <!-- PHẦN BẢNG SẢN PHẨM END -->
+
+    <!-- PHẦN CHỌN SẢN PHẨM ĐẦU TRANG -->
+    <div class="profile-selection-cont" id="profileSelectionCont" style="display: none; padding: 20px;">
+        <div class="profile-selection">
+            <h2>Chọn sản phẩm đầu trang (tối đa 9 sản phẩm)</h2>
+            <form method="POST" action="admin.php">
+                <div class="product-selection">
+                    <?php
+                    // Fetch tất cả sản phẩm
+                    try {
+                        $sql_all_products = "SELECT id, name FROM items_detail ORDER BY name ASC";
+                        $stmt_all_products = $pdo->prepare($sql_all_products);
+                        $stmt_all_products->execute();
+                        $all_products = $stmt_all_products->fetchAll(PDO::FETCH_ASSOC);
+                    } catch (PDOException $e) {
+                        die("Lỗi truy vấn sản phẩm: " . $e->getMessage());
+                    }
+
+                    // Fetch các sản phẩm đã chọn cho profile-section
+                    try {
+                        $sql_selected_profiles = "SELECT product_id FROM index_profiles";
+                        $stmt_selected_profiles = $pdo->prepare($sql_selected_profiles);
+                        $stmt_selected_profiles->execute();
+                        $selected_profiles = $stmt_selected_profiles->fetchAll(PDO::FETCH_COLUMN);
+                    } catch (PDOException $e) {
+                        die("Lỗi truy vấn sản phẩm đã chọn: " . $e->getMessage());
+                    }
+
+                    // Hiển thị sản phẩm với checkbox
+                    foreach ($all_products as $product) {
+                        $checked = in_array($product['id'], $selected_profiles) ? 'checked' : '';
+                        echo '<div class="product-checkbox">';
+                        echo '<input type="checkbox" name="profile_products[]" value="' . htmlspecialchars($product['id']) . '" ' . $checked . '>';
+                        echo '<label>' . htmlspecialchars($product['name']) . '</label>';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+                <button type="submit" name="save_profiles" class="save-button">Lưu Sản Phẩm</button>
+            </form>
+        </div>
+    </div>
+
 
     <!-- Bao gồm tệp JavaScript -->
     <script src="admin.js"></script>

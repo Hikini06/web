@@ -1,6 +1,10 @@
 // admin.js
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Xử lý nút "Chọn sản phẩm đầu trang"
+    var toggleProfileBtn = document.getElementById('toggleProfileSelection');
+    var profileSelectionCont = document.getElementById('profileSelectionCont');
+
     // Xử lý nút "Thông tin khách hàng"
     var toggleCustomerBtn = document.getElementById('toggleCustomerInfo');
     var customerInfoCont = document.getElementById('customerInfoCont');
@@ -13,6 +17,19 @@ document.addEventListener('DOMContentLoaded', function() {
     var toggleSliderBtn = document.getElementById('toggleIndexSliderInfo');
     var sliderInfoCont = document.getElementById('indexSliderInfoCont');
 
+
+    if (toggleProfileBtn && profileSelectionCont) {
+        toggleProfileBtn.addEventListener('click', function () {
+            if (profileSelectionCont.style.display === 'none' || profileSelectionCont.style.display === '') {
+                hideAllSections('profile');
+                profileSelectionCont.style.display = 'block';
+                toggleProfileBtn.setAttribute('aria-expanded', 'true');
+            } else {
+                profileSelectionCont.style.display = 'none';
+                toggleProfileBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
     // Hàm để ẩn tất cả các bảng
     function hideAllSections(except = null) {
         if (except !== 'customer') {

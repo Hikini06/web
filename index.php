@@ -4,6 +4,17 @@
 // Bao gồm tệp kết nối cơ sở dữ liệu
 require_once 'db-connect.php';
 
+// Fetch selected products for profile section
+try {
+    $sql_profiles = "SELECT items_detail.* FROM index_profiles 
+                     JOIN items_detail ON index_profiles.product_id = items_detail.id";
+    $stmt_profiles = $pdo->prepare($sql_profiles);
+    $stmt_profiles->execute();
+    $profile_products = $stmt_profiles->fetchAll();
+} catch (PDOException $e) {
+    die("Lỗi khi lấy sản phẩm đầu trang: " . $e->getMessage());
+}
+
 // Fetch selected products for slider1
 try {
     $sql_slider1 = "SELECT items_detail.* FROM index_sliders 
@@ -49,90 +60,61 @@ try {
 
     <!-- PHẦN KHU VỰC PROFILE -->
     <section class="profile-section">
-        <div class="profile-section-cont">
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/1.webp" alt="Profile Image" />
-                    <p>Description 1</p>
-                </div>
-            </a>
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/2.webp" alt="Profile Image" />
-                    <p>Description 2</p>
-                </div>
-            </a>
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/3.webp" alt="Profile Image" />
-                    <p>Description 3</p>
-                </div>
-            </a>
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/4.webp" alt="Profile Image" />
-                    <p>Description 4</p>
-                </div>
-            </a>
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/5.webp" alt="Profile Image" />
-                    <p>Description 5</p>
-                </div>
-            </a>
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/6.webp" alt="Profile Image" />
-                    <p>Description 6</p>
-                </div>
-            </a>
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/6.webp" alt="Profile Image" />
-                    <p>Description 7</p>
-                </div>
-            </a>
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/6.webp" alt="Profile Image" />
-                    <p>Description 8</p>
-                </div>
-            </a>
-            <a href="https://www.google.com.vn/">
-                <div class="profile-card">
-                    <img src="image/6.webp" alt="Profile Image" />
-                    <p>Description 9</p>
-                </div>
-            </a>
-        </div>
-    </section>
+            <div class="profile-section-cont">
+                <?php foreach ($profile_products as $product): ?>
+                    <a href="product-detail.php?id=<?php echo htmlspecialchars($product['id']); ?>">
+                        <div class="profile-card">
+                            <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
+                            <p><?php echo htmlspecialchars($product['name']); ?></p>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+    </section>         
     <!-- PHẦN KHU VỰC PROFILE END -->
 
     <!-- PHẦN HERO BANNER -->
-    <main>
-        <div class="hero-banner-cont">
-            <section id="hero-banner" class="slideshow-container">
-                <div class="mySlides fade" style="background-image: url('image/1.webp')"></div>
-                <div class="mySlides fade" style="background-image: url('image/2.webp')"></div>
-                <div class="mySlides fade" style="background-image: url('image/3.webp')"></div>
-                <div class="mySlides fade" style="background-image: url('image/4.webp')"></div>
-                <div class="mySlides fade" style="background-image: url('image/5.webp')"></div>
-                <div class="mySlides fade" style="background-image: url('image/6.webp')"></div>
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-            </section>
-            <section class="banner-divine-to-two">
-                <div class="banner-divine-to-two-child">
-                    <img src="image/2.webp" alt="" />
+    <div class="hero-banner-cont">
+        <section id="hero-banner" class="swiper hero-banner">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img class = "hero-banner-img" src="image/1.webp" alt="Hoa 1">
                 </div>
-                <div class="banner-divine-to-two-child banner-divine-to-two-child-cont">
-                    <img src="image/3.webp" alt="" />
-                    <a class="banner-divine-to-two-child-btn cta-button" href="product.php">Mua ngay</a>
+                <div class="swiper-slide">
+                    <img class = "hero-banner-img" src="image/2.webp" alt="Hoa 2">
                 </div>
-            </section>
-        </div>
-    </main>
+                <div class="swiper-slide">
+                    <img class = "hero-banner-img" src="image/3.webp" alt="Hoa 3">
+                </div>
+                <div class="swiper-slide">
+                    <img class = "hero-banner-img" src="image/4.webp" alt="Hoa 4">
+                </div>
+                <div class="swiper-slide">
+                    <img class = "hero-banner-img" src="image/5.webp" alt="Hoa 5">
+                </div>
+                <div class="swiper-slide">
+                    <img class = "hero-banner-img" src="image/6.webp" alt="Hoa 6">
+                </div>
+                <!-- Thêm thêm slide nếu cần -->
+            </div>
+            <!-- Nút điều hướng -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <!-- Chấm phân trang -->
+            <div class="swiper-pagination"></div>
+        </section>
+        <section class="banner-divine-to-two">
+            <div class="banner-divine-to-two-child">
+                <img src="image/2.webp" alt="" />
+            </div>
+            <div class="banner-divine-to-two-child banner-divine-to-two-child-cont">
+                <img src="image/3.webp" alt="" />
+                <a class="banner-divine-to-two-child-btn cta-button" href="product.php">Mua ngay</a>
+            </div>
+        </section>
+    </div>  
     <!-- PHẦN HERO BANNER END -->
+
 
     <!-- PHẦN SẢN PHẨM NỔI BẬT -->
     <section id="featured-products">
@@ -171,21 +153,22 @@ try {
     <!-- PHẦN SẢN PHẨM NỔI BẬT END -->
 
     <!-- PHẦN SLIDER 1 - DANH SÁCH SẢN PHẨM -->
-    <div class="swiper slider-container-one">
-        <div class="swiper-wrapper">
-            <?php foreach ($slider1_products as $product): ?>
-                <div class="swiper-slide slider-item-one">
-                    <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
-                    <p><?php echo htmlspecialchars($product['name']); ?></p>
-                    <button class="product-slider-btn"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></button>
-                </div>
-            <?php endforeach; ?>
+    <h2 class= "title-for-all">Sản phẩm này thuộc danh mục gì đó!</h2>
+    <div class="swiper-slider-container">
+        <div class="swiper slider-container-one">
+            <div class="swiper-wrapper">
+                <?php foreach ($slider1_products as $product): ?>
+                    <a href="product-detail.php?id=<?php echo htmlspecialchars($product['id']); ?>" class="swiper-slide slider-item-one">
+                        <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
+                        <p><?php echo htmlspecialchars($product['name']); ?></p>
+                        <button class="product-slider-btn"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></button>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
-        <!-- Navigation buttons -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
     </div>
-
     <!-- PHẦN SLIDER 1 END -->
 
     <!-- PHẦN 2 BANNER SẢN PHẨM -->
@@ -219,21 +202,22 @@ try {
     <!-- PHẦN 2 BANNER SẢN PHẨM END -->
 
     <!-- PHẦN SLIDER 2 - DANH SÁCH SẢN PHẨM -->
-    <div class="swiper slider-container-two">
+    <h2 class= "title-for-all">Phàn danh mục sản phẩm chưa đặt tên!</h2>
+    <div class="swiper-slider-container">
+      <div class="swiper slider-container-two">
         <div class="swiper-wrapper">
-            <?php foreach ($slider2_products as $product): ?>
-                <div class="swiper-slide slider-item-two">
-                    <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
-                    <p><?php echo htmlspecialchars($product['name']); ?></p>
-                    <button class="product-slider-btn-two"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></button>
-                </div>
-            <?php endforeach; ?>
+                <?php foreach ($slider2_products as $product): ?>
+                    <a href="product-detail.php?id=<?php echo htmlspecialchars($product['id']); ?>" class="swiper-slide slider-item-two">
+                        <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
+                        <p><?php echo htmlspecialchars($product['name']); ?></p>
+                        <button class="product-slider-btn-two"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></button>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
-        <!-- Navigation buttons -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
     </div>
-
     <!-- PHẦN SLIDER 2 END -->
 
     <!-- FOOTER -->

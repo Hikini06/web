@@ -1,28 +1,50 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Khởi tạo Swiper hoặc các logic khác
+    // Khởi tạo Swiper cho Slider 1
     const swiper1 = new Swiper(".slider-container-one", {
         slidesPerView: 4,
         spaceBetween: 20,
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".slider-container-one .swiper-button-next",
+            prevEl: ".slider-container-one .swiper-button-prev",
         },
         loop: true,
         autoplay: {
             delay: 5000,
+            disableOnInteraction: false,
         },
     });
 
+    // Khởi tạo Swiper cho Slider 2
     const swiper2 = new Swiper(".slider-container-two", {
         slidesPerView: 4,
         spaceBetween: 20,
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".slider-container-two .swiper-button-next",
+            prevEl: ".slider-container-two .swiper-button-prev",
         },
         loop: true,
         autoplay: {
             delay: 5000,
+            disableOnInteraction: false,
+        },
+    });
+
+    // Khởi tạo Swiper cho Hero Banner
+    const heroSwiper = new Swiper(".hero-banner", {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        loop: true,
+        autoplay: {
+            delay: 3000, // Thời gian giữa các slide (ms)
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: ".hero-banner .swiper-button-next",
+            prevEl: ".hero-banner .swiper-button-prev",
+        },
+        pagination: {
+            el: ".hero-banner .swiper-pagination",
+            clickable: true,
         },
     });
 });

@@ -41,18 +41,26 @@ body {
 .top-banner a:hover {
   text-decoration: underline;
 }
+.title-for-all {
+  color: var(--text-color-dark);
+  text-align: center;
+  padding-top: 4rem;
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1.2;
+  padding-bottom: 2rem;
+}
+
 /* profile-section */
 .profile-section {
   width: 100%;
   display: flex;
-  /* gap: 20px; */
+ 
   justify-content: center;
-  /* align-items: center; */
-  /* padding: 20px; */
-  margin-top: 8rem;
-  /* padding: 1rem 20% 1rem; */
+  margin-top: 10rem;
   margin-bottom: 1rem;
 }
+
 .profile-section-cont {
   gap: 1rem;
   display: flex;
@@ -60,16 +68,17 @@ body {
   width: 60%;
 }
 .profile-section-cont a {
-width: 11%;
-box-sizing: border-box;
+/* width: 11%; */
+/* box-sizing: border-box; */
+display: flex;
 text-decoration: none;
+flex: 1;
 }
 
 .profile-card {
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  /* max-width: 150px; */
+  width: 100%;
 }
 .profile-card img {
   width: 100%;
@@ -112,7 +121,7 @@ main {
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 100%;
+  height: 30rem;
   /* max-height: 200px; */
   width: 50%;
   overflow: hidden;
@@ -124,7 +133,9 @@ main {
   color: #fff;
   background: url("path/to/hero-image.jpg") no-repeat center center/cover;
 }
-
+.hero-banner-img {
+  padding: 0px !important;
+}
 #hero-banner::before {
   content: "";
   position: absolute;
@@ -849,21 +860,7 @@ main {
   margin-bottom: 4rem;
 }
 
-.slider-item-one {
-  min-width: calc(96.5% / 4);
-  margin: 5px;
-  text-align: center;
-  border: 0px solid #ccc;
-  display: flex;
-  flex-direction: column; /* Sắp xếp các thẻ con theo cột */
-  align-items: center;
-  /* width: 23%; */
-  height: auto;
-  justify-content: space-between;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  border-radius: 8px;
-}
+
 
 
 
@@ -936,11 +933,11 @@ main {
   background-color: rgba(255, 248, 249, 0.5);
   cursor: pointer;
 }
-.slider-item-one:hover {
+/* .slider-item-one:hover {
   transform: translateY(-5px);
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+} */
 
 /* slider product jim làm end */
 
@@ -1042,25 +1039,6 @@ main {
   margin-bottom: 4rem;
 }
 
-.slider-item-two {
-  min-width: calc(96.5% / 4);
-  margin: 5px;
-  text-align: center;
-  border: 0px solid #ccc;
-  display: flex;
-  flex-direction: column; /* Sắp xếp các thẻ con theo cột */
-  align-items: center;
-  /* width: 23%; */
-  height: auto;
-  justify-content: space-between;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  border-radius: 8px;
-}
-
-
-  
-
 .left {
   left: 10px;
 }
@@ -1129,11 +1107,7 @@ main {
   background-color: rgba(255, 248, 249, 0.5);
   cursor: pointer;
 }
-.slider-item-two:hover {
-  transform: translateY(-5px);
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+
 /* slider sản phẩm 2 jim làm end */
 .slider-container-one-upper-two h2 {
   text-align: center;
@@ -1146,6 +1120,40 @@ main {
 }
 
 /* banner slider chia 2 start */
+/* Hero Banner Swiper */
+.hero-banner {
+  width: 100%;
+  height: 500px; /* Điều chỉnh chiều cao theo nhu cầu */
+  position: relative;
+}
+
+.hero-banner .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-banner .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Điều chỉnh nút điều hướng */
+.hero-banner .swiper-button-next,
+.hero-banner .swiper-button-prev {
+  color: var(--text-color-dark); /* Màu sắc của nút */
+}
+
+/* Điều chỉnh phân trang */
+.hero-banner .swiper-pagination-bullet {
+  background: var(--text-color-dark);
+}
+
+.hero-banner .swiper-pagination-bullet-active {
+  background: var(--main-color);
+}
+
 .banner-divine-to-two-child img {
   height: 100px;
   width: 100px;
@@ -1157,6 +1165,8 @@ main {
   justify-content: space-between;
   width: 60%;
   height: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .banner-divine-to-two {
   width: 50%;
@@ -1203,9 +1213,13 @@ main {
 /* banner slider chia 2 end */
 
 
+
+
+/* SLIDER SẢN PHẨM CHUNG */
+
 .swiper {
   width: 100%;
-  height: auto;
+  height: 35rem;
 }
 
 .swiper-slide {
@@ -1213,9 +1227,48 @@ main {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.swiper-slide:hover {
+  transform: scale(1.2);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+.swiper-wrapper a {
+  display: block;
+  text-decoration: none;
+  color: inherit; 
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 95%; 
+  margin: auto; /* Căn giữa thẻ */
+  border-radius: 8px; /* Để làm bo tròn đẹp mắt */
 }
 
+.swiper-slide img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  padding-bottom: 1rem;
+  object-fit: cover;
+}
+.swiper-slider-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-
-
-
+.slider-container-one,
+.slider-container-two {
+  width: 60%;
+}
+.swiper-wrapper {
+  overflow: visible;
+  width: 100%;
+}
+.swiper-button-next:after, 
+.swiper-rtl .swiper-button-prev:after,
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  color: var(--text-color);
+  font-size: 1.5rem !important ;
+}
