@@ -242,7 +242,7 @@
     }
     /* Thêm hiệu ứng hover cho nút */
     .swiper-slider-container .swiper-slide button:hover {
-        background-color: var(--hover-color); /* Màu nền khi hover */
+        background-color: var(--background-color); /* Màu nền khi hover */
     }
 
     /* Optional: Thêm hiệu ứng active giống product-card */
