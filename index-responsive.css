@@ -1,0 +1,63 @@
+/* index-responsive.css */
+
+@media (max-width: 768px) {
+    /* Responsive styles cho profile-section trên điện thoại di động */
+    .profile-section {
+        width: 100%;
+        margin-top: 8rem; 
+        margin-bottom: 1rem;
+    }
+
+    .profile-section-cont {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        display: flex;
+        overflow-x: auto; /* Cho phép cuộn ngang */
+        gap: 1rem;
+        padding: 0 1rem; /* Thêm padding trái và phải */
+        scroll-behavior: smooth; /* Hiệu ứng cuộn mượt mà */
+        -webkit-overflow-scrolling: touch; /* Hỗ trợ kéo mượt trên iOS */
+    }
+
+    /* Ẩn thanh cuộn (scrollbar) trên Webkit (Chrome, Safari) */
+    .profile-section-cont::-webkit-scrollbar {
+        display: none;
+    }
+
+    .profile-section-cont {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Thiết lập mỗi profile-card để hiển thị 3 sản phẩm mỗi lần */
+    .profile-card {
+        flex: 0 0 30%; /* Chiếm khoảng 30% chiều rộng container */
+        max-width: 30%;
+        min-width: 150px; /* Đảm bảo không quá nhỏ */
+        border: 1px solid #e0e0e0; /* Thêm viền nhẹ */
+        border-radius: 8px; /* Bo tròn góc */
+        padding: 10px; /* Thêm padding */
+        background-color: #fff; /* Nền trắng */
+    }
+
+    /* Điều chỉnh hình ảnh và văn bản trong profile-card nếu cần */
+    .profile-card img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .profile-card p {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    /* Optional: Thêm khoảng cách giữa các `a` */
+    .profile-section-cont a {
+        flex: 0 0 auto; /* Không co giãn */
+        margin-right: 1rem; /* Thêm khoảng cách bên phải */
+        width: 35%;
+        height: auto;
+        display: block;
+    }
+}
