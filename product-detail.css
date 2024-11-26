@@ -525,4 +525,7 @@ background-color: var(--background-color);
         width: calc(50% - 0.5rem);
         margin-bottom: 1rem;
     }
+    .product-detail-suggest-cont-title {
+        text-align: center;
+    }
 }
