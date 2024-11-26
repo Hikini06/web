@@ -1,9 +1,16 @@
 <?php
 require 'db-connect.php';
 
+// Hàm phát hiện thiết bị di động
+function isMobile() {
+    return preg_match('/mobile|android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i', $_SERVER['HTTP_USER_AGENT']);
+}
+
 $searchQuery = isset($_GET['q']) ? trim($_GET['q']) : '';
 $offset = isset($_GET['offset']) ? intval($_GET['offset']) : 0;
-$limit = 16;
+
+// Đặt tham số limit dựa trên thiết bị
+$limit = isset($_GET['limit']) ? intval($_GET['limit']) : (isMobile() ? 10 : 16);
 
 // Kiểm tra độ dài của từ khóa tìm kiếm
 if (strlen($searchQuery) < 2) {
@@ -123,24 +130,24 @@ $suggestedProducts = [];
 if (!empty($currentProductIDs)) {
     // Chuẩn bị placeholders cho câu lệnh SQL
     $placeholders = implode(',', array_fill(0, count($currentProductIDs), '?'));
-    
+
     // Truy vấn lấy sản phẩm gợi ý
     $suggestedSql = "SELECT * FROM items_detail
                      WHERE id NOT IN ($placeholders)
                      ORDER BY ABS(id - ?)
                      LIMIT 16";
-    
+
     $suggestedQuery = $pdo->prepare($suggestedSql);
-    
+
     // Gán giá trị cho placeholders
     $i = 1;
     foreach ($currentProductIDs as $id) {
         $suggestedQuery->bindValue($i++, $id, PDO::PARAM_INT);
     }
-    
+
     // Gán giá trị cho averageID
     $suggestedQuery->bindValue($i, $averageID, PDO::PARAM_INT);
-    
+
     // Thực thi truy vấn
     $suggestedQuery->execute();
     $suggestedProducts = $suggestedQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -159,6 +166,7 @@ if (!empty($currentProductIDs)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
     <link rel="stylesheet" href="filter.css">
+    <link rel="stylesheet" href="filter-responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -190,6 +198,7 @@ if (!empty($currentProductIDs)) {
         </div>
     </div>
     
+    <!-- Suggested Products Carousel -->
     <div class="suggested-products">
         <h2>Sản phẩm gợi ý</h2>
         <div class="suggested-carousel">
@@ -199,7 +208,7 @@ if (!empty($currentProductIDs)) {
                 <?php foreach ($suggestedProducts as $index => $product): ?>
                     <?php if (!empty($product) && isset($product['id'])): ?>
                         <li class="carousel-slide" data-index="<?= $index ?>">
-                            <div class="carousel-slide-inner">
+                            <div class="carousel-slide-inner" id="carousel-slide-inner">
                                 <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
                                     <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                                     <h3><?= htmlspecialchars($product['name']) ?></h3>
@@ -217,5 +226,6 @@ if (!empty($currentProductIDs)) {
 
     <?php include 'footer.php'; ?>
     <script src="filter.js"></script>
+    <script src="filter-responsive.js"></script>
 </body>
 </html>
