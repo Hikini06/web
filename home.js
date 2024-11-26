@@ -1,48 +1,45 @@
 // home.js
 document.addEventListener("DOMContentLoaded", function () {
-    // Khởi tạo Swiper cho Slider 1
-    const swiper1 = new Swiper(".slider-container-one", {
-        slidesPerView: 4,
-        spaceBetween: 20,
-        navigation: {
-            nextEl: ".slider-container-one .swiper-button-next",
-            prevEl: ".slider-container-one .swiper-button-prev",
-        },
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        breakpoints: {
-            320: { slidesPerView: 1, spaceBetween: 10 },
-            480: { slidesPerView: 2, spaceBetween: 15 },
-            768: { slidesPerView: 3, spaceBetween: 20 },
-            1024: { slidesPerView: 4, spaceBetween: 20 },
-        },
-    });
+    // Hàm khởi tạo Swiper với cấu hình responsive
+    function initializeSwiper(containerSelector, slidesPerViewDesktop) {
+        const swiperInstance = new Swiper(containerSelector, {
+            slidesPerView: slidesPerViewDesktop, // Số lượng slides hiển thị trên desktop
+            spaceBetween: 20, // Khoảng cách giữa các slides (px)
+            loop: false, // Tắt loop khi có kích thước cố định slide trên mobile
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: `${containerSelector} .swiper-button-next`,
+                prevEl: `${containerSelector} .swiper-button-prev`,
+            },
+            pagination: {
+                el: `${containerSelector} .swiper-pagination`,
+                clickable: true,
+            },
+            breakpoints: {
+                // Cấu hình responsive cho từng breakpoint
+                0: {
+                    slidesPerView: 2, // Hai slide trên mobile
+                    spaceBetween: 10,
+                },
+                769: {
+                    slidesPerView: slidesPerViewDesktop, // 4 slide trên desktop
+                    spaceBetween: 20,
+                },
+            },
+        });
+        return swiperInstance;
+    }
 
-    // Khởi tạo Swiper cho Slider 2
-    const swiper2 = new Swiper(".slider-container-two", {
-        slidesPerView: 4,
-        spaceBetween: 20,
-        navigation: {
-            nextEl: ".slider-container-two .swiper-button-next",
-            prevEl: ".slider-container-two .swiper-button-prev",
-        },
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        breakpoints: {
-            320: { slidesPerView: 1, spaceBetween: 10 },
-            480: { slidesPerView: 2, spaceBetween: 15 },
-            768: { slidesPerView: 3, spaceBetween: 20 },
-            1024: { slidesPerView: 4, spaceBetween: 20 },
-        },
-    });
+    // Khởi tạo Swiper cho Slider 1 với 4 slides trên desktop
+    const swiper1 = initializeSwiper(".slider-container-one", 4);
 
-    // Khởi tạo Swiper cho Hero Banner
+    // Khởi tạo Swiper cho Slider 2 với 4 slides trên desktop
+    const swiper2 = initializeSwiper(".slider-container-two", 4);
+
+    // Khởi tạo Swiper cho Hero Banner với cấu hình riêng
     const heroSwiper = new Swiper(".hero-banner", {
         slidesPerView: 1,
         spaceBetween: 10,

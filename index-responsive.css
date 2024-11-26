@@ -27,13 +27,15 @@
     }
 
     .profile-section-cont {
+        /* padding-left: 0px; */
         width: 100%; /* Chiếm toàn bộ chiều rộng */
         display: flex;
         overflow-x: auto; /* Cho phép cuộn ngang */
         gap: 1rem;
-        padding: 0 1rem; /* Thêm padding trái và phải */
+        padding-right: 1rem; 
         scroll-behavior: smooth; /* Hiệu ứng cuộn mượt mà */
         -webkit-overflow-scrolling: touch; /* Hỗ trợ kéo mượt trên iOS */
+      
     }
 
     /* Ẩn thanh cuộn (scrollbar) trên Webkit (Chrome, Safari) */
@@ -64,6 +66,9 @@
         border-radius: 50%;
         object-fit: cover;
     }
+    .profile-section .profile-card img {
+        width: 70%;
+    }
 
     .profile-card p {
         font-size: 14px;
@@ -74,7 +79,7 @@
     .profile-section-cont a {
         flex: 0 0 auto; /* Không co giãn */
         margin-right: 1rem; /* Thêm khoảng cách bên phải */
-        width: 35%;
+        width: 30%;
         height: auto;
         display: block;
     }
@@ -216,13 +221,12 @@
     }
     /* Điều chỉnh các swiper-slide để hiển thị đúng như product-card */
     .swiper-slider-container .swiper-slide {
-        flex: 0 0 45%; /* Tương tự như .product-card */
-        max-width: 45%;
+      
+        width: 45% !important;
         min-width: 150px;
         scroll-snap-align: start;
         border: 1px solid #e0e0e0; /* Thêm viền giống product-card */
         border-radius: 8px; /* Bo tròn góc giống product-card */
-       
         background-color: #fff; /* Nền trắng giống product-card */
         box-sizing: border-box; /* Đảm bảo padding được tính đúng */
         display: flex;
@@ -264,7 +268,7 @@
     }
     /* Điều chỉnh các swiper-slide để hiển thị đúng */
     .swiper-slide {
-        width: auto; /* Để Swiper tính toán width dựa trên slidesPerView */
+        /* width: auto;  */
     }
     .swiper-slider-container .swiper-slide img {
         width: 100%;
@@ -293,4 +297,22 @@
     #hero-banner {
         width: 100%;
     }
+
+
+    .two-product-banner-cont {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    }
+    .two-product-banner-cont {
+        width: 90%;
+    }
+    .two-product-banner-child {
+        width: 100%;
+    }
 }
+
