@@ -1,3 +1,5 @@
+// categories.js
+
 const filterContainer = document.querySelector('.categories-filter ul');
 const leftArrow = document.querySelector('.left-arrow');
 const rightArrow = document.querySelector('.right-arrow');
@@ -21,4 +23,32 @@ rightArrow.addEventListener('click', () => {
     scrollAmount += containerWidth; // Di chuyển bằng chiều rộng khung nhìn
     if (scrollAmount > maxScrollRight) scrollAmount = maxScrollRight; // Không vượt quá phải
     filterContainer.style.transform = `translateX(-${scrollAmount}px)`;
+});
+
+// Thêm hỗ trợ thao tác vuốt trên thiết bị di động
+let startX;
+let isDragging = false;
+
+filterContainer.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+});
+
+filterContainer.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const currentX = e.touches[0].clientX;
+    const diffX = startX - currentX;
+    scrollAmount += diffX;
+    
+    const containerWidth = document.querySelector('.categories-filter').offsetWidth;
+    const maxScrollRight = filterContainer.scrollWidth - containerWidth;
+    if (scrollAmount < 0) scrollAmount = 0;
+    if (scrollAmount > maxScrollRight) scrollAmount = maxScrollRight;
+    
+    filterContainer.style.transform = `translateX(-${scrollAmount}px)`;
+    startX = currentX;
+});
+
+filterContainer.addEventListener('touchend', () => {
+    isDragging = false;
 });

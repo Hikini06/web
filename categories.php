@@ -22,8 +22,8 @@ if ($subcategory_id) {
     $subcategoryInfo = $querySubcategoryInfo->fetch(PDO::FETCH_ASSOC);
 }
 
-// Số sản phẩm tối đa mỗi trang
-$items_per_page = 16;
+// Lấy items_per_page từ URL hoặc đặt mặc định
+$items_per_page = isset($_GET['items_per_page']) ? intval($_GET['items_per_page']) : 16;
 
 // Trang hiện tại
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -69,6 +69,7 @@ $total_pages = ceil($total_products / $items_per_page);
 
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +79,7 @@ $total_pages = ceil($total_products / $items_per_page);
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="categories.css"/>
     <link rel="stylesheet" href="header.css" />
+    <link rel="stylesheet" href="categories-responsive.css"/>
 </head>
 <body>
     <!-- HEADER -->
@@ -127,8 +129,8 @@ $total_pages = ceil($total_products / $items_per_page);
     <div class="pagination">
         <?php if ($total_pages > 1): ?>
             <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&page=<?= $i ?>"
-                   class="<?= $i == $page ? 'active' : '' ?>">
+                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=<?= $i ?>"
+                class="<?= $i == $page ? 'active' : '' ?>">
                     <?= $i ?>
                 </a>
             <?php endfor; ?>
@@ -140,5 +142,27 @@ $total_pages = ceil($total_products / $items_per_page);
 
 <script src="header.js"></script>
 <script src="categories.js"></script>
+<script>
+        // Script để tự động điều chỉnh items_per_page dựa trên kích thước màn hình
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentItemsPerPage = parseInt(urlParams.get('items_per_page')) || 16;
+            const screenWidth = window.innerWidth;
+
+            // Xác định nếu màn hình nhỏ hơn hoặc bằng 768px thì items_per_page = 10
+            if (screenWidth <= 768 && currentItemsPerPage !== 10) {
+                urlParams.set('items_per_page', 10);
+                urlParams.set('page', 1); // Đặt lại trang về 1
+                window.location.search = urlParams.toString();
+            }
+
+            // Nếu màn hình lớn hơn 768px và items_per_page không phải là 16, cập nhật
+            if (screenWidth > 768 && currentItemsPerPage !== 16) {
+                urlParams.set('items_per_page', 16);
+                urlParams.set('page', 1); // Đặt lại trang về 1
+                window.location.search = urlParams.toString();
+            }
+        })();
+</script>
 </body>
 </html>
