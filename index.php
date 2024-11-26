@@ -228,6 +228,7 @@ try {
     <script src="home.js" defer></script>
     <script src="header.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+    <script src="index-responsive.js" defer></script>
 
 </body>
 </html>

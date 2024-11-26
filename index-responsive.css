@@ -1,6 +1,24 @@
 /* index-responsive.css */
 
 @media (max-width: 768px) {
+
+    :root {
+        --main-color: rgb(255, 211, 219);
+        --text-color: rgb(194, 47, 80);
+        --text-color-dark: rgb(0, 32, 77);
+        --hover-color: rgb(53, 16, 25);
+        --background-color: rgb(255, 248, 249);
+      }
+      
+    body {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400; 
+        font-style: normal;
+        line-height: 1.6;
+        color: var(--text-color-dark);
+      }
+    
     /* Responsive styles cho profile-section trên điện thoại di động */
     .profile-section {
         width: 100%;
@@ -59,5 +77,220 @@
         width: 35%;
         height: auto;
         display: block;
+    }
+    /* 1. Điều chỉnh padding của phần featured-products */
+    #featured-products {
+        padding: 2rem 5%; /* Giảm padding để phù hợp với màn hình nhỏ */
+    }
+
+    /* 2. Chuyển đổi .product-grid thành flexbox với cuộn ngang */
+    #featured-products .product-grid {
+        display: flex; /* Chuyển từ grid sang flex */
+        overflow-x: auto; /* Cho phép cuộn ngang */
+        gap: 1rem; /* Khoảng cách giữa các sản phẩm */
+        padding: 0 1rem; /* Thêm padding trái và phải */
+        scroll-behavior: smooth; /* Cuộn mượt mà */
+        -webkit-overflow-scrolling: touch; /* Hỗ trợ cuộn mượt trên iOS */
+        
+        /* Thêm Scroll Snap để cuộn mượt hơn */
+        scroll-snap-type: x mandatory;
+
+        /* Thêm căn lề về phía bắt đầu */
+        justify-content: flex-start;
+    }
+
+    /* 3. Ẩn thanh cuộn (scrollbar) */
+    #featured-products .product-grid::-webkit-scrollbar {
+        display: none; /* Ẩn thanh cuộn trên Chrome, Safari */
+    }
+    #featured-products .product-grid {
+        -ms-overflow-style: none;  /* Ẩn thanh cuộn trên IE và Edge */
+        scrollbar-width: none;  /* Ẩn thanh cuộn trên Firefox */
+    }
+
+    /* 4. Điều chỉnh mỗi .product-card để hiển thị 2 sản phẩm mỗi lần */
+    #featured-products .product-card {
+        flex: 0 0 45%; /* Chiếm khoảng 45% chiều rộng container */
+        max-width: 45%;
+        min-width: 150px; /* Đảm bảo không quá nhỏ */
+        scroll-snap-align: start; /* Căn chỉnh scroll snap */
+    }
+
+    /* 5. Điều chỉnh hình ảnh và văn bản trong .product-card nếu cần */
+    #featured-products .product-card img {
+        height: 200px; /* Giảm chiều cao hình ảnh cho phù hợp */
+        object-fit: cover;
+    }
+
+    #featured-products .product-card h3 {
+        font-size: 1rem; /* Giảm kích thước font cho tiêu đề */
+        margin: 0.5rem 0;
+    }
+
+    #featured-products .product-card button {
+        font-size: 16px; /* Giảm kích thước font cho nút */
+        padding: 0.5rem; /* Giảm padding */
+    }
+
+    /* Optional: Thêm khoảng cách giữa các `a` */
+    #featured-products .product-grid a {
+        width: 45%;
+        flex: 0 0 auto; /* Không co giãn */
+    }
+     /* 1. Điều chỉnh padding của phần featured-products */
+     #featured-products {
+        padding: 2rem 5%; /* Giảm padding để phù hợp với màn hình nhỏ */
+    }
+
+    /* 2. Chuyển đổi .product-grid thành flexbox với cuộn ngang */
+    #featured-products .product-grid {
+        display: flex; /* Chuyển từ grid sang flex */
+        overflow-x: auto; /* Cho phép cuộn ngang */
+        gap: 1rem; /* Khoảng cách giữa các sản phẩm */
+        padding: 0 1rem; /* Thêm padding trái và phải */
+        scroll-behavior: smooth; /* Cuộn mượt mà */
+        -webkit-overflow-scrolling: touch; /* Hỗ trợ cuộn mượt trên iOS */
+        
+        /* Thêm Scroll Snap để cuộn mượt hơn */
+        scroll-snap-type: x mandatory;
+
+        /* Thêm căn lề về phía bắt đầu */
+        justify-content: flex-start;
+    }
+
+    /* 3. Ẩn thanh cuộn (scrollbar) */
+    #featured-products .product-grid::-webkit-scrollbar {
+        display: none; /* Ẩn thanh cuộn trên Chrome, Safari */
+    }
+    #featured-products .product-grid {
+        -ms-overflow-style: none;  /* Ẩn thanh cuộn trên IE và Edge */
+        scrollbar-width: none;  /* Ẩn thanh cuộn trên Firefox */
+    }
+
+    /* 4. Điều chỉnh mỗi .product-card để hiển thị 2 sản phẩm mỗi lần */
+    #featured-products .product-card {
+        flex: 0 0 45%; /* Chiếm khoảng 45% chiều rộng container */
+        max-width: 45%;
+        min-width: 150px; /* Đảm bảo không quá nhỏ */
+        scroll-snap-align: start; /* Căn chỉnh scroll snap */
+    }
+
+    /* 5. Điều chỉnh hình ảnh và văn bản trong .product-card nếu cần */
+    #featured-products .product-card img {
+        height: 200px; /* Giảm chiều cao hình ảnh cho phù hợp */
+        object-fit: cover;
+    }
+
+    #featured-products .product-card h3 {
+        font-size: 1rem; /* Giảm kích thước font cho tiêu đề */
+        margin: 0.5rem 0;
+    }
+
+    #featured-products .product-card button {
+        font-size: 16px; /* Giảm kích thước font cho nút */
+        padding: 0.5rem; /* Giảm padding */
+    }
+
+    /* Optional: Thêm khoảng cách giữa các `a` */
+    #featured-products .product-grid a {
+        flex: 0 0 auto; /* Không co giãn */
+    }
+    .banner-divine-to-two {
+        display: none;
+    }
+    /* Đặt width cho swiper-slider-container bằng 100% */
+    .swiper-slider-container {
+        width: 100%;
+        padding: 0 1rem; /* Thêm padding nếu cần */
+        box-sizing: border-box;
+    }
+
+    /* Đảm bảo các Swiper containers bên trong cũng có width 100% */
+    .swiper-container-one,
+    .swiper-container-two,
+    .swiper.hero-banner {
+        width: 100%;
+    }
+    .swiper-wrapper {
+        display: flex;
+    }
+    /* Điều chỉnh các swiper-slide để hiển thị đúng như product-card */
+    .swiper-slider-container .swiper-slide {
+        flex: 0 0 45%; /* Tương tự như .product-card */
+        max-width: 45%;
+        min-width: 150px;
+        scroll-snap-align: start;
+        border: 1px solid #e0e0e0; /* Thêm viền giống product-card */
+        border-radius: 8px; /* Bo tròn góc giống product-card */
+       
+        background-color: #fff; /* Nền trắng giống product-card */
+        box-sizing: border-box; /* Đảm bảo padding được tính đúng */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+     /* Điều chỉnh nút trong swiper-slide giống như trong product-card */
+     .swiper-slider-container .swiper-slide button {
+        font-size: 16px; 
+        padding: 0.5rem;
+        border-radius: 8px;
+        color: var(--text-color); 
+        border: 2px solid var(--text-color);
+        
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    /* Thêm hiệu ứng hover cho nút */
+    .swiper-slider-container .swiper-slide button:hover {
+        background-color: var(--hover-color); /* Màu nền khi hover */
+    }
+
+    /* Optional: Thêm hiệu ứng active giống product-card */
+    .swiper-slider-container .swiper-slide:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+     /* Điều chỉnh tiêu đề trong swiper-slide giống như trong product-card */
+     .swiper-slider-container .swiper-slide h3 {
+        font-size: 1rem; 
+        margin: 0.5rem 0;
+        text-align: center; 
+        color: var(--text-color-dark);
+        padding: 0px;
+    }
+    .swiper-slider-container .swiper-slide p {
+
+        padding: 5px 0px;
+    }
+    /* Điều chỉnh các swiper-slide để hiển thị đúng */
+    .swiper-slide {
+        width: auto; /* Để Swiper tính toán width dựa trên slidesPerView */
+    }
+    .swiper-slider-container .swiper-slide img {
+        width: 100%;
+        height: 200px; /* Giảm chiều cao hình ảnh cho phù hợp */
+        object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+        padding-bottom: 0px;
+        
+    }
+    .swiper {
+        height: auto;
+        width: 100%;
+    }
+    /* Điều chỉnh các nút navigation để phù hợp với thiết bị nhỏ */
+    .swiper-button-next,
+    .swiper-button-prev {
+        top: 50%;
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+    }
+
+    /* Điều chỉnh phân trang nếu cần */
+    .swiper-pagination {
+        bottom: 10px;
+    }
+    #hero-banner {
+        width: 100%;
     }
 }
