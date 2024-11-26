@@ -29,6 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     ];
 
+    // Xác định xem thiết bị có phải là di động không
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
     // Xử lý sự kiện click trên nút hamburger
     hamburger.addEventListener('click', function (e) {
         e.stopPropagation(); // Ngăn sự kiện lan truyền lên document
@@ -43,19 +46,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (sanpham && table) {
             sanpham.addEventListener('click', (e) => {
-                e.preventDefault(); // Ngăn hành động mặc định của thẻ <a>
-                e.stopPropagation(); // Ngăn sự kiện lan truyền
+                if (isMobile) {
+                    e.preventDefault(); // Ngăn hành động mặc định của thẻ <a> chỉ trên di động
+                    e.stopPropagation(); // Ngăn sự kiện lan truyền chỉ trên di động
 
-                // Tắt tất cả các bảng khác
-                sanphamItems.forEach(i => {
-                    const otherTable = document.querySelector(i.tableClass);
-                    if (otherTable && otherTable !== table) {
-                        otherTable.classList.remove('active');
-                    }
-                });
+                    // Tắt tất cả các bảng khác
+                    sanphamItems.forEach(i => {
+                        const otherTable = document.querySelector(i.tableClass);
+                        if (otherTable && otherTable !== table) {
+                            otherTable.classList.remove('active');
+                        }
+                    });
 
-                // Bật hoặc tắt bảng hiện tại
-                table.classList.toggle('active');
+                    // Bật hoặc tắt bảng hiện tại
+                    table.classList.toggle('active');
+                }
+                // Nếu không phải di động, để các liên kết hoạt động bình thường
             });
         }
     });
@@ -113,28 +119,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
     nestedLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault(); // Ngăn hành động mặc định của thẻ <a>
-            e.stopPropagation(); // Ngăn sự kiện lan truyền
+            if (isMobile) {
+                e.preventDefault(); // Ngăn hành động mặc định của thẻ <a> chỉ trên di động
+                e.stopPropagation(); // Ngăn sự kiện lan truyền chỉ trên di động
 
-            const parentLi = e.target.closest('.product-banner-jim-li');
+                const parentLi = e.target.closest('.product-banner-jim-li');
 
-            if (parentLi) {
-                const isActive = parentLi.classList.contains('active');
+                if (parentLi) {
+                    const isActive = parentLi.classList.contains('active');
 
-                // Đóng tất cả các danh sách lồng nhau khác
-                document.querySelectorAll('.product-banner-jim-table-ul .product-banner-jim-li.active').forEach(li => {
-                    if (li !== parentLi) {
-                        li.classList.remove('active');
+                    // Đóng tất cả các danh sách lồng nhau khác
+                    document.querySelectorAll('.product-banner-jim-table-ul .product-banner-jim-li.active').forEach(li => {
+                        if (li !== parentLi) {
+                            li.classList.remove('active');
+                        }
+                    });
+
+                    // Bật hoặc tắt danh sách lồng nhau của mục hiện tại
+                    if (!isActive) {
+                        parentLi.classList.add('active');
+                    } else {
+                        parentLi.classList.remove('active');
                     }
-                });
-
-                // Bật hoặc tắt danh sách lồng nhau của mục hiện tại
-                if (!isActive) {
-                    parentLi.classList.add('active');
-                } else {
-                    parentLi.classList.remove('active');
                 }
             }
+            // Nếu không phải di động, để các liên kết hoạt động bình thường
         });
     });
 });

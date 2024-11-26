@@ -20,6 +20,17 @@ try {
 
     // Tính toán tổng số trang
     $totalPages = ceil($totalProducts / $productsPerPage);
+    // Hàm phát hiện thiết bị di động
+    function isMobile() {
+        return preg_match('/Mobile|Android|BlackBerry|IEMobile|Silk|Kindle|Opera Mini/i', $_SERVER['HTTP_USER_AGENT']);
+    }
+
+    // Đặt số sản phẩm mỗi trang dựa trên thiết bị
+    $productsPerPage = isMobile() ? 10 : 16;
+
+    // Cập nhật các biến liên quan đến pagination
+    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+    $offset = ($page - 1) * $productsPerPage;
 
     // Truy vấn để lấy các sản phẩm, sắp xếp các nhóm ngẫu nhiên
     $productQuery = "
@@ -42,6 +53,7 @@ try {
 } catch (PDOException $e) {
     die("Lỗi truy vấn: " . $e->getMessage());
 }
+
 ?>
 
 

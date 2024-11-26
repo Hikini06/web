@@ -168,6 +168,8 @@ if (!empty($currentProductIDs)) {
     <link rel="stylesheet" href="filter.css">
     <link rel="stylesheet" href="filter-responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -202,7 +204,7 @@ if (!empty($currentProductIDs)) {
     <div class="suggested-products">
         <h2>Sản phẩm gợi ý</h2>
         <div class="suggested-carousel">
-            <button class="carousel-btn carousel-prev">&lt;</button>
+            <button class="carousel-btn carousel-prev"><i class="fa-solid fa-chevron-left"></i></button>
             <div class="carousel-track-container">
                 <ul class="carousel-track">
                 <?php foreach ($suggestedProducts as $index => $product): ?>
@@ -220,7 +222,7 @@ if (!empty($currentProductIDs)) {
                 <?php endforeach; ?>
                 </ul>
             </div>
-            <button class="carousel-btn carousel-next">&gt;</button>
+            <button class="carousel-btn carousel-next"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
     </div>
 
