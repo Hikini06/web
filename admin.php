@@ -123,23 +123,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Truy vấn dữ liệu khách hàng với ORDER BY, LIMIT và OFFSET
+// Truy vấn dữ liệu khách hàng với ORDER BY, LIMIT và OFFSET, bao gồm thông tin sản phẩm
 try {
     if ($customer_isTodayFilter) {
         // Lấy ngày hiện tại
         $today = date('Y-m-d');
 
         // Truy vấn với điều kiện ngày hiện tại
-        $sql = "SELECT id, ten, sdt, diachi, thoigiandathang FROM khachhang 
-                WHERE DATE(thoigiandathang) = :today 
-                ORDER BY thoigiandathang DESC 
+        $sql = "SELECT kh.id, kh.ten, kh.sdt, kh.diachi, kh.thoigiandathang, kh.product_id, it.name AS product_name
+                FROM khachhang kh
+                LEFT JOIN items_detail it ON kh.product_id = it.id
+                WHERE DATE(kh.thoigiandathang) = :today 
+                ORDER BY kh.thoigiandathang DESC 
                 LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':today', $today, PDO::PARAM_STR);
     } else {
         // Truy vấn không điều kiện lọc
-        $sql = "SELECT id, ten, sdt, diachi, thoigiandathang FROM khachhang 
-                ORDER BY thoigiandathang DESC 
+        $sql = "SELECT kh.id, kh.ten, kh.sdt, kh.diachi, kh.thoigiandathang, kh.product_id, it.name AS product_name
+                FROM khachhang kh
+                LEFT JOIN items_detail it ON kh.product_id = it.id
+                ORDER BY kh.thoigiandathang DESC 
                 LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($sql);
     }
@@ -152,6 +156,9 @@ try {
 } catch (PDOException $e) {
     die("Lỗi truy vấn khách hàng: " . $e->getMessage());
 }
+
+
+
 
 // Tính tổng số bản ghi cho khách hàng
 try {
@@ -340,9 +347,11 @@ try {
                         <th>Tên khách hàng</th>
                         <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
+                        <th>Sản phẩm</th> <!-- Thêm cột mới -->
                         <th>Thời gian đặt hàng</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <?php if ($customers && count($customers) > 0): ?>
                         <?php foreach ($customers as $index => $customer): ?>
@@ -351,6 +360,7 @@ try {
                                 <td><?php echo htmlspecialchars($customer['ten']); ?></td>
                                 <td><?php echo htmlspecialchars($customer['sdt']); ?></td>
                                 <td><?php echo htmlspecialchars($customer['diachi']); ?></td>
+                                <td><?php echo htmlspecialchars($customer['product_name'] ?? 'Không xác định'); ?></td> <!-- Hiển thị sản phẩm -->
                                 <td>
                                     <?php 
                                         if (!empty($customer['thoigiandathang'])) {
@@ -365,9 +375,10 @@ try {
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="5">Không có dữ liệu</td>
+                            <td colspan="6">Không có dữ liệu</td> <!-- Thay đổi colspan từ 5 thành 6 -->
                         </tr>
                     <?php endif; ?>
+
                 </tbody>
             </table>
 

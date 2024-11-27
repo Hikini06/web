@@ -2,16 +2,22 @@
 include 'db-connect.php';
 
 // Xử lý dữ liệu từ form Quick Buy
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt']) && isset($_POST['product_id'])) {
     $sdt = trim($_POST['sdt']);
+    $product_id = (int)$_POST['product_id'];
 
+    // Kiểm tra product_id
+    if ($product_id <= 0) {
+        $errorMessage = "Thông tin sản phẩm không hợp lệ!";
+    }
     // Kiểm tra số điện thoại trên máy chủ
-    if (preg_match('/^\d{9,10}$/', $sdt)) {
+    elseif (preg_match('/^\d{9,10}$/', $sdt)) {
         try {
             // Chuẩn bị câu lệnh INSERT
-            $query = "INSERT INTO khachhang (sdt, thoigiandathang) VALUES (:sdt, CURRENT_TIMESTAMP)";
+            $query = "INSERT INTO khachhang (sdt, thoigiandathang, product_id) VALUES (:sdt, CURRENT_TIMESTAMP, :product_id)";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(':sdt', $sdt, PDO::PARAM_STR);
+            $stmt->bindParam(':product_id', $product_id, PDO::PARAM_INT);
 
             // Thực thi câu lệnh
             $stmt->execute();
@@ -25,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt'])) {
         $errorMessage = "Vui lòng nhập đúng số điện thoại.";
     }
 }
+
 
 // CHỨC NĂNG HIỂN THỊ SẢN PHẨM MAIN
 $product_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
@@ -40,7 +47,7 @@ try {
         $productName = htmlspecialchars($product['name']);
         $productPrice = number_format($product['price'], 0, ',', '.') . "đ";
         $productImg = htmlspecialchars($product['img']);
-        $currentItemId = $product['item_id']; // Giả sử bảng items_detail có trường item_id
+        $currentItemId = $product['id']; // Giả sử bảng items_detail có trường item_id
     } else {
         $productName = "Sản phẩm không tồn tại";
         $productPrice = "0đ";
@@ -178,6 +185,9 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                     <h4>MUA HÀNG NHANH</h4>
                     <div class="product-detail-pic-text-quickbuy-input">
                         <form id="quick-buy-form" method="post">
+                            <!-- Thêm trường ẩn để gửi product_id -->
+                            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                            
                             <input
                                 type="text"
                                 name="sdt"
@@ -188,6 +198,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                             />
                             <button type="submit">Gửi</button>
                         </form>
+
                         <?php if (isset($errorMessage)): ?>
                             <div class="error-message"><?php echo htmlspecialchars($errorMessage); ?></div>
                         <?php endif; ?>
@@ -251,19 +262,24 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
         <div class="popup-content">
             <span id="close-popup" class="close-popup">&times;</span>
             <h2>Thông tin đặt hàng</h2>
-            <form id="order-form" method="post">
-                <label for="name">Tên:</label>
-                <input type="text" id="name" name="ten" placeholder="Nhập tên" required>
-                
-                <label for="phone">Số điện thoại:</label>
-                <input type="text" id="phone" name="sdt" placeholder="Nhập số điện thoại" required>
-                <div id="phone-error" class="error-message"></div> <!-- Thông báo lỗi -->
+                <form id="order-form" method="post">
+                    <!-- Thêm trường ẩn để gửi product_id -->
+                    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                    <div id="phone-error" class="error-message"></div>
+                    <label for="name">Tên:</label>
+                    <input type="text" id="name" name="ten" placeholder="Nhập tên" required>
+                    
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="text" id="phone" name="sdt" placeholder="Nhập số điện thoại" required>
+                 
 
-                <label for="address">Địa chỉ:</label>
-                <input type="text" id="address" name="diachi" placeholder="Nhập địa chỉ" required>
-                
-                <button type="submit">Xác nhận</button>
-            </form>
+                    <label for="address">Địa chỉ:</label>
+                    <input type="text" id="address" name="diachi" placeholder="Nhập địa chỉ" required>
+                    
+                    <button type="submit">Xác nhận</button>
+                </form>
+
+
         </div>
     </div>
 
@@ -290,5 +306,6 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
             }, 3000);
         }
     </script>
+
 </body>
 </html>
