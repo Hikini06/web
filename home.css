@@ -56,7 +56,7 @@ body {
 
 .categories-section-cont {
   padding: 4rem 0;
-  
+  display: none;
   margin-top: 6rem;
 }
 .categories-section-cont > .swiper {
@@ -136,7 +136,7 @@ body {
 /* profile-section */
 .profile-section {
   width: 100%;
-  display: none;
+  display: flex;
  
   justify-content: center;
   margin-top: 10rem;
