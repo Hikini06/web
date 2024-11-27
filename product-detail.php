@@ -289,46 +289,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                 popup.classList.remove('show');
             }, 3000);
         }
-    </script><!-- Pop-up Đăng ký -->
-<div class="popup" id="registrationPopup">
-        <div class="popup-content">
-            <span class="close-btn" onclick="closePopup()">&times;</span>
-            <h2>Đăng ký mua hàng</h2>
-            <form id="registrationForm">
-                <input type="text" placeholder="Tên của bạn" required><br><br>
-                <input type="email" placeholder="Email của bạn" required><br><br>
-                <input type="tel" placeholder="Số điện thoại" required><br><br>
-                <button type="submit">Đặt hàng</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        function openPopup() {
-            document.getElementById('registrationPopup').style.display = 'flex';
-        }
-
-        function closePopup() {
-            document.getElementById('registrationPopup').style.display = 'none';
-        }
-
-        // Xử lý sự kiện khi form được gửi
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Ngăn chặn hành động mặc định của form
-
-            // Thực hiện các hành động cần thiết, ví dụ: gửi dữ liệu đến máy chủ
-
-            // Hiển thị thông báo xác nhận
-            alert('Cảm ơn bạn đã đăng ký mua hàng!');
-
-            // Đóng pop-up sau khi gửi
-            closePopup();
-        });
-
-        // Ví dụ: Mở pop-up khi trang được tải
-        window.onload = function() {
-            openPopup();
-        }
     </script>
+
 </body>
 </html>
