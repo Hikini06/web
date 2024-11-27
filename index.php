@@ -45,47 +45,72 @@ $categories = [
     [
         'link' => './categories.php?subcategory_id=1',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Hồng'
+        'name' => 'Bó hoa len Hoa sáp'
     ],
     [
-        'link' => 'category-detail.php?id=2',
+        'link' => './categories.php?subcategory_id=2',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Lily'
+        'name' => 'Bó hoa gấu bông'
     ],
     [
-        'link' => 'category-detail.php?id=3',
+        'link' => './categories.php?subcategory_id=3',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Tulip'
+        'name' => 'Gấu bông lớn'
     ],
     [
-        'link' => 'category-detail.php?id=4',
+        'link' => './categories.php?subcategory_id=4',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Hướng Dương'
+        'name' => 'Móc khoá'
     ],
     [
-        'link' => 'category-detail.php?id=5',
+        'link' => './categories.php?subcategory_id=5',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Lan'
+        'name' => 'Ghim cài áo'
     ],
     [
-        'link' => 'category-detail.php?id=6',
+        'link' => './categories.php?subcategory_id=6',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Cúc'
+        'name' => 'Set gấu hoa'
     ],
     [
-        'link' => 'category-detail.php?id=7',
+        'link' => './categories.php?subcategory_id=7',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Mẫu Đơn'
+        'name' => 'Nến thơm'
     ],
     [
-        'link' => 'category-detail.php?id=8',
+        'link' => './categories.php?subcategory_id=8',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Sen'
+        'name' => 'Balo Túi xách'
     ],
     [
-        'link' => 'category-detail.php?id=9',
+        'link' => './categories.php?subcategory_id=9',
         'img'  => './image/1.jpg',
-        'name' => 'Hoa Thủy Tiên'
+        'name' => 'Tất'
+    ],
+    [
+        'link' => './categories.php?subcategory_id=10',
+        'img'  => './image/1.jpg',
+        'name' => 'Đồ theo trend'
+    ],
+    [
+        'link' => './categories.php?subcategory_id=11',
+        'img'  => './image/1.jpg',
+        'name' => 'Đèn hình tròn'
+    ],
+    [
+        'link' => './categories.php?subcategory_id=12',
+        'img'  => './image/1.jpg',
+        'name' => 'Đèn hình vuông'
+    ],
+    [
+        'link' => './categories.php?subcategory_id=13',
+        'img'  => './image/1.jpg',
+        'name' => 'Đèn đám mây'
+    ],
+    [
+        'link' => './categories.php?subcategory_id=14',
+        'img'  => './image/1.jpg',
+        'name' => 'Đèn hình thú'
     ],
 ];
 

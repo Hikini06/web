@@ -1,7 +1,7 @@
 // home.js
 document.addEventListener("DOMContentLoaded", function () {
     // Hàm khởi tạo Swiper với cấu hình responsive
-    function initializeSwiper(containerSelector, slidesPerViewDesktop) {
+    function initializeSwiper(containerSelector, slidesPerViewDesktop, isFreeMode = false) {
         const swiperInstance = new Swiper(containerSelector, {
             slidesPerView: slidesPerViewDesktop, // Số lượng slides hiển thị trên desktop
             spaceBetween: 20, // Khoảng cách giữa các slides (px)
@@ -29,6 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     spaceBetween: 20,
                 },
             },
+            // Kích hoạt freeMode nếu isFreeMode là true
+            freeMode: isFreeMode,
+            freeModeMomentum: isFreeMode,
+            speed: isFreeMode ? 600 : 400, // Điều chỉnh tốc độ cho freeMode
+            freeModeMomentumRatio: isFreeMode ? 0.5 : undefined, // Tỷ lệ động lượng
+            freeModeMomentumVelocityRatio: isFreeMode ? 0.5 : undefined, // Tỷ lệ vận tốc động lượng
+            freeModeMomentumBounce: isFreeMode ? true : undefined, // Phản hồi khi đạt giới hạn
         });
         return swiperInstance;
     }
@@ -58,6 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
         },
     });
 
-    // Khởi tạo Swiper cho Categories Section với 6 slides trên desktop
-    const categoriesSwiper = initializeSwiper(".categories-section", 6);
+    // Khởi tạo Swiper cho Categories Section với 6 slides trên desktop và freeMode bật
+    const categoriesSwiper = initializeSwiper(".categories-section", 6, true);
 });
