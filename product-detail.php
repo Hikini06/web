@@ -246,6 +246,26 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
     <div id="popup-message" class="popup-message">
         <span id="popup-text"></span>
     </div>
+    <!-- Popup Form -->
+    <div id="order-popup" class="popup">
+        <div class="popup-content">
+            <span id="close-popup" class="close-popup">&times;</span>
+            <h2>Thông tin đặt hàng</h2>
+            <form id="order-form" method="post">
+                <label for="name">Tên:</label>
+                <input type="text" id="name" name="ten" placeholder="Nhập tên" required>
+                
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" id="phone" name="sdt" placeholder="Nhập số điện thoại" required>
+                <div id="phone-error" class="error-message"></div> <!-- Thông báo lỗi -->
+
+                <label for="address">Địa chỉ:</label>
+                <input type="text" id="address" name="diachi" placeholder="Nhập địa chỉ" required>
+                
+                <button type="submit">Xác nhận</button>
+            </form>
+        </div>
+    </div>
 
     <script src="product_detail.js"></script>
     
