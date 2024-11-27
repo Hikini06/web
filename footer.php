@@ -8,11 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="footer.css" />
-<<<<<<< HEAD
-    
-=======
     <link rel="stylesheet" href="footer-responsive.css" />
->>>>>>> 745657af4fe190718439ee45d4a634481362f537
 </head>
 <body>
     <!-- FOOTER START -->
@@ -113,7 +109,6 @@
       <h5 class="footer-h">Tiệm hoa MiMi - Since 2020</h5>
     </footer>
     <!-- FOOTER END -->
-
 
     <script src="footer.js" defer></script>
 </body>
