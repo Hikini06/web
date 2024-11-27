@@ -40,6 +40,55 @@ try {
 } catch (PDOException $e) {
     die("Lỗi khi lấy sản phẩm cho slider2: " . $e->getMessage());
 }
+
+$categories = [
+    [
+        'link' => './categories.php?subcategory_id=1',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Hồng'
+    ],
+    [
+        'link' => 'category-detail.php?id=2',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Lily'
+    ],
+    [
+        'link' => 'category-detail.php?id=3',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Tulip'
+    ],
+    [
+        'link' => 'category-detail.php?id=4',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Hướng Dương'
+    ],
+    [
+        'link' => 'category-detail.php?id=5',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Lan'
+    ],
+    [
+        'link' => 'category-detail.php?id=6',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Cúc'
+    ],
+    [
+        'link' => 'category-detail.php?id=7',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Mẫu Đơn'
+    ],
+    [
+        'link' => 'category-detail.php?id=8',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Sen'
+    ],
+    [
+        'link' => 'category-detail.php?id=9',
+        'img'  => './image/1.jpg',
+        'name' => 'Hoa Thủy Tiên'
+    ],
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -58,7 +107,25 @@ try {
     <!-- HEADER ĐI THEO MỌI TRANG -->
     <?php include 'header.php'; ?>
     <!-- HEADER ĐI THEO MỌI TRANG END -->
-
+    <!-- PHẦN DANH MỤC SẢN PHẨM -->
+    <section class="categories-section-cont">
+        <div class="categories-section swiper">
+            <div class="swiper-wrapper">
+                <?php foreach ($categories as $category): ?>
+                    <a href="<?php echo htmlspecialchars($category['link']); ?>" class="swiper-slide category-item">
+                        <div class="category-content">
+                            <img src="<?php echo htmlspecialchars($category['img']); ?>" alt="<?php echo htmlspecialchars($category['name']); ?>" />
+                            <p><?php echo htmlspecialchars($category['name']); ?></p>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+            <!-- Nút điều hướng -->
+            <div class="swiper-button-next categories-swiper-button-next"></div>
+            <div class="swiper-button-prev categories-swiper-button-prev"></div>
+        </div>
+    </section>
+    <!-- PHẦN DANH MỤC SẢN PHẨM END -->
     <!-- PHẦN KHU VỰC PROFILE -->
     <section class="profile-section">
             <div class="profile-section-cont">

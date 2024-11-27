@@ -51,10 +51,92 @@ body {
   padding-bottom: 2rem;
 }
 
+
+/* Categories Section Styles */
+
+.categories-section-cont {
+  padding: 4rem 0;
+  
+  margin-top: 6rem;
+}
+.categories-section-cont > .swiper {
+  width: 60%;
+  height: 13rem;
+}
+.category-item {
+  text-decoration: none;
+  color: var(--text-color-dark);
+}
+.categories-section-cont .swiper-wrapper a {
+  box-shadow: none;
+}
+.categories-section-cont .swiper-wrapper a:hover {
+  box-shadow: none;
+}
+.category-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 0px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.0);
+  height: 100%; 
+  box-sizing: border-box;
+}
+
+.categories-section-cont .category-content > img {
+  padding: 0px;
+  margin: 1rem;
+  width: 85%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categories-section-cont .category-content p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0; /* Loại bỏ margin mặc định */
+}
+
+.category-content:hover {
+  transform: translateY(-5px);
+  
+}
+
+.category-content:hover img {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Swiper Navigation Buttons Customization */
+.categories-swiper-button-next,
+.categories-swiper-button-prev {
+  color: var(--text-color-dark);
+}
+
+.categories-swiper-button-next:hover,
+.categories-swiper-button-prev:hover {
+  color: var(--text-color);
+}
+
+
+
+
+
+
 /* profile-section */
 .profile-section {
   width: 100%;
-  display: flex;
+  display: none;
  
   justify-content: center;
   margin-top: 10rem;

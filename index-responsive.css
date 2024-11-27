@@ -18,7 +18,29 @@
         line-height: 1.6;
         color: var(--text-color-dark);
       }
+
+
+      .category-content img {
+        width: 80px;
+        height: 80px;
+        }
+        .categories-section-cont {
+            padding: 1rem 0px;
+            margin-top: 9rem;
+
+        }
+        .categories-section-cont .category-content p {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 3rem;
+            font-size: 14px;
+        }
     
+        .categories-section-cont .categories-section{
+            width: 90%;
+        }
     /* Responsive styles cho profile-section trên điện thoại di động */
     .profile-section {
         width: 100%;

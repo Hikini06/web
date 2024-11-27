@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const swiperInstance = new Swiper(containerSelector, {
             slidesPerView: slidesPerViewDesktop, // Số lượng slides hiển thị trên desktop
             spaceBetween: 20, // Khoảng cách giữa các slides (px)
-            loop: false, // Tắt loop khi có kích thước cố định slide trên mobile
+            loop: false, // Không lặp lại
             autoplay: {
                 delay: 5000,
                 disableOnInteraction: false,
@@ -21,11 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
             breakpoints: {
                 // Cấu hình responsive cho từng breakpoint
                 0: {
-                    slidesPerView: 2, // Hai slide trên mobile
+                    slidesPerView: 3, // Ba slide trên mobile
                     spaceBetween: 10,
                 },
-                769: {
-                    slidesPerView: slidesPerViewDesktop, // 4 slide trên desktop
+                768: {
+                    slidesPerView: slidesPerViewDesktop, // Sáu slide trên desktop
                     spaceBetween: 20,
                 },
             },
@@ -57,4 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             clickable: true,
         },
     });
+
+    // Khởi tạo Swiper cho Categories Section với 6 slides trên desktop
+    const categoriesSwiper = initializeSwiper(".categories-section", 6);
 });
