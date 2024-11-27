@@ -204,16 +204,18 @@
 
     /* Định dạng cho danh sách lồng nhau */
     .nested-ul {
-        max-height: 0;
+        max-height: 200px;
         pointer-events: none;
         opacity: 0;
-        overflow: hidden;
+        /* overflow: hidden; */
         transition: max-height 0.3s ease, opacity 0.3s ease;
         display: none; 
         list-style-type: none;
         padding-left: 1rem; 
         padding-top: 0px;
         padding-bottom: 0px;
+        overflow-y: auto;
+        scrollbar-width: thin;
      
     }
     .product-banner-jim-ultwo > li {
@@ -262,6 +264,9 @@
         transform: rotate(180deg); /* Xoay mũi tên lên */
     }
     .product-banner-jim-table-ul {
+        scrollbar-width: thin;
+        overflow-y: auto; 
+        max-height: 70vh;
         flex-direction: column;
         list-style-type: none;
         text-decoration: none;
