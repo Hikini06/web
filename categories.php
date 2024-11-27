@@ -128,14 +128,43 @@ $total_pages = ceil($total_products / $items_per_page);
     <!-- Pagination -->
     <div class="pagination">
         <?php if ($total_pages > 1): ?>
-            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=<?= $i ?>"
-                class="<?= $i == $page ? 'active' : '' ?>">
-                    <?= $i ?>
+            <!-- Trang đầu -->
+            <?php if ($page > 2): ?>
+                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=1">
+                    1
                 </a>
-            <?php endfor; ?>
+            <?php endif; ?>
+
+            <!-- Trang trước -->
+            <?php if ($page > 1): ?>
+                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=<?= $page - 1 ?>">
+                    <?= $page - 1 ?>
+                </a>
+            <?php endif; ?>
+
+            <!-- Trang hiện tại -->
+            <a class="active"><?= $page ?></a>
+
+            <!-- Trang sau -->
+            <?php if ($page < $total_pages): ?>
+                <?php if ($page + 1 < $total_pages): ?>
+                    <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=<?= $page + 1 ?>">
+                        <?= $page + 1 ?>
+                    </a>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <!-- Trang cuối -->
+            <?php if ($page < $total_pages): ?>
+                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=<?= $total_pages ?>">
+                    <?= $total_pages ?>
+                </a>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
+
+
+
     <!-- FOOTER -->
     <?php include 'footer.php'; ?>
 

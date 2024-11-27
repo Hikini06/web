@@ -315,7 +315,16 @@
         height: 30px;
         margin-top: -15px;
     }
-
+    .categories-section-cont .swiper-button-next,
+    .categories-section-cont .swiper-button-prev {
+        top: 35%;
+    }
+    .categories-section-cont .swiper-button-next {
+        right: -1%;
+    }
+    .categories-section-cont .swiper-button-prev {
+        left: -1%;
+    }
     /* Điều chỉnh phân trang nếu cần */
     .swiper-pagination {
         bottom: 10px;
