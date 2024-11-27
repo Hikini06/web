@@ -360,3 +360,28 @@ background-color: var(--background-color);
     80% { opacity: 1; }
     100% { opacity: 0; }
 }
+        /* Thêm một số kiểu dáng cơ bản cho pop-up */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            text-align: center;
+        }
+        .close-btn {
+            cursor: pointer;
+            color: red;
+            float: right;
+            font-size: 20px;
+        }
