@@ -1,3 +1,5 @@
+// footer.js
+
 // GUIDE SECTION SLIDER JS START HERE
 const guideSectionImageSlider = document.querySelector('.guideSection-image-slider');
 const guideSectionImageSliderContainer = document.querySelector('.guideSection-image-slider-container');
@@ -5,10 +7,20 @@ const guideSectionPrevButton = document.querySelector('.guideSection-slider-prev
 const guideSectionNextButton = document.querySelector('.guideSection-slider-next-btn');
 
 let guideSectionCurrentIndex = 0;
-const guideSectionVisibleImages = 3; // Hiển thị 3 ảnh
+let guideSectionVisibleImages = getVisibleImages(); // Động xác định số lượng hình ảnh hiển thị
 let guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages; // Tính chiều rộng mỗi ảnh
 const guideSectionTotalImages = document.querySelectorAll('.guideSection-image-slider .guideSection-image-card').length;
 let guideSectionAutoSlideInterval; // Biến lưu interval cho auto slide
+
+// Hàm xác định số lượng hình ảnh hiển thị dựa trên kích thước màn hình
+function getVisibleImages() {
+    return window.innerWidth <= 768 ? 1 : 3; // 1 trên mobile, 3 trên desktop
+}
+
+// Hàm cập nhật chiều rộng mỗi slide
+function updateSlideWidth() {
+    guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages;
+}
 
 // Hàm cập nhật vị trí slider
 function guideSectionUpdateSlider() {
@@ -60,16 +72,30 @@ guideSectionNextButton.addEventListener('click', () => {
     guideSectionRestartAutoSlide(); // Khởi động lại timer sau khi nhấn
 });
 
-// Tự động điều chỉnh chiều rộng ảnh khi thay đổi kích thước màn hình
-window.addEventListener('resize', () => {
-    guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages;
+// Hàm điều chỉnh slider khi thay đổi kích thước màn hình
+function guideSectionResizeHandler() {
+    // Xác định lại số lượng hình ảnh hiển thị
+    const newVisibleImages = getVisibleImages();
+    if (newVisibleImages !== guideSectionVisibleImages) {
+        guideSectionVisibleImages = newVisibleImages;
+        guideSectionCurrentIndex = 0; // Reset về slide đầu tiên
+        updateSlideWidth();
+        guideSectionUpdateSlider();
+        guideSectionUpdateButtons();
+    }
+}
+
+// Hàm khởi động slider
+function guideSectionInitialize() {
+    updateSlideWidth();
     guideSectionUpdateSlider();
-});
+    guideSectionUpdateButtons();
+    guideSectionAutoSlideInterval = setInterval(guideSectionAutoSlide, 3000); // Tự động slide mỗi 3 giây
+}
 
-// Kích hoạt tự động slide mỗi 10 giây
-guideSectionAutoSlideInterval = setInterval(guideSectionAutoSlide, 3000);
+// Kích hoạt khi DOM đã tải
+guideSectionInitialize();
 
-// Khởi tạo slider
-guideSectionUpdateButtons();
-
+// Lắng nghe sự kiện thay đổi kích thước màn hình
+window.addEventListener('resize', guideSectionResizeHandler);
 // GUIDE SECTION SLIDER JS END HERE

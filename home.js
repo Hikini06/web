@@ -1,5 +1,3 @@
-console.log("JavaScript file loaded");
-// khung search
 document.addEventListener("DOMContentLoaded", function () {
   const searchToggle = document.getElementById("searchToggle");
   const searchContainer = document.getElementById("searchContainer");
@@ -263,6 +261,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 745657af4fe190718439ee45d4a634481362f537
 // GUIDE SECTION SLIDER JS START HERE
 const guideSectionImageSlider = document.querySelector('.guideSection-image-slider');
 const guideSectionImageSliderContainer = document.querySelector('.guideSection-image-slider-container');
@@ -339,6 +341,7 @@ guideSectionUpdateButtons();
 
 // GUIDE SECTION SLIDER JS END HERE
 
+<<<<<<< HEAD
 const pagination = document.getElementById("pagination");
 const itemsPerPage = 5;
 const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -362,3 +365,5 @@ products.forEach((product) => {
     </div>
   `;
 });
+=======
+>>>>>>> 745657af4fe190718439ee45d4a634481362f537

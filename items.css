@@ -234,8 +234,80 @@ body {
   font-size: 1.2rem;
   color: var(--text-color-dark);
 }
+.no-succgestion {
+  margin-top: 4rem;
+  text-align: center;
+}
 
+@media (max-width: 768px) {
+  .item-info { 
+    margin-top: 9rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
 
+  
+  /* Điều chỉnh hiển thị sản phẩm chính */
+  .items {
+
+      grid-template-columns: repeat(2, 1fr); /* Hiển thị 2 sản phẩm trên một hàng */
+      width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+      gap: 0.5rem; /* Giảm khoảng cách giữa các sản phẩm */
+  }
+
+  /* Điều chỉnh phần Suggested Items */
+  .suggested-items {
+      width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+  }
+
+  .suggested-row {
+      display: flex;
+      flex-wrap: wrap; /* Cho phép các sản phẩm xuống hàng khi cần */
+      justify-content: center;
+      gap: 0.5rem; /* Giảm khoảng cách giữa các sản phẩm */
+  }
+
+  .suggested-product {
+      width: calc(50% - 0.5rem); /* Hiển thị 2 sản phẩm trên một hàng */
+  }
+
+  /* Điều chỉnh kích thước hình ảnh nếu cần */
+  .product img,
+  .suggested-product img {
+      aspect-ratio: 1 / 1; /* Giữ tỷ lệ hình vuông */
+      object-fit: cover;
+  }
+
+  /* Điều chỉnh phông chữ nếu cần để phù hợp với màn hình nhỏ hơn */
+  .item-info h1 {
+      font-size: 1.5rem;
+  }
+
+  .item-info p {
+      font-size: 1rem;
+  }
+
+  .pagination a {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+  }
+
+  /* Hiển thị danh sách filter trên di động */
+  .items-filter-cont {
+      display: none;
+      /* display: flex; */
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      margin-top: 2rem;
+  }
+
+  .items-filter ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px; /* Thêm khoảng cách giữa các mục filter */
+  }
+}
 
 
 

@@ -1,0 +1,313 @@
+@media (max-width: 768px) {
+    :root {
+        --main-color: rgb(255, 211, 219);
+        --text-color: rgb(194, 47, 80);
+        --text-color-dark: rgb(0, 32, 77);
+        --hover-color: rgb(53, 16, 25);
+        --background-color: rgb(255, 248, 249);
+    }
+
+    body {
+        font-family: "Nunito", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400; 
+        font-style: normal;
+        line-height: 1.6;
+        color: var(--text-color-dark);
+    }
+
+    /* Ẩn menu product-banner-jim-child mặc định */
+    .hero-banner-cont {
+        width: 100%;
+    }
+    .product-banner-jim .product-banner-jim-child {
+        margin-top: 7rem;
+        font-weight: 700;
+        pointer-events: none;
+        /* display: none; */
+        opacity: 0;
+        position:fixed ;
+        left: 0;
+        top: 4rem;
+        width: 50%; 
+        flex-direction: column; 
+        background-color: var(--background-color);
+        top: 0%;
+        height: auto;
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        transform: translateY(-20px);
+        /* visibility: hidden; */
+    }
+  
+    /* Hiển thị menu khi có lớp active */
+    .product-banner-jim-child.active {
+        pointer-events: auto; 
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        display: flex;
+        justify-content: flex-start;
+        top: 0%;
+        width: 50%;
+        margin-top: 7rem;
+        height: auto;
+    }
+
+    .header-cont {
+        position: relative;
+        width: 100%;
+        margin: 1rem;
+    }
+    .logo-container {
+        padding-left: 1.5rem;
+    }
+    .logo-container a {
+        font-size: 0.1rem;
+    }
+
+    .logo-container .logo {
+        display: none;
+    }
+
+    .logo-container .logo-mobi {
+        display: block;
+        font-size: 2rem;
+        font-family: 'Pacifico', cursive;
+        color: var(--main-color);
+        text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.6);
+        letter-spacing: 2px;
+        text-align: center;
+        display: inline-block;
+        padding: 10px;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    .search-bar-cont {
+        left: -3%;
+        width: 100%;
+        top: 85%;
+        position: absolute;
+        display: flex;
+    }
+    .search-form {
+        width: 100%;
+    }
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .hamburger {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 24px;
+        width: 30px;
+        padding: 0;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .hamburger-line {
+        width: 100%;
+        height: 3px;
+        background-color: var(--text-color-dark);
+        transition: all 0.3s ease;
+    }
+
+    /* Thay đổi hamburger khi active */
+    .hamburger.active {
+        transform: rotate(90deg);
+    }
+    .hamburger.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(10px, -10px);
+    }
+
+    /* Điều chỉnh các bảng sản phẩm khi hiển thị */
+    .product-banner-jim {
+        height: calc(100% - 4rem);
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 0rem;
+        width: 100%;
+        height: auto;
+        position: fixed;
+        left: 0;
+        top: 4rem; 
+        z-index: 998;
+     
+    }
+    .profile-card {
+        border: 0px solid #e0e0e0;
+
+    }
+    .profile-card img {
+        box-shadow:  1px 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .product-banner-jim-sanpham {
+
+        width: 100%;
+        display: flex;
+        padding: 1rem;
+        background-color: var(--background-color);
+        justify-content: flex-start;
+    }
+    .product-banner-jim .product-banner-jim-a {
+        line-height: 100%;
+        width: 100%;
+        justify-content: space-between;
+        color: var(--text-color-dark);
+        font-size: 1rem;
+        text-align: center;
+        display: flex;
+
+    }
+    .product-banner-jim-sanpham .fa-chevron-right {
+        height: 100%;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+    .product-banner-jim-sanpham .fa-chevron-down {
+        display: none;
+    }
+    .product-banner-jim-table,
+    .product-banner-jim-table-two,
+    .product-banner-jim-table-three,
+    .product-banner-jim-table-four,
+    .product-banner-jim-table-five {
+        pointer-events: none;
+        opacity: 0;
+        transform: translateX(-100%);
+        visibility: hidden;
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        margin-top: 3rem;
+        /* display: none; */
+        position: fixed;
+        left: 50%; /* Bên cạnh product-banner-jim-child */
+        top: 4rem;
+        width: 50%; /* Chiếm 50% chiều rộng màn hình */
+        height: auto;
+        background-color: white;
+        z-index: 999;
+        overflow-y: auto;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    }
+    /* Hiển thị bảng khi có lớp active */
+    .product-banner-jim-table.active,
+    .product-banner-jim-table-two.active,
+    .product-banner-jim-table-three.active,
+    .product-banner-jim-table-four.active,
+    .product-banner-jim-table-five.active {
+        pointer-events: auto;
+        display: block;
+        opacity: 1;
+        transform: translateX(0);
+        visibility: visible;
+        margin-top: 3rem;
+    }
+
+    /* Định dạng cho danh sách lồng nhau */
+    .nested-ul {
+        max-height: 0px;
+        pointer-events: none;
+        opacity: 0;
+        /* overflow: hidden; */
+        transform: translateY(-20%);
+        visibility: hidden;
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        /* display: none;  */
+        list-style-type: none;
+        padding-left: 1rem; 
+        padding-top: 0px;
+        padding-bottom: 0px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        z-index: 1000;
+     
+    }
+    .product-banner-jim-li.active > .nested-ul {
+        display: block;
+        max-height: 500px;
+        opacity: 1;
+        transform: translateX(0);
+        visibility: visible;
+        pointer-events: auto;
+
+    }
+    .product-banner-jim-ultwo > li {
+        padding-bottom: 0px;
+        padding-top: 0px;
+        padding-left: 1rem ;
+
+    }
+    
+    
+    .product-banner-jim-li {
+        padding-top: 0px;
+    }
+    /* Định dạng các liên kết trong danh sách lồng nhau */
+    .nested-ul li a {
+        font-size: 0.9rem;
+        color: var(--text-color-dark);
+        text-decoration: none;
+        display: block;
+        padding: 0.5rem 0;
+    }
+
+    .nested-ul li a:hover {
+        color: var(--text-color);
+    }
+    .product-banner-jim-li .fa-chevron-down {
+        display: flex;
+        font-size: 0.7rem;
+        font-weight: 900;
+        transform: rotate(0deg); 
+    }
+    /* Thêm chỉ thị để người dùng biết có thể nhấn vào mục cha */
+    /* .product-banner-jim-li > a::after {
+        content: '\25BC'; 
+        float: right;
+        transition: transform 0.3s ease;
+    } */
+    .product-banner-jim-li a {
+        line-height: 100%;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        display: flex;
+        padding: 1rem;
+    }
+
+    /* Thay đổi mũi tên khi mục cha có lớp active */
+    .product-banner-jim-li.active .fa-chevron-down {
+        
+        transform: rotate(180deg); 
+        transition: transform 0.3s ease-in-out;
+    }
+    .product-banner-jim-table-ul {
+        scrollbar-width: thin;
+        overflow-y: auto; 
+        max-height: 70vh;
+        flex-direction: column;
+        list-style-type: none;
+        text-decoration: none;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+}

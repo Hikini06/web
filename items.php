@@ -177,7 +177,7 @@ if (!empty($item_id)) {
             </div>
         </div>
     <?php else: ?>
-        <p>Không có sản phẩm gợi ý nào.</p>
+        <p class="no-succgestion">Không có sản phẩm gợi ý nào.</p>
     <?php endif; ?>
 
 

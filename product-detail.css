@@ -354,12 +354,49 @@ background-color: var(--background-color);
     display: block;
     animation: fadeOut 3s forwards; 
 }
+/* POP UP MUA HÀNG */
+.popup {
+    display: none; /* Ẩn popup mặc định */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Hiệu ứng nền mờ */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
 
 @keyframes fadeOut {
     0% { opacity: 1; }
     80% { opacity: 1; }
     100% { opacity: 0; }
 }
+<<<<<<< HEAD
         /* Thêm một số kiểu dáng cơ bản cho pop-up */
         .popup {
             display: none;
@@ -385,3 +422,178 @@ background-color: var(--background-color);
             float: right;
             font-size: 20px;
         }
+=======
+@media (max-width: 768px) {
+    /* Điều chỉnh container chính */
+    .product-detail-pic-cont {
+        flex-direction: column;
+        margin-top: 6rem; /* Giảm khoảng cách trên */
+        padding: 1rem; /* Thêm padding để tạo không gian cho nội dung */
+    }
+
+    /* Điều chỉnh layout của phần sản phẩm */
+    .product-detail-pic {
+        flex-direction: column;
+        gap: 1rem; /* Giảm khoảng cách giữa các phần tử */
+        width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+        height: auto; /* Để chiều cao tự động điều chỉnh theo nội dung */
+        padding-top: 2rem; /* Giảm padding trên */
+    }
+
+    /* Điều chỉnh phần ảnh sản phẩm */
+    .product-detail-pic-img {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+
+    .product-detail-pic-img-mainimg {
+        width: 100%;
+        aspect-ratio: 1 / 1; /* Giữ tỷ lệ hình vuông */
+    }
+
+    .product-detail-pic-img-moreimg {
+        display: none; /* Ẩn phần ảnh phụ nếu không cần thiết trên di động */
+    }
+
+    /* Điều chỉnh phần thông tin sản phẩm */
+    .product-detail-pic-text {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        align-items: center; /* Căn giữa nội dung */
+        text-align: center; /* Căn giữa văn bản */
+    }
+
+    .product-detail-pic-text-nameandprice {
+        padding-left: 0; /* Loại bỏ padding trái */
+        padding-right: 0; /* Loại bỏ padding phải */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        padding-bottom: 1rem;
+    }
+    
+    .product-detail-pic-text-buynow {
+        width: 80%; /* Điều chỉnh chiều rộng nút */
+        height: auto; /* Điều chỉnh chiều cao tự động */
+        padding: 0.5rem 0; /* Thêm padding trên và dưới */
+        font-size: 1rem; /* Điều chỉnh kích thước phông chữ */
+    }
+
+    .product-detail-pic-text-quickbuy {
+        width: 90%; /* Điều chỉnh chiều rộng */
+        height: auto; /* Điều chỉnh chiều cao tự động */
+        padding: 1rem; /* Thêm padding */
+    }
+
+    .product-detail-pic-text-quickbuy-input {
+        flex-direction: column; /* Chuyển thành cột */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+
+    .product-detail-pic-text-quickbuy-input form {
+        flex-direction: column; /* Chuyển thành cột */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+
+    .product-detail-pic-text-quickbuy-input input {
+        height: 2rem;
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        margin-bottom: 0.5rem; /* Thêm khoảng cách dưới input */
+    }
+
+    .product-detail-pic-text-quickbuy-input button {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        height: 2rem;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .product-detail-pic-text-dis {
+        width: 90%; /* Điều chỉnh chiều rộng */
+        text-align: center; /* Căn giữa văn bản */
+    }
+    .product-detail-pic-text-dis p {
+        text-align: left;
+    }
+    /* Điều chỉnh các phần sản phẩm tương tự và gợi ý */
+    .product-detail-common,
+    .product-detail-suggest {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+
+    .product-detail-common-items,
+    .product-detail-suggest-items {
+        width: 90%; /* Chiếm toàn bộ chiều rộng */
+        margin-bottom: 1rem; /* Thêm khoảng cách dưới mỗi sản phẩm */
+    }
+
+    /* Điều chỉnh hình ảnh sản phẩm tương tự và gợi ý */
+    .product-detail-common-items img,
+    .product-detail-suggest-items img {
+        width: 100%;
+        height: auto; /* Để chiều cao tự động điều chỉnh */
+    }
+
+    /* Điều chỉnh tiêu đề và giá sản phẩm tương tự và gợi ý */
+    .product-detail-common-items h3,
+    .product-detail-suggest-items h3 {
+        font-size: 1.2rem; /* Điều chỉnh kích thước phông chữ */
+    }
+
+    .product-detail-common-items h4,
+    .product-detail-suggest-items h4 {
+        font-size: 1rem; /* Điều chỉnh kích thước phông chữ */
+    }
+
+    /* Điều chỉnh popup thông báo */
+    .popup-message {
+        font-size: 1.2rem; /* Điều chỉnh kích thước phông chữ */
+        padding: 0.8rem 1.5rem; /* Điều chỉnh padding */
+    }
+    .product-detail-common {
+        display: flex;
+        flex-direction: row;
+        width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+        flex-wrap: wrap; /* Cho phép các sản phẩm xuống hàng */
+        justify-content: space-between; /* Căn đều các sản phẩm trong hàng */
+        gap: 1rem; /* Thêm khoảng cách giữa các hàng */
+        margin: 0 auto; /* Căn giữa container */
+    }
+
+    .product-detail-common-items {
+        width: calc(50% - 0.5rem); /* Hiển thị 2 sản phẩm trên một hàng */
+        margin-bottom: 1rem; /* Thêm khoảng cách dưới mỗi hàng */
+    }
+    .product-detail-suggest {
+        display: flex; /* Đảm bảo container sử dụng Flexbox */
+        flex-direction: row; /* Căn các sản phẩm theo hàng ngang */
+        flex-wrap: wrap; /* Cho phép các sản phẩm xuống hàng khi không đủ không gian */
+        justify-content: space-between; /* Căn đều các sản phẩm trong hàng */
+        width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+        margin: 0 auto; /* Căn giữa container */
+        gap: 1rem; /* Khoảng cách giữa các sản phẩm */
+    }
+
+    .product-detail-suggest-items {
+        width: calc(50% - 0.5rem); /* Hiển thị 2 sản phẩm trên một hàng */
+        margin-bottom: 1rem; /* Thêm khoảng cách dưới mỗi hàng */
+    }
+
+    /* Điều chỉnh phần sản phẩm tương tự nếu cần */
+    .product-detail-common {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .product-detail-common-items {
+        width: calc(50% - 0.5rem);
+        margin-bottom: 1rem;
+    }
+    .product-detail-suggest-cont-title {
+        text-align: center;
+    }
+}
+>>>>>>> 745657af4fe190718439ee45d4a634481362f537

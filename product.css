@@ -103,7 +103,11 @@ body {
     align-items: center;
     justify-content: center;
 }
-
+.pagination-btn i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .pagination-btn:hover {
     background-color: var(--main-color);
     cursor: pointer;
@@ -136,4 +140,47 @@ body {
     text-align: center;
     font-size: 2rem;
     font-weight: 900;
+}
+
+/* Thêm vào cuối tệp product.css */
+
+/* Media Query cho thiết bị di động */
+@media (max-width: 768px) {
+    /* Điều chỉnh grid để hiển thị 2 sản phẩm trên một hàng */
+    .products-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cột thay vì 4 */
+        width: 90%; /* Điều chỉnh chiều rộng phù hợp với màn hình di động */
+        gap: 1rem; /* Giảm khoảng cách giữa các sản phẩm nếu cần */
+    }
+
+    /* Điều chỉnh kích thước sản phẩm nếu cần */
+    .product {
+        width: 100%; /* Đảm bảo sản phẩm chiếm toàn bộ chiều rộng của grid column */
+    }
+
+    /* Điều chỉnh phần tiêu đề nếu cần */
+    .product-title {
+        padding-top: 8rem; /* Giảm padding trên để phù hợp với màn hình nhỏ */
+    }
+
+    /* Điều chỉnh phân trang */
+    .pagination {
+        width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+        padding-bottom: 2rem; /* Giảm padding dưới */
+    }
+
+    .pagination-btn {
+        width: 2rem; /* Điều chỉnh kích thước nút phân trang */
+        height: 2rem;
+        font-size: 0.8rem; /* Giảm kích thước phông chữ */
+    }
+
+    .pagination-btn:first-child,
+    .pagination-btn:last-child {
+        width: 2.5rem; /* Giữ nguyên hoặc điều chỉnh tùy ý */
+    }
+
+    .pagination-dots {
+        display: none; /* Ẩn dấu chấm nếu cần để giảm clutter */
+    }
 }
