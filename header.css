@@ -661,6 +661,9 @@ header + .product-banner-jim {
 .product-banner-jim-sanpham i {
   font-size: 0.7rem;
 }
+.product-banner-jim-sanpham .fa-chevron-right {
+  display: none;
+}
 .product-banner-jim-sanpham-one {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;

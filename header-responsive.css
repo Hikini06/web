@@ -165,7 +165,25 @@
         background-color: var(--background-color);
         justify-content: flex-start;
     }
+    .product-banner-jim .product-banner-jim-a {
+        line-height: 100%;
+        width: 100%;
+        justify-content: space-between;
+        color: var(--text-color-dark);
+        font-size: 1rem;
+        text-align: center;
+        display: flex;
 
+    }
+    .product-banner-jim-sanpham .fa-chevron-right {
+        height: 100%;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+    .product-banner-jim-sanpham .fa-chevron-down {
+        display: none;
+    }
     .product-banner-jim-table,
     .product-banner-jim-table-two,
     .product-banner-jim-table-three,
