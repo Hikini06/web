@@ -73,6 +73,10 @@
           <p>
             Ngõ 2 Tân Mỹ, Mỹ Đình, Nam Từ Liêm, Hà Nội
           </p>
+          <p class="footer-adress-sdt">
+              <span class="contact-label">Liên hệ:</span>
+              <strong>0354.235.669</strong>
+          </p>
         </div>
         <div class="footer-contact">
           <h3>
@@ -80,11 +84,11 @@
           </h3>
           <div class="footer-icon">
             <a href="https://www.facebook.com/people/Ti%E1%BB%87m-hoa-MiMi/61560867710445/" target="_blank"><div><img src="image/icon/icon-facebook.png" alt=""></div></a>
-            <a href="" target="_blank"><div><img src="image/icon/icon-insta.webp"  alt=""></div></a>
+            <a href="https://www.instagram.com/tiemhoa.mimi/" target="_blank"><div><img src="image/icon/icon-insta.webp"  alt=""></div></a>
             <a href="https://vn.shp.ee/FofnRRP" target="_blank"><div><img src="image/icon/icon-shopee.webp"  alt=""></div></a>
           </div>
           <div class="footer-icon">
-            <a href="" target="_blank"><div><img src="image/icon/icon-threads.webp"  alt=""></div></a>
+            <a href="https://www.threads.net/@tiemhoa.mimi" target="_blank"><div><img src="image/icon/icon-threads.webp"  alt=""></div></a>
             <a href="https://www.tiktok.com/@phannthaonguyen" target="_blank"><div><img src="image/icon/icon-tiktok.webp" alt=""></div></a>
             <a href="https://zalo.me/84354235669" target="_blank"><div><img src="image/icon/icon-zalo.png" alt=""></div></a>
           </div>

@@ -326,11 +326,14 @@ main {
 }
 
 .product-card h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
-  height: 2rem;
+  height: 4rem;
   font-size: 1rem;
   margin: 1rem;
-  font-weight: bolder;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -861,6 +864,10 @@ main {
 }
 
 .slider-container-one p {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   color: var(--text-color-dark);
@@ -1036,6 +1043,10 @@ main {
 }
 
 .slider-container-two p {
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   color: var(--text-color-dark);
@@ -1137,6 +1148,7 @@ main {
 }
 
 .hero-banner-cont {
+  margin-bottom: 4rem;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -1229,6 +1241,7 @@ main {
   object-fit: cover;
 }
 .swiper-slider-container {
+  margin-bottom: 4rem;
   width: 100%;
   display: flex;
   justify-content: center;

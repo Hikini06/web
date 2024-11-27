@@ -222,19 +222,31 @@
 
     /* Định dạng cho danh sách lồng nhau */
     .nested-ul {
-        max-height: 200px;
+        max-height: 0px;
         pointer-events: none;
         opacity: 0;
         /* overflow: hidden; */
-        transition: max-height 0.3s ease, opacity 0.3s ease;
-        display: none; 
+        transform: translateY(-20%);
+        visibility: hidden;
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        /* display: none;  */
         list-style-type: none;
         padding-left: 1rem; 
         padding-top: 0px;
         padding-bottom: 0px;
         overflow-y: auto;
         scrollbar-width: thin;
+        z-index: 1000;
      
+    }
+    .product-banner-jim-li.active > .nested-ul {
+        display: block;
+        max-height: 500px;
+        opacity: 1;
+        transform: translateX(0);
+        visibility: visible;
+        pointer-events: auto;
+
     }
     .product-banner-jim-ultwo > li {
         padding-bottom: 0px;
@@ -242,13 +254,8 @@
         padding-left: 1rem ;
 
     }
-    /* Hiển thị danh sách lồng nhau khi cha có lớp active */
-    .product-banner-jim-li.active > .nested-ul {
-        display: block;
-        max-height: 500px; /* Giá trị đủ lớn để hiển thị nội dung */
-        opacity: 1;
-        pointer-events: auto;
-    }
+    
+    
     .product-banner-jim-li {
         padding-top: 0px;
     }
@@ -264,22 +271,32 @@
     .nested-ul li a:hover {
         color: var(--text-color);
     }
-
+    .product-banner-jim-li .fa-chevron-down {
+        display: flex;
+        font-size: 0.7rem;
+        font-weight: 900;
+        transform: rotate(0deg); 
+    }
     /* Thêm chỉ thị để người dùng biết có thể nhấn vào mục cha */
-    .product-banner-jim-li > a::after {
-        content: '\25BC'; /* Mũi tên xuống */
+    /* .product-banner-jim-li > a::after {
+        content: '\25BC'; 
         float: right;
         transition: transform 0.3s ease;
-    }
+    } */
     .product-banner-jim-li a {
+        line-height: 100%;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
-        display: block;
+        display: flex;
         padding: 1rem;
     }
 
     /* Thay đổi mũi tên khi mục cha có lớp active */
-    .product-banner-jim-li.active > a::after {
-        transform: rotate(180deg); /* Xoay mũi tên lên */
+    .product-banner-jim-li.active .fa-chevron-down {
+        
+        transform: rotate(180deg); 
+        transition: transform 0.3s ease-in-out;
     }
     .product-banner-jim-table-ul {
         scrollbar-width: thin;

@@ -429,12 +429,16 @@ background-color: var(--background-color);
     }
 
     .product-detail-pic-text-quickbuy-input input {
+        height: 2rem;
         width: 100%; /* Chiếm toàn bộ chiều rộng */
         margin-bottom: 0.5rem; /* Thêm khoảng cách dưới input */
     }
 
     .product-detail-pic-text-quickbuy-input button {
         width: 100%; /* Chiếm toàn bộ chiều rộng */
+        height: 2rem;
+        font-size: 1rem;
+        font-weight: 700;
     }
 
     .product-detail-pic-text-dis {

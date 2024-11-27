@@ -17,11 +17,28 @@
     /* Slider Buttons */
     .guideSection-slider-prev-btn,
     .guideSection-slider-next-btn {
-        width: 1.5rem;
-        height: 1.5rem;
-        font-size: 0.8rem;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        width: auto;
+        height: auto;
+        font-size: 1.5rem;
+        /* padding: 1rem; */
+        top: 45%;
     }
-
+    .guideSection-slider-prev-btn {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-right: 1rem;
+        
+        left: 1%;
+    }
+    .guideSection-slider-next-btn {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        padding-left: 1rem;
+        right: 1%;
+    }
     /* Footer Responsive */
     .footer .footer-cont {
         flex-direction: column;

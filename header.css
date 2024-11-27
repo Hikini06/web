@@ -778,6 +778,9 @@ header + .product-banner-jim {
   color: var(--text-color);
   padding-top: 0.5rem;
 }
+.product-banner-jim-li .fa-chevron-down {
+  display: none;
+}
 .product-banner-jim-li > a {
   color: var(--text-color);
 }

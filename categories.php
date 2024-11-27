@@ -1,5 +1,10 @@
 <?php
 require 'db-connect.php';
+if (!isset($_GET['subcategory_id'])) {
+    // Chuyển hướng đến URL mặc định
+    header("Location: categories.php?subcategory_id=1");
+    exit; // Dừng thực thi mã PHP sau khi chuyển hướng
+}
 
 // Lấy danh sách subcategories từ bảng subcategories
 $query = $pdo->prepare("SELECT * FROM subcategories");
