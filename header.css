@@ -10,20 +10,127 @@
   --hover-color: rgb(53, 16, 25);
   --background-color: rgb(255, 248, 249);
 }
+body {
+  font-family: "Nunito", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; 
+  font-style: normal;
+  line-height: 1.6;
+  color: var(--text-color-dark);
+}
+
+.main-header-important {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+/* thanh tim kiem */
+.search-bar-cont {
+  width: 50%;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+/* Định dạng cho form tìm kiếm */
+.search-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+/* Container cho input và icon */
+.search-input {
+  position: relative;
+  width: 100%;
+  /* border: 1px solid var(--text-color-dark); */
+}
+
+/* Định dạng cho ô input */
+.search-input input[type="text"] {
+  font-family: "Nunito", sans-serif;
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem; 
+  font-size: 1rem;
+  border: 2px solid var(--text-color-dark);
+  border-radius: 100px;
+  box-sizing: border-box;
+  color: var(--text-color-dark);
+}
+/* Chrome, Safari, Opera */
+.search-input input[type="text"]::-webkit-input-placeholder {
+  color: rgba(0, 32, 77, 0.7);
+    font-style: italic;
+    font-family: "Nunito", sans-serif;
+}
+
+/* Firefox 19+ */
+.search-input input[type="text"]::-moz-placeholder {
+  color: rgba(0, 32, 77, 0.7);
+    font-style: italic;
+    font-family: "Nunito", sans-serif;
+}
+
+/* Firefox 4 - 18 */
+.search-input input[type="text"]:-moz-placeholder {
+  color: rgba(0, 32, 77, 0.7);
+    font-style: italic;
+    font-family: "Nunito", sans-serif;
+}
+
+/* Internet Explorer 10-11 */
+.search-input input[type="text"]:-ms-input-placeholder {
+  color: rgba(0, 32, 77, 0.7);
+    font-style: italic;
+    font-family: "Nunito", sans-serif;
+}
+
+/* Microsoft Edge */
+.search-input input[type="text"]::-ms-input-placeholder {
+  color: rgba(0, 32, 77, 0.7);
+    font-style: italic;
+    font-family: "Nunito", sans-serif;
+}
+
+/* Trình duyệt mới theo chuẩn */
+.search-input input[type="text"]::placeholder {
+  color: rgba(0, 32, 77, 0.7);
+    font-style: italic;
+    font-family: "Nunito", sans-serif;
+}
+
+/* Định dạng cho nút submit */
+.search-input button[type="submit"] {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-color-dark);
+}
+
+/* Định dạng cho biểu tượng kính lúp */
+.search-input button[type="submit"] i {
+  font-size: 1.25rem;
+  color: var(--text-color-dark);
+}
+
+/* Loại bỏ viền khi focus */
+.search-input button[type="submit"]:focus {
+  outline: none;
+}
+
+
+
+
+
 
 /* Header styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-:root {
-  --main-color: rgb(255, 211, 219);
-  --text-color: rgb(194, 47, 80);
-  --text-color-dark: rgb(0, 32, 77);
-  --hover-color: rgb(53, 16, 25);
-  --background-color: rgb(255, 248, 249);
-}
+
+
 header {
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -31,12 +138,12 @@ header {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
   /* padding: 1rem 20%; */
-  height: 80px;
+  height: 4rem;
   width: 100%;
   box-sizing: border-box;
 }
@@ -53,30 +160,49 @@ header {
   height: 100%;
   justify-content: space-between;
   align-items: center;
+  
 }
 .header-left {
-  order: 1;
+ 
   display: none;
   align-items: center;
   height: 100%;
 }
-.header-right {
-  width: 55%;
-  order: 3;
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
 
-.logo {
-  font-size: 2.5rem;
-  font-weight: bold;
+
+/* .logo {
+  font-weight: 900;
   color: var(--main-color);
   text-decoration: none;
-  font-family: "Pacifico", cursive;
-}
+  font-family: "Nunito", sans-serif !important;
+} */
+ /* Font Style */
+ @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Pacifico&display=swap');
+
+
+
+ .logo {
+     font-family: 'Pacifico', cursive; /* Font đáng yêu */
+     font-size: 3.5rem; /* Kích thước lớn */
+     color: rgb(255, 211, 219); /* Tone màu chủ đạo */
+     text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.6); /* Hiệu ứng bóng nhẹ */
+     letter-spacing: 2px; /* Khoảng cách giữa các chữ */
+     text-align: center;
+     display: inline-block;
+     padding: 10px;
+     text-decoration: none; /* Loại bỏ gạch chân */
+     transition: all 0.3s ease-in-out; /* Hiệu ứng khi hover */
+ }
+
+ /* Hover effect */
+ .logo:hover {
+     color: rgb(255, 182, 193); /* Màu hồng nhạt hơn khi hover */
+     text-shadow: 3px 3px 5px rgba(255, 140, 0, 0.4); /* Hiệu ứng bóng nhẹ hơn */
+     transform: scale(1.1); /* Phóng to nhẹ */
+ }
+/* END */
+
 .logo-container {
-  order: 2;
   flex: 2;
   text-align: center;
   display: flex;
@@ -85,7 +211,11 @@ header {
   height: 100%;
 }
 .logo-container a {
-  font-size: 1.8rem;
+
+  font-size: 2rem;
+}
+.logo-container .logo-mobi {
+  display: none;
 }
 .menu-nav ul {
   display: flex;
@@ -501,3 +631,181 @@ header {
   text-align: left;
   display: block;
 }
+.header-contact-number {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--text-color-dark);
+  font-style: italic;
+}
+.header-contact-number a {
+  color: var(--text-color-dark);
+  text-decoration: none;
+  
+}
+.header-contact-number:hover {
+  cursor: pointer;
+}
+
+header + .product-banner-jim {
+  margin-top: 4rem; /* Same as header height */
+}
+
+/* section product banner jim */
+
+.product-banner-jim-sanpham {
+  background-color: var(--main-color);
+  width: auto;
+  position: relative;
+  
+}
+.product-banner-jim-sanpham i {
+  font-size: 0.7rem;
+}
+.product-banner-jim-sanpham .fa-chevron-right {
+  display: none;
+}
+.product-banner-jim-sanpham-one {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.product-banner-jim-table-two,
+.product-banner-jim-table-three,
+.product-banner-jim-table-four,
+.product-banner-jim-table-five,
+.product-banner-jim-table {
+  color: var(--text-color-dark);
+  text-decoration: none;
+  display: none;
+  width: 60%;
+  position: absolute;
+  background-color: white;
+  top: 100%;
+  z-index: 999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+.product-banner-jim-table-two a,
+.product-banner-jim-table-three a,
+.product-banner-jim-table-four a,
+.product-banner-jim-table-five a,
+.product-banner-jim-table a {
+  color: var(--text-color-dark);
+  text-decoration: none;
+}
+.product-banner-jim-table-two a:hover,
+.product-banner-jim-table-three a:hover,
+.product-banner-jim-table-four a:hover,
+.product-banner-jim-table-five a:hover,
+.product-banner-jim-table a:hover {
+  color: var(--text-color);
+}
+.product-banner-jim-table-ul {
+  list-style-type: none;
+  text-decoration: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.product-banner-jim {
+  
+  z-index: 999;
+  position: fixed;
+  /* margin-top: 2.4rem; */
+  width: 100%;
+  height: auto;
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.product-banner-jim .product-banner-jim-child {
+  background-color: var(--main-color);
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; 
+}
+
+.product-banner-jim .product-banner-jim-a {
+  color: var(--text-color-dark);
+  font-size: 1rem;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  text-decoration: none;
+}
+.product-banner-jim-ul {
+  z-index: 2;
+  background-color: white;
+  width: 60%; 
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+  position: absolute; 
+  top: 100%; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+}
+.product-banner-jim-ul-one {
+  height: auto;
+}
+.product-banner-jim .product-banner-jim-ul {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+}
+.product-banner-jim-ul li:hover {
+  color: var(--text-color);
+  background-color: rgba(255, 211, 219, 0.2); 
+}
+.product-banner-jim-ul li {
+  font-size: 1rem;
+  padding: 8px 16px;
+  font-weight: 600;
+  color: var(--text-color-dark);
+  cursor: pointer;
+}
+.product-banner-jim-sanpham:hover .product-banner-jim-ul {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start; 
+}
+.product-banner-jim-li {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  padding-top: 0.5rem;
+}
+.product-banner-jim-li .fa-chevron-down {
+  display: none;
+}
+.product-banner-jim-li > a {
+  color: var(--text-color);
+}
+.product-banner-jim-li > a:hover {
+  color: var(--text-color-dark);
+}
+.product-banner-jim-ultwo  {
+  
+  color: var(--text-color-dark);
+  list-style-type: none;
+  padding-top: 1rem;
+  font-weight: 300;
+}
+.product-banner-jim-ultwo > li {
+  color: var(--text-color-dark);
+  padding-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.product-banner-jim-ultwo > li:last-child {
+  padding-bottom: 2rem;
+}
+.product-banner-jim-ultwo > li:hover {
+ color: var(--text-color);
+ cursor: pointer;
+}
+/* section product banner jim end */
+
