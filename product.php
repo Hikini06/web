@@ -81,7 +81,7 @@ try {
             <?php foreach ($products as $product): ?>
                 <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
                     <div class="product">
-                        <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                        <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                         <span><?= htmlspecialchars($product['name']) ?></span>
                         <p><?= number_format($product['price'], 0, ',', '.') ?>đ</p>
                     </div>

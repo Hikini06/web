@@ -167,7 +167,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
             <div class="product-detail-pic-img">
                 <div class="product-detail-pic-img-mainimg">
                     <!-- Hiển thị ảnh sản phẩm -->
-                    <img src="<?php echo $productImg; ?>" alt="<?php echo $productName; ?>" style="width: 100%; height: 100%;">
+                    <img src="image/upload/<?php echo $productImg; ?>" alt="<?php echo $productName; ?>" style="width: 100%; height: 100%;">
                 </div>
                 <div class="product-detail-pic-img-moreimg">
                     <!-- Phần dành cho ảnh phụ nếu cần -->
@@ -221,7 +221,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
             <?php if (!empty($similarProducts) && is_array($similarProducts)): ?>
                 <?php foreach ($similarProducts as $item): ?>
                     <a href="product-detail.php?id=<?php echo htmlspecialchars($item['id']); ?>" class="product-detail-common-items">
-                        <img src="<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
+                        <img src="image/upload/<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
                         <h3><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h3>
                         <h4><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h4>
                     </a>
@@ -239,7 +239,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
             <?php if (!empty($suggestItems) && is_array($suggestItems)): ?>
                 <?php foreach ($suggestItems as $item): ?>
                     <a href="product-detail.php?id=<?php echo htmlspecialchars($item['id']); ?>" class="product-detail-suggest-items">
-                        <img src="<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
+                        <img src="image/upload/<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
                         <h3><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h3>
                         <h4><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h4>
                     </a>

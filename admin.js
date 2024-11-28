@@ -17,11 +17,64 @@ document.addEventListener('DOMContentLoaded', function() {
     var toggleSliderBtn = document.getElementById('toggleIndexSliderInfo');
     var sliderInfoCont = document.getElementById('indexSliderInfoCont');
 
+    // Xử lý nút "Tải lên ảnh"
+    var uploadButtons = document.querySelectorAll('.upload-image-btn');
+    uploadButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var productId = this.getAttribute('data-id');
+            var fileInput = document.querySelector('.upload-image-input[data-id="' + productId + '"]');
+            fileInput.click();
+        });
+    });
+
+    // Xử lý khi người dùng chọn tệp ảnh
+    var fileInputs = document.querySelectorAll('.upload-image-input');
+
+    fileInputs.forEach(function(input) {
+        input.addEventListener('change', function() {
+            var productId = this.getAttribute('data-id');
+            var file = this.files[0];
+
+            if (file) {
+                // Tạo đối tượng FormData
+                var formData = new FormData();
+                formData.append('product_id', productId);
+                formData.append('image', file);
+
+                // Gửi yêu cầu AJAX để tải lên ảnh
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'upload_image.php', true);
+
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        try {
+                            var response = JSON.parse(xhr.responseText);
+                            if (response.success) {
+                                // Cập nhật ảnh trong bảng
+                                var imgElement = document.querySelector('tr[data-id="' + productId + '"] img');
+                                imgElement.src = response.image_path + '?' + new Date().getTime(); // Thêm timestamp để tránh cache
+                                // alert('Tải lên ảnh thành công!');
+                            } else {
+                                alert('Lỗi: ' + response.message);
+                            }
+                        } catch (e) {
+                            alert('Phản hồi từ server không hợp lệ.');
+                        }
+                    } else {
+                        alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+                    }
+                };
+
+                xhr.send(formData);
+            }
+        });
+    });
+
 
     if (toggleProfileBtn && profileSelectionCont) {
         toggleProfileBtn.addEventListener('click', function () {
+            hideAllSections('profile');
             if (profileSelectionCont.style.display === 'none' || profileSelectionCont.style.display === '') {
-                hideAllSections('profile');
                 profileSelectionCont.style.display = 'block';
                 toggleProfileBtn.setAttribute('aria-expanded', 'true');
             } else {
@@ -30,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
     // Hàm để ẩn tất cả các bảng
     function hideAllSections(except = null) {
         if (except !== 'customer') {

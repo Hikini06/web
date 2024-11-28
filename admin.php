@@ -18,6 +18,9 @@ $product_records_per_page = 15;
 $customer_page = isset($_GET['customer_page']) && is_numeric($_GET['customer_page']) ? (int)$_GET['customer_page'] : 1;
 $product_page = isset($_GET['product_page']) && is_numeric($_GET['product_page']) ? (int)$_GET['product_page'] : 1;
 
+// Lấy search từ URL nếu có
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
 // Tính toán OFFSET cho khách hàng và sản phẩm
 $customer_offset = ($customer_page - 1) * $customer_records_per_page;
 $product_offset = ($product_page - 1) * $product_records_per_page;
@@ -157,9 +160,6 @@ try {
     die("Lỗi truy vấn khách hàng: " . $e->getMessage());
 }
 
-
-
-
 // Tính tổng số bản ghi cho khách hàng
 try {
     if ($customer_isTodayFilter) {
@@ -178,10 +178,25 @@ try {
     die("Lỗi truy vấn tổng số bản ghi khách hàng: " . $e->getMessage());
 }
 
-// Truy vấn dữ liệu sản phẩm với ORDER BY, LIMIT và OFFSET
+// Truy vấn dữ liệu sản phẩm với ORDER BY, LIMIT và OFFSET, bao gồm filter search
 try {
-    $sql_items = "SELECT id, name, description, img, price FROM items_detail ORDER BY id DESC LIMIT :limit OFFSET :offset";
-    $stmt_items = $pdo->prepare($sql_items);
+    if (!empty($search)) {
+        $sql_items = "SELECT id, name, description, img, price 
+                     FROM items_detail 
+                     WHERE name LIKE :search 
+                     ORDER BY id DESC 
+                     LIMIT :limit OFFSET :offset";
+        $stmt_items = $pdo->prepare($sql_items);
+        $search_param = '%' . $search . '%';
+        $stmt_items->bindParam(':search', $search_param, PDO::PARAM_STR);
+    } else {
+        $sql_items = "SELECT id, name, description, img, price 
+                     FROM items_detail 
+                     ORDER BY id DESC 
+                     LIMIT :limit OFFSET :offset";
+        $stmt_items = $pdo->prepare($sql_items);
+    }
+
     $stmt_items->bindParam(':limit', $product_records_per_page, PDO::PARAM_INT);
     $stmt_items->bindParam(':offset', $product_offset, PDO::PARAM_INT);
     $stmt_items->execute();
@@ -190,17 +205,23 @@ try {
     die("Lỗi truy vấn sản phẩm: " . $e->getMessage());
 }
 
-// Tính tổng số bản ghi cho sản phẩm
+// Tính tổng số bản ghi cho sản phẩm, bao gồm filter search
 try {
-    $sql_total_items = "SELECT COUNT(*) FROM items_detail";
-    $stmt_total_items = $pdo->prepare($sql_total_items);
+    if (!empty($search)) {
+        $sql_total_items = "SELECT COUNT(*) FROM items_detail WHERE name LIKE :search";
+        $stmt_total_items = $pdo->prepare($sql_total_items);
+        $stmt_total_items->bindParam(':search', $search_param, PDO::PARAM_STR);
+    } else {
+        $sql_total_items = "SELECT COUNT(*) FROM items_detail";
+        $stmt_total_items = $pdo->prepare($sql_total_items);
+    }
+
     $stmt_total_items->execute();
     $total_records_items = $stmt_total_items->fetchColumn();
     $total_pages_items = ceil($total_records_items / $product_records_per_page);
 } catch (PDOException $e) {
     die("Lỗi truy vấn tổng số sản phẩm: " . $e->getMessage());
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -332,10 +353,10 @@ try {
         <div class="customer-info">
             <!-- Nút lọc "Khách hàng hôm nay" và "Tất cả khách hàng" -->
             <div class="filter-buttons">
-                <a href="admin.php<?php echo $customer_isTodayFilter ? '' : '?today=1'; ?>" class="filter-btn <?php echo $customer_isTodayFilter ? 'active' : ''; ?>">
+                <a href="admin.php?today=1&customer_page=1" class="filter-btn <?php echo $customer_isTodayFilter ? 'active' : ''; ?>">
                     Khách hàng hôm nay
                 </a>
-                <a href="admin.php<?php echo $customer_isTodayFilter ? '?customer_page=' . $customer_page : ''; ?>" class="filter-btn <?php echo !$customer_isTodayFilter ? 'active' : ''; ?>">
+                <a href="admin.php?customer_page=1" class="filter-btn <?php echo !$customer_isTodayFilter ? 'active' : ''; ?>">
                     Tất cả khách hàng
                 </a>
             </div>
@@ -347,7 +368,7 @@ try {
                         <th>Tên khách hàng</th>
                         <th>Số điện thoại</th>
                         <th>Địa chỉ</th>
-                        <th>Sản phẩm</th> <!-- Thêm cột mới -->
+                        <th>Sản phẩm</th>
                         <th>Thời gian đặt hàng</th>
                     </tr>
                 </thead>
@@ -360,7 +381,7 @@ try {
                                 <td><?php echo htmlspecialchars($customer['ten']); ?></td>
                                 <td><?php echo htmlspecialchars($customer['sdt']); ?></td>
                                 <td><?php echo htmlspecialchars($customer['diachi']); ?></td>
-                                <td><?php echo htmlspecialchars($customer['product_name'] ?? 'Không xác định'); ?></td> <!-- Hiển thị sản phẩm -->
+                                <td><?php echo htmlspecialchars($customer['product_name'] ?? 'Không xác định'); ?></td>
                                 <td>
                                     <?php 
                                         if (!empty($customer['thoigiandathang'])) {
@@ -375,7 +396,7 @@ try {
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6">Không có dữ liệu</td> <!-- Thay đổi colspan từ 5 thành 6 -->
+                            <td colspan="6">Không có dữ liệu</td>
                         </tr>
                     <?php endif; ?>
 
@@ -399,26 +420,48 @@ try {
                         }
                     ?>
 
-                    <?php if ($customer_page > 1): ?>
-                        <a href="<?php echo build_customer_url($customer_page - 1, $customer_isTodayFilter); ?>">&laquo; Trang trước</a>
-                    <?php endif; ?>
+                    <?php 
+                        // Hiển thị nút "Trang đầu"
+                        if ($customer_page > 1) {
+                            echo '<li><a href="' . build_customer_url(1, $customer_isTodayFilter) . '">Trang đầu</a></li>';
+                        } else {
+                            echo '<li class="disabled">Trang đầu</li>';
+                        }
 
-                    <?php
-                    // Hiển thị số trang cho khách hàng
-                    for ($i = 1; $i <= $total_pages_customers; $i++):
-                        if ($i == $customer_page):
+                        // Hiển thị nút "Trang trước"
+                        if ($customer_page > 1) {
+                            echo '<li><a href="' . build_customer_url($customer_page - 1, $customer_isTodayFilter) . '">&laquo; Trang trước</a></li>';
+                        } else {
+                            echo '<li class="disabled">&laquo; Trang trước</li>';
+                        }
+
+                        // Hiển thị số trang cho khách hàng
+                        for ($i = 1; $i <= $total_pages_customers; $i++):
+                            if ($i == $customer_page):
                     ?>
-                            <span><?php echo $i; ?></span>
+                                <li class="active"><?php echo $i; ?></li>
                     <?php else: ?>
-                            <a href="<?php echo build_customer_url($i, $customer_isTodayFilter); ?>"><?php echo $i; ?></a>
+                                <li><a href="<?php echo build_customer_url($i, $customer_isTodayFilter); ?>"><?php echo $i; ?></a></li>
                     <?php
-                        endif;
-                    endfor;
+                            endif;
+                        endfor;
                     ?>
 
-                    <?php if ($customer_page < $total_pages_customers): ?>
-                        <a href="<?php echo build_customer_url($customer_page + 1, $customer_isTodayFilter); ?>">Trang sau &raquo;</a>
-                    <?php endif; ?>
+                    <?php 
+                        // Hiển thị nút "Trang sau"
+                        if ($customer_page < $total_pages_customers) {
+                            echo '<li><a href="' . build_customer_url($customer_page + 1, $customer_isTodayFilter) . '">Trang sau &raquo;</a></li>';
+                        } else {
+                            echo '<li class="disabled">Trang sau &raquo;</li>';
+                        }
+
+                        // Hiển thị nút "Trang cuối"
+                        if ($customer_page < $total_pages_customers) {
+                            echo '<li><a href="' . build_customer_url($total_pages_customers, $customer_isTodayFilter) . '">Trang cuối</a></li>';
+                        } else {
+                            echo '<li class="disabled">Trang cuối</li>';
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -428,7 +471,15 @@ try {
     <!-- PHẦN BẢNG SẢN PHẨM -->
     <div class="product-info-cont" id="productInfoCont" style="display: none;">
         <div class="product-info">
-            <!-- Bảng thông tin sản phẩm -->
+             <!-- Search Filter for Products -->
+            <div class="product-search-filter">
+                <form method="GET" action="admin.php">
+                    <input type="hidden" name="product_page" value="1">
+                    <input type="text" name="search" placeholder="Tìm kiếm sản phẩm..." value="<?php echo htmlspecialchars($search); ?>">
+                    <button type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+            
             <table id="productsTable">
                 <thead>
                     <tr>
@@ -450,7 +501,10 @@ try {
                                 <td class="editable" data-field="name"><?php echo htmlspecialchars($product['name']); ?></td>
                                 <td class="editable" data-field="description"><?php echo htmlspecialchars($product['description']); ?></td>
                                 <td>
-                                    <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="Ảnh sản phẩm" width="100">
+                                    <img src="/image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
+                                    <br>
+                                    <button class="upload-image-btn" data-id="<?php echo htmlspecialchars($product['id']); ?>">Tải lên ảnh</button>
+                                    <input type="file" accept="image/*" class="upload-image-input" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="display: none;">
                                 </td>
                                 <td class="editable" data-field="price"><?php echo htmlspecialchars(number_format($product['price'], 0, ',', '.') . 'đ'); ?></td>
                                 <td>
@@ -467,14 +521,18 @@ try {
                         </tr>
                     <?php endif; ?>
                 </tbody>
+
             </table>
 
             <!-- Phân Trang Sản Phẩm -->
             <div class="pagination">
                 <?php
-                // Hàm để xây dựng URL phân trang sản phẩm
-                function build_product_url($page) {
+                // Hàm để xây dựng URL phân trang sản phẩm bao gồm tham số search
+                function build_product_url($page, $search) {
                     $params = [];
+                    if (!empty($search)) {
+                        $params['search'] = $search;
+                    }
                     if ($page > 1) {
                         $params['product_page'] = $page;
                     }
@@ -489,14 +547,14 @@ try {
 
                     // Hiển thị nút "Trang đầu"
                     if ($product_page > 1) {
-                        echo '<li><a href="' . build_product_url(1) . '">Trang đầu</a></li>';
+                        echo '<li><a href="' . build_product_url(1, $search) . '">Trang đầu</a></li>';
                     } else {
                         echo '<li class="disabled">Trang đầu</li>';
                     }
 
                     // Hiển thị nút "Trang trước"
                     if ($product_page > 1) {
-                        echo '<li><a href="' . build_product_url($product_page - 1) . '">&laquo; Trang trước</a></li>';
+                        echo '<li><a href="' . build_product_url($product_page - 1, $search) . '">&laquo; Trang trước</a></li>';
                     } else {
                         echo '<li class="disabled">&laquo; Trang trước</li>';
                     }
@@ -511,7 +569,7 @@ try {
                         if ($i == $product_page) {
                             echo '<li class="active">' . $i . '</li>';
                         } else {
-                            echo '<li><a href="' . build_product_url($i) . '">' . $i . '</a></li>';
+                            echo '<li><a href="' . build_product_url($i, $search) . '">' . $i . '</a></li>';
                         }
                     }
 
@@ -522,14 +580,14 @@ try {
 
                     // Hiển thị nút "Trang sau"
                     if ($product_page < $total_pages_items) {
-                        echo '<li><a href="' . build_product_url($product_page + 1) . '">Trang sau &raquo;</a></li>';
+                        echo '<li><a href="' . build_product_url($product_page + 1, $search) . '">Trang sau &raquo;</a></li>';
                     } else {
                         echo '<li class="disabled">Trang sau &raquo;</li>';
                     }
 
                     // Hiển thị nút "Trang cuối"
                     if ($product_page < $total_pages_items) {
-                        echo '<li><a href="' . build_product_url($total_pages_items) . '">Trang cuối</a></li>';
+                        echo '<li><a href="' . build_product_url($total_pages_items, $search) . '">Trang cuối</a></li>';
                     } else {
                         echo '<li class="disabled">Trang cuối</li>';
                     }

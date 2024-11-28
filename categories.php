@@ -119,7 +119,7 @@ $total_pages = ceil($total_products / $items_per_page);
             <?php foreach ($products as $product): ?>
                 <div class="product">
                     <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
-                        <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                        <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                         <h3><?= htmlspecialchars($product['name']) ?></h3>
                         <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
                     </a>

@@ -88,7 +88,7 @@ if ($item_id) {
                 <?php foreach ($products as $product): ?>
                     <div class="product">
                         <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
-                            <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                            <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                             <h3><?= htmlspecialchars($product['name']) ?></h3>
                             <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
                         </a>
@@ -166,7 +166,7 @@ if (!empty($item_id)) {
                         <?php foreach ($row as $product): ?>
                             <div class="suggested-product">
                                 <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
-                                    <img src="<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
+                                    <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                                     <h3><?= htmlspecialchars($product['name']) ?></h3>
                                     <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
                                 </a>
