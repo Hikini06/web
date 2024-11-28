@@ -1,0 +1,186 @@
+/* Định nghĩa biến màu sắc */
+:root {
+    --main-color: rgb(255, 211, 219);
+    --text-color: rgb(194, 47, 80);
+    --text-color-dark: rgb(0, 32, 77);
+    --hover-color: rgb(53, 16, 25);
+    --background-color: rgb(255, 248, 249);
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    font-weight: 400;
+    color: var(--text-color-dark);
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+}
+
+/* Container chính */
+.product-all-cont {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Grid sản phẩm */
+.products-container {
+    margin-top: 4rem;
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    justify-items: center;
+}
+.products-container a {
+    text-decoration: none;
+    list-style-type: none;
+}
+/* Thẻ sản phẩm */
+.product {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.product img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+
+}
+
+.product span {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+    color: var(--text-color-dark);
+}
+
+.product p {
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.product:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Phân trang */
+.pagination {
+    padding-top: 2rem;
+    width: 60%;
+    text-align: center;
+    padding-bottom: 3rem;
+}
+
+.pagination-btn {
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    background-color: white;
+    font-weight: 500;
+    font-size: 0.8rem;
+    width: 2rem;
+    margin: 0 0.3rem;
+    padding: 5px;
+    height: 2rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.pagination-btn i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination-btn:hover {
+    background-color: var(--main-color);
+    cursor: pointer;
+}
+
+.pagination-btn.active {
+    background-color: var(--main-color);
+}
+
+.pagination-btn:first-child,
+.pagination-btn:last-child {
+    width: 2.5rem;
+    font-weight: 900;
+}
+.pagination-dots {
+    display: inline-block;
+    margin: 0 0.3rem;
+    color: var(--text-color);
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+/* TITLE */
+.product-title {
+    width: 100%;
+    padding-top: 10rem;
+
+}
+.product-title h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+/* Thêm vào cuối tệp product.css */
+
+/* Media Query cho thiết bị di động */
+@media (max-width: 768px) {
+    /* Điều chỉnh grid để hiển thị 2 sản phẩm trên một hàng */
+    .products-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cột thay vì 4 */
+        width: 90%; /* Điều chỉnh chiều rộng phù hợp với màn hình di động */
+        gap: 1rem; /* Giảm khoảng cách giữa các sản phẩm nếu cần */
+    }
+
+    /* Điều chỉnh kích thước sản phẩm nếu cần */
+    .product {
+        width: 100%; /* Đảm bảo sản phẩm chiếm toàn bộ chiều rộng của grid column */
+    }
+
+    /* Điều chỉnh phần tiêu đề nếu cần */
+    .product-title {
+        padding-top: 8rem; /* Giảm padding trên để phù hợp với màn hình nhỏ */
+    }
+
+    /* Điều chỉnh phân trang */
+    .pagination {
+        width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+        padding-bottom: 2rem; /* Giảm padding dưới */
+    }
+
+    .pagination-btn {
+        width: 2rem; /* Điều chỉnh kích thước nút phân trang */
+        height: 2rem;
+        font-size: 0.8rem; /* Giảm kích thước phông chữ */
+    }
+
+    .pagination-btn:first-child,
+    .pagination-btn:last-child {
+        width: 2.5rem; /* Giữ nguyên hoặc điều chỉnh tùy ý */
+    }
+
+    .pagination-dots {
+        display: none; /* Ẩn dấu chấm nếu cần để giảm clutter */
+    }
+}

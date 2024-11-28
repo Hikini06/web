@@ -1,0 +1,117 @@
+/* filter-responsive.css */
+
+@media (max-width: 768px) {
+    .search-results {
+        width: 100% !important;
+        margin-top: 8rem; 
+        padding: 0px 1rem;
+    }
+
+    .product-grid {
+        display: grid; /* Sử dụng CSS Grid */
+        grid-template-columns: repeat(2, 1fr) !important; /* 2 cột trên di động */
+        gap: 0.5rem;
+    }
+
+    .product-item {
+        /* Điều chỉnh kích thước và khoảng cách nếu cần */
+    }
+
+    .search-results h1 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-results button {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+    }
+
+    .suggested-products {
+        width: 100% !important;
+        padding: 0px 1rem;
+        
+    }
+
+    .carousel-slide {
+        width: calc((100% - 1rem) / 2) !important;
+    }
+
+   
+
+    /* Điều chỉnh nút "Xem thêm" để tải thêm sản phẩm nếu cần */
+    #load-more {
+        display: block;
+        margin: 2rem auto;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+    }
+    .carousel-btn {
+        background-color: rgba(0, 0, 0, 0.0) !important;
+        padding: 2rem 0px !important;
+        top: 35%;
+        justify-content: center;
+        flex-direction: column;
+        display: flex;
+        align-items: flex-end;
+    }
+    .carousel-slide {
+        width: calc((100% - 1rem) / 2); /* 2 sản phẩm mỗi hàng với khoảng cách 1rem */
+    }
+    .carousel-prev {
+        align-items: flex-start;
+    }
+    .carousel-track {
+        
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+    .carousel-track-container {
+        overflow: hidden;
+    }
+    /* Điều chỉnh nút prev và next cho carousel */
+    .carousel-prev,
+    .carousel-next {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+    .fa-solid, .fas {
+        font-weight: 600 !important;
+        font-size: 1.5rem;
+    }
+    .carousel-prev {
+        left: 0.5rem;
+    }
+
+    .carousel-next {
+        right: 0.5rem;
+    }
+
+
+
+
+}
+
+/* Styles dành cho máy tính để bàn */
+@media (min-width: 769px) {
+    .product-grid {
+        display: grid; /* Sử dụng CSS Grid */
+        grid-template-columns: repeat(4, 1fr); /* 4 cột trên desktop */
+        gap: 1rem;
+    }
+
+    .product-item {
+        /* Điều chỉnh kích thước và khoảng cách nếu cần */
+    }
+
+}

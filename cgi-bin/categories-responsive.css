@@ -1,0 +1,77 @@
+@media (max-width: 768px) { 
+    .pagination a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    .categories-filter-cont {
+        margin-top: 2rem;
+    }
+    .subcategory-info {
+        margin-top: 9rem;
+    }
+    .subcategory-info {
+        padding-bottom: 2rem;
+        padding-top: 2rem;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+    .categories-filter {
+        width: 90%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; /* Cho phép cuộn mượt trên iOS */
+    }
+
+    .categories-filter ul {
+        gap: 0.5rem;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    .categories {
+        width: 90%;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .categories-filter ul li {
+        min-width: 120px; /* Điều chỉnh kích thước cho phù hợp */
+    }
+    /* Thay đổi số lượng sản phẩm hiển thị bằng cách giới hạn cao độ */
+    .categories .product {
+        display: none;
+    }
+    /* Hiển thị chỉ 10 sản phẩm đầu tiên */
+    .categories .product:nth-child(-n+10) {
+        display: block;
+    }
+
+
+}
+
+/* Hiển thị mũi tên trên thiết bị lớn hơn 768px */
+@media (min-width: 769px) {
+    .arrow {
+        display: block;
+    }
+
+    .categories-filter {
+        width: 58%;
+    }
+
+    .categories-filter ul {
+        gap: 1rem;
+    }
+
+    .categories {
+        width: 60%;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+
+    /* Hiển thị tất cả sản phẩm khi trên máy tính để bàn */
+    .categories .product {
+        display: block;
+    }
+}

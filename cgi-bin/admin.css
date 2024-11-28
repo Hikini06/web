@@ -1,0 +1,428 @@
+/* admin.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --main-color: rgb(255, 211, 219);
+    --text-color: rgb(194, 47, 80);
+    --text-color-dark: rgb(0, 32, 77);
+    --hover-color: rgb(53, 16, 25);
+    --background-color: rgb(255, 248, 249);
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; 
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--text-color-dark);
+    background-color: var(--background-color);
+    padding-left: 15rem; /* Đảm bảo nội dung không bị che bởi sidebar */
+    transition: padding-left 0.3s ease;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 15rem; /* Bạn có thể điều chỉnh độ rộng theo ý muốn */
+    background-color: #f1f1f1; /* Màu nền, có thể thay đổi */
+    overflow: auto; /* Thêm thanh cuộn nếu nội dung vượt quá chiều cao */
+    padding: 20px; /* Thêm padding để nội dung không bị dính sát cạnh */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user {
+    color: var(--text-color);
+}
+
+.customer-infor-bar, .product-infor-bar, .index-slider-bar {
+    margin-top: 20px; /* Thêm khoảng cách từ trên xuống nút */
+}
+
+.customer-infor-bar-btn, .product-infor-bar-btn, .index-slider-bar-btn {
+    padding: 10px 20px;
+    background-color: var(--main-color);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-color-dark);
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%; /* Làm nút rộng toàn bộ chiều rộng của sidebar */
+    margin-bottom: 10px; /* Thêm khoảng cách giữa các nút */
+}
+
+.customer-infor-bar-btn:hover, .product-infor-bar-btn:hover, .index-slider-bar-btn:hover {
+    background-color: var(--hover-color);
+    color: #fff;
+}
+
+.logout {
+    padding-top: 20px;
+}
+
+.logout a {
+    text-decoration: none;
+    color: var(--text-color-dark);
+    font-weight: bold;
+}
+
+.logout a:hover {
+    color: var(--text-color);
+}
+
+/* Định dạng cho các nút lọc */
+.filter-buttons {
+    margin: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: var(--main-color);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-color-dark);
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: var(--hover-color);
+    color: #fff;
+}
+
+.filter-btn.active {
+    background-color: var(--hover-color);
+    color: #fff;
+}
+
+/* Định dạng cho bảng thông tin khách hàng và sản phẩm */
+.customer-info-cont, .product-info-cont, .index-slider-info-cont {
+    display: none; /* Ẩn bảng thông tin ban đầu */
+    padding: 20px;
+    transition: all 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.customer-info-cont.active, .product-info-cont.active, .index-slider-info-cont.active {
+    display: block; /* Hiển thị bảng khi có lớp 'active' */
+}
+
+/* Định dạng cho bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 10px 15px; /* Thay đổi padding nếu cần */
+    border: 1px solid var(--text-color-dark);
+    vertical-align: top;
+}
+
+table th {
+    background-color: var(--main-color);
+    color: var(--text-color-dark);
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#productsTable img {
+    max-width: 100px;
+    height: auto;
+}
+
+.edit-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.save-btn, .cancel-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+.save-btn {
+    background-color: #4CAF50; /* Màu xanh lá */
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #f44336; /* Màu đỏ */
+    color: white;
+}
+
+.upload-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    background-color: #008CBA; /* Màu xanh dương */
+    color: white;
+}
+
+.upload-btn:hover {
+    background-color: #005f6a;
+}
+
+/* Phân Trang */
+.pagination-cont {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination {
+    margin-top: 20px;
+}
+
+.pagination span {
+    padding: 1rem 1rem;
+    border: 1px solid var(--background-color);
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 1rem 1rem;
+    border: 1px solid var(--background-color);
+}
+
+.pagination-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination-list li {
+    margin: 0 5px;
+    /* width: 1.5rem; */
+    /* height: 5rem; */
+}
+
+.pagination-list li a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.pagination-list li a:hover {
+    background-color: #f1f1f1;
+}
+
+.pagination-list li.active {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+}
+
+.pagination-list li.disabled {
+    color: #ccc;
+    border: 1px solid #ddd;
+    cursor: not-allowed;
+}
+
+/* Selection Grid Styles */
+.product-selection {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* Chia thành 4 cột */
+    gap: 15px;
+    overflow: auto; /* Thêm thanh cuộn nếu cần */
+}
+
+.product-checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.product-checkbox:hover {
+    background-color: #e9e9e9;
+}
+
+.product-checkbox input[type="checkbox"] {
+    margin-bottom: 10px;
+    transform: scale(1.2);
+}
+
+.product-checkbox label {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-color-dark);
+}
+
+/* Save Button Styles */
+.save-button {
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 10px 20px;
+    background-color: var(--text-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+    background-color: var(--hover-color);
+}
+
+/* Container cho hai form slider */
+.slider-forms-container {
+    display: flex;
+    gap: 20px; /* Khoảng cách giữa hai form */
+    flex-wrap: wrap;
+}
+
+.slider-form {
+    flex: 1 1 45%; /* Mỗi form chiếm khoảng 45% chiều rộng cha */
+    min-width: 300px; /* Đảm bảo mỗi form có chiều rộng tối thiểu */
+}
+/* Styles for product search filter */
+.product-search-filter {
+    margin: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.product-search-filter form {
+    display: flex;
+    gap: 10px;
+}
+
+.product-search-filter input[type="text"] {
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.product-search-filter button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--text-color-dark);
+    transition: background-color 0.3s;
+}
+
+.product-search-filter button:hover {
+    background-color: var(--hover-color);
+    color: #fff;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .product-search-filter {
+        justify-content: center;
+    }
+
+    .product-search-filter form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .product-search-filter input[type="text"],
+    .product-search-filter button {
+        width: 100%;
+    }
+    
+    body {
+        padding-left: 0; /* Loại bỏ padding khi trên thiết bị nhỏ */
+    }
+
+    .sidebar {
+        width: 100%; /* Làm cho sidebar rộng toàn màn hình trên thiết bị nhỏ */
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .customer-infor-bar-btn, .product-infor-bar-btn, .index-slider-bar-btn {
+        width: 90%;
+        margin-bottom: 10px;
+    }
+
+    .filter-buttons {
+        flex-direction: column;
+    }
+
+    .filter-buttons a {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Hiển thị tất cả các phần khi trên thiết bị nhỏ */
+    .customer-info-cont, .product-info-cont, .index-slider-info-cont {
+        width: 90%;
+    }
+
+    /* Adjust product grid for smaller screens */
+    .product-selection {
+        grid-template-columns: repeat(2, 1fr); /* Giảm xuống 2 cột trên thiết bị nhỏ */
+    }
+
+    .slider-forms-container {
+        flex-direction: column;
+    }
+
+    .slider-form {
+        flex: 1 1 100%; /* Mỗi form chiếm toàn bộ chiều rộng trên thiết bị nhỏ */
+    }
+}

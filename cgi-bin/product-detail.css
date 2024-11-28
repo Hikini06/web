@@ -1,0 +1,681 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+:root {
+    --main-color: rgb(255, 211, 219);
+    --text-color: rgb(194, 47, 80);
+    --text-color-dark: rgb(0, 32, 77);
+    --hover-color: rgb(53, 16, 25);
+    --background-color: rgb(255, 248, 249);
+  }
+  
+body {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; 
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--text-color-dark);
+  }
+
+
+/* product-detail-pic-cont HIỂN THỊ 1 SẢN PHẨM CHÍNH */
+
+.product-detail-pic-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+    width: 100%;
+}
+.product-detail-pic {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    padding-top: 4rem;
+    width: 60%;
+    /* text-align: center; */
+    height: 50rem;
+}
+
+.product-detail-pic-img {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+}
+.product-detail-pic-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    /* background-color: blue; */
+    width: 50%;
+}
+.product-detail-pic-img-mainimg {
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+
+}
+.product-detail-pic-img-mainimg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* Hiệu ứng shadow */
+}
+.product-detail-pic-img-moreimg {
+    width: 100%;
+    height: 30%;
+    /* background-color: bisque; */
+}
+.product-detail-pic-text-nameandprice {
+
+    padding-left: 1rem;
+width: 100%;
+height: 20%;
+background-color: var(--background-color);
+}
+.product-detail-pic-text-nameandprice h1 {
+    text-align: center;
+    color: var(--text-color-dark);
+    font-weight: 900;
+    font-size: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+.product-detail-pic-text-nameandprice h3 {
+    text-align: center;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+.product-detail-pic-text-buynow {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    font-family: "Nunito", sans-serif;
+    font-weight: 700;
+    color: var(--text-color) ;
+    border: 2px solid var(--text-color);
+    background-color: white;
+    border-radius: 8px;
+    margin-right: auto;
+    text-align: center;
+    height: 5%;
+    width: 50%;
+}
+.product-detail-pic-text-buynow:hover {
+    background-color: var(--background-color);
+    cursor: pointer;
+}
+.product-detail-pic-text-quickbuy {
+    border: 2px solid var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    background-color: var(--background-color);
+}
+.product-detail-pic-text-quickbuy h4 {
+    background-color: var(--text-color);
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    
+}
+.product-detail-pic-text-dis {
+    width: 100%;
+    height: 50%;
+    /* background-color:rgb(194, 47, 80); */
+}
+.product-detail-pic-text-dis p {
+    padding-top: 0.5rem;
+    padding-left: 1rem;
+}
+.product-detail-pic-text-quickbuy-input {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color-dark);
+    width: 50%;
+    position: relative;
+}
+.product-detail-pic-text-quickbuy-input form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.product-detail-pic-text-quickbuy-input input {
+    font-family: "Nunito", sans-serif;
+    width: 80%;
+    color: var(--text-color) ;
+    border: 1px solid var(--text-color);
+    background-color: white;
+    border-radius: 3px;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 1rem;
+    outline: none;
+}
+.product-detail-pic-text-quickbuy-input button {
+    font-weight: 600;
+    width: 15%;
+    font-family: "Nunito", sans-serif;
+    color: var(--text-color) ;
+    border: 1px solid var(--text-color);
+    background-color: white;
+    border-radius: 3px;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+.product-detail-pic-text-quickbuy-input button:hover {
+    cursor: pointer;
+    background-color: var(--background-color);
+}
+.product-detail-pic-text-quickbuy-input input:focus {
+    color: var(--text-color);
+    border-color: var(--text-color);
+    background-color: var(--background-color);
+    border-radius: 3px;
+}
+
+/* product-detail-pic-cont HIỂN THỊ 1 SẢN PHẨM CHÍNH - END */
+
+/* DANH SÁCH SẢN PHẨM GỢI Ý START */
+.product-detail-common-cont-title {
+    /* margin-top: 4rem; */
+    line-height: 1.4;
+    font-weight: 900;
+    font-size: 2rem;
+    padding-bottom: 2rem;
+    
+}
+
+.product-detail-common-cont {
+    width: 100%;
+    margin-top: 6rem;
+    height: auto;
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    align-items: center;
+}
+.product-detail-common {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+.product-detail-common-items {
+    display: block;
+    text-decoration: none; 
+    color: inherit;
+    transition: transform 0.2s ease-in-out;
+    width: 24%;
+    border: 0px solid red;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* Hiệu ứng shadow */
+}
+.product-detail-common-items:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+.product-detail-common-items img {
+    border: 0px solid red;
+    border-radius: 8px;
+    width: 100%; 
+    aspect-ratio: 1; 
+    object-fit: cover; 
+    display: block; 
+}
+.product-detail-common-items h3 {
+    display: flex;
+    padding: 1rem 1rem;
+    font-size: 1.5rem;
+    color: var(--text-color-dark);
+    padding-top: 1rem;
+    text-align: center;
+    height: 7rem;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+}
+
+.product-detail-common-items h4 {
+    text-align: center;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 1rem;
+}
+/* DANH SÁCH SẢN PHẨM GỢI Ý END */
+
+
+/* DÁNH SÁCH SẢN PHẨM NGẪU NHIÊN START */
+.product-detail-suggest-cont-title {
+    line-height: 1.4;
+    font-weight: 900;
+    font-size: 2rem;
+    padding-bottom: 2rem;
+}
+
+.product-detail-suggest-cont {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem; /* Khoảng cách trên với section trước */
+}
+
+.product-detail-suggest {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.product-detail-suggest-items {
+    display: block;
+    text-decoration: none; 
+    color: inherit;
+    transition: transform 0.2s ease-in-out;
+    width: 24%;
+    border: 0px solid red;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); /* Hiệu ứng shadow */
+}
+
+.product-detail-suggest-items:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.product-detail-suggest-items img {
+    border: 0px solid red;
+    border-radius: 8px;
+    width: 100%; 
+    aspect-ratio: 1; 
+    object-fit: cover; 
+    display: block; 
+}
+
+.product-detail-suggest-items h3 {
+    display: flex;
+    padding: 1rem 1rem;
+    font-size: 1.5rem;
+    color: var(--text-color-dark);
+    padding-top: 1rem;
+    text-align: center;
+    height: 7rem;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+}
+
+.product-detail-suggest-items h4 {
+    text-align: center;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 1rem;
+}
+/* DÁNH SÁCH SẢN PHẨM NGẪU NHIÊN END */
+
+
+
+
+/* Thông báo lỗi */
+.error-message {
+    color: red;
+    margin-top: 0.5rem;
+}
+
+/* CSS cho popup thông báo */
+.popup-message {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background-color: var(--background-color); 
+    color: var(--text-color);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    border: 3px solid var(--text-color);
+    z-index: 1000; 
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+/* Hiệu ứng mờ dần */
+.popup-message.show {
+    display: block;
+    animation: fadeOut 3s forwards; 
+}
+/* POP UP MUA HÀNG */
+.popup {
+    display: none; /* Ẩn popup mặc định */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Hiệu ứng nền mờ */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    position: relative;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+/* CSS cho Popup Order-Form */
+
+#order-popup .popup-content {
+    background-color: white; /* Màu nền popup */
+    padding: 20px; /* Khoảng cách bên trong */
+    border-radius: 8px; /* Bo góc */
+    width: 400px; /* Chiều rộng popup */
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+}
+
+/* Sử dụng CSS Grid để sắp xếp form */
+#order-popup #order-form {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Hai cột: Label và Input */
+    gap: 1rem 0.5rem; /* Khoảng cách giữa các hàng và cột */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+}
+
+/* Style cho các label */
+#order-popup #order-form label {
+    text-align: right; /* Căn phải nội dung label */
+    font-weight: bold; /* Đậm chữ */
+    color: var(--text-color-dark); /* Màu chữ từ biến CSS */
+    padding-right: 10px; /* Khoảng cách giữa label và input */
+}
+
+/* Style cho các input */
+#order-popup #order-form input {
+    padding: 0.5rem; /* Khoảng cách bên trong input */
+    border: 1px solid var(--text-color); /* Đường viền input */
+    border-radius: 4px; /* Bo góc input */
+    outline: none; /* Loại bỏ viền khi focus */
+    font-size: 1rem; /* Kích thước chữ */
+    background-color: var(--background-color); /* Màu nền input */
+    color: var(--text-color-dark); /* Màu chữ input */
+}
+
+/* Style cho button submit */
+#order-popup #order-form button {
+    
+    grid-column: 2 / 3; /* Đặt button ở cột thứ hai */
+    background-color: var(--text-color); /* Màu nền button */
+    color: white; /* Màu chữ button */
+    border: none; /* Loại bỏ đường viền */
+    padding: 0.7rem 2rem; /* Khoảng cách bên trong button */
+    border-radius: 4px; /* Bo góc button */
+    cursor: pointer; /* Hiệu ứng con trỏ khi hover */
+    font-weight: bold; /* Đậm chữ */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+    font-family: "Nunito", sans-serif;
+}
+
+/* Hiệu ứng hover cho button */
+#order-popup #order-form button:hover {
+    background-color: var(--hover-color); /* Màu nền khi hover */
+}
+
+/* Style cho thông báo lỗi trong form */
+#order-popup #order-form .error-message {
+    grid-column: 2 / 3; /* Đặt thông báo lỗi ở cột thứ hai */
+    color: red; /* Màu chữ lỗi */
+    font-size: 0.9rem; /* Kích thước chữ lỗi */
+    margin-top: 0.5rem; /* Khoảng cách trên */
+}
+.popup-content h2 {
+    margin-bottom: 2rem;
+}       
+.popup {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.close-btn {
+    cursor: pointer;
+    color: red;
+    float: right;
+    font-size: 20px;
+}
+
+
+
+@media (max-width: 768px) {
+    /* Điều chỉnh container chính */
+    .product-detail-pic-cont {
+        flex-direction: column;
+        margin-top: 6rem; /* Giảm khoảng cách trên */
+        padding: 1rem; /* Thêm padding để tạo không gian cho nội dung */
+    }
+
+    /* Điều chỉnh layout của phần sản phẩm */
+    .product-detail-pic {
+        flex-direction: column;
+        gap: 1rem; /* Giảm khoảng cách giữa các phần tử */
+        width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+        height: auto; /* Để chiều cao tự động điều chỉnh theo nội dung */
+        padding-top: 2rem; /* Giảm padding trên */
+    }
+
+    /* Điều chỉnh phần ảnh sản phẩm */
+    .product-detail-pic-img {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+
+    .product-detail-pic-img-mainimg {
+        width: 100%;
+        aspect-ratio: 1 / 1; /* Giữ tỷ lệ hình vuông */
+    }
+
+    .product-detail-pic-img-moreimg {
+        display: none; /* Ẩn phần ảnh phụ nếu không cần thiết trên di động */
+    }
+
+    /* Điều chỉnh phần thông tin sản phẩm */
+    .product-detail-pic-text {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        align-items: center; /* Căn giữa nội dung */
+        text-align: center; /* Căn giữa văn bản */
+    }
+
+    .product-detail-pic-text-nameandprice {
+        padding-left: 0; /* Loại bỏ padding trái */
+        padding-right: 0; /* Loại bỏ padding phải */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        padding-bottom: 1rem;
+    }
+    
+    .product-detail-pic-text-buynow {
+        width: 80%; /* Điều chỉnh chiều rộng nút */
+        height: auto; /* Điều chỉnh chiều cao tự động */
+        padding: 0.5rem 0; /* Thêm padding trên và dưới */
+        font-size: 1rem; /* Điều chỉnh kích thước phông chữ */
+    }
+
+    .product-detail-pic-text-quickbuy {
+        width: 90%; /* Điều chỉnh chiều rộng */
+        height: auto; /* Điều chỉnh chiều cao tự động */
+        padding: 1rem; /* Thêm padding */
+    }
+
+    .product-detail-pic-text-quickbuy-input {
+        flex-direction: column; /* Chuyển thành cột */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+
+    .product-detail-pic-text-quickbuy-input form {
+        flex-direction: column; /* Chuyển thành cột */
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+
+    .product-detail-pic-text-quickbuy-input input {
+        height: 2rem;
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        margin-bottom: 0.5rem; /* Thêm khoảng cách dưới input */
+    }
+
+    .product-detail-pic-text-quickbuy-input button {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+        height: 2rem;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .product-detail-pic-text-dis {
+        width: 90%; /* Điều chỉnh chiều rộng */
+        text-align: center; /* Căn giữa văn bản */
+    }
+    .product-detail-pic-text-dis p {
+        text-align: left;
+    }
+    /* Điều chỉnh các phần sản phẩm tương tự và gợi ý */
+    .product-detail-common,
+    .product-detail-suggest {
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+
+    .product-detail-common-items,
+    .product-detail-suggest-items {
+        width: 90%; /* Chiếm toàn bộ chiều rộng */
+        margin-bottom: 1rem; /* Thêm khoảng cách dưới mỗi sản phẩm */
+    }
+
+    /* Điều chỉnh hình ảnh sản phẩm tương tự và gợi ý */
+    .product-detail-common-items img,
+    .product-detail-suggest-items img {
+        width: 100%;
+        height: auto; /* Để chiều cao tự động điều chỉnh */
+    }
+
+    /* Điều chỉnh tiêu đề và giá sản phẩm tương tự và gợi ý */
+    .product-detail-common-items h3,
+    .product-detail-suggest-items h3 {
+        padding: 1rem 1rem;
+        justify-content: center;
+        display: flex;
+        font-size: 1rem;
+        height: 4.5rem;
+        align-items: center;
+       
+    }
+
+    .product-detail-common-items h4,
+    .product-detail-suggest-items h4 {
+        font-size: 1rem; /* Điều chỉnh kích thước phông chữ */
+    }
+
+    /* Điều chỉnh popup thông báo */
+    .popup-message {
+        font-size: 1.2rem; /* Điều chỉnh kích thước phông chữ */
+        padding: 0.8rem 1.5rem; /* Điều chỉnh padding */
+    }
+    .product-detail-common {
+        display: flex;
+        flex-direction: row;
+        width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+        flex-wrap: wrap; /* Cho phép các sản phẩm xuống hàng */
+        justify-content: space-between; /* Căn đều các sản phẩm trong hàng */
+        gap: 1rem; /* Thêm khoảng cách giữa các hàng */
+        margin: 0 auto; /* Căn giữa container */
+    }
+
+    .product-detail-common-items {
+        width: calc(50% - 0.5rem); /* Hiển thị 2 sản phẩm trên một hàng */
+        margin-bottom: 1rem; /* Thêm khoảng cách dưới mỗi hàng */
+    }
+    .product-detail-suggest {
+        display: flex; /* Đảm bảo container sử dụng Flexbox */
+        flex-direction: row; /* Căn các sản phẩm theo hàng ngang */
+        flex-wrap: wrap; /* Cho phép các sản phẩm xuống hàng khi không đủ không gian */
+        justify-content: space-between; /* Căn đều các sản phẩm trong hàng */
+        width: 90%; /* Điều chỉnh chiều rộng để phù hợp với màn hình di động */
+        margin: 0 auto; /* Căn giữa container */
+        gap: 1rem; /* Khoảng cách giữa các sản phẩm */
+    }
+
+    .product-detail-suggest-items {
+        width: calc(50% - 0.5rem); /* Hiển thị 2 sản phẩm trên một hàng */
+        margin-bottom: 1rem; /* Thêm khoảng cách dưới mỗi hàng */
+    }
+
+    /* Điều chỉnh phần sản phẩm tương tự nếu cần */
+    .product-detail-common {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .product-detail-common-items {
+        width: calc(50% - 0.5rem);
+        margin-bottom: 1rem;
+    }
+    .product-detail-suggest-cont-title {
+        text-align: center;
+    }
+}
+
