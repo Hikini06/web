@@ -23,8 +23,8 @@
             </button>
           </div>
           <div class="logo-container">
-            <a href="index.php" class="logo">Tiệm hoa MiMi</a>
-            <a href="index.php" class="logo-mobi">MiMi</a>
+            <a href="index.php" class="logo"><img src="image/mimi-logo.png" alt=""></a>
+            <!-- <a href="index.php" class="logo-mobi">MiMi</a> -->
           </div>
           <div class="search-bar-cont">
             <form action="filter.php" method="GET" class="search-form">

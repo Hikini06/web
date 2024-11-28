@@ -61,34 +61,34 @@
         margin: 1rem;
     }
     .logo-container {
-        padding-left: 1.5rem;
+        left: -8%;
+        top: -9%;
+        position: absolute;
+        height: 110%;
+        width: 50%;
+       
     }
-    .logo-container a {
-        font-size: 0.1rem;
+    .logo img {
+        width: 100%;
     }
 
-    .logo-container .logo {
+    /* .logo-container .logo {
         display: none;
-    }
+    } */
+    .header-contact-number {
+        align-items: center;
+        display: flex;
+        padding: 0px;
+        width: 100%;
+        justify-content: flex-end;
 
-    .logo-container .logo-mobi {
-        display: block;
-        font-size: 2rem;
-        font-family: 'Pacifico', cursive;
-        color: var(--main-color);
-        text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.6);
-        letter-spacing: 2px;
-        text-align: center;
-        display: inline-block;
-        padding: 10px;
-        text-decoration: none;
-        transition: all 0.3s ease-in-out;
     }
     
+    
     .search-bar-cont {
-        left: -3%;
-        width: 100%;
-        top: 85%;
+        left: 8%;
+        width: 90%;
+        top: 87%;
         position: absolute;
         display: flex;
     }
@@ -96,8 +96,11 @@
         width: 100%;
     }
     .header-left {
+        position: absolute;
+        top: 95%;
         display: flex;
         align-items: center;
+        width: 10%;
     }
 
     .hamburger {
@@ -284,7 +287,9 @@
         transition: transform 0.3s ease;
     } */
     .product-banner-jim-li a {
-        line-height: 100%;
+        font-size: 0.8rem;
+        text-align: left;
+        line-height: 1.5;
         justify-content: space-between;
         align-items: center;
         width: 100%;
