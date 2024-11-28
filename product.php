@@ -1,6 +1,6 @@
 <?php
 // Kết nối cơ sở dữ liệu
-include 'db-connect.php';
+include '../config/db-connect.php';
 
 try {
     // Xác định số sản phẩm mỗi trang

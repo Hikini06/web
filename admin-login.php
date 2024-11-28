@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db-connect.php';
+include '../config/db-connect.php';
 
 // Xử lý đăng nhập
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -1,5 +1,5 @@
 <?php
-include 'db-connect.php';
+include '../config/db-connect.php';
 
 $response = ['success' => false, 'message' => ''];
 

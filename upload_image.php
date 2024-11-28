@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
 }
 
 // Bao gồm tệp kết nối cơ sở dữ liệu
-require_once 'db-connect.php';
+require_once '../config/db-connect.php';
 
 // Kiểm tra yêu cầu POST và tệp ảnh
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -49,7 +49,7 @@ if ($field === 'price') {
     }
 }
 
-require_once 'db-connect.php';
+require_once '../config/db-connect.php';
 
 try {
     // Sử dụng prepared statement để tránh SQL Injection

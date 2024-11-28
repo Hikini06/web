@@ -1,5 +1,5 @@
 <?php
-include 'db-connect.php';
+include '../config/db-connect.php';
 
 // Xử lý dữ liệu từ form Quick Buy
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt']) && isset($_POST['product_id'])) {

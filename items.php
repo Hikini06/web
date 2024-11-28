@@ -1,5 +1,5 @@
 <?php
-require 'db-connect.php';
+require '../config/db-connect.php';
 
 // Lấy danh sách item_id từ bảng items
 $queryItems = $pdo->prepare("SELECT id, name, description FROM items");

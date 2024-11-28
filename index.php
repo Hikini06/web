@@ -2,7 +2,7 @@
 // index.php
 
 // Bao gồm tệp kết nối cơ sở dữ liệu
-require_once 'db-connect.php';
+require_once '../config/db-connect.php';
 
 // Fetch selected products for profile section
 try {

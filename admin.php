@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
 }
 
 // Bao gồm tệp kết nối cơ sở dữ liệu
-require_once 'db-connect.php';
+require_once '../config/db-connect.php';
 
 // Thiết lập số bản ghi mỗi trang cho khách hàng và sản phẩm
 $customer_records_per_page = 15;

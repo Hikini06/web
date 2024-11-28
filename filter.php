@@ -1,5 +1,5 @@
 <?php
-require 'db-connect.php';
+require '../config/db-connect.php';
 
 // Hàm phát hiện thiết bị di động
 function isMobile() {
