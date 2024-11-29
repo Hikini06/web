@@ -174,6 +174,8 @@ if (empty($suggestedProducts)) {
     <title>Tiệm hoa MiMi</title>
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
 
+    <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
+
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel= "stylesheet" href= "items.css"/>
     <link rel="stylesheet" href="header.css" />
