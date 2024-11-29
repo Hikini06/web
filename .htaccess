@@ -1,0 +1,14 @@
+# Bật chế độ Rewrite
+RewriteEngine On
+
+# Điều kiện để loại bỏ phần mở rộng .php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Quy tắc rewrite
+RewriteRule ^trang-chu$ index.php [L]
+RewriteRule ^admin$ admin.php [L]
+
+# Quy tắc rewrite cho categories.php
+RewriteRule ^categories/([0-9]+)$ categories.php?subcategory_id=$1 [L,QSA]
+RewriteRule ^categories/([0-9]+)/([a-zA-Z0-9_-]+)$ categories.php?subcategory_id=$1&name=$2 [L,QSA]

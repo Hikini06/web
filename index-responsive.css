@@ -154,8 +154,15 @@
     }
 
     #featured-products .product-card h3 {
-        font-size: 1rem; /* Giảm kích thước font cho tiêu đề */
+        justify-content: center;
+        display: flex;
+        height: 4rem;
+        padding: 1rem;
+        font-size: 0.9rem;
         margin: 0.5rem 0;
+        align-items: center;
+        margin: 0px;
+
     }
 
     #featured-products .product-card button {
@@ -291,8 +298,14 @@
         padding: 0px;
     }
     .swiper-slider-container .swiper-slide p {
-
-        padding: 5px 0px;
+        justify-content: center;
+        display: flex;
+        height: 4rem;
+        padding: 1rem;
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+        align-items: center;
+        margin: 0px;
     }
     /* Điều chỉnh các swiper-slide để hiển thị đúng */
     .swiper-slide {

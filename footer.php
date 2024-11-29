@@ -21,7 +21,7 @@
           <div class="guideSection-image-slider">
               <a href="https://example.com/1" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="image/image/Ảnh Hoa/đèn tròn hoa hồng/b (1).jpg" alt="Slide 1">
+                      <img src="./image/upload/img_67481a918fd810.31193589.jpg" alt="Slide 1">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Cách lắp đèn tròn hoa hồng</p>
 
@@ -29,7 +29,7 @@
               </a>
               <a href="https://example.com/2" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="image/image/Ảnh Hoa/Đèn vuông/den-hoa-tulip-17.jpg" alt="Slide 2">
+                      <img src="./image/upload/img_67481a393b3031.21826075.jpg" alt="Slide 2">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Cách lắp đèn vuông hoa tulip</p>
 
@@ -37,7 +37,7 @@
               </a>
               <a href="https://example.com/3" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="image/image/Ảnh Hoa/đèn mây hoa hồng/den-ngu-hoa-hong (3).jpeg" alt="Slide 3">
+                      <img src="./image/upload/img_674819588e46d6.00397169.jpeg" alt="Slide 3">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Lắp đèn mây hoa hồng</p>
 
@@ -45,7 +45,7 @@
               </a>
               <a href="https://example.com/4" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="image/image/Ảnh Hoa/đèn ngủ AD/hoa-anh-dao-6.jpg" alt="Slide 4">
+                      <img src="./image/upload/img_67481a4f305432.28780776.jpg" alt="Slide 4">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Cách lắp đèn tròn anh đào</p>
 
@@ -53,7 +53,7 @@
               </a>
               <a href="https://example.com/5" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="image/image/Ảnh Hoa/Đèn Ngủ Hoa Tulip (Tặng kèm túi quà) Nhiều Màu Sắc Thủ Công DIY , Quà Tặng Ý Nghĩa,Đèn Hoa Để Phòng Ngủ, Đèn Trang Trí _ Shopee Việt Nam/SKU-Hồng-01.jpg" alt="Slide 5">
+                      <img src="./image/upload/img_67481ac2c22733.73395989.jpg" alt="Slide 5">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Lắp đèn tròn hoa tulip</p>
 

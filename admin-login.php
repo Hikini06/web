@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập Admin</title>
+    <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
+
 </head>
 <body>
     <h1>Đăng nhập Admin</h1>

@@ -23,7 +23,7 @@
             </button>
           </div>
           <div class="logo-container">
-            <a href="index.php" class="logo"><img src="image/mimi-logo.png" alt=""></a>
+            <a href="./trang-chu" class="logo"><img src="image/mimi-logo.png" alt=""></a>
             <!-- <a href="index.php" class="logo-mobi">MiMi</a> -->
           </div>
           <div class="search-bar-cont">
