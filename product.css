@@ -183,4 +183,14 @@ body {
     .pagination-dots {
         display: none; /* Ẩn dấu chấm nếu cần để giảm clutter */
     }
+    .product span {
+        justify-content: center;
+        display: flex;
+        height: 4rem;
+        padding: 1rem;
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+        align-items: center;
+        margin: 0px;
+    }
 }

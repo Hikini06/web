@@ -80,7 +80,9 @@ $total_pages = ceil($total_products / $items_per_page);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh mục sản phẩm</title>
+    <title>Tiệm hoa MiMi</title>
+    <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
+
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="categories.css"/>
     <link rel="stylesheet" href="header.css" />
