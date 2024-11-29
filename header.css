@@ -233,10 +233,12 @@ header {
   height: 80%;
   box-sizing: border-box;
   margin: 0.5rem 0rem;
-  transition: ease;
+  
+  transition: transform 0.3s ease; /* Hiệu ứng mượt mà */
+
 }
 .logo img:hover {
-  scale: 1.1;
+  transform: scale(1.1);
 }
 .menu-nav ul {
   display: flex;

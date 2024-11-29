@@ -163,12 +163,14 @@ flex: 1;
   width: 100%;
 }
 .profile-card img {
+  box-shadow: 0, 0, 0, 0.3;
   width: 100%;
   aspect-ratio: 1;
   /* height: 100%; */
   border-radius: 50%;
   object-fit: cover;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.5);
 }
 .profile-card p {
   margin-top: 10px;
@@ -181,7 +183,7 @@ flex: 1;
 }
 .profile-card:hover img {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.5);
 }
 .profile-card:hover p {
   color: rgb(206, 51, 86);
@@ -199,21 +201,22 @@ main {
 
 /* Hero banner styles */
 #hero-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 30rem;
-  /* max-height: 200px; */
-  width: 50%;
-  overflow: hidden;
-  background-image: url("image/banner.webp");
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  flex-direction: column;
-  color: #fff;
-  background: url("path/to/hero-image.jpg") no-repeat center center/cover;
+  aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    /* max-height: 200px; */
+    width: 50%;
+    overflow: hidden;
+    background-image: url(image/banner.webp);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    flex-direction: column;
+    color: #fff;
+    background: url(path/to/hero-image.jpg) no-repeat center center / cover;
 }
 .hero-banner-img {
   padding: 0px !important;
@@ -1111,11 +1114,14 @@ main {
 /* Hero Banner Swiper */
 .hero-banner {
   width: 100%;
-  height: 500px; /* Điều chỉnh chiều cao theo nhu cầu */
+  aspect-ratio: 1/1;
+  height: 100%; 
   position: relative;
 }
 
 .hero-banner .swiper-slide {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1153,13 +1159,16 @@ main {
   display: flex;
   justify-content: space-between;
   width: 60%;
+  aspect-ratio: 2/1;
   height: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 .banner-divine-to-two {
   width: 50%;
-  height: 30rem;
+  height: 100%;
+  aspect-ratio: 1/1;
+  /* height: 30rem; */
   display: flex;
   flex-direction: column;
   gap: 2px;
