@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         const item = document.createElement('div');
                         item.className = 'product-item';
                         item.innerHTML = `
-                            <a href="product-detail.php?id=${product.id}">
-                                <img src="${product.img}" alt="${product.name}">
-                                <h3>${product.name}</h3>
-                                <p>${new Intl.NumberFormat().format(product.price)}đ</p>
-                            </a>
-                        `;
+                        <a href="/chi-tiet-san-pham/${product.id}">
+                            <img src="./image/upload/${product.img}" alt="${product.name}">
+                            <h3>${product.name}</h3>
+                            <p>${new Intl.NumberFormat().format(product.price)}đ</p>
+                        </a>
+                    `;
                         grid.appendChild(item);
                     });
 
