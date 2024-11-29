@@ -172,6 +172,7 @@ if (empty($suggestedProducts)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
+    <!-- <base href="/web_dm_lum/"> -->
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
 
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
@@ -198,7 +199,7 @@ if (empty($suggestedProducts)) {
         <ul>
             <?php foreach ($items as $item): ?>
                 <li>
-                    <a href="items.php?item_id=<?= $item['id'] ?>">
+                    <a href="./san-pham/<?= $item['id'] ?>">
                         <?= htmlspecialchars($item['name']) ?>
                     </a>
                 </li>
@@ -213,7 +214,7 @@ if (empty($suggestedProducts)) {
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
                 <div class="product">
-                    <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
+                    <a href="chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
                         <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                         <h3><?= htmlspecialchars($product['name']) ?></h3>
                         <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
@@ -237,7 +238,7 @@ if (empty($suggestedProducts)) {
                 <div class="suggested-row">
                     <?php foreach ($row as $product): ?>
                         <div class="suggested-product">
-                            <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
+                            <a href="chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
                                 <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                                 <h3><?= htmlspecialchars($product['name']) ?></h3>
                                 <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
@@ -256,9 +257,9 @@ if (empty($suggestedProducts)) {
 <?php if (!empty($products) && $totalPages > 1): ?>
     <div class="pagination">
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="items.php?item_id=<?= $item_id ?>&page=<?= $i ?>" 
-            class="<?= $i == $page ? 'active' : '' ?>">
-            <?= $i ?>
+            <a href="/san-pham/<?= htmlspecialchars($item_id) ?>/page/<?= $i ?>" 
+                class="<?= $i == $page ? 'active' : '' ?>">
+                <?= $i ?>
             </a>
         <?php endfor; ?>
     </div>

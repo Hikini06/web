@@ -5,10 +5,64 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Quy tắc rewrite
+# --- Quy tắc Rewrite Mới Cho product.php ---
+
+# 1. Xử lý URL dạng /tat-ca-san-pham/page/2
+RewriteRule ^tat-ca-san-pham/page/([0-9]+)/?$ product.php?page=$1 [L,QSA]
+
+# 2. Xử lý URL dạng /tat-ca-san-pham
+RewriteRule ^tat-ca-san-pham/?$ product.php [L,QSA]
+
+# 3. (Tùy chọn) Chuyển hướng từ /product.php?page=2 sang /tat-ca-san-pham/page/2
+RewriteCond %{THE_REQUEST} ^GET\ /product\.php\?page=([0-9]+) [NC]
+RewriteRule ^product\.php$ /tat-ca-san-pham/page/%1? [R=301,L]
+
+# --- Quy tắc Rewrite hiện tại cho các trang khác ---
+
+# Quy tắc rewrite hiện tại
 RewriteRule ^trang-chu$ index.php [L]
 RewriteRule ^admin$ admin.php [L]
 
-# Quy tắc rewrite cho categories.php
-RewriteRule ^categories/([0-9]+)$ categories.php?subcategory_id=$1 [L,QSA]
-RewriteRule ^categories/([0-9]+)/([a-zA-Z0-9_-]+)$ categories.php?subcategory_id=$1&name=$2 [L,QSA]
+# Quy tắc chuyển hướng từ URL cũ sang URL mới (categories)
+RewriteCond %{THE_REQUEST} ^GET\ /categories\.php\?subcategory_id=([0-9]+)&page=([0-9]+) [NC]
+RewriteRule ^categories\.php$ /danh-muc/%1/page/%2? [R=301,L]
+
+# Quy tắc rewrite mới cho danh mục
+RewriteRule ^danh-muc/([0-9]+)/page/([0-9]+)/?$ categories.php?subcategory_id=$1&page=$2 [L,QSA]
+RewriteRule ^danh-muc/([0-9]+)/?$ categories.php?subcategory_id=$1 [L,QSA]
+RewriteRule ^danh-muc/([0-9]+)/([a-zA-Z0-9_-]+)/?$ categories.php?subcategory_id=$1&name=$2 [L,QSA]
+
+# --- Quy tắc Rewrite Mới Cho items.php ---
+
+# 1. Xử lý URL dạng /san-pham/1/page/2
+RewriteRule ^san-pham/([0-9]+)/page/([0-9]+)/?$ items.php?item_id=$1&page=$2 [L,QSA]
+
+# 2. Xử lý URL dạng /san-pham/1
+RewriteRule ^san-pham/([0-9]+)/?$ items.php?item_id=$1 [L,QSA]
+
+# 3. Xử lý URL dạng /san-pham/1/some-name (nếu cần)
+RewriteRule ^san-pham/([0-9]+)/([a-zA-Z0-9_-]+)/?$ items.php?item_id=$1&name=$2 [L,QSA]
+
+# 4a. Chuyển hướng từ /items.php?item_id=1&page=2 sang /san-pham/1/page/2
+RewriteCond %{THE_REQUEST} ^GET\ /items\.php\?item_id=([0-9]+)&page=([0-9]+) [NC]
+RewriteRule ^items\.php$ /san-pham/%1/page/%2? [R=301,L]
+
+# 4b. Chuyển hướng từ /items.php?item_id=1 sang /san-pham/1
+RewriteCond %{THE_REQUEST} ^GET\ /items\.php\?item_id=([0-9]+) [NC]
+RewriteRule ^items\.php$ /san-pham/%1? [R=301,L]
+
+# --- Quy tắc Rewrite Mới Cho product-detail.php ---
+
+# 1. Xử lý URL dạng /chi-tiet-san-pham/1
+RewriteRule ^chi-tiet-san-pham/([0-9]+)/?$ product-detail.php?id=$1 [L,QSA]
+
+# 2. Xử lý URL dạng /chi-tiet-san-pham/1/some-name (nếu cần)
+RewriteRule ^chi-tiet-san-pham/([0-9]+)/([a-zA-Z0-9_-]+)/?$ product-detail.php?id=$1&name=$2 [L,QSA]
+
+# 3a. Chuyển hướng từ /product-detail.php?id=1&page=2 sang /chi-tiet-san-pham/1/page/2 (nếu sử dụng phân trang)
+RewriteCond %{THE_REQUEST} ^GET\ /product-detail\.php\?id=([0-9]+)&page=([0-9]+) [NC]
+RewriteRule ^product-detail\.php$ /chi-tiet-san-pham/%1/page/%2? [R=301,L]
+
+# 3b. Chuyển hướng từ /product-detail.php?id=1 sang /chi-tiet-san-pham/1
+RewriteCond %{THE_REQUEST} ^GET\ /product-detail\.php\?id=([0-9]+) [NC]
+RewriteRule ^product-detail\.php$ /chi-tiet-san-pham/%1? [R=301,L]

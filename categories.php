@@ -1,8 +1,9 @@
+
 <?php
 require '../config/db-connect.php';
 if (!isset($_GET['subcategory_id'])) {
     // Chuyển hướng đến URL mặc định
-    header("Location: categories.php?subcategory_id=1");
+    header("Location: ./danh-muc/1");
     exit; // Dừng thực thi mã PHP sau khi chuyển hướng
 }
 
@@ -81,7 +82,7 @@ $total_pages = ceil($total_products / $items_per_page);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
-    <base href="https://tiemhoamimi.com/">
+    <base href="/web_dm_lum/">
     <link rel="icon" href="image/mimi-logo-vuong.png" type="image/png">
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -109,7 +110,7 @@ $total_pages = ceil($total_products / $items_per_page);
         <ul>
             <?php foreach ($subcategories as $subcategory): ?>
                 <li class="<?= $subcategory['id'] === $subcategory_id ? 'active' : '' ?>">
-                    <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory['id']) ?>">
+                    <a href="./danh-muc/<?= htmlspecialchars($subcategory['id']) ?>">
                         <?= htmlspecialchars($subcategory['name']) ?>
                     </a>
                 </li>
@@ -123,7 +124,7 @@ $total_pages = ceil($total_products / $items_per_page);
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
                 <div class="product">
-                    <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
+                    <a href="chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
                         <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                         <h3><?= htmlspecialchars($product['name']) ?></h3>
                         <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
@@ -135,19 +136,17 @@ $total_pages = ceil($total_products / $items_per_page);
         <?php endif; ?>
     </div>
 
-    <!-- Pagination -->
+    <!-- Phân trang -->
     <div class="pagination">
         <?php if ($total_pages > 1): ?>
-            <!-- Trang đầu -->
+            <!-- Trang đầu tiên -->
             <?php if ($page > 2): ?>
-                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=1">
-                    1
-                </a>
+                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/1">1</a>
             <?php endif; ?>
 
             <!-- Trang trước -->
             <?php if ($page > 1): ?>
-                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=<?= $page - 1 ?>">
+                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $page - 1 ?>">
                     <?= $page - 1 ?>
                 </a>
             <?php endif; ?>
@@ -158,15 +157,15 @@ $total_pages = ceil($total_products / $items_per_page);
             <!-- Trang sau -->
             <?php if ($page < $total_pages): ?>
                 <?php if ($page + 1 < $total_pages): ?>
-                    <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=<?= $page + 1 ?>">
+                    <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $page + 1 ?>">
                         <?= $page + 1 ?>
                     </a>
                 <?php endif; ?>
             <?php endif; ?>
 
-            <!-- Trang cuối -->
+            <!-- Trang cuối cùng -->
             <?php if ($page < $total_pages): ?>
-                <a href="categories.php?subcategory_id=<?= htmlspecialchars($subcategory_id) ?>&items_per_page=<?= htmlspecialchars($items_per_page) ?>&page=<?= $total_pages ?>">
+                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $total_pages ?>">
                     <?= $total_pages ?>
                 </a>
             <?php endif; ?>

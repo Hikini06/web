@@ -63,8 +63,11 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
-    <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
+    <base href="https://tiemhoamimi.com/">
+    <!-- <base href="http://localhost/web_dm_lum/"> -->
 
+    <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
+    
     <!-- Font chữ -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="product.css">
@@ -81,7 +84,7 @@ try {
     <section class="product-all-cont">
         <div class="products-container">
             <?php foreach ($products as $product): ?>
-                <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
+                <a href="chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
                     <div class="product">
                         <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                         <span><?= htmlspecialchars($product['name']) ?></span>
@@ -91,60 +94,62 @@ try {
             <?php endforeach; ?>
         </div>
 
-        <!-- Phân trang -->
-        <div class="pagination">
-            <?php if ($page > 1): ?>
-                <a href="?page=<?= $page - 1 ?>" class="pagination-btn"><i class="fa-solid fa-chevron-left"></i></a>
+    <!-- Phân trang -->
+    <div class="pagination">
+        <?php if ($page > 1): ?>
+            <a href="./tat-ca-san-pham/page/<?= $page - 1 ?>" class="pagination-btn"><i class="fa-solid fa-chevron-left"></i></a>
+        <?php endif; ?>
+
+        <!-- Luôn hiển thị trang 1 -->
+        <a href="./tat-ca-san-pham/page/1" class="pagination-btn <?= $page == 1 ? 'active' : '' ?>">1</a>
+
+        <!-- Khi ở trang đầu, hiển thị trang 2 và 3 -->
+        <?php if ($page == 1): ?>
+            <?php if ($totalPages >= 2): ?>
+                <a href="./tat-ca-san-pham/page/2" class="pagination-btn">2</a>
+            <?php endif; ?>
+            <?php if ($totalPages >= 3): ?>
+                <a href="./tat-ca-san-pham/page/3" class="pagination-btn">3</a>
+            <?php endif; ?>
+            <?php if ($totalPages > 3): ?>
+                <span class="pagination-dots">...</span>
+            <?php endif; ?>
+            <?php if ($totalPages > 1): ?>
+                <a href="./tat-ca-san-pham/page/<?= $totalPages ?>" class="pagination-btn"><?= $totalPages ?></a>
+            <?php endif; ?>
+        <?php elseif ($page == $totalPages): ?>
+            <?php if ($totalPages > 3): ?>
+                <span class="pagination-dots">...</span>
             <?php endif; ?>
 
-            <!-- Luôn hiển thị trang 1 -->
-            <a href="?page=1" class="pagination-btn <?= $page == 1 ? 'active' : '' ?>">1</a>
-
-            <!-- Khi ở trang đầu, hiển thị trang 2 và 3 -->
-            <?php if ($page == 1): ?>
-                <?php if ($totalPages >= 2): ?>
-                    <a href="?page=2" class="pagination-btn">2</a>
-                <?php endif; ?>
-                <?php if ($totalPages >= 3): ?>
-                    <a href="?page=3" class="pagination-btn">3</a>
-                <?php endif; ?>
-                <?php if ($totalPages > 3): ?>
-                    <span class="pagination-dots">...</span>
-                <?php endif; ?>
-                <?php if ($totalPages > 1): ?>
-                    <a href="?page=<?= $totalPages ?>" class="pagination-btn"><?= $totalPages ?></a>
-                <?php endif; ?>
-            <?php elseif ($page == $totalPages): ?>
-                <?php if ($totalPages > 3): ?>
-                    <span class="pagination-dots">...</span>
-                <?php endif; ?>
-                <?php if ($totalPages - 2 > 1): ?>
-                    <a href="?page=<?= $totalPages - 2 ?>" class="pagination-btn"><?= $totalPages - 2 ?></a>
-                <?php endif; ?>
-                <?php if ($totalPages - 1 > 1): ?>
-                    <a href="?page=<?= $totalPages - 1 ?>" class="pagination-btn"><?= $totalPages - 1 ?></a>
-                <?php endif; ?>
-                <a href="?page=<?= $totalPages ?>" class="pagination-btn active"><?= $totalPages ?></a>
-            <?php else: ?>
-                <?php if ($page > 3): ?>
-                    <span class="pagination-dots">...</span>
-                <?php endif; ?>
-
-                <a href="?page=<?= $page ?>" class="pagination-btn active"><?= $page ?></a>
-
-                <?php if ($page < $totalPages - 2): ?>
-                    <span class="pagination-dots">...</span>
-                <?php endif; ?>
-
-                <?php if ($totalPages > 1): ?>
-                    <a href="?page=<?= $totalPages ?>" class="pagination-btn"><?= $totalPages ?></a>
-                <?php endif; ?>
+            <?php if ($totalPages - 2 > 1): ?>
+                <a href="./tat-ca-san-pham/page/<?= $totalPages - 2 ?>" class="pagination-btn"><?= $totalPages - 2 ?></a>
+            <?php endif; ?>
+            <?php if ($totalPages - 1 > 1): ?>
+                <a href="./tat-ca-san-pham/page/<?= $totalPages - 1 ?>" class="pagination-btn"><?= $totalPages - 1 ?></a>
+            <?php endif; ?>
+            <a href="./tat-ca-san-pham/page/<?= $totalPages ?>" class="pagination-btn active"><?= $totalPages ?></a>
+        <?php else: ?>
+            <?php if ($page > 3): ?>
+                <span class="pagination-dots">...</span>
             <?php endif; ?>
 
-            <?php if ($page < $totalPages): ?>
-                <a href="?page=<?= $page + 1 ?>" class="pagination-btn"><i class="fa-solid fa-chevron-right"></i></a>
+            <a href="./tat-ca-san-pham/page/<?= $page ?>" class="pagination-btn active"><?= $page ?></a>
+
+            <?php if ($page < $totalPages - 2): ?>
+                <span class="pagination-dots">...</span>
             <?php endif; ?>
-        </div>
+
+            <?php if ($totalPages > 1): ?>
+                <a href="./tat-ca-san-pham/page/<?= $totalPages ?>" class="pagination-btn"><?= $totalPages ?></a>
+            <?php endif; ?>
+        <?php endif; ?>
+
+        <?php if ($page < $totalPages): ?>
+            <a href="./tat-ca-san-pham/page/<?= $page + 1 ?>" class="pagination-btn"><i class="fa-solid fa-chevron-right"></i></a>
+        <?php endif; ?>
+    </div>
+
 
 
     </section>
