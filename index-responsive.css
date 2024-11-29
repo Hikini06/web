@@ -249,7 +249,9 @@
     .swiper.hero-banner {
         width: 100%;
     }
-   
+    .swiper-wrapper {
+        display: flex !important;
+    }
     /* Điều chỉnh các swiper-slide để hiển thị đúng như product-card */
     .swiper-slider-container .swiper-slide {
       
