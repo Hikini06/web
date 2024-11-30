@@ -200,11 +200,17 @@ $categories = [
         </section>
         <section class="banner-divine-to-two">
             <div class="banner-divine-to-two-child">
-                <img src="image/2.webp" alt="" />
+                <img src="./image/banner-pc/banner-1.png" alt="" />
             </div>
             <div class="banner-divine-to-two-child banner-divine-to-two-child-cont">
-                <img src="image/3.webp" alt="" />
+                <img src="./image/banner-pc/banner-2.png" alt="" />
                 <a class="banner-divine-to-two-child-btn cta-button" href="product.php">Mua ngay</a>
+                <div class = "banner-divine-to-two-child-cont-btn">
+                    <h3>Tất cả các đơn hàng từ 15/12 - 24/12</h3>
+                    <a href="#">Miễn phí vận chuyển</a>
+                    <a href="#">MUA NGAY</a>
+                </div>
+
             </div>
         </section>
     </div>  
