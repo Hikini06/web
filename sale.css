@@ -7,11 +7,13 @@ body {
     padding: 0;
 }
 .sale-item-cont {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4rem;
     width: 60%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
     justify-items: center;
 }
 .product-item {
