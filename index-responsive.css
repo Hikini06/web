@@ -52,8 +52,14 @@
         margin-bottom: 1rem;
     }
     .hero-banner-cont {
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         aspect-ratio: 1/1;
+        height: auto;
     }
 
     .profile-section-cont {
@@ -238,7 +244,47 @@
         flex: 0 0 auto; /* Không co giãn */
     }
     .banner-divine-to-two {
-        display: none;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 25%;
+    }
+    .banner-divine-to-two-child {
+        height: 100%;
+    }
+    .banner-divine-to-two-child-cont-btn {
+       height: 100%;
+    }
+    .banner-divine-to-two-child-cont-btn h3 {
+        font-size: 0.5rem;
+        margin: 0px;
+    }
+    .banner-divine-to-two-child-cont-btn a {
+        padding: 5px 10px;
+        margin: 0px;
+        height: auto;
+        text-align: center;
+        font-size: 0.5rem;
+        font-weight: 900;
+        /* line-height: 100%; */
+        color: var(--text-color);
+        text-decoration: none;
+        border: 1px solid var(--text-color);
+        border-radius: 10px;
+        /* margin-bottom: 1rem; */
+        width: 49%;
+        display: block;
+        /* padding: 1rem 3rem; */
+        background-color: white;
+
+    }
+    .banner-divine-to-two-child-cont-btn a:last-child {
+        margin-top: 5px;
+        padding: 5px 10px;
+        background-color: var(--text-color);
+        color: white;
+        border: 1px solid var(--text-color);
+        margin-bottom: 0px;
     }
     /* Đặt width cho swiper-slider-container bằng 100% */
     .swiper-slider-container {
