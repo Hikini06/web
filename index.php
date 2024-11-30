@@ -281,7 +281,7 @@ $categories = [
             <div class="two-product-banner-child">
                 <div class="two-product-banner-child-two">
                     <div class="img-one">
-                        <img src="image/noel-background.jpg" alt="" />
+                        <img src="./image/banner-pc/divine-vuong.jpg" alt="" />
                     </div>
                     <div class="img-two">
                         <img src="image/den-vuong-noel.jpeg" alt="" />
@@ -291,7 +291,7 @@ $categories = [
             <div class="two-product-banner-child">
                 <div class="two-product-banner-child-two">
                     <div class="img-one">
-                        <img src="image/noel-background-two.jfif" alt="" />
+                        <img src="./image/banner-pc/divine-tron.jpg" alt="" />
                     </div>
                     <div class="img-two">
                         <img src="image/den-tron-hoa-hong.jpg" alt="" />
