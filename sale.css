@@ -150,7 +150,17 @@ body {
 
  @media (max-width: 768px) {
     .sale-item-cont {
+        margin-top: 2rem;
         width: 90%;
         grid-template-columns: repeat(2, 1fr); /* 2 sản phẩm mỗi hàng trên điện thoại */
+    }
+    .banner-cont {
+        width: 90%;
+    }
+    .banner-text h1 {
+        font-size: 1.5rem;
+    }
+    .banner-text h3 {
+        font-size: 1rem;
     }
 }

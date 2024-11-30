@@ -76,8 +76,8 @@ if (!empty($currentProductIds)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi - Nhóm <?php echo htmlspecialchars(strtoupper($groupKey)); ?></title>
-    <!-- <base href="https://tiemhoamimi.com/"> -->
-    <base href="http://localhost/web_dm_lum/">
+    <base href="https://tiemhoamimi.com/">
+    <!-- <base href="http://localhost/web_dm_lum/"> -->
 
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     
