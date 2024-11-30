@@ -17,8 +17,6 @@ RewriteRule ^tat-ca-san-pham/?$ product.php [L,QSA]
 RewriteCond %{THE_REQUEST} ^GET\ /product\.php\?page=([0-9]+) [NC]
 RewriteRule ^product\.php$ /tat-ca-san-pham/page/%1? [R=301,L]
 
-# --- Quy tắc Rewrite hiện tại cho các trang khác ---
-
 # Quy tắc rewrite hiện tại
 RewriteRule ^trang-chu$ index.php [L]
 RewriteRule ^admin$ admin.php [L]
@@ -66,3 +64,19 @@ RewriteRule ^product-detail\.php$ /chi-tiet-san-pham/%1/page/%2? [R=301,L]
 # 3b. Chuyển hướng từ /product-detail.php?id=1 sang /chi-tiet-san-pham/1
 RewriteCond %{THE_REQUEST} ^GET\ /product-detail\.php\?id=([0-9]+) [NC]
 RewriteRule ^product-detail\.php$ /chi-tiet-san-pham/%1? [R=301,L]
+
+# --- Quy tắc Rewrite Mới Cho sale.php ---
+
+# 1. Xử lý URL dạng /danh-sach/a/trang/1
+RewriteRule ^danh-sach/([a-zA-Z0-9_-]+)/trang/([0-9]+)/?$ sale.php?group=$1&page=$2 [L,QSA]
+
+# 2. Xử lý URL dạng /danh-sach/a
+RewriteRule ^danh-sach/([a-zA-Z0-9_-]+)/?$ sale.php?group=$1 [L,QSA]
+
+# 3. Chuyển hướng từ /sale.php?group=a&page=1 sang /danh-sach/a/trang/1
+RewriteCond %{THE_REQUEST} ^GET\ /sale\.php\?group=([a-zA-Z0-9_-]+)&page=([0-9]+) [NC]
+RewriteRule ^sale\.php$ /danh-sach/%1/trang/%2? [R=301,L]
+
+# 4. Chuyển hướng từ /sale.php?group=a sang /danh-sach/a
+RewriteCond %{THE_REQUEST} ^GET\ /sale\.php\?group=([a-zA-Z0-9_-]+) [NC]
+RewriteRule ^sale\.php$ /danh-sach/%1? [R=301,L]
