@@ -157,11 +157,8 @@
         scroll-snap-align: start; /* Căn chỉnh scroll snap */
     }
 
-    /* 5. Điều chỉnh hình ảnh và văn bản trong .product-card nếu cần */
-    #featured-products .product-card img {
-        height: 200px; /* Giảm chiều cao hình ảnh cho phù hợp */
-        object-fit: cover;
-    }
+    
+
 
     #featured-products .product-card h3 {
         justify-content: center;
@@ -225,9 +222,10 @@
 
     /* 5. Điều chỉnh hình ảnh và văn bản trong .product-card nếu cần */
     #featured-products .product-card img {
-        height: 200px; /* Giảm chiều cao hình ảnh cho phù hợp */
+        aspect-ratio: 1/1; /* Giảm chiều cao hình ảnh cho phù hợp */
         object-fit: cover;
     }
+
 
     #featured-products .product-card h3 {
         font-size: 1rem; /* Giảm kích thước font cho tiêu đề */

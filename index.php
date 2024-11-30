@@ -200,10 +200,10 @@ $categories = [
         </section>
         <section class="banner-divine-to-two">
             <div class="banner-divine-to-two-child">
-                <img src="./image/banner-pc/banner-1.png" alt="" />
+                <img src="./image/banner-pc/banner-1.jpg" alt="" />
             </div>
             <div class="banner-divine-to-two-child banner-divine-to-two-child-cont">
-                <img src="./image/banner-pc/banner-2.png" alt="" />
+                <img src="./image/banner-pc/banner-2.jpg" alt="" />
                 <!-- <a class="banner-divine-to-two-child-btn cta-button" href="product.php">Mua ngay</a> -->
                 <div class = "banner-divine-to-two-child-cont-btn">
                     <h3>Tất cả các đơn hàng từ 15/12 - 24/12</h3>
@@ -223,29 +223,29 @@ $categories = [
         <div class="product-grid">
             <a href="">
                 <div class="product-card">
-                    <img src="image/2.webp" alt="Sản phẩm 1" />
-                    <h3>Bó hoa hồng đỏ</h3>
+                    <img src="./image/noi-bat/noi-bat-1.jpg" alt="Sản phẩm 1" />
+                    <h3>Gấu trúc Noel</h3>
                     <button>159.000đ</button>
                 </div>
             </a>
             <a href="">
                 <div class="product-card">
-                    <img src="image/5.webp" alt="Sản phẩm 2" />
-                    <h3>Hoa cưới cầm tay</h3>
+                    <img src="./image/noi-bat/noi-bat-2.jpg" alt="Sản phẩm 2" />
+                    <h3>Capybara Noel</h3>
                     <button>250.000đ</button>
                 </div>
             </a>
             <a href="">
                 <div class="product-card">
-                    <img src="image/3.webp" alt="Sản phẩm 3" />
-                    <h3>Hoa chúc mừng khai trương</h3>
+                    <img src="./image/noi-bat/noi-bat-3.jpg" alt="Sản phẩm 3" />
+                    <h3>Set quà Noel</h3>
                     <button>129.000đ</button>
                 </div>
             </a>
             <a href="">
                 <div class="product-card">
-                    <img src="image/3.webp" alt="Sản phẩm 4" />
-                    <h3>Hoa sinh nhật</h3>
+                    <img src="./image/noi-bat/noi-bat-4.jpg" alt="Sản phẩm 4" />
+                    <h3>Bó hoa gấu Noel</h3>
                     <button>390.000đ</button>
                 </div>
             </a>
