@@ -1,0 +1,84 @@
+
+/* Thêm một số kiểu CSS cơ bản cho sản phẩm */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+.sale-item-cont {
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+.product-item {
+    
+    margin-top: 10rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: #fff;
+    transition: transform 0.2s;
+}
+.product-item:hover {
+    transform: translateY(-5px);
+}
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+.product-item h3 {
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: #333;
+}
+.product-item p {
+    color: #555;
+    font-size: 1em;
+    margin: 5px 0;
+}
+.product-item .price {
+    font-size: 1.1em;
+    color: #e74c3c;
+    margin-top: 5px;
+    font-weight: bold;
+}
+/* Phân trang */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    list-style: none;
+    padding: 0;
+}
+.pagination li {
+    margin: 0 5px;
+}
+.pagination a, .pagination span {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #3498db;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+.pagination .active {
+    background-color: #3498db;
+    color: #fff;
+    border-color: #3498db;
+}
+.pagination .disabled {
+    color: #ccc;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
