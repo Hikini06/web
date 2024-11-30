@@ -151,7 +151,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
-    <!-- <base href="/web_dm_lum/"> -->
+    <base href="http://localhost/web-dm-lum/web/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="stylesheet" href="product-detail.css">
     <link rel="stylesheet" href="header.css">
