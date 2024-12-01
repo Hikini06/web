@@ -592,6 +592,7 @@ try {
                     <thead>
                         <tr>
                             <th>STT</th>
+                            <th>ID</th>
                             <th>Tên Sản Phẩm</th>
                             <th>Mô Tả</th>
                             <th>Ảnh</th>

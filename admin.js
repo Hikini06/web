@@ -1192,7 +1192,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 var cellIndex = document.createElement('td');
                 cellIndex.textContent = index + 1 + (currentPage - 1) * 50;
                 row.appendChild(cellIndex);
-    
+                
+                // Ô ID sản phẩm
+                var cellID = document.createElement('td');
+                cellID.textContent = product.id; // Hiển thị ID từ items_detail
+                row.appendChild(cellID);
+
                 // Ô tên sản phẩm
                 var cellName = document.createElement('td');
                 cellName.textContent = product.name;
