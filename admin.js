@@ -458,6 +458,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         updateButtons();
+
+        fetchAndUpdateProducts();
     });
 
     document.getElementById('subcategoriesSelect').addEventListener('change', function() {
@@ -475,6 +477,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         updateButtons();
+
+        fetchAndUpdateProducts();
+
     });
 
     document.getElementById('itemsSelect').addEventListener('change', function() {
@@ -489,11 +494,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         updateButtons();
+
+        fetchAndUpdateProducts();
     });
 
     document.getElementById('itemsDetailSelect').addEventListener('change', function() {
         // Khi thay đổi items_detail, chỉ cần cập nhật nút delete
         updateButtons();
+        fetchAndUpdateProducts();
+
     });
 
     // Khởi tạo trạng thái ban đầu
@@ -1052,5 +1061,241 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.send();
     }
+    function fetchAndUpdateProducts() {
+        var category_id = document.getElementById('categoriesSelect').value;
+        var subcategory_id = document.getElementById('subcategoriesSelect').value;
+        var item_id = document.getElementById('itemsSelect').value;
+        var items_detail_id = document.getElementById('itemsDetailSelect').value;
+    
+        var params = {};
+        if (category_id) params['category_id'] = category_id;
+        if (subcategory_id) params['subcategory_id'] = subcategory_id;
+        if (item_id) params['item_id'] = item_id;
+        if (items_detail_id) params['items_detail_id'] = items_detail_id;
+    
+        var queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
+    
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_product.php?' + queryString, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        updateProductsTable(response.data);
+                    } else {
+                        alert('Lỗi: ' + response.message);
+                    }
+                } catch (e) {
+                    alert('Phản hồi từ server không hợp lệ.');
+                }
+            } else {
+                alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+            }
+        };
+        xhr.send();
+    }
+
+    function updateProductsTable(products) {
+        var productsTableBody = document.querySelector('#productsTable tbody');
+        if (!productsTableBody) {
+            productsTableBody = document.createElement('tbody');
+            document.getElementById('productsTable').appendChild(productsTableBody);
+        }
+        productsTableBody.innerHTML = ''; // Clear existing rows
+    
+        if (products.length > 0) {
+            products.forEach(function(product, index) {
+                var row = document.createElement('tr');
+                row.setAttribute('data-id', product.id);
+    
+                var cellIndex = document.createElement('td');
+                cellIndex.textContent = index + 1;
+                row.appendChild(cellIndex);
+    
+                var cellId = document.createElement('td');
+                cellId.textContent = product.id;
+                row.appendChild(cellId);
+    
+                var cellName = document.createElement('td');
+                cellName.className = 'editable';
+                cellName.setAttribute('data-field', 'name');
+                cellName.textContent = product.name;
+                row.appendChild(cellName);
+    
+                var cellDescription = document.createElement('td');
+                cellDescription.className = 'editable';
+                cellDescription.setAttribute('data-field', 'description');
+                cellDescription.textContent = product.description;
+                row.appendChild(cellDescription);
+    
+                var cellImg = document.createElement('td');
+                var img = document.createElement('img');
+                img.src = 'https://tiemhoamimi.com//image/upload/' + product.img;
+                img.alt = product.name;
+                img.width = 100;
+                cellImg.appendChild(img);
+                cellImg.innerHTML += '<br><button class="upload-image-btn" data-id="' + product.id + '">Tải lên ảnh</button><input type="file" accept="image/*" class="upload-image-input" data-id="' + product.id + '" style="display: none;">';
+                row.appendChild(cellImg);
+    
+                var cellPrice = document.createElement('td');
+                cellPrice.className = 'editable';
+                cellPrice.setAttribute('data-field', 'price');
+                cellPrice.textContent = numberWithCommas(product.price) + 'đ';
+                row.appendChild(cellPrice);
+    
+                var cellActions = document.createElement('td');
+                cellActions.innerHTML = '<button class="save-btn" data-id="' + product.id + '" style="display: none;">Lưu</button><button class="cancel-btn" data-id="' + product.id + '" style="display: none;">Hủy</button>';
+                row.appendChild(cellActions);
+    
+                productsTableBody.appendChild(row);
+            });
+    
+            // Re-initialize event listeners for editable cells and upload buttons
+            initializeEditableCells();
+            initializeUploadButtons();
+        } else {
+            var row = document.createElement('tr');
+            var cell = document.createElement('td');
+            cell.setAttribute('colspan', '7');
+            cell.textContent = 'Không có dữ liệu';
+            row.appendChild(cell);
+            productsTableBody.appendChild(row);
+        }
+    }
+    
+    function initializeEditableCells() {
+        var editableCells = document.querySelectorAll('.editable');
+    
+        editableCells.forEach(function(cell) {
+            cell.addEventListener('click', function() {
+                if (cell.querySelector('input')) return;
+    
+                var currentText = cell.textContent.trim();
+                var field = cell.getAttribute('data-field');
+                var id = cell.parentElement.getAttribute('data-id');
+    
+                var input = document.createElement('input');
+                input.type = field === 'price' ? 'number' : 'text';
+                input.value = field === 'price' ? parseFloat(currentText.replace(/[^0-9.-]+/g,"")) : currentText;
+                input.className = 'edit-input';
+                input.style.width = '100%';
+    
+                cell.textContent = '';
+                cell.appendChild(input);
+                input.focus();
+    
+                var saveBtn = cell.parentElement.querySelector('.save-btn');
+                var cancelBtn = cell.parentElement.querySelector('.cancel-btn');
+                saveBtn.style.display = 'inline-block';
+                cancelBtn.style.display = 'inline-block';
+    
+                cancelBtn.addEventListener('click', function() {
+                    cell.textContent = currentText;
+                    saveBtn.style.display = 'none';
+                    cancelBtn.style.display = 'none';
+                }, { once: true });
+    
+                saveBtn.addEventListener('click', function() {
+                    var newValue = input.value.trim();
+                    if (newValue === '') {
+                        alert('Giá trị không được để trống.');
+                        return;
+                    }
+    
+                    if (field === 'price' && isNaN(newValue)) {
+                        alert('Giá trị phải là số.');
+                        return;
+                    }
+    
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'update_product.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
+                                try {
+                                    var response = JSON.parse(xhr.responseText);
+                                    if (response.success) {
+                                        if (field === 'price') {
+                                            cell.textContent = numberWithCommas(parseFloat(newValue)) + 'đ';
+                                        } else {
+                                            cell.textContent = newValue;
+                                        }
+                                        saveBtn.style.display = 'none';
+                                        cancelBtn.style.display = 'none';
+                                    } else {
+                                        alert('Lỗi: ' + response.message);
+                                    }
+                                } catch (e) {
+                                    alert('Phản hồi từ server không hợp lệ.');
+                                }
+                            } else {
+                                alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+                            }
+                        }
+                    };
+                    xhr.send('id=' + encodeURIComponent(id) + '&field=' + encodeURIComponent(field) + '&value=' + encodeURIComponent(newValue));
+                }, { once: true });
+            });
+        });
+    }
+    
+    function initializeUploadButtons() {
+        var uploadButtons = document.querySelectorAll('.upload-image-btn');
+    
+        uploadButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var productId = this.getAttribute('data-id');
+                var fileInput = document.querySelector('.upload-image-input[data-id="' + productId + '"]');
+                if (fileInput) {
+                    fileInput.click();
+                }
+            });
+        });
+    
+        var fileInputs = document.querySelectorAll('.upload-image-input');
+    
+        fileInputs.forEach(function(input) {
+            input.addEventListener('change', function() {
+                var productId = this.getAttribute('data-id');
+                var file = this.files[0];
+    
+                if (file) {
+                    var formData = new FormData();
+                    formData.append('product_id', productId);
+                    formData.append('image', file);
+    
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'upload_image.php', true);
+    
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            try {
+                                var response = JSON.parse(xhr.responseText);
+                                if (response.success) {
+                                    var imgElement = document.querySelector('tr[data-id="' + productId + '"] img');
+                                    if (imgElement) {
+                                        imgElement.src = response.image_path + '?' + new Date().getTime();
+                                    }
+                                    alert('Tải lên ảnh thành công!');
+                                } else {
+                                    alert('Lỗi: ' + response.message);
+                                }
+                            } catch (e) {
+                                alert('Phản hồi từ server không hợp lệ.');
+                            }
+                        } else {
+                            alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+                        }
+                    };
+    
+                    xhr.send(formData);
+                }
+            });
+        });
+    }
+    
+    fetchAndUpdateProducts();
 
 });

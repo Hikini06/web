@@ -475,135 +475,6 @@ try {
     </div>
     <!-- PHẦN BẢNG KHÁCH HÀNG END -->
 
-    <!-- PHẦN BẢNG SẢN PHẨM -->
-    <div class="product-info-cont" id="productInfoCont" style="display: none;">
-        <div class="product-info">
-             <!-- Search Filter for Products -->
-            <div class="product-search-filter">
-                <form method="GET" action="admin.php">
-                    <input type="hidden" name="product_page" value="1">
-                    <input type="text" name="search" placeholder="Tìm kiếm sản phẩm..." value="<?php echo htmlspecialchars($search); ?>">
-                    <button type="submit">Tìm kiếm</button>
-                </form>
-            </div>
-            
-            <table id="productsTable">
-                <thead>
-                    <tr>
-                        <th>Số thứ tự</th>
-                        <th>ID</th> <!-- Cột mới cho ID -->
-                        <th>Tên sản phẩm</th>
-                        <th>Mô tả</th>
-                        <th>Ảnh</th>
-                        <th>Giá</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($products && count($products) > 0): ?>
-                        <?php foreach ($products as $index => $product): ?>
-                            <tr data-id="<?php echo htmlspecialchars($product['id']); ?>">
-                                <td><?php echo htmlspecialchars($customer_offset + $index + 1); ?></td>
-                                <td><?php echo htmlspecialchars($product['id']); ?></td> <!-- Hiển thị ID -->
-                                <td class="editable" data-field="name"><?php echo htmlspecialchars($product['name']); ?></td>
-                                <td class="editable" data-field="description"><?php echo htmlspecialchars($product['description']); ?></td>
-                                <td>
-                                    <img src="https://tiemhoamimi.com//image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
-                                    <br>
-                                    <button class="upload-image-btn" data-id="<?php echo htmlspecialchars($product['id']); ?>">Tải lên ảnh</button>
-                                    <input type="file" accept="image/*" class="upload-image-input" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="display: none;">
-                                </td>
-                                <td class="editable" data-field="price"><?php echo htmlspecialchars(number_format($product['price'], 0, ',', '.') . 'đ'); ?></td>
-                                <td>
-                                    <button class="save-btn" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="display: none;">Lưu</button>
-                                    <button class="cancel-btn" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="display: none;">Hủy</button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="7">Không có dữ liệu</td> <!-- Điều chỉnh colspan từ 6 thành 7 -->
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-
-            <!-- Phân Trang Sản Phẩm -->
-            <div class="pagination">
-                <?php
-                // Hàm để xây dựng URL phân trang sản phẩm bao gồm tham số search
-                function build_product_url($page, $search) {
-                    $params = [];
-                    if (!empty($search)) {
-                        $params['search'] = $search;
-                    }
-                    if ($page > 1) {
-                        $params['product_page'] = $page;
-                    }
-                    return 'admin.php' . (count($params) > 0 ? '?' . http_build_query($params) : '');
-                }
-
-                // Số lượng trang hiển thị trước và sau trang hiện tại
-                $adjacents = 1;
-
-                if ($total_pages_items > 1) {
-                    echo '<ul class="pagination-list">';
-
-                    // Hiển thị nút "Trang đầu"
-                    if ($product_page > 1) {
-                        echo '<li><a href="' . build_product_url(1, $search) . '">Trang đầu</a></li>';
-                    } else {
-                        echo '<li class="disabled">Trang đầu</li>';
-                    }
-
-                    // Hiển thị nút "Trang trước"
-                    if ($product_page > 1) {
-                        echo '<li><a href="' . build_product_url($product_page - 1, $search) . '">&laquo; Trang trước</a></li>';
-                    } else {
-                        echo '<li class="disabled">&laquo; Trang trước</li>';
-                    }
-
-                    // Hiển thị dấu "..." nếu cần thiết trước các trang liền kề
-                    if ($product_page > ($adjacents + 2)) {
-                        echo '<li class="disabled">...</li>';
-                    }
-
-                    // Hiển thị các trang liền kề
-                    for ($i = max(1, $product_page - $adjacents); $i <= min($product_page + $adjacents, $total_pages_items); $i++) {
-                        if ($i == $product_page) {
-                            echo '<li class="active">' . $i . '</li>';
-                        } else {
-                            echo '<li><a href="' . build_product_url($i, $search) . '">' . $i . '</a></li>';
-                        }
-                    }
-
-                    // Hiển thị dấu "..." nếu cần thiết sau các trang liền kề
-                    if ($product_page < ($total_pages_items - ($adjacents + 1))) {
-                        echo '<li class="disabled">...</li>';
-                    }
-
-                    // Hiển thị nút "Trang sau"
-                    if ($product_page < $total_pages_items) {
-                        echo '<li><a href="' . build_product_url($product_page + 1, $search) . '">Trang sau &raquo;</a></li>';
-                    } else {
-                        echo '<li class="disabled">Trang sau &raquo;</li>';
-                    }
-
-                    // Hiển thị nút "Trang cuối"
-                    if ($product_page < $total_pages_items) {
-                        echo '<li><a href="' . build_product_url($total_pages_items, $search) . '">Trang cuối</a></li>';
-                    } else {
-                        echo '<li class="disabled">Trang cuối</li>';
-                    }
-
-                    echo '</ul>';
-                }
-                ?>
-            </div>
-        </div>
-    </div>
-    <!-- PHẦN BẢNG SẢN PHẨM END -->
-
     <!-- PHẦN CHỌN SẢN PHẨM ĐẦU TRANG -->
     <div class="profile-selection-cont" id="profileSelectionCont" style="display: none; padding: 20px;">
         <div class="profile-selection">
@@ -714,6 +585,26 @@ try {
                     </tr>
                 </tbody>
             </table>
+            <!-- PHẦN BẢNG SẢN PHẨM -->
+            <div class="product-info">
+                <h2>Danh sách Sản phẩm</h2>
+                <table id="productsTable">
+                    <thead>
+                        <tr>
+                            <th>Số thứ tự</th>
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Mô tả</th>
+                            <th>Ảnh</th>
+                            <th>Giá</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be inserted here via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <!-- PHẦN QUẢN LÝ SẢN PHẨM END -->
