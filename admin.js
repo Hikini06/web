@@ -1,7 +1,8 @@
 // admin.js
 
 document.addEventListener('DOMContentLoaded', function() {
-
+    var currentPage = 1;
+    var totalPages = 1;
     // ===== Thêm chức năng thêm và xoá hạng mục =====
 
     // ===== Add Category =====
@@ -381,6 +382,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Event listener cho ô tìm kiếm sản phẩm
+    var productSearchInput = document.getElementById('productSearchInput');
+    if (productSearchInput) {
+        productSearchInput.addEventListener('input', function() {
+            // Gọi hàm fetchAndUpdateProducts() mỗi khi người dùng nhập
+            fetchAndUpdateProducts();
+        });
+    }
+    // Event listener cho nút Trang trước
+    var prevPageBtn = document.getElementById('prevPageBtn');
+    prevPageBtn.addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            fetchAndUpdateProducts();
+        }
+    });
+
+    // Event listener cho nút Trang sau
+    var nextPageBtn = document.getElementById('nextPageBtn');
+    nextPageBtn.addEventListener('click', function() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            fetchAndUpdateProducts();
+        }
+    });
+
+
 
     // ===== Cập Nhật và Vô Hiệu Hóa Các Nút =====
     function updateButtons() {
@@ -1066,15 +1095,19 @@ document.addEventListener('DOMContentLoaded', function() {
         var subcategory_id = document.getElementById('subcategoriesSelect').value;
         var item_id = document.getElementById('itemsSelect').value;
         var items_detail_id = document.getElementById('itemsDetailSelect').value;
+        var searchQuery = document.getElementById('productSearchInput').value.trim(); // Lấy giá trị tìm kiếm
     
         var params = {};
         if (category_id) params['category_id'] = category_id;
         if (subcategory_id) params['subcategory_id'] = subcategory_id;
         if (item_id) params['item_id'] = item_id;
         if (items_detail_id) params['items_detail_id'] = items_detail_id;
+        if (searchQuery) params['search'] = searchQuery; // Thêm tham số tìm kiếm nếu có
+    
+        params['page'] = currentPage; // Thêm tham số trang
     
         var queryString = Object.keys(params).map(key => key + '=' + encodeURIComponent(params[key])).join('&');
-    
+        
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'get_product.php?' + queryString, true);
         xhr.onload = function () {
@@ -1082,7 +1115,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     var response = JSON.parse(xhr.responseText);
                     if (response.success) {
-                        updateProductsTable(response.data);
+                        updateProductsTable(response); // Truyền toàn bộ response
                     } else {
                         alert('Lỗi: ' + response.message);
                     }
@@ -1095,74 +1128,115 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.send();
     }
-
-    function updateProductsTable(products) {
+    function updateProductsTable(responseData) {
+        var products = responseData.data;
+        totalPages = responseData.total_pages; // Cập nhật tổng số trang
+    
+        // Cập nhật hiển thị trang hiện tại
+        document.getElementById('currentPage').textContent = 'Trang ' + currentPage + ' / ' + totalPages;
+    
+        // Cập nhật trạng thái của các nút phân trang
+        prevPageBtn.disabled = currentPage <= 1;
+        nextPageBtn.disabled = currentPage >= totalPages;
+    
+        // Phần xử lý hiển thị sản phẩm
         var productsTableBody = document.querySelector('#productsTable tbody');
-        if (!productsTableBody) {
-            productsTableBody = document.createElement('tbody');
-            document.getElementById('productsTable').appendChild(productsTableBody);
-        }
-        productsTableBody.innerHTML = ''; // Clear existing rows
+        productsTableBody.innerHTML = ''; // Xóa nội dung cũ
     
         if (products.length > 0) {
             products.forEach(function(product, index) {
                 var row = document.createElement('tr');
                 row.setAttribute('data-id', product.id);
     
+                // Ô số thứ tự
                 var cellIndex = document.createElement('td');
-                cellIndex.textContent = index + 1;
+                cellIndex.textContent = index + 1 + (currentPage - 1) * 50;
                 row.appendChild(cellIndex);
     
-                var cellId = document.createElement('td');
-                cellId.textContent = product.id;
-                row.appendChild(cellId);
-    
+                // Ô tên sản phẩm
                 var cellName = document.createElement('td');
-                cellName.className = 'editable';
-                cellName.setAttribute('data-field', 'name');
                 cellName.textContent = product.name;
+                cellName.classList.add('editable');
+                cellName.setAttribute('data-field', 'name');
                 row.appendChild(cellName);
     
+                // Ô mô tả
                 var cellDescription = document.createElement('td');
-                cellDescription.className = 'editable';
-                cellDescription.setAttribute('data-field', 'description');
                 cellDescription.textContent = product.description;
+                cellDescription.classList.add('editable');
+                cellDescription.setAttribute('data-field', 'description');
                 row.appendChild(cellDescription);
     
+                // Ô ảnh
                 var cellImg = document.createElement('td');
-                var img = document.createElement('img');
-                img.src = 'https://tiemhoamimi.com//image/upload/' + product.img;
-                img.alt = product.name;
-                img.width = 100;
-                cellImg.appendChild(img);
-                cellImg.innerHTML += '<br><button class="upload-image-btn" data-id="' + product.id + '">Tải lên ảnh</button><input type="file" accept="image/*" class="upload-image-input" data-id="' + product.id + '" style="display: none;">';
+                var imgElement = document.createElement('img');
+                imgElement.src = product.img ? 'https://tiemhoamimi.com/image/upload/' + product.img : 'path/to/default/image.jpg';
+                imgElement.style.width = '50px';
+                cellImg.appendChild(imgElement);
+
+                // Tạo nút upload ảnh
+                var uploadBtn = document.createElement('button');
+                uploadBtn.textContent = 'Tải lên ảnh';
+                uploadBtn.classList.add('upload-image-btn');
+                uploadBtn.setAttribute('data-id', product.id);
+                
+
+                // Tạo input file ẩn để chọn ảnh
+                var fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.style.display = 'none';
+                fileInput.classList.add('upload-image-input');
+                fileInput.setAttribute('data-id', product.id);
+
+                cellImg.appendChild(uploadBtn);
+                cellImg.appendChild(fileInput);
+
                 row.appendChild(cellImg);
     
+                // Ô giá
                 var cellPrice = document.createElement('td');
-                cellPrice.className = 'editable';
-                cellPrice.setAttribute('data-field', 'price');
                 cellPrice.textContent = numberWithCommas(product.price) + 'đ';
+                cellPrice.classList.add('editable');
+                cellPrice.setAttribute('data-field', 'price');
                 row.appendChild(cellPrice);
     
+                // Ô hành động (nút lưu và hủy)
                 var cellActions = document.createElement('td');
-                cellActions.innerHTML = '<button class="save-btn" data-id="' + product.id + '" style="display: none;">Lưu</button><button class="cancel-btn" data-id="' + product.id + '" style="display: none;">Hủy</button>';
+                var saveBtn = document.createElement('button');
+                saveBtn.textContent = 'Lưu';
+                saveBtn.classList.add('save-btn');
+                saveBtn.style.display = 'none';
+    
+                var cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Hủy';
+                cancelBtn.classList.add('cancel-btn');
+                cancelBtn.style.display = 'none';
+    
+                cellActions.appendChild(saveBtn);
+                cellActions.appendChild(cancelBtn);
                 row.appendChild(cellActions);
     
                 productsTableBody.appendChild(row);
             });
     
-            // Re-initialize event listeners for editable cells and upload buttons
+            // Khởi tạo lại các sự kiện cho các ô editable
             initializeEditableCells();
+
+            // Khởi tạo lại các sự kiện cho các nút upload ảnh
             initializeUploadButtons();
+
         } else {
             var row = document.createElement('tr');
             var cell = document.createElement('td');
-            cell.setAttribute('colspan', '7');
+            cell.setAttribute('colspan', '6'); // Số cột trong bảng
             cell.textContent = 'Không có dữ liệu';
             row.appendChild(cell);
             productsTableBody.appendChild(row);
         }
+        
     }
+    
+    
     
     function initializeEditableCells() {
         var editableCells = document.querySelectorAll('.editable');

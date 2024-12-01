@@ -19,7 +19,10 @@ $customer_page = isset($_GET['customer_page']) && is_numeric($_GET['customer_pag
 $product_page = isset($_GET['product_page']) && is_numeric($_GET['product_page']) ? (int)$_GET['product_page'] : 1;
 
 // Lấy search từ URL nếu có
-$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$search = isset($_GET['search']) ? trim($_GET['search']) : null; // Tham số tìm kiếm
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1; // Tham số trang
+$limit = 50; // Số sản phẩm mỗi trang
+$offset = ($page - 1) * $limit; // Tính toán offset
 
 // Tính toán OFFSET cho khách hàng và sản phẩm
 $customer_offset = ($customer_page - 1) * $customer_records_per_page;
@@ -247,12 +250,6 @@ try {
         <div class="profile-selection-bar">
             <button class="profile-selection-bar-btn" id="toggleProfileSelection" aria-expanded="false" aria-controls="profileSelectionCont">
                 Chọn sản phẩm đầu trang
-            </button>
-        </div>
-        <!-- chọn slider sản phẩm -->
-        <div class="product-infor-bar">
-            <button class="product-infor-bar-btn" id="toggleProductInfo" aria-expanded="false" aria-controls="productInfoCont">
-                Sản phẩm
             </button>
         </div>
         <!-- index-slider selection -->
@@ -588,22 +585,31 @@ try {
             <!-- PHẦN BẢNG SẢN PHẨM -->
             <div class="product-info">
                 <h2>Danh sách Sản phẩm</h2>
+                <input type="text" id="productSearchInput" placeholder="Tìm kiếm sản phẩm theo tên">
+                <!-- ... trước table -->
+                <!-- Trước table -->
                 <table id="productsTable">
                     <thead>
                         <tr>
-                            <th>Số thứ tự</th>
-                            <th>ID</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Mô tả</th>
+                            <th>STT</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Mô Tả</th>
                             <th>Ảnh</th>
                             <th>Giá</th>
-                            <th>Thao tác</th>
+                            <th>Hành Động</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Table rows will be inserted here via JavaScript -->
                     </tbody>
                 </table>
+                <!-- Đặt điều khiển phân trang sau table -->
+                <div id="paginationControls">
+                    <button id="prevPageBtn" disabled>Trang trước</button>
+                    <span id="currentPage">Trang 1</span>
+                    <button id="nextPageBtn">Trang sau</button>
+                </div>
+
             </div>
         </div>
     </div>
