@@ -230,7 +230,6 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin MiMi</title>
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
-
     <link rel="stylesheet" href="admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
@@ -262,7 +261,13 @@ try {
                 Chọn sản phẩm cho slider
             </button>
         </div>
-        <div class="logout"><a href="logout.php">Đăng xuất</a></div>
+         <!-- Thêm nút mới cho chức năng quản lý sản phẩm -->
+        <div class="product-change-bar">
+            <button class="product-change-bar-btn" id="toggleProductChange" aria-expanded="false" aria-controls="productChangeCont">
+                Chỉnh sửa sản phẩm
+            </button>
+        </div>
+    <div class="logout"><a href="logout.php">Đăng xuất</a></div>
     </div>
     <!-- SIDE BAR END -->
 
@@ -486,6 +491,7 @@ try {
                 <thead>
                     <tr>
                         <th>Số thứ tự</th>
+                        <th>ID</th> <!-- Cột mới cho ID -->
                         <th>Tên sản phẩm</th>
                         <th>Mô tả</th>
                         <th>Ảnh</th>
@@ -494,16 +500,15 @@ try {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    if ($products && count($products) > 0):
-                        foreach ($products as $index => $product):
-                    ?>
+                    <?php if ($products && count($products) > 0): ?>
+                        <?php foreach ($products as $index => $product): ?>
                             <tr data-id="<?php echo htmlspecialchars($product['id']); ?>">
-                                <td><?php echo htmlspecialchars($product_offset + $index + 1); ?></td>
+                                <td><?php echo htmlspecialchars($customer_offset + $index + 1); ?></td>
+                                <td><?php echo htmlspecialchars($product['id']); ?></td> <!-- Hiển thị ID -->
                                 <td class="editable" data-field="name"><?php echo htmlspecialchars($product['name']); ?></td>
                                 <td class="editable" data-field="description"><?php echo htmlspecialchars($product['description']); ?></td>
                                 <td>
-                                    <img src="/image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
+                                    <img src="https://tiemhoamimi.com//image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
                                     <br>
                                     <button class="upload-image-btn" data-id="<?php echo htmlspecialchars($product['id']); ?>">Tải lên ảnh</button>
                                     <input type="file" accept="image/*" class="upload-image-input" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="display: none;">
@@ -514,16 +519,13 @@ try {
                                     <button class="cancel-btn" data-id="<?php echo htmlspecialchars($product['id']); ?>" style="display: none;">Hủy</button>
                                 </td>
                             </tr>
-                    <?php
-                        endforeach;
-                    else:
-                    ?>
+                        <?php endforeach; ?>
+                    <?php else: ?>
                         <tr>
-                            <td colspan="6">Không có dữ liệu</td>
+                            <td colspan="7">Không có dữ liệu</td> <!-- Điều chỉnh colspan từ 6 thành 7 -->
                         </tr>
                     <?php endif; ?>
                 </tbody>
-
             </table>
 
             <!-- Phân Trang Sản Phẩm -->
@@ -644,8 +646,82 @@ try {
         </div>
     </div>
 
+    <!-- PHẦN QUẢN LÝ SẢN PHẨM -->
+    <div class="product-change-cont" id="productChangeCont" style="display: none; padding: 20px;">
+        <div class="product-change">
+            <h2>Quản lý Sản phẩm</h2>
+            <table id="productChangeTable">
+                <thead>
+                    <tr>
+                        <th>Categories</th>
+                        <th>Subcategories</th>
+                        <th>Items</th>
+                        <th>Items Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <!-- Categories Column -->
+                        <td>
+                            <select id="categoriesSelect">
+                                <option value="">-- Chọn Category --</option>
+                                <?php
+                                // Fetch all categories
+                                try {
+                                    $sql_categories = "SELECT id, name FROM categories ORDER BY name ASC";
+                                    $stmt_categories = $pdo->prepare($sql_categories);
+                                    $stmt_categories->execute();
+                                    $categories = $stmt_categories->fetchAll(PDO::FETCH_ASSOC);
+                                } catch (PDOException $e) {
+                                    die("Lỗi truy vấn categories: " . $e->getMessage());
+                                }
 
-    <!-- Bao gồm tệp JavaScript -->
+                                foreach ($categories as $category) {
+                                    echo '<option value="' . htmlspecialchars($category['id']) . '">' . htmlspecialchars($category['name']) . '</option>';
+                                }
+                                ?>
+                            </select>
+                            <button class="add-category-btn">Add</button>
+                            <button class="delete-category-btn">Delete</button>
+                        </td>
+
+                        <!-- Subcategories Column -->
+                        <td>
+                            <select id="subcategoriesSelect" disabled>
+                                <option value="">-- Chọn Subcategory --</option>
+                            </select>
+                            <button class="add-subcategory-btn" disabled>Add</button>
+                            <button class="delete-subcategory-btn" disabled>Delete</button>
+                        </td>
+
+                        <!-- Items Column -->
+                        <td>
+                            <select id="itemsSelect" disabled>
+                                <option value="">-- Chọn Item --</option>
+                            </select>
+                            <button class="add-item-btn" disabled>Add</button>
+                            <button class="delete-item-btn" disabled>Delete</button>
+                        </td>
+
+                        <!-- Items Detail Column -->
+                        <td>
+                            <select id="itemsDetailSelect" disabled>
+                                <option value="">-- Chọn Items Detail --</option>
+                            </select>
+                            <button class="add-item-detail-btn" disabled>Add</button>
+                            <button class="delete-item-detail-btn" disabled>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- PHẦN QUẢN LÝ SẢN PHẨM END -->
+
+
+
+
+    
     <script src="admin.js"></script>
 </body>
 </html>
