@@ -3,6 +3,46 @@
 document.addEventListener('DOMContentLoaded', function() {
     var currentPage = 1;
     var totalPages = 1;
+
+    // ===== Sidebar Active State =====
+    var sidebarButtons = document.querySelectorAll('.sidebar-button');
+
+    sidebarButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Loại bỏ lớp 'active' từ tất cả các nút
+            sidebarButtons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+
+            // Thêm lớp 'active' cho nút được nhấn
+            this.classList.add('active');
+
+            // Lưu ID của nút vào localStorage để giữ trạng thái khi tải lại trang
+            var activeButtonId = this.id;
+            localStorage.setItem('activeSidebarButton', activeButtonId);
+        });
+    });
+
+    // Khôi phục trạng thái active từ localStorage khi tải lại trang
+    var activeSidebarButtonId = localStorage.getItem('activeSidebarButton');
+    if (activeSidebarButtonId) {
+        var activeButton = document.getElementById(activeSidebarButtonId);
+        if (activeButton) {
+            // Loại bỏ lớp 'active' từ tất cả các nút trước khi thêm lại lớp 'active'
+            sidebarButtons.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            // Thêm lớp 'active' cho nút được lưu
+            activeButton.classList.add('active');
+        }
+    } else {
+        // Nếu không có nút nào được active, có thể thiết lập mặc định (ví dụ: nút đầu tiên)
+        if (sidebarButtons.length > 0) {
+            sidebarButtons[0].classList.add('active');
+            localStorage.setItem('activeSidebarButton', sidebarButtons[0].id);
+        }
+    }
+
     // ===== Thêm chức năng thêm và xoá hạng mục =====
 
     // ===== Add Category =====

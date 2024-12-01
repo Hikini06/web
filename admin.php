@@ -242,25 +242,25 @@ try {
         <h1>Chào đại ca <span class="user"><?php echo htmlspecialchars($_SESSION['admin_username']); ?></span></h1>
         <!-- xem thông tin khách hàng -->
         <div class="customer-infor-bar">
-            <button class="customer-infor-bar-btn" id="toggleCustomerInfo" aria-expanded="false" aria-controls="customerInfoCont">
+            <button class="customer-infor-bar-btn sidebar-button" id="toggleCustomerInfo" aria-expanded="false" aria-controls="customerInfoCont">
                 Thông tin khách hàng
             </button>
         </div>
         <!-- Chọn sản phẩm đầu trang -->
         <div class="profile-selection-bar">
-            <button class="profile-selection-bar-btn" id="toggleProfileSelection" aria-expanded="false" aria-controls="profileSelectionCont">
+            <button class="profile-selection-bar-btn sidebar-button" id="toggleProfileSelection" aria-expanded="false" aria-controls="profileSelectionCont">
                 Chọn sản phẩm đầu trang
             </button>
         </div>
         <!-- index-slider selection -->
         <div class="index-slider-bar">
-            <button class="index-slider-bar-btn" id="toggleIndexSliderInfo" aria-expanded="false" aria-controls="indexSliderInfoCont">
+            <button class="index-slider-bar-btn sidebar-button" id="toggleIndexSliderInfo" aria-expanded="false" aria-controls="indexSliderInfoCont">
                 Chọn sản phẩm cho slider
             </button>
         </div>
          <!-- Thêm nút mới cho chức năng quản lý sản phẩm -->
         <div class="product-change-bar">
-            <button class="product-change-bar-btn" id="toggleProductChange" aria-expanded="false" aria-controls="productChangeCont">
+            <button class="product-change-bar-btn sidebar-button" id="toggleProductChange" aria-expanded="false" aria-controls="productChangeCont">
                 Chỉnh sửa sản phẩm
             </button>
         </div>
