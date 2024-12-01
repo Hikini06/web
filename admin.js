@@ -427,7 +427,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var productSearchInput = document.getElementById('productSearchInput');
     if (productSearchInput) {
         productSearchInput.addEventListener('input', function() {
-            // Gọi hàm fetchAndUpdateProducts() mỗi khi người dùng nhập
+            // Đặt lại currentPage về 1 khi thực hiện tìm kiếm
+            currentPage = 1;
             fetchAndUpdateProducts();
         });
     }
@@ -527,7 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         updateButtons();
-
+        currentPage = 1;
         fetchAndUpdateProducts();
     });
 
@@ -546,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         updateButtons();
-
+        currentPage = 1;
         fetchAndUpdateProducts();
 
     });
@@ -563,13 +564,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         updateButtons();
-
+        currentPage = 1;
         fetchAndUpdateProducts();
     });
 
     document.getElementById('itemsDetailSelect').addEventListener('change', function() {
         // Khi thay đổi items_detail, chỉ cần cập nhật nút delete
         updateButtons();
+        currentPage = 1;
         fetchAndUpdateProducts();
 
     });
@@ -1273,7 +1275,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             var row = document.createElement('tr');
             var cell = document.createElement('td');
-            cell.setAttribute('colspan', '6'); // Số cột trong bảng
+            cell.setAttribute('colspan', '7'); // Số cột trong bảng
             cell.textContent = 'Không có dữ liệu';
             row.appendChild(cell);
             productsTableBody.appendChild(row);
