@@ -197,3 +197,12 @@ body {
         margin: 0px;
     }
 }
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .products-container {
+        width: 95%;
+    }
+
+
+}
