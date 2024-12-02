@@ -11,10 +11,22 @@ function isMobile() {
 
 // Định nghĩa các nhóm sản phẩm
 $groups = [
-    'a' => [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
-    'b' => [4, 6, 7, 9, 10, 12],
-    
-    // Bạn có thể thêm các nhóm khác ở đây
+    'a' => [
+            'ids' => [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+            'sale_title' => 'Danh sách sản phẩm nổi bật Noel 2024',
+            'banner_img' => './image/banner-pc/banner-2.jpg',
+            'banner_h1' => 'NGÀY HỘI MUA SẮM',
+            'banner_h3' => 'Siêu SALE NOEL'
+        ],    
+    'noel' => [
+        'ids' => [340, 341, 342, 343, 344],
+        'sale_title' => 'Danh sách sản phẩm nổi bật Noel 2024',
+        'banner_img' => './image/banner-pc/banner-2.jpg',
+        'banner_h1' => 'NGÀY HỘI MUA SẮM',
+        'banner_h3' => 'Siêu SALE NOEL'
+    ],
+
+    // THÊM CÁC NHÓM KHÁC
 ];
 
 // Lấy tham số 'group' từ URL
@@ -26,8 +38,13 @@ if (!array_key_exists($groupKey, $groups)) {
     exit;
 }
 
-// Lấy danh sách ID sản phẩm của nhóm
-$productIds = $groups[$groupKey];
+// Lấy thông tin nhóm hiện tại
+$currentGroup = $groups[$groupKey];
+$productIds = $currentGroup['ids'];
+$saleTitle = $currentGroup['sale_title'];
+$bannerImg = $currentGroup['banner_img'];
+$bannerH1 = $currentGroup['banner_h1'];
+$bannerH3 = $currentGroup['banner_h3'];
 
 // Phát hiện thiết bị di động
 $mobile = isMobile();
@@ -76,9 +93,9 @@ if (!empty($currentProductIds)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiệm hoa MiMi - Nhóm <?php echo htmlspecialchars(strtoupper($groupKey)); ?></title>
-    <base href="https://tiemhoamimi.com/">
-    <!-- <base href="http://localhost/web_dm_lum/"> -->
+    <title>Tiệm hoa MiMi</title>
+    <!-- <base href="https://tiemhoamimi.com/"> -->
+    <base href="http://localhost/web-dm-lum/web/">
 
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     
@@ -91,14 +108,22 @@ if (!empty($currentProductIds)) {
     <?php include 'header.php'; ?>
 
     <!-- Banner -->
-     <div class="banner-cont">
-        <div class ="banner-img"><img src="./image/banner-pc/banner-2.jpg" alt=""></div>
-        <div class="banner-text">
-            <h1>NGÀY HỘI MUA SẮM</h1>
-            <h3>Siêu SALE NOEL 2024</h3>
+    <div class="banner-cont">
+        <div class="banner-img">
+            <img src="<?php echo htmlspecialchars($bannerImg); ?>" alt="Banner <?php echo htmlspecialchars($groupKey); ?>">
         </div>
-     </div>
+        <div class="banner-text">
+            <h1><?php echo htmlspecialchars($bannerH1); ?></h1>
+            <h3><?php echo htmlspecialchars($bannerH3); ?></h3>
+        </div>
+    </div>
 
+    <!-- Title -->
+    <div class="sale-title">
+        <h1><?php echo htmlspecialchars($saleTitle); ?></h1>
+    </div>
+
+    <!-- ITEMS -->
     <div class="sale-item-cont"> 
         <?php if (count($products) > 0): ?>
             <?php foreach ($products as $product): ?>
