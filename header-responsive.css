@@ -316,3 +316,31 @@
     }
 
 }
+
+
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .header-cont {
+        width: 100%;
+    }
+    .product-banner-jim {
+        width: 100%;
+    }
+    .product-banner-jim .product-banner-jim-child {
+        width: 90%;
+    }
+    .product-banner-jim-table-two, .product-banner-jim-table-three, 
+    .product-banner-jim-table-four, .product-banner-jim-table-five, 
+    .product-banner-jim-table {
+        width: 100%;
+    }
+    .product-banner-jim .product-banner-jim-a {
+        font-size: 0.8rem;
+    }
+    
+
+
+
+}

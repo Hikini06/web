@@ -328,6 +328,16 @@ body {
     margin: 0px;
   }
 }
+@media (min-width: 769px) and (max-width: 1024px) {
+  .items {
+    width: 95%;
+  }
+  .suggested-items {
+    width: 95%;
+  }
+
+
+}
 
 
 

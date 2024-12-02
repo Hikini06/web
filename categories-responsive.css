@@ -85,3 +85,24 @@
         display: block;
     }
 }
+
+
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .categories-filter {
+        width: 85%;
+    }
+    .left-arrow {
+        left: 4%;
+    }
+    .right-arrow {
+        right: 4%;
+    }
+    .categories {
+        width: 95%;
+    }
+
+
+
+}

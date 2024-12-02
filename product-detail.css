@@ -679,3 +679,30 @@ background-color: var(--background-color);
     }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .product-detail-pic {
+        width: 95%;
+    }
+    .product-detail-common-cont {
+        margin-top: 0px;
+    }
+    .product-detail-common,
+    .product-detail-suggest {
+        width: 95%;
+    }
+
+    .product-detail-common-items h3,
+    .product-detail-suggest-items h3 {
+        font-size: 0.9rem;
+        height: 4rem;
+    }
+
+
+
+
+
+
+
+
+}

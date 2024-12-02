@@ -146,4 +146,42 @@ document.addEventListener("DOMContentLoaded", function () {
             // Nếu không phải di động, để các liên kết hoạt động bình thường
         });
     });
+    const manageProductLinks = () => {
+        const tabletMedia = window.matchMedia("(min-width: 769px) and (max-width: 1024px)");
+
+        const handleTabletChange = (e) => {
+            const productLinks = document.querySelectorAll('.product-banner-jim-sanpham:not(.product-banner-jim-sanpham-all) a');
+            if (e.matches) {
+                // Máy tính bảng: Tắt các liên kết ngoại trừ 'all'
+                productLinks.forEach(link => {
+                    if (!link.dataset.disabled) {
+                        link.addEventListener('click', disableLink);
+                        link.dataset.disabled = "true";
+                    }
+                });
+            } else {
+                // Không phải máy tính bảng: Bật lại các liên kết
+                productLinks.forEach(link => {
+                    if (link.dataset.disabled) {
+                        link.removeEventListener('click', disableLink);
+                        delete link.dataset.disabled;
+                    }
+                });
+            }
+        };
+
+        const disableLink = (e) => {
+            e.preventDefault();
+            // Bạn có thể thêm thông báo hoặc hành động khác ở đây nếu cần
+        };
+
+        // Nghe sự thay đổi của media query
+        tabletMedia.addEventListener('change', handleTabletChange);
+
+        // Kiểm tra ban đầu
+        handleTabletChange(tabletMedia);
+    };
+
+    // Gọi hàm quản lý các liên kết sản phẩm
+    manageProductLinks();
 });

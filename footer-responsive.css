@@ -73,3 +73,26 @@
 
 
 }
+
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    .guideSection-slider-wrapper {
+        width: 100%;
+    }
+    .footer .footer-cont {
+        width: 98%;
+    }
+
+    .footer .footer-cont h3 {
+        font-size: 0.9rem;
+    }
+
+
+
+
+
+
+
+}
