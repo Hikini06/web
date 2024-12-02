@@ -380,6 +380,24 @@ table tr:nth-child(even) {
 
 
 
+/* Image Preview Popup */
+.image-preview {
+    position: absolute;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none; /* Ẩn mặc định */
+}
+
+.image-preview img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     table {

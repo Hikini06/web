@@ -207,8 +207,8 @@ $categories = [
                 <!-- <a class="banner-divine-to-two-child-btn cta-button" href="product.php">Mua ngay</a> -->
                 <div class = "banner-divine-to-two-child-cont-btn">
                     <h3>Tất cả các đơn hàng từ 15/12 - 24/12</h3>
-                    <a href="#">Miễn phí vận chuyển</a>
-                    <a href="#">MUA NGAY</a>
+                    <a href="/danh-sach/noel">Miễn phí vận chuyển</a>
+                    <a href="/danh-sach/noel">MUA NGAY</a>
                 </div>
 
             </div>

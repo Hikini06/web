@@ -232,7 +232,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin MiMi</title>
-    <!-- <base href="https://tiemhoamimi.com/"> -->
+    <base href="https://tiemhoamimi.com/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="stylesheet" href="admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -617,10 +617,9 @@ try {
     </div>
     <!-- PHẦN QUẢN LÝ SẢN PHẨM END -->
 
-
-
-
-    
+    <div id="imagePreview" class="image-preview" style="display: none;">
+        <img src="" alt="Image Preview">
+    </div>
     <script src="admin.js"></script>
 </body>
 </html>

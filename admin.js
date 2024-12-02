@@ -1,5 +1,3 @@
-// admin.js
-
 document.addEventListener('DOMContentLoaded', function() {
     var currentPage = 1;
     var totalPages = 1;
@@ -808,7 +806,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (imgElement) {
                                     imgElement.src = response.image_path + '?' + new Date().getTime(); // Thêm timestamp để tránh cache
                                 }
-                                alert('Tải lên ảnh thành công!');
+                                // alert('Tải lên ảnh thành công!');
                             } else {
                                 alert('Lỗi: ' + response.message);
                             }
@@ -1271,7 +1269,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Khởi tạo lại các sự kiện cho các nút upload ảnh
             initializeUploadButtons();
+            // Thêm sự kiện hover cho ảnh ===
+            document.querySelectorAll('#productsTable tbody tr td img').forEach(function(img) {
+            img.addEventListener('mouseover', function(event) {
+                var preview = document.getElementById('imagePreview');
+                preview.querySelector('img').src = this.src;
+                preview.style.display = 'block';
+                
+                // Tính toán vị trí để hiển thị cửa sổ xem trước
+                var rect = this.getBoundingClientRect();
+                preview.style.top = (rect.top + window.scrollY) + 'px';
+                preview.style.left = (rect.right + window.scrollX + 10) + 'px'; // Thêm 10px phía bên phải ảnh
+            });
 
+            img.addEventListener('mouseout', function(event) {
+                var preview = document.getElementById('imagePreview');
+                preview.style.display = 'none';
+            });
+        });
+        
         } else {
             var row = document.createElement('tr');
             var cell = document.createElement('td');
