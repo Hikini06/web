@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (categoriesMobi.classList.contains('active')) {
             subcategoriesMobi.classList.remove('active-slide-in'); // Ensure subcategories are hidden
+        } else {
+            // Nếu menu bị đóng, loại bỏ lớp active từ tất cả các category-mobi
+            removeActiveClasses();
         }
     });
 
@@ -29,7 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const categoryId = categoryLink.getAttribute('data-category-id');
 
-            // If subcategories already loaded, render them
+            // Loại bỏ lớp active từ tất cả các category-mobi
+            removeActiveClasses();
+
+            // Thêm lớp active vào category-mobi đang được nhấn
+            categoryLink.classList.add('active');
+
+            // Nếu subcategories đã được tải, render chúng
             if (subcategoryCache[categoryId]) {
                 renderSubcategories(subcategoryCache[categoryId], categoryId);
             } else {
@@ -48,6 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Function to remove 'active' class from all category-link-mobi
+    function removeActiveClasses() {
+        categoryLinksMobi.forEach(link => {
+            link.classList.remove('active');
+        });
+    }
 
     // Function to render subcategories with slide-in effect
     function renderSubcategories(subcategories, categoryId) {
@@ -81,36 +97,57 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation(); // Prevent event bubbling
 
                 const subcategoryId = subcategoryLink.getAttribute('data-subcategory-id');
+                let itemsUl = subcategoryLi.querySelector('.items-mobi');
+
+                // Kiểm tra xem itemsUl có tồn tại và đang mở không
+                const isActive = itemsUl && itemsUl.classList.contains('slide-down-active');
+
+                // Đóng tất cả các items-mobi đang mở
                 const allItemsMobi = document.querySelectorAll('.items-mobi.slide-down-active');
                 allItemsMobi.forEach(items => {
                     items.classList.remove('slide-down-active');
+                    // Tìm icon của items đang đóng và chuyển hướng biểu tượng về chevron-down
+                    const relatedIcon = items.parentElement.querySelector('.subcategory-link-mobi i');
+                    if (relatedIcon) {
+                        relatedIcon.classList.remove('fa-chevron-up');
+                        relatedIcon.classList.add('fa-chevron-down');
+                    }
                 });
-                // Toggle items-mobi with slide effect
-                let itemsUl = subcategoryLi.querySelector('.items-mobi');
-                if (itemsUl) {
-                    itemsUl.classList.toggle('slide-down-active');
-                    // Toggle icon direction
-                    icon.classList.toggle('fa-chevron-down');
-                    icon.classList.toggle('fa-chevron-up');
+
+                if (isActive) {
+                    // Nếu itemsUl đang mở, đóng nó và chuyển hướng biểu tượng về chevron-down
+                    itemsUl.classList.remove('slide-down-active');
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
                 } else {
-                    if (itemCache[subcategoryId]) {
-                        renderItems(itemCache[subcategoryId], subcategoryLi);
+                    // Nếu itemsUl chưa mở, mở nó
+                    if (itemsUl) {
+                        itemsUl.classList.add('slide-down-active');
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
                     } else {
-                        // Fetch items via AJAX
-                        fetch(`get_items.php?subcategory_id=${subcategoryId}`)
-                            .then(response => response.json())
-                            .then(itemData => {
-                                if (itemData.success) {
-                                    itemCache[subcategoryId] = itemData.data; // Cache data
-                                    renderItems(itemData.data, subcategoryLi);
-                                    // Toggle icon direction
-                                    icon.classList.toggle('fa-chevron-down');
-                                    icon.classList.toggle('fa-chevron-up');
-                                } else {
-                                    console.error(itemData.message);
-                                }
-                            })
-                            .catch(error => console.error('Error fetching items:', error));
+                        if (itemCache[subcategoryId]) {
+                            renderItems(itemCache[subcategoryId], subcategoryLi);
+                            // Chuyển hướng biểu tượng về chevron-up
+                            icon.classList.remove('fa-chevron-down');
+                            icon.classList.add('fa-chevron-up');
+                        } else {
+                            // Fetch items via AJAX
+                            fetch(`get_items.php?subcategory_id=${subcategoryId}`)
+                                .then(response => response.json())
+                                .then(itemData => {
+                                    if (itemData.success) {
+                                        itemCache[subcategoryId] = itemData.data; // Cache data
+                                        renderItems(itemData.data, subcategoryLi);
+                                        // Chuyển hướng biểu tượng về chevron-up
+                                        icon.classList.remove('fa-chevron-down');
+                                        icon.classList.add('fa-chevron-up');
+                                    } else {
+                                        console.error(itemData.message);
+                                    }
+                                })
+                                .catch(error => console.error('Error fetching items:', error));
+                        }
                     }
                 }
             });
@@ -159,7 +196,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const allItemsMobi = document.querySelectorAll('.items-mobi');
             allItemsMobi.forEach(itemsUl => {
                 itemsUl.classList.remove('slide-down-active');
+                // Reset chevron icons
+                // const relatedIcon = itemsUl.parentElement.querySelector('.subcategory-link-mobi i');
+                // if (relatedIcon) {
+                //     relatedIcon.classList.remove('fa-chevron-up');
+                //     relatedIcon.classList.add('fa-chevron-down');
+                // }
             });
+            // Loại bỏ lớp active từ tất cả các category-mobi
+            removeActiveClasses();
         }
     });
 

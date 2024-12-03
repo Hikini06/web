@@ -350,9 +350,7 @@ header {
 .category-link-mobi i {
     font-size: 0.8rem ;
 }
-.category-link-mobi:hover {
-    background-color: #ddd;
-}
+
 
 /* Subcategories Mobi */
 .subcategories-mobi {
@@ -393,10 +391,11 @@ header {
 }
 .subcategory-link-mobi i {
     font-size: 0.7rem;
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+
 }
-.subcategory-link-mobi:hover {
-    background-color: #ddd;
-}
+
 
 /* Danh sách Items Mobi */
 .items-mobi {
@@ -433,7 +432,7 @@ header {
 }
 
 .item-mobi a:hover {
-    background-color: #ddd;
+    color: var(--text-color);
 }
 .hamburger-cont {
     padding-top: 1rem;
@@ -484,5 +483,20 @@ header {
         display: flex;
         align-items: center;
     }
+    /* ... Các quy tắc CSS hiện tại ... */
+
+    /* Định dạng khi category-link-mobi có lớp active */
+    .category-link-mobi.active {
+        color: var(--text-color); 
+    }
+
+    /* Thêm hiệu ứng mượt mà khi thay đổi màu nền và màu chữ */
+    .category-link-mobi {
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .subcategory-link-mobi i {
+        transform: rotate(180deg);
+    }
+    
 
 }
