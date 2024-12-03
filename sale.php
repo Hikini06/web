@@ -95,13 +95,16 @@ if (!empty($currentProductIds)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
     <!-- <base href="https://tiemhoamimi.com/"> -->
-    <base href="http://localhost/web-dm-lum/web/">
+    <base href="http://localhost/web_dm_lum/">
 
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     
     <!-- Font chữ -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="sale.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="footer-responsive.css">
+
 </head>
 <body>
     <!-- Header -->

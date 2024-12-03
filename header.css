@@ -6,6 +6,11 @@
     box-sizing: border-box;
 }
 :root {
+    --main-color: rgb(255, 211, 219);
+    --text-color: rgb(194, 47, 80);
+    --text-color-dark: rgb(0, 32, 77);
+    --hover-color: rgb(53, 16, 25);
+    --background-color: rgb(255, 248, 249);
     --header-main-color: rgb(255, 211, 219);
     --header-text-color: rgb(194, 47, 80);
     --header-text-color-dark: rgb(0, 32, 77);
