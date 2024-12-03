@@ -143,7 +143,7 @@
                                 </a>
                             </li>
                         <?php endforeach; ?>
-                        <a href="" class="header-categories-mobi-list-all" style="text-decoration:none">TẤT CẢ SẢN PHẨM</a>
+                        <a href="./tat-ca-san-pham" class="header-categories-mobi-list-all" style="text-decoration:none">TẤT CẢ SẢN PHẨM</a>
                     </ul>
                     <ul class="header-subcategories-mobi">
                         <!-- Subcategories sẽ được thêm động qua JavaScript khi nhấn vào category -->
