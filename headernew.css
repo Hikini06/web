@@ -306,6 +306,7 @@ header {
 
 /* Categories Mobi */
 .categories-mobi {
+    position: fixed;
     display: flex;
     opacity: 0;
     transform: translateY(-10%);
@@ -465,7 +466,7 @@ header {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 3rem;
         overflow-y: auto;
         display: flex; 
         flex-direction: column;
@@ -476,6 +477,8 @@ header {
     /* Khi categories-mobi có lớp active, hiển thị nó */
     .categories-mobi.active {
         display: flex;
+        width: 100%;
+        top: 10%;
     }
     .logo-container {
         padding-top: 10px;
