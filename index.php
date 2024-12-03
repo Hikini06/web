@@ -131,9 +131,9 @@ $categories = [
     <link rel="stylesheet" href="index-responsive.css" />
 </head>
 <body>
-    <!-- HEADER ĐI THEO MỌI TRANG -->
+    <!-- header ĐI THEO MỌI TRANG -->
     <?php include 'header.php'; ?>
-    <!-- HEADER ĐI THEO MỌI TRANG END -->
+    <!-- header ĐI THEO MỌI TRANG END -->
     <!-- PHẦN DANH MỤC SẢN PHẨM -->
     <section class="categories-section-cont">
         <div class="categories-section swiper">
@@ -326,7 +326,7 @@ $categories = [
 
     <!-- Bao gồm tệp JavaScript -->
     <script src="home.js" defer></script>
-    <script src="header.js"></script>
+    <!-- <script src="header.js"></script> -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
     <script src="index-responsive.js" defer></script>
 

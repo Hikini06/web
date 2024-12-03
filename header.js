@@ -1,134 +1,215 @@
-// TABLE SẢN PHẨM
-// Hiển thị `product-banner-jim-table` khi hover vào `product-banner-jim-sanpham-one`
-document.addEventListener("DOMContentLoaded", function () {
-    const sanphamOne = document.querySelector('.product-banner-jim-sanpham-one');
-    const tableOne = document.querySelector('.product-banner-jim-table');
-  
-    // Hover vào .product-banner-jim-sanpham-one để hiển thị bảng
-    sanphamOne.addEventListener('mouseenter', () => {
-      tableOne.style.display = 'block';
-    });
-  
-    // Hover ra khỏi .product-banner-jim-sanpham-one để ẩn bảng
-    sanphamOne.addEventListener('mouseleave', () => {
-      setTimeout(() => {
-        if (!tableOne.matches(':hover')) {
-          tableOne.style.display = 'none';
+// headernew.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Mobile Menu Elements
+    const headerHamburger = document.getElementById('header-hamburger');
+    const headerCategoriesMobi = document.querySelector('.header-categories-mobi');
+    const headerSubcategoriesMobi = document.querySelector('.header-subcategories-mobi');
+
+    // Toggle header-categories-mobi and header-activeHamburger when clicking hamburger
+    headerHamburger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
+        headerCategoriesMobi.classList.toggle('active');
+        headerHamburger.classList.toggle('activeHamburger'); // Toggle activeHamburger class
+
+        if (headerCategoriesMobi.classList.contains('active')) {
+            headerSubcategoriesMobi.classList.remove('active-slide-in'); // Ensure subcategories are hidden
+        } else {
+            // Nếu menu bị đóng, loại bỏ lớp active từ tất cả các header-category-mobi
+            headerRemoveActiveClasses();
         }
-      }, 100); // Delay để tránh bị tắt khi di chuyển chuột quá nhanh
     });
-  
-    // Giữ bảng hiển thị khi hover vào chính bảng
-    tableOne.addEventListener('mouseenter', () => {
-      tableOne.style.display = 'block';
+
+    // Handle click on header-category-link-mobi
+    const headerCategoryLinksMobi = document.querySelectorAll('.header-category-link-mobi');
+    const headerSubcategoryCache = {}; // Cache for subcategories
+    const headerItemCache = {}; // Cache for items
+
+    headerCategoryLinksMobi.forEach(headerCategoryLink => {
+        headerCategoryLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent event bubbling
+
+            const headerCategoryId = headerCategoryLink.getAttribute('data-category-id');
+
+            // Loại bỏ lớp active từ tất cả các header-category-link-mobi
+            headerRemoveActiveClasses();
+
+            // Thêm lớp active vào header-category-link-mobi đang được nhấn
+            headerCategoryLink.classList.add('active');
+
+            // Nếu subcategories đã được tải, render chúng
+            if (headerSubcategoryCache[headerCategoryId]) {
+                headerRenderSubcategories(headerSubcategoryCache[headerCategoryId], headerCategoryId);
+            } else {
+                // Fetch subcategories via AJAX
+                fetch(`get_subcategories.php?category_id=${headerCategoryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            headerSubcategoryCache[headerCategoryId] = data.data; // Cache data
+                            headerRenderSubcategories(data.data, headerCategoryId);
+                        } else {
+                            console.error(data.message);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching subcategories:', error));
+            }
+        });
     });
-  
-    // Ẩn bảng khi chuột rời khỏi bảng
-    tableOne.addEventListener('mouseleave', () => {
-      tableOne.style.display = 'none';
-    });
-  
-    // Hiển thị `product-banner-jim-table-two` khi hover vào `product-banner-jim-sanpham-two`
-    const sanphamTwo = document.querySelector('.product-banner-jim-sanpham-two');
-    const tableTwo = document.querySelector('.product-banner-jim-table-two');
-  
-    // Hover vào .product-banner-jim-sanpham-two để hiển thị bảng
-    sanphamTwo.addEventListener('mouseenter', () => {
-      tableTwo.style.display = 'block';
-    });
-  
-    // Hover ra khỏi .product-banner-jim-sanpham-two để ẩn bảng
-    sanphamTwo.addEventListener('mouseleave', () => {
-      setTimeout(() => {
-        if (!tableTwo.matches(':hover')) {
-          tableTwo.style.display = 'none';
+
+    // Function to remove 'active' class from all header-category-link-mobi
+    function headerRemoveActiveClasses() {
+        headerCategoryLinksMobi.forEach(headerLink => {
+            headerLink.classList.remove('active');
+        });
+    }
+
+    // Function to render subcategories with slide-in effect
+    function headerRenderSubcategories(headerSubcategories, headerCategoryId) {
+        // Assign category_id to header-subcategories-mobi
+        headerSubcategoriesMobi.setAttribute('data-category-id', headerCategoryId);
+
+        // Clear previous subcategories
+        headerSubcategoriesMobi.innerHTML = '';
+
+        headerSubcategories.forEach(headerSubcategory => {
+            const headerSubcategoryLi = document.createElement('li');
+            headerSubcategoryLi.classList.add('header-subcategory-mobi');
+
+            const headerSubcategoryLink = document.createElement('a');
+            headerSubcategoryLink.href = `danh-muc/${headerSubcategory.id}`;
+            headerSubcategoryLink.classList.add('header-subcategory-link-mobi');
+            headerSubcategoryLink.setAttribute('data-subcategory-id', headerSubcategory.id);
+            
+            // Tạo văn bản cho liên kết
+            const headerLinkText = document.createTextNode(headerSubcategory.name);
+            headerSubcategoryLink.appendChild(headerLinkText);
+
+            // Tạo và thêm biểu tượng chevron-down
+            const headerIcon = document.createElement('i');
+            headerIcon.classList.add('fa-solid', 'fa-chevron-down');
+            headerSubcategoryLink.appendChild(headerIcon);
+
+            // Add click event for header-subcategory-link-mobi
+            headerSubcategoryLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event bubbling
+
+                const headerSubcategoryId = headerSubcategoryLink.getAttribute('data-subcategory-id');
+                let headerItemsUl = headerSubcategoryLi.querySelector('.header-items-mobi');
+
+                // Kiểm tra xem itemsUl có tồn tại và đang mở không
+                const headerIsActive = headerItemsUl && headerItemsUl.classList.contains('slide-down-active');
+
+                // Đóng tất cả các header-items-mobi đang mở
+                const headerAllItemsMobi = document.querySelectorAll('.header-items-mobi.slide-down-active');
+                headerAllItemsMobi.forEach(headerItems => {
+                    headerItems.classList.remove('slide-down-active');
+                    // Tìm icon của items đang đóng và chuyển hướng biểu tượng về chevron-down
+                    const headerRelatedIcon = headerItems.parentElement.querySelector('.header-subcategory-link-mobi i');
+                    if (headerRelatedIcon) {
+                        headerRelatedIcon.classList.remove('fa-chevron-up');
+                        headerRelatedIcon.classList.add('fa-chevron-down');
+                    }
+                });
+
+                if (headerIsActive) {
+                    // Nếu itemsUl đang mở, đóng nó và chuyển hướng biểu tượng về chevron-down
+                    headerItemsUl.classList.remove('slide-down-active');
+                    headerIcon.classList.remove('fa-chevron-up');
+                    headerIcon.classList.add('fa-chevron-down');
+                } else {
+                    // Nếu itemsUl chưa mở, mở nó
+                    if (headerItemsUl) {
+                        headerItemsUl.classList.add('slide-down-active');
+                        headerIcon.classList.remove('fa-chevron-down');
+                        headerIcon.classList.add('fa-chevron-up');
+                    } else {
+                        if (headerItemCache[headerSubcategoryId]) {
+                            headerRenderItems(headerItemCache[headerSubcategoryId], headerSubcategoryLi);
+                            // Chuyển hướng biểu tượng về chevron-up
+                            headerIcon.classList.remove('fa-chevron-down');
+                            headerIcon.classList.add('fa-chevron-up');
+                        } else {
+                            // Fetch items via AJAX
+                            fetch(`get_items.php?subcategory_id=${headerSubcategoryId}`)
+                                .then(response => response.json())
+                                .then(headerItemData => {
+                                    if (headerItemData.success) {
+                                        headerItemCache[headerSubcategoryId] = headerItemData.data; // Cache data
+                                        headerRenderItems(headerItemData.data, headerSubcategoryLi);
+                                        // Chuyển hướng biểu tượng về chevron-up
+                                        headerIcon.classList.remove('fa-chevron-down');
+                                        headerIcon.classList.add('fa-chevron-up');
+                                    } else {
+                                        console.error(headerItemData.message);
+                                    }
+                                })
+                                .catch(error => console.error('Error fetching items:', error));
+                        }
+                    }
+                }
+            });
+
+            headerSubcategoryLi.appendChild(headerSubcategoryLink);
+            headerSubcategoriesMobi.appendChild(headerSubcategoryLi);
+        });
+
+        // Trigger the slide-in animation for header-subcategories-mobi
+        headerSubcategoriesMobi.classList.add('active-slide-in');
+    }
+
+    // Function to render items with slide-down effect
+    function headerRenderItems(headerItems, headerSubcategoryLi) {
+        // Create ul.header-items-mobi and append to subcategory-li
+        const headerItemsUl = document.createElement('ul');
+        headerItemsUl.classList.add('header-items-mobi');
+
+        headerItems.forEach(headerItem => {
+            const headerItemLi = document.createElement('li');
+            headerItemLi.classList.add('header-item-mobi');
+
+            const headerItemLink = document.createElement('a');
+            headerItemLink.href = `san-pham/${headerItem.id}`;
+            headerItemLink.textContent = headerItem.name;
+
+            headerItemLi.appendChild(headerItemLink);
+            headerItemsUl.appendChild(headerItemLi);
+        });
+
+        headerSubcategoryLi.appendChild(headerItemsUl);
+
+        // Trigger the slide-down animation by adding 'slide-down-active' class
+        setTimeout(() => {
+            headerItemsUl.classList.add('slide-down-active');
+        }, 10); // Slight delay to allow DOM insertion
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!headerCategoriesMobi.contains(e.target) && !headerHamburger.contains(e.target)) {
+            headerCategoriesMobi.classList.remove('active');
+            headerHamburger.classList.remove('activeHamburger'); // Remove activeHamburger class
+            headerSubcategoriesMobi.classList.remove('active-slide-in'); // Remove slide-in class
+            // Hide items
+            const headerAllItemsMobi = document.querySelectorAll('.header-items-mobi');
+            headerAllItemsMobi.forEach(headerItemsUl => {
+                headerItemsUl.classList.remove('slide-down-active');
+                // Reset chevron icons
+                const headerRelatedIcon = headerItemsUl.parentElement.querySelector('.header-subcategory-link-mobi i');
+                if (headerRelatedIcon) {
+                    headerRelatedIcon.classList.remove('fa-chevron-up');
+                    headerRelatedIcon.classList.add('fa-chevron-down');
+                }
+            });
+            // Loại bỏ lớp active từ tất cả các header-category-link-mobi
+            headerRemoveActiveClasses();
         }
-      }, 100); // Delay để tránh bị tắt khi di chuyển chuột quá nhanh
     });
-  
-    // Giữ bảng hiển thị khi hover vào chính bảng
-    tableTwo.addEventListener('mouseenter', () => {
-      tableTwo.style.display = 'block';
+
+    // Prevent closing when clicking inside header-categories-mobi
+    headerCategoriesMobi.addEventListener('click', (e) => {
+        e.stopPropagation();
     });
-  
-    // Ẩn bảng khi chuột rời khỏi bảng
-    tableTwo.addEventListener('mouseleave', () => {
-      tableTwo.style.display = 'none';
-    });
-  });
-  document.addEventListener('DOMContentLoaded', () => {
-    // Hiển thị và ẩn bảng `product-banner-jim-table-three` khi hover vào `product-banner-jim-sanpham-three`
-    const sanphamThree = document.querySelector('.product-banner-jim-sanpham-three');
-    const tableThree = document.querySelector('.product-banner-jim-table-three');
-  
-    sanphamThree.addEventListener('mouseenter', () => {
-      tableThree.style.display = 'block';
-    });
-  
-    sanphamThree.addEventListener('mouseleave', () => {
-      setTimeout(() => {
-        if (!tableThree.matches(':hover')) {
-          tableThree.style.display = 'none';
-        }
-      }, 100);
-    });
-  
-    tableThree.addEventListener('mouseenter', () => {
-      tableThree.style.display = 'block';
-    });
-  
-    tableThree.addEventListener('mouseleave', () => {
-      tableThree.style.display = 'none';
-    });
-  
-    // Hiển thị và ẩn bảng `product-banner-jim-table-four` khi hover vào `product-banner-jim-sanpham-four`
-    const sanphamFour = document.querySelector('.product-banner-jim-sanpham-four');
-    const tableFour = document.querySelector('.product-banner-jim-table-four');
-  
-    sanphamFour.addEventListener('mouseenter', () => {
-      tableFour.style.display = 'block';
-    });
-  
-    sanphamFour.addEventListener('mouseleave', () => {
-      setTimeout(() => {
-        if (!tableFour.matches(':hover')) {
-          tableFour.style.display = 'none';
-        }
-      }, 100);
-    });
-  
-    tableFour.addEventListener('mouseenter', () => {
-      tableFour.style.display = 'block';
-    });
-  
-    tableFour.addEventListener('mouseleave', () => {
-      tableFour.style.display = 'none';
-    });
-  
-    // Hiển thị và ẩn bảng `product-banner-jim-table-five` khi hover vào `product-banner-jim-sanpham-five`
-    const sanphamFive = document.querySelector('.product-banner-jim-sanpham-five');
-    const tableFive = document.querySelector('.product-banner-jim-table-five');
-  
-    sanphamFive.addEventListener('mouseenter', () => {
-      tableFive.style.display = 'block';
-    });
-  
-    sanphamFive.addEventListener('mouseleave', () => {
-      setTimeout(() => {
-        if (!tableFive.matches(':hover')) {
-          tableFive.style.display = 'none';
-        }
-      }, 100);
-    });
-  
-    tableFive.addEventListener('mouseenter', () => {
-      tableFive.style.display = 'block';
-    });
-  
-    tableFive.addEventListener('mouseleave', () => {
-      tableFive.style.display = 'none';
-    });
-  });
-  
-  
-  
+});

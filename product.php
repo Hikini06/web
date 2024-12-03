@@ -71,7 +71,7 @@ try {
     <!-- Font chữ -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="product.css">
-    <link rel="stylesheet" href="header.css">
+    <!-- <link rel="stylesheet" href="header.css"> -->
 </head>
 <body>
     <!-- Header -->
@@ -158,6 +158,6 @@ try {
     <?php include 'footer.php'; ?>
 
     <!-- Script -->
-    <script src="header.js"></script>
+    <!-- <script src="header.js"></script> -->
 </body>
 </html>

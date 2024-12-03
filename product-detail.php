@@ -154,7 +154,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
     <base href="http://localhost/web-dm-lum/web/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="stylesheet" href="product-detail.css">
-    <link rel="stylesheet" href="header.css">
+    <!-- <link rel="stylesheet" href="header.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>

@@ -88,7 +88,7 @@ $total_pages = ceil($total_products / $items_per_page);
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="categories.css"/>
-    <link rel="stylesheet" href="header.css" />
+    <!-- <link rel="stylesheet" href="header.css" /> -->
     <link rel="stylesheet" href="categories-responsive.css"/>
     
 
@@ -179,7 +179,7 @@ $total_pages = ceil($total_products / $items_per_page);
     <?php include 'footer.php'; ?>
 
 
-<script src="header.js"></script>
+<!-- <script src="header.js"></script> -->
 <script src="categories.js"></script>
 <script>
         // Script để tự động điều chỉnh items_per_page dựa trên kích thước màn hình
