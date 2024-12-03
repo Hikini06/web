@@ -500,3 +500,23 @@ header {
     }
 
 }
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header-cont {
+        width: 100%;
+    }
+    .header-main-menu {
+        width: 95%;
+    }
+    .header-main-menu ul.header-categories > li.header-category > ul.header-subcategories > li.header-subcategory > ul.header-items > li.header-item > a {
+        font-size: 0.65rem;
+    }
+    .header-main-menu ul.header-categories > li.header-category > ul.header-subcategories > li.header-subcategory > a.header-subcategory-link {
+        font-size: 0.8rem;
+    }
+    .header-main-menu ul.header-categories > li.header-category > a.header-category-link,
+    .header-categories-all-product > a {
+        font-size: 0.8rem;
+    }
+
+}

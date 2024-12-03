@@ -1,24 +1,27 @@
 <?php
     include '../config/db-connect.php';
 
-    // Fetch categories along with subcategories and items
     $stmt = $pdo->prepare("
-        SELECT 
-            c.id AS category_id, 
-            c.name AS category_name, 
-            sc.id AS subcategory_id, 
-            sc.name AS subcategory_name,
-            i.id AS item_id,
-            i.name AS item_name
-        FROM 
-            categories c
-        LEFT JOIN 
-            subcategories sc ON c.id = sc.category_id
-        LEFT JOIN 
-            items i ON sc.id = i.subcategory_id
-        ORDER BY 
-            c.name ASC, sc.name ASC, i.name ASC
+    SELECT 
+        c.id AS category_id, 
+        c.name AS category_name, 
+        sc.id AS subcategory_id, 
+        sc.name AS subcategory_name,
+        i.id AS item_id,
+        i.name AS item_name
+    FROM 
+        categories c
+    LEFT JOIN 
+        subcategories sc ON c.id = sc.category_id
+    LEFT JOIN 
+        items i ON sc.id = i.subcategory_id
+    ORDER BY 
+        FIELD(c.name, 'ĐÈN NGỦ', 'HOA GẤU BÔNG', 'GẤU BÔNG', 'SET QUÀ TẶNG', 'KHÁC') ASC,
+        c.name ASC,
+        sc.name ASC,
+        i.name ASC
     ");
+
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
