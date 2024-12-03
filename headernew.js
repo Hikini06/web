@@ -65,7 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
             subcategoryLink.href = `danh-muc/${subcategory.id}`;
             subcategoryLink.classList.add('subcategory-link-mobi');
             subcategoryLink.setAttribute('data-subcategory-id', subcategory.id);
-            subcategoryLink.textContent = subcategory.name;
+            
+            // Tạo văn bản cho liên kết
+            const linkText = document.createTextNode(subcategory.name);
+            subcategoryLink.appendChild(linkText);
+
+            // Tạo và thêm biểu tượng chevron-down
+            const icon = document.createElement('i');
+            icon.classList.add('fa-solid', 'fa-chevron-down');
+            subcategoryLink.appendChild(icon);
 
             // Add click event for subcategory-link-mobi
             subcategoryLink.addEventListener('click', (e) => {
@@ -81,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 let itemsUl = subcategoryLi.querySelector('.items-mobi');
                 if (itemsUl) {
                     itemsUl.classList.toggle('slide-down-active');
+                    // Toggle icon direction
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
                 } else {
                     if (itemCache[subcategoryId]) {
                         renderItems(itemCache[subcategoryId], subcategoryLi);
@@ -92,6 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if (itemData.success) {
                                     itemCache[subcategoryId] = itemData.data; // Cache data
                                     renderItems(itemData.data, subcategoryLi);
+                                    // Toggle icon direction
+                                    icon.classList.toggle('fa-chevron-down');
+                                    icon.classList.toggle('fa-chevron-up');
                                 } else {
                                     console.error(itemData.message);
                                 }

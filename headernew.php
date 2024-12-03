@@ -65,7 +65,7 @@
     <link rel="stylesheet" href="headernew.css"/>
 </head>
 <body>
-    <section class="main">
+    <section class="main-header">
         <div class="floor-one">
             <div class="header-cont">
                 <div class="logo-container">
@@ -124,11 +124,13 @@
         </div>
 
         <div class="floor-three">
-            <button class="hamburger" id="hamburger">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            </button>
+            <div class="hamburger-cont">
+                <button class="hamburger" id="hamburger">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
             <div class="categories-mobi" id="categories-mobi">
                 <div class="categories-mobi-container">
                     <ul class="categories-mobi-list">
@@ -136,9 +138,11 @@
                             <li class="category-mobi">
                                 <a href="#" class="category-link-mobi" data-category-id="<?php echo $category['id']; ?>">
                                     <?php echo htmlspecialchars($category['name']); ?>
+                                    <i class="fa-solid fa-chevron-right"></i>
                                 </a>
                             </li>
                         <?php endforeach; ?>
+                        <a href="" class="categories-mobi-list-all" style = "text-decoration:none">TẤT CẢ SẢN PHẨM</a>
                     </ul>
                     <ul class="subcategories-mobi">
                         <!-- Subcategories sẽ được thêm động qua JavaScript khi nhấn vào category -->
