@@ -1,6 +1,25 @@
-/* headernew.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --main-color: rgb(255, 211, 219);
+    --text-color: rgb(194, 47, 80);
+    --text-color-dark: rgb(0, 32, 77);
+    --hover-color: rgb(53, 16, 25);
+    --background-color: rgb(255, 248, 249);
+  }
+  body {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; 
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--text-color-dark);
+  }
 
-/* Các kiểu hiện có của bạn */
+/* FLOOR ONE --------------------------------------------------------------------------- */
 header {
     background-color: #fff;
     display: flex;
@@ -14,17 +33,20 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
+    margin-right: auto;
+    margin-left: auto;
+    width: 60%;
 }
 .header-left {
     display: none;
 }
 .logo-container {
+    width: 15%;
     display: flex;
     align-items: center;
 }
 .logo img {
-    width: 80px;
+    width: 100%;
     height: auto;
 }
 .search-bar-cont {
@@ -43,15 +65,21 @@ header {
     width: 100%;
 }
 .search-input input[type="text"] {
+    font-style: italic;
     font-family: "Nunito", sans-serif;
     width: 100%;
-    padding: 0.5rem 2.5rem 0.5rem 0.75rem; 
+    padding: 0.5rem 2.5rem 0.5rem 0.75rem;
     font-size: 1rem;
-    border: 2px solid #333;
+    border: 2px solid var(--text-color-dark);
     border-radius: 100px;
     box-sizing: border-box;
-    color: #333;
+    color: var(--text-color-dark);
 }
+.search-input input[type="text"]::placeholder {
+    color: var(--text-color-dark); 
+    font-style: italic; 
+}
+
 .search-input button[type="submit"] {
     position: absolute;
     right: 0.75rem;
@@ -61,31 +89,44 @@ header {
     border: none;
     padding: 0;
     cursor: pointer;
-    color: #333;
+    color: var(--text-color-dark);
 }
 .search-input button[type="submit"] i {
     font-size: 1.25rem;
-    color: #333;
+    color: var(--text-color-dark);
 }
 .header-contact-number {
     padding-right: 1rem;
     font-size: 1rem;
     font-weight: 900;
-    color: #333;
+    color: var(--text-color-dark);
     font-style: italic;
 }
+.header-contact-number h1 {
+
+}
 .header-contact-number a {
-    color: #333;
+    color: var(--text-color-dark);
     text-decoration: none;
 }
 .header-contact-number:hover {
     cursor: pointer;
 }
 
+
+
+/* Floor two ---------------------------------------------------------------------------------------------------------- */
+.floor-two {
+    width: 100%;
+    background-color: var(--main-color);
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
 /* Menu Styling */
 .main-menu {
-    width: 100%;
-    background-color: #fff;
+    margin-right: auto;
+    margin-left: auto;
+    width: 60%;
     font-family: "Nunito", sans-serif;
     position: relative;
     z-index: 1000;
@@ -98,27 +139,23 @@ header {
 .main-menu > ul.categories {
     width: 100%;
     display: flex;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #ddd;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .main-menu ul.categories > li.category > a.category-link {
+    color: var(--text-color-dark);
+    font-size: 1rem;
+    text-align: center;
     display: block;
-    padding: 10px 15px;
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    cursor: pointer;
+}
+.category-link i {
+    font-size: 0.7rem;
 }
 .main-menu ul.categories > li.category > a.category-link:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
 }
-
-/* Subcategories */
-.floor-two {
-    width: 60%;
-}
-
 .main-menu ul.categories > li.category > ul.subcategories {
     display: none; 
     position: absolute;
@@ -132,6 +169,9 @@ header {
     /* display: flex;  */
     flex-direction: row; /* Sắp xếp subcategories theo hàng ngang */
 }
+.categories-all-product > a {
+    color: var(--text-color-dark);
+}
 .main-menu ul.categories > li.category:hover > ul.subcategories {
     display: flex;
 }
@@ -144,7 +184,7 @@ header {
 .main-menu ul.categories > li.category > ul.subcategories > li.subcategory > a.subcategory-link {
     display: block;
     text-decoration: none;
-    color: #333;
+    color: var(--text-color-dark);
     font-weight: normal;
     cursor: pointer;
 }
@@ -167,7 +207,7 @@ header {
     display: block;
     padding: 5px 10px;
     text-decoration: none;
-    color: #333;
+    color: var(--text-color-dark);
     font-weight: normal;
 }
 .main-menu ul.categories > li.category > ul.subcategories > li.subcategory > ul.items > li.item > a:hover {
@@ -264,7 +304,7 @@ header {
     display: block;
     padding: 0.75rem 1rem;
     text-decoration: none;
-    color: #333;
+    color: var(--text-color-dark);
     border: 1px solid #ddd;
     margin-bottom: 0.5rem;
     border-radius: 5px;
@@ -303,7 +343,7 @@ header {
     display: block;
     padding: 0.75rem 1rem;
     text-decoration: none;
-    color: #333;
+    color: var(--text-color-dark);
     border: 1px solid #ddd;
     margin-bottom: 0.5rem;
     border-radius: 5px;
@@ -331,7 +371,7 @@ header {
     display: block;
     padding: 0.5rem 1rem;
     text-decoration: none;
-    color: #333;
+    color: var(--text-color-dark);
     border: 1px solid #ddd;
     margin-bottom: 0.5rem;
     border-radius: 5px;

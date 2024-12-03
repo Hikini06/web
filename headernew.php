@@ -59,6 +59,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="headernew.css"/>
 </head>
@@ -88,7 +89,10 @@
                 <ul class="categories">
                     <?php foreach ($categories as $category): ?>
                         <li class="category">
-                            <a href="#" class="category-link"><?php echo htmlspecialchars($category['name']); ?></a>
+                            <a href="#" class="category-link">
+                                <?php echo htmlspecialchars($category['name']); ?>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </a>
                             <?php if (!empty($category['subcategories'])): ?>
                                 <ul class="subcategories">
                                     <?php foreach ($category['subcategories'] as $subcategory): ?>
@@ -109,6 +113,7 @@
                             <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
+                    <div class = "categories-all-product"><a href="./tat-ca-san-pham" style = "text-decoration:none;">TẤT CẢ SẢN PHẨM</a></div>
                 </ul>
             </nav>
         </div>
