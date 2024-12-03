@@ -1415,7 +1415,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     if (imgElement) {
                                         imgElement.src = response.image_path + '?' + new Date().getTime();
                                     }
-                                    alert('Tải lên ảnh thành công!');
+                                    // alert('Tải lên ảnh thành công!');
                                 } else {
                                     alert('Lỗi: ' + response.message);
                                 }
