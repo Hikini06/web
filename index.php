@@ -121,6 +121,8 @@ $categories = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tiệm hoa MiMi</title>
+    <!-- <base href="https://tiemhoamimi.com/"> -->
+    <base href="http://localhost/web_dm_lum/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -327,8 +329,8 @@ $categories = [
     <!-- Bao gồm tệp JavaScript -->
     <script src="home.js" defer></script>
     <!-- <script src="header.js"></script> -->
+     
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
-    <script src="index-responsive.js" defer></script>
 
 </body>
 </html>

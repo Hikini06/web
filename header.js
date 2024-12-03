@@ -1,5 +1,3 @@
-// headernew.js
-
 document.addEventListener('DOMContentLoaded', () => {
     // Mobile Menu Elements
     const headerHamburger = document.getElementById('header-hamburger');
@@ -42,18 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (headerSubcategoryCache[headerCategoryId]) {
                 headerRenderSubcategories(headerSubcategoryCache[headerCategoryId], headerCategoryId);
             } else {
-                // Fetch subcategories via AJAX
-                fetch(`get_subcategories.php?category_id=${headerCategoryId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            headerSubcategoryCache[headerCategoryId] = data.data; // Cache data
-                            headerRenderSubcategories(data.data, headerCategoryId);
-                        } else {
-                            console.error(data.message);
-                        }
-                    })
-                    .catch(error => console.error('Error fetching subcategories:', error));
+                // Fetch subcategories via AJAX using XMLHttpRequest
+                fetchSubcategories(headerCategoryId);
             }
         });
     });
@@ -63,6 +51,32 @@ document.addEventListener('DOMContentLoaded', () => {
         headerCategoryLinksMobi.forEach(headerLink => {
             headerLink.classList.remove('active');
         });
+    }
+
+    // Function to fetch subcategories using XMLHttpRequest
+    function fetchSubcategories(categoryId) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `get_subcategories.php?category_id=${categoryId}`, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        if (data.success) {
+                            headerSubcategoryCache[categoryId] = data.data; // Cache data
+                            headerRenderSubcategories(data.data, categoryId);
+                        } else {
+                            console.error(data.message);
+                        }
+                    } catch (e) {
+                        console.error('Error parsing response:', e);
+                    }
+                } else {
+                    console.error('Error fetching subcategories:', xhr.statusText);
+                }
+            }
+        };
+        xhr.send();
     }
 
     // Function to render subcategories with slide-in effect
@@ -132,21 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             headerIcon.classList.remove('fa-chevron-down');
                             headerIcon.classList.add('fa-chevron-up');
                         } else {
-                            // Fetch items via AJAX
-                            fetch(`get_items.php?subcategory_id=${headerSubcategoryId}`)
-                                .then(response => response.json())
-                                .then(headerItemData => {
-                                    if (headerItemData.success) {
-                                        headerItemCache[headerSubcategoryId] = headerItemData.data; // Cache data
-                                        headerRenderItems(headerItemData.data, headerSubcategoryLi);
-                                        // Chuyển hướng biểu tượng về chevron-up
-                                        headerIcon.classList.remove('fa-chevron-down');
-                                        headerIcon.classList.add('fa-chevron-up');
-                                    } else {
-                                        console.error(headerItemData.message);
-                                    }
-                                })
-                                .catch(error => console.error('Error fetching items:', error));
+                            // Fetch items via AJAX using XMLHttpRequest
+                            fetchItems(headerSubcategoryId, headerSubcategoryLi, headerIcon);
                         }
                     }
                 }
@@ -158,6 +159,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Trigger the slide-in animation for header-subcategories-mobi
         headerSubcategoriesMobi.classList.add('active-slide-in');
+    }
+
+    // Function to fetch items using XMLHttpRequest
+    function fetchItems(subcategoryId, headerSubcategoryLi, headerIcon) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', `get_items.php?subcategory_id=${subcategoryId}`, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        const headerItemData = JSON.parse(xhr.responseText);
+                        if (headerItemData.success) {
+                            headerItemCache[subcategoryId] = headerItemData.data; // Cache data
+                            headerRenderItems(headerItemData.data, headerSubcategoryLi);
+                            // Chuyển hướng biểu tượng về chevron-up
+                            headerIcon.classList.remove('fa-chevron-down');
+                            headerIcon.classList.add('fa-chevron-up');
+                        } else {
+                            console.error(headerItemData.message);
+                        }
+                    } catch (e) {
+                        console.error('Error parsing response:', e);
+                    }
+                } else {
+                    console.error('Error fetching items:', xhr.statusText);
+                }
+            }
+        };
+        xhr.send();
     }
 
     // Function to render items with slide-down effect

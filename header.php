@@ -59,7 +59,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <base href="http://localhost/web-dm-lum/web/">
+    <base href="https://tiemhoamimi.com/">
+    <!-- <base href="http://localhost/web-dm-lum/web/"> -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="header.css"/>
@@ -151,6 +152,6 @@
             </div>
         </div>
     </section>
-    <script src="header.js"></script>
+    <script src="header.js" defer ></script>
 </body>
 </html>
