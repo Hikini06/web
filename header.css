@@ -6,17 +6,18 @@
     box-sizing: border-box;
 }
 :root {
-    --main-color: rgb(255, 211, 219);
-    --text-color: rgb(194, 47, 80);
-    --text-color-dark: rgb(0, 32, 77);
-    --hover-color: rgb(53, 16, 25);
-    --background-color: rgb(255, 248, 249);
     --header-main-color: rgb(255, 211, 219);
     --header-text-color: rgb(194, 47, 80);
     --header-text-color-dark: rgb(0, 32, 77);
     --header-hover-color: rgb(53, 16, 25);
     --header-background-color: rgb(255, 248, 249);
+    --main-color: rgb(255, 211, 219);
+    --text-color: rgb(194, 47, 80);
+    --text-color-dark: rgb(0, 32, 77);
+    --hover-color: rgb(53, 16, 25);
+    --background-color: rgb(255, 248, 249);
 }
+
 body {
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
@@ -304,6 +305,7 @@ header {
     
     /* Hiển thị categories-mobi khi có lớp active */
     .header-categories-mobi.active {
+        
         display: flex;
         opacity: 1;
         transform: translateY(0%);
@@ -322,7 +324,6 @@ header {
     
     /* Categories Mobi Container */
     .header-categories-mobi-container {
-        margin-top: 1rem;
         display: flex;
         flex-direction: row;
         height: 100%;
@@ -481,7 +482,7 @@ header {
     .header-categories-mobi.active {
         display: flex;
         width: 100%;
-        top: 10%;
+        margin-top: 3rem;
     }
     .header-logo-container {
         padding-top: 10px;
@@ -505,6 +506,7 @@ header {
     }
 
 }
+
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .header-cont {

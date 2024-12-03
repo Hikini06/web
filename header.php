@@ -21,7 +21,6 @@
         sc.name ASC,
         i.name ASC
     ");
-
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -62,7 +61,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <base href="https://tiemhoamimi.com/">
     <!-- <base href="http://localhost/web-dm-lum/web/"> -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
@@ -73,7 +71,7 @@
         <div class="header-floor-one">
             <div class="header-cont">
                 <div class="header-logo-container">
-                    <a href="./trang-chu" class="header-logo"><img src="image/mimi-logo.png" alt="Logo"></a>
+                    <a href="./trang-chu" class="header-logo"><img src="image/mimi-logo.webp" alt="Logo"></a>
                 </div>
                 <div class="header-search-bar-cont">
                     <form action="filter.php" method="GET" class="header-search-form">
@@ -155,6 +153,7 @@
             </div>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"></script>
     <script src="header.js" defer ></script>
 </body>
 </html>

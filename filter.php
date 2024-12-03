@@ -184,7 +184,7 @@ if (!empty($currentProductIDs)) {
                     <div class="product-grid">
                         <?php foreach ($results as $result): ?>
                             <div class="product-item">
-                                <a href="product-detail.php?id=<?= htmlspecialchars($result['id']) ?>">
+                                <a href="/chi-tiet-san-pham/<?= htmlspecialchars($result['id']) ?>">
                                     <img src="./image/upload/<?= htmlspecialchars($result['img']) ?>" alt="<?= htmlspecialchars($result['name']) ?>">
                                     <h3><?= htmlspecialchars($result['name']) ?></h3>
                                     <p><?= htmlspecialchars(number_format($result['price'])) ?>đ</p>
@@ -213,7 +213,7 @@ if (!empty($currentProductIDs)) {
                     <?php if (!empty($product) && isset($product['id'])): ?>
                         <li class="carousel-slide" data-index="<?= $index ?>">
                             <div class="carousel-slide-inner" id="carousel-slide-inner">
-                                <a href="product-detail.php?id=<?= htmlspecialchars($product['id']) ?>">
+                                <a href="/chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
                                     <img src="./image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                                     <h3><?= htmlspecialchars($product['name']) ?></h3>
                                     <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>

@@ -63,15 +63,14 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
-    <!-- <base href="https://tiemhoamimi.com/"> -->
-    <base href="http://localhost/web-dm-lum/web/">
+    <base href="https://tiemhoamimi.com/">
+    <!-- <base href="http://localhost/web_dm_lum/"> -->
 
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     
     <!-- Font chữ -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="product.css">
-    <!-- <link rel="stylesheet" href="header.css"> -->
 </head>
 <body>
     <!-- Header -->
@@ -157,7 +156,5 @@ try {
     <!-- Footer -->
     <?php include 'footer.php'; ?>
 
-    <!-- Script -->
-    <!-- <script src="header.js"></script> -->
 </body>
 </html>
