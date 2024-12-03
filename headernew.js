@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             subcategoryLi.classList.add('subcategory-mobi');
 
             const subcategoryLink = document.createElement('a');
-            subcategoryLink.href = '#';
+            subcategoryLink.href = `danh-muc/${subcategory.id}`;
             subcategoryLink.classList.add('subcategory-link-mobi');
             subcategoryLink.setAttribute('data-subcategory-id', subcategory.id);
             subcategoryLink.textContent = subcategory.name;
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             itemLi.classList.add('item-mobi');
 
             const itemLink = document.createElement('a');
-            itemLink.href = '#';
+            itemLink.href = `san-pham/${item.id}`;
             itemLink.textContent = item.name;
 
             itemLi.appendChild(itemLink);

@@ -59,6 +59,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <base href="http://localhost/web-dm-lum/web/">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="headernew.css"/>
@@ -97,12 +98,16 @@
                                 <ul class="subcategories">
                                     <?php foreach ($category['subcategories'] as $subcategory): ?>
                                         <li class="subcategory">
-                                            <a href="#" class="subcategory-link"><?php echo htmlspecialchars($subcategory['name']); ?></a>
+                                            <a href="danh-muc/<?php echo urlencode($subcategory['id']); ?>" class="subcategory-link">
+                                                <?php echo htmlspecialchars($subcategory['name']); ?>
+                                            </a>
                                             <?php if (!empty($subcategory['items'])): ?>
                                                 <ul class="items">
                                                     <?php foreach ($subcategory['items'] as $item): ?>
                                                         <li class="item">
-                                                            <a href="#"><?php echo htmlspecialchars($item['name']); ?></a>
+                                                            <a href="san-pham/<?php echo urlencode($item['id']); ?>">
+                                                                <?php echo htmlspecialchars($item['name']); ?>
+                                                            </a>
                                                         </li>
                                                     <?php endforeach; ?>
                                                 </ul>
