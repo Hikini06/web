@@ -123,11 +123,14 @@ $categories = [
     <title>Tiệm hoa MiMi</title>
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
 
+    <!-- Font và Icon -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="home.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="home.css?v=<?php echo filemtime('home.css'); ?>">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="index-responsive.css" />
+    <link rel="stylesheet" href="index-responsive.css?v=<?php echo filemtime('index-responsive.css'); ?>">
 </head>
 <body>
     <!-- HEADER ĐI THEO MỌI TRANG -->
@@ -324,7 +327,7 @@ $categories = [
     <?php include 'footer.php'; ?>
 
     <!-- Bao gồm tệp JavaScript -->
-    <script src="home.js" defer></script>
+    <script src="home.js?v=<?php echo filemtime('home.js'); ?>" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
 
 </body>
