@@ -9,6 +9,7 @@ if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
 
 // Bao gồm tệp kết nối cơ sở dữ liệu
 require_once '../config/db-connect.php';
+require_once 'functions.php';
 
 // Thiết lập số bản ghi mỗi trang cho khách hàng và sản phẩm
 $customer_records_per_page = 15;
@@ -234,7 +235,7 @@ try {
     <title>Admin MiMi</title>
     <base href="https://tiemhoamimi.com/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="<?php echo asset('admin.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -620,7 +621,7 @@ try {
     <div id="imagePreview" class="image-preview" style="display: none;">
         <img src="" alt="Image Preview">
     </div>
-    <script src="admin.js"></script>
+    <script src="<?php echo asset('admin.js'); ?>"></script>
 </body>
 </html>
 

@@ -1,5 +1,6 @@
 <?php
     include '../config/db-connect.php';
+    require_once 'functions.php';
 
     $stmt = $pdo->prepare("
     SELECT 
@@ -64,7 +65,7 @@
     <!-- <base href="http://localhost/web-dm-lum/web/"> -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="header.css"/>
+    <link rel="stylesheet" href="<?php echo asset('header.css'); ?>"/>
 </head>
 <body>
     <section class="header-main">
@@ -154,6 +155,6 @@
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"></script>
-    <script src="header.js" defer ></script>
+    <script src="<?php echo asset('header.js'); ?>" defer></script>
 </body>
 </html>

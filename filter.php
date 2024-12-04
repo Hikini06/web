@@ -1,5 +1,6 @@
 <?php
 require '../config/db-connect.php';
+require_once 'functions.php';
 
 // Hàm phát hiện thiết bị di động
 function isMobile() {
@@ -167,8 +168,8 @@ if (!empty($currentProductIDs)) {
     <title>Tiệm hoa MiMi</title>
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
 
-    <link rel="stylesheet" href="filter.css">
-    <link rel="stylesheet" href="filter-responsive.css">
+    <link rel="stylesheet" href="<?php echo asset('filter.css'); ?>">
+    <link rel="stylesheet" href="<?php echo asset('filter-responsive.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
 
@@ -229,7 +230,7 @@ if (!empty($currentProductIDs)) {
     </div>
 
     <?php include 'footer.php'; ?>
-    <script src="filter.js"></script>
-    <script src="filter-responsive.js"></script>
+    <script src="<?php echo asset('filter.js'); ?>"></script>
+    <script src="<?php echo asset('filter-responsive.js'); ?>"></script>
 </body>
 </html>

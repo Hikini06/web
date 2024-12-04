@@ -1,6 +1,8 @@
 
 <?php
 require '../config/db-connect.php';
+require_once 'functions.php';
+
 if (!isset($_GET['subcategory_id'])) {
     // Chuyển hướng đến URL mặc định
     header("Location: ./danh-muc/1");
@@ -86,10 +88,8 @@ $total_pages = ceil($total_products / $items_per_page);
     <link rel="icon" href="image/mimi-logo-vuong.png" type="image/png">
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="categories.css"/>
-    <link rel="stylesheet" href="categories-responsive.css"/>
-    
-
+    <link rel="stylesheet" href="<?php echo asset('categories.css'); ?>"/>
+    <link rel="stylesheet" href="<?php echo asset('categories-responsive.css'); ?>"/>
 </head>
 <body>
     <!-- HEADER -->
@@ -177,8 +177,8 @@ $total_pages = ceil($total_products / $items_per_page);
     <?php include 'footer.php'; ?>
 
 
-<script src="categories.js"></script>
-<script>
+    <script src="<?php echo asset('categories.js'); ?>"></script>
+    <script>
         // Script để tự động điều chỉnh items_per_page dựa trên kích thước màn hình
         (function() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -199,6 +199,6 @@ $total_pages = ceil($total_products / $items_per_page);
                 window.location.search = urlParams.toString();
             }
         })();
-</script>
+    </script>
 </body>
 </html>

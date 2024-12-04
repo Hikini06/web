@@ -1,5 +1,7 @@
 <?php
 include '../config/db-connect.php';
+require_once 'functions.php';
+
 
 // Xử lý dữ liệu từ form Quick Buy
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt']) && isset($_POST['product_id'])) {
@@ -153,7 +155,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
     <title>Tiệm hoa MiMi</title>
     <base href="https://tiemhoamimi.com/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
-    <link rel="stylesheet" href="product-detail.css">
+    <link rel="stylesheet" href="<?php echo asset('product-detail.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -284,7 +286,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
         </div>
     </div>
 
-    <script src="product_detail.js"></script>
+    <script src="<?php echo asset('product_detail.js'); ?>"></script>
     
     <script>
         // JavaScript kiểm tra và hiển thị popup

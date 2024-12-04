@@ -3,6 +3,7 @@
 
 // Kết nối cơ sở dữ liệu bằng PDO
 include '../config/db-connect.php';
+require_once 'functions.php';
 
 // Hàm kiểm tra thiết bị di động
 function isMobile() {
@@ -101,7 +102,7 @@ if (!empty($currentProductIds)) {
     
     <!-- Font chữ -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="sale.css">
+    <link rel="stylesheet" href="<?php echo asset('sale.css'); ?>">
 </head>
 <body>
     <!-- Header -->

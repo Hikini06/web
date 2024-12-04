@@ -1,5 +1,6 @@
 <?php
 require '../config/db-connect.php';
+require_once 'functions.php';
 
 // Lấy danh sách item_id từ bảng items
 $queryItems = $pdo->prepare("SELECT id, name, description FROM items");
@@ -174,11 +175,9 @@ if (empty($suggestedProducts)) {
     <title>Tiệm hoa MiMi</title>
     <base href="https://tiemhoamimi.com/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
-
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
-
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel= "stylesheet" href= "items.css"/>
+    <link rel="stylesheet" href="<?php echo asset('items.css'); ?>"/>
 </head>
 <body>
 

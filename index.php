@@ -3,6 +3,7 @@
 
 // Bao gồm tệp kết nối cơ sở dữ liệu
 require_once '../config/db-connect.php';
+require_once 'functions.php';
 
 // Fetch selected products for profile section
 try {
@@ -121,14 +122,14 @@ $categories = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tiệm hoa MiMi</title>
+    <base href="https://tiemhoamimi.com/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
-
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="<?php echo asset('home.css'); ?>" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="index-responsive.css" />
-</head>
+    <link rel="stylesheet" href="<?php echo asset('index-responsive.css'); ?>" />
+    </head>
 <body>
     <!-- HEADER ĐI THEO MỌI TRANG -->
     <?php include 'header.php'; ?>
@@ -324,7 +325,7 @@ $categories = [
     <?php include 'footer.php'; ?>
 
     <!-- Bao gồm tệp JavaScript -->
-    <script src="home.js" defer></script>
+    <script src="<?php echo asset('home.js'); ?>" defer></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
 
 </body>

@@ -1,6 +1,7 @@
 <?php
 // Kết nối cơ sở dữ liệu
 include '../config/db-connect.php';
+require_once 'functions.php';
 
 try {
     // Xác định số sản phẩm mỗi trang
@@ -70,7 +71,7 @@ try {
     
     <!-- Font chữ -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="<?php echo asset('product.css'); ?>">
 </head>
 <body>
     <!-- Header -->
