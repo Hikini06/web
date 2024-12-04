@@ -20,7 +20,14 @@ $groups = [
             'banner_h3' => 'Siêu SALE NOEL'
         ],    
     'noel' => [
-        'ids' => [340, 341, 342, 343, 344],
+        'ids' => [340, 341, 342, 343, 344,345,346,347,348,349,350,351,88,87],
+        'sale_title' => 'Danh sách sản phẩm nổi bật Noel 2024',
+        'banner_img' => './image/banner-pc/banner-2.webp',
+        'banner_h1' => 'NGÀY HỘI MUA SẮM',
+        'banner_h3' => 'Siêu SALE NOEL'
+    ],
+    'set-noel' => [
+        'ids' => [277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,267,268,269],
         'sale_title' => 'Danh sách sản phẩm nổi bật Noel 2024',
         'banner_img' => './image/banner-pc/banner-2.webp',
         'banner_h1' => 'NGÀY HỘI MUA SẮM',
@@ -97,10 +104,7 @@ if (!empty($currentProductIds)) {
     <title>Tiệm hoa MiMi</title>
     <base href="https://tiemhoamimi.com/">
     <!-- <base href="http://localhost/web-dm-lum/web/"> -->
-
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
-    
-    <!-- Font chữ -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo asset('sale.css'); ?>">
 </head>
