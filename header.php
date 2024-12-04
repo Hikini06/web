@@ -56,7 +56,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <!-- (Các thẻ head như trước) -->
     <meta charset="UTF-8">
