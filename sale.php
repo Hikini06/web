@@ -14,14 +14,14 @@ $groups = [
     'a' => [
             'ids' => [1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
             'sale_title' => 'Danh sách sản phẩm nổi bật Noel 2024',
-            'banner_img' => './image/banner-pc/banner-2.jpg',
+            'banner_img' => './image/banner-pc/banner-2.webp',
             'banner_h1' => 'NGÀY HỘI MUA SẮM',
             'banner_h3' => 'Siêu SALE NOEL'
         ],    
     'noel' => [
         'ids' => [340, 341, 342, 343, 344],
         'sale_title' => 'Danh sách sản phẩm nổi bật Noel 2024',
-        'banner_img' => './image/banner-pc/banner-2.jpg',
+        'banner_img' => './image/banner-pc/banner-2.webp',
         'banner_h1' => 'NGÀY HỘI MUA SẮM',
         'banner_h3' => 'Siêu SALE NOEL'
     ],
@@ -94,8 +94,8 @@ if (!empty($currentProductIds)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
-    <!-- <base href="https://tiemhoamimi.com/"> -->
-    <base href="http://localhost/web-dm-lum/web/">
+    <base href="https://tiemhoamimi.com/">
+    <!-- <base href="http://localhost/web-dm-lum/web/"> -->
 
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     
@@ -221,8 +221,5 @@ if (!empty($currentProductIds)) {
 
     <!-- Footer -->
     <?php include 'footer.php'; ?>
-
-    <!-- Script -->
-    <!-- <script src="header.js"></script> -->
 </body>
 </html>

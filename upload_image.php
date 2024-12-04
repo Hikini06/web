@@ -22,22 +22,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        // Kiểm tra loại tệp (cho phép jpg, jpeg, png, gif)
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+        // Kiểm tra loại tệp (cho phép jpg, jpeg, png)
+        // Lưu ý: GIF không hỗ trợ chuyển đổi sang WebP bằng GD
+        $allowed_types = ['image/jpeg', 'image/png', 'image/jpg'];
         if (!in_array($image['type'], $allowed_types)) {
-            echo json_encode(['success' => false, 'message' => 'Chỉ cho phép tải lên các định dạng JPG, JPEG, PNG, GIF.']);
+            echo json_encode(['success' => false, 'message' => 'Chỉ cho phép tải lên các định dạng JPG, JPEG, PNG.']);
             exit();
         }
 
-        // Kiểm tra kích thước tệp (ví dụ: tối đa 5MB)
-        $max_size = 5 * 1024 * 1024; // 5MB
+        // Kiểm tra kích thước tệp (ví dụ: tối đa 10MB để đảm bảo sau nén dưới 5MB)
+        $max_size = 10 * 1024 * 1024; // 10MB
         if ($image['size'] > $max_size) {
-            echo json_encode(['success' => false, 'message' => 'Kích thước ảnh vượt quá giới hạn cho phép (5MB).']);
+            echo json_encode(['success' => false, 'message' => 'Kích thước ảnh vượt quá giới hạn cho phép (10MB).']);
             exit();
         }
 
         // Tạo thư mục upload nếu chưa tồn tại
-        $upload_dir = 'image/upload/';
+        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/image/upload/';
         if (!is_dir($upload_dir)) {
             if (!mkdir($upload_dir, 0755, true)) {
                 echo json_encode(['success' => false, 'message' => 'Không thể tạo thư mục upload.']);
@@ -45,31 +46,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Tạo tên tệp duy nhất để tránh trùng lặp
-        $file_ext = pathinfo($image['name'], PATHINFO_EXTENSION);
-        $new_filename = uniqid('img_', true) . '.' . $file_ext;
+        // Lấy phần mở rộng tệp
+        $file_ext = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+
+        // Xử lý chuyển đổi và nén ảnh bằng GD
+        switch ($file_ext) {
+            case 'jpg':
+            case 'jpeg':
+                $source_image = imagecreatefromjpeg($image['tmp_name']);
+                break;
+            case 'png':
+                $source_image = imagecreatefrompng($image['tmp_name']);
+                break;
+            default:
+                echo json_encode(['success' => false, 'message' => 'Định dạng ảnh không được hỗ trợ.']);
+                exit();
+        }
+
+        if (!$source_image) {
+            echo json_encode(['success' => false, 'message' => 'Không thể tạo đối tượng hình ảnh từ tệp tải lên.']);
+            exit();
+        }
+
+        // Thiết lập chất lượng ban đầu
+        $quality = 80;
+        $max_webp_size = 5 * 1024 * 1024; // 5MB
+
+        // Tạo tên tệp WebP duy nhất
+        $new_filename = uniqid('img_', true) . '.webp';
         $destination = $upload_dir . $new_filename;
 
-        // Di chuyển tệp vào thư mục upload
-        if (move_uploaded_file($image['tmp_name'], $destination)) {
-            // Cập nhật đường dẫn ảnh trong cơ sở dữ liệu
-            try {
-                $sql = "UPDATE items_detail SET img = :img WHERE id = :id";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([':img' => $new_filename, ':id' => $product_id]);
+        // Chuyển đổi và nén ảnh thành WebP
+        do {
+            // Xóa tệp nếu đã tồn tại
+            if (file_exists($destination)) {
+                unlink($destination);
+            }
 
-                echo json_encode(['success' => true, 'image_path' => '/' . $destination]);
-                exit();
-            } catch (PDOException $e) {
-                // Xóa tệp nếu có lỗi trong cơ sở dữ liệu
-                if (file_exists($destination)) {
-                    unlink($destination);
-                }
-                echo json_encode(['success' => false, 'message' => 'Lỗi cập nhật cơ sở dữ liệu: ' . $e->getMessage()]);
+            // Chuyển đổi sang WebP
+            if (!imagewebp($source_image, $destination, $quality)) {
+                echo json_encode(['success' => false, 'message' => 'Lỗi khi chuyển đổi ảnh sang WebP.']);
                 exit();
             }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Không thể di chuyển tệp ảnh.']);
+
+            clearstatcache(true, $destination);
+            $current_size = filesize($destination);
+
+            // Giảm chất lượng nếu kích thước vẫn lớn hơn giới hạn
+            if ($current_size > $max_webp_size && $quality > 10) {
+                $quality -= 10;
+            } else {
+                break;
+            }
+        } while ($current_size > $max_webp_size && $quality > 10);
+
+        // Giải phóng bộ nhớ
+        imagedestroy($source_image);
+
+        // Kiểm tra kích thước cuối cùng
+        if ($current_size > $max_webp_size) {
+            // Xóa tệp WebP nếu không đạt yêu cầu
+            if (file_exists($destination)) {
+                unlink($destination);
+            }
+            echo json_encode(['success' => false, 'message' => 'Không thể nén ảnh dưới 5MB. Vui lòng tải lại với tệp nhỏ hơn hoặc chất lượng thấp hơn.']);
+            exit();
+        }
+
+        // Cập nhật đường dẫn ảnh trong cơ sở dữ liệu
+        try {
+            $sql = "UPDATE items_detail SET img = :img WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':img' => $new_filename, ':id' => $product_id]);
+
+            echo json_encode(['success' => true, 'image_path' => '/image/upload/' . $new_filename]);
+            exit();
+        } catch (PDOException $e) {
+            // Xóa tệp nếu có lỗi trong cơ sở dữ liệu
+            if (file_exists($destination)) {
+                unlink($destination);
+            }
+            echo json_encode(['success' => false, 'message' => 'Lỗi cập nhật cơ sở dữ liệu: ' . $e->getMessage()]);
             exit();
         }
     } else {

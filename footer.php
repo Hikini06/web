@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="footer.css" />
@@ -19,41 +18,41 @@
       <button class="guideSection-slider-prev-btn"><i class="fa-solid fa-chevron-left"></i></button>
       <div class="guideSection-image-slider-container">
           <div class="guideSection-image-slider">
-              <a href="https://example.com/1" target="_blank">
+              <a href="https://www.tiktok.com/@phannthaonguyen/video/7404533330441555217" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="./image/upload/img_67481a918fd810.31193589.jpg" alt="Slide 1">
+                      <img src="./image/upload/img_67481a918fd810.31193589.webp" alt="Slide 1">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Cách lắp đèn tròn hoa hồng</p>
 
                   </div>
               </a>
-              <a href="https://example.com/2" target="_blank">
+              <a href="https://www.tiktok.com/@phannthaonguyen/video/7397103723874372880" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="./image/upload/img_67481a393b3031.21826075.jpg" alt="Slide 2">
+                      <img src="./image/upload/img_67481a393b3031.21826075.webp" alt="Slide 2">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Cách lắp đèn vuông hoa tulip</p>
 
                   </div>
               </a>
-              <a href="https://example.com/3" target="_blank">
+              <a href="https://www.tiktok.com/@phannthaonguyen/video/7322417539131231489" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="./image/upload/img_674819588e46d6.00397169.jpeg" alt="Slide 3">
+                      <img src="./image/upload/img_674819588e46d6.00397169.webp" alt="Slide 3">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
-                      <p class="guideSection-image-description">Lắp đèn mây hoa hồng</p>
+                      <p class="guideSection-image-description">Lắp đèn mây</p>
 
                   </div>
               </a>
-              <a href="https://example.com/4" target="_blank">
+              <a href="https://www.tiktok.com/@phannthaonguyen/video/7381706325941554433" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="./image/upload/img_67481a4f305432.28780776.jpg" alt="Slide 4">
+                      <img src="./image/upload/img_67481a4f305432.28780776.webp" alt="Slide 4">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Cách lắp đèn tròn anh đào</p>
 
                   </div>
               </a>
-              <a href="https://example.com/5" target="_blank">
+              <a href="https://www.tiktok.com/@phannthaonguyen/video/7394459337428569361" target="_blank">
                   <div class="guideSection-image-card">
-                      <img src="./image/upload/img_67481ac2c22733.73395989.jpg" alt="Slide 5">
+                      <img src="./image/upload/img_67481ac2c22733.73395989.webp" alt="Slide 5">
                       <button class="guideSection-play-btn"><i class="fa-solid fa-play"></i></button>
                       <p class="guideSection-image-description">Lắp đèn tròn hoa tulip</p>
 
@@ -89,14 +88,14 @@
             LIÊN HỆ VỚI BỌN MÌNH
           </h3>
           <div class="footer-icon">
-            <a href="https://www.facebook.com/people/Ti%E1%BB%87m-hoa-MiMi/61560867710445/" target="_blank"><div><img src="image/icon/icon-facebook.png" alt=""></div></a>
+            <a href="https://www.facebook.com/people/Ti%E1%BB%87m-hoa-MiMi/61560867710445/" target="_blank"><div><img src="image/icon/icon-facebook.webp" alt=""></div></a>
             <a href="https://www.instagram.com/tiemhoa.mimi/" target="_blank"><div><img src="image/icon/icon-insta.webp"  alt=""></div></a>
             <a href="https://vn.shp.ee/FofnRRP" target="_blank"><div><img src="image/icon/icon-shopee.webp"  alt=""></div></a>
           </div>
           <div class="footer-icon">
             <a href="https://www.threads.net/@tiemhoa.mimi" target="_blank"><div><img src="image/icon/icon-threads.webp"  alt=""></div></a>
             <a href="https://www.tiktok.com/@phannthaonguyen" target="_blank"><div><img src="image/icon/icon-tiktok.webp" alt=""></div></a>
-            <a href="https://zalo.me/84354235669" target="_blank"><div><img src="image/icon/icon-zalo.png" alt=""></div></a>
+            <a href="https://zalo.me/84354235669" target="_blank"><div><img src="image/icon/icon-zalo.webp" alt=""></div></a>
           </div>
         </div>
         <div class="footer-payment">

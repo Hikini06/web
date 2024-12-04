@@ -1,3 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --header-main-color: rgb(255, 211, 219);
+    --header-text-color: rgb(194, 47, 80);
+    --header-text-color-dark: rgb(0, 32, 77);
+    --header-hover-color: rgb(53, 16, 25);
+    --header-background-color: rgb(255, 248, 249);
+}
+body {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; 
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--header-text-color-dark);
+}
+
+
 /* GUIDE SECTION SLIDER CSS START HERE */
 .guideSection-h {
   color: var(--text-color-dark);

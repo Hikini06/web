@@ -44,72 +44,72 @@ try {
 $categories = [
     [
         'link' => './danh-muc/1',
-        'img'  => './image/mobile-title/hoa-len-hoa-sap.jpg',
+        'img'  => './image/mobile-title/hoa-len-hoa-sap.webp',
         'name' => 'Bó hoa len Hoa sáp'
     ],
     [
         'link' => './danh-muc/2',
-        'img'  => './image/mobile-title/hoa-gau-bong.jpg',
+        'img'  => './image/mobile-title/hoa-gau-bong.webp',
         'name' => 'Bó hoa gấu bông'
     ],
     [
         'link' => './danh-muc/3',
-        'img'  => './image/mobile-title/gau-bong.jpg',
+        'img'  => './image/mobile-title/gau-bong.webp',
         'name' => 'Gấu bông lớn'
     ],
     [
         'link' => './danh-muc/4',
-        'img'  => './image/mobile-title/moc-khoa.jpg',
+        'img'  => './image/mobile-title/moc-khoa.webp',
         'name' => 'Móc khoá'
     ],
     [
         'link' => './danh-muc/5',
-        'img'  => './image/mobile-title/ghim.jpg',
+        'img'  => './image/mobile-title/ghim.webp',
         'name' => 'Ghim cài áo'
     ],
     [
         'link' => './danh-muc/6',
-        'img'  => './image/mobile-title/set-gau-hoa.jpg',
+        'img'  => './image/mobile-title/set-gau-hoa.webp',
         'name' => 'Set gấu hoa'
     ],
     [
         'link' => './danh-muc/7',
-        'img'  => './image/mobile-title/nen.jpg',
+        'img'  => './image/mobile-title/nen.webp',
         'name' => 'Nến thơm'
     ],
     [
         'link' => './danh-muc/8',
-        'img'  => './image/mobile-title/balo.jpg',
+        'img'  => './image/mobile-title/balo.webp',
         'name' => 'Balo Túi xách'
     ],
     [
         'link' => './danh-muc/9',
-        'img'  => './image/mobile-title/tat.jpg',
+        'img'  => './image/mobile-title/tat.webp',
         'name' => 'Tất'
     ],
     [
         'link' => './danh-muc/10',
-        'img'  => './image/mobile-title/trend.jpg',
+        'img'  => './image/mobile-title/trend.webp',
         'name' => 'Đồ theo trend'
     ],
     [
         'link' => './danh-muc/11',
-        'img'  => './image/mobile-title/den-tron.jpg',
+        'img'  => './image/mobile-title/den-tron.webp',
         'name' => 'Đèn hình tròn'
     ],
     [
         'link' => './danh-muc/12',
-        'img'  => './image/mobile-title/den-vuong.jpg',
+        'img'  => './image/mobile-title/den-vuong.webp',
         'name' => 'Đèn hình vuông'
     ],
     [
         'link' => './danh-muc/13',
-        'img'  => './image/mobile-title/den-may.jpg',
+        'img'  => './image/mobile-title/den-may.webp',
         'name' => 'Đèn đám mây'
     ],
     [
         'link' => './danh-muc/14',
-        'img'  => './image/mobile-title/den-thu.jpg',
+        'img'  => './image/mobile-title/den-thu.webp',
         'name' => 'Đèn hình thú'
     ],
 ];
@@ -125,15 +125,14 @@ $categories = [
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="header.css"/>
     <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="index-responsive.css" />
 </head>
 <body>
-    <!-- header ĐI THEO MỌI TRANG -->
+    <!-- HEADER ĐI THEO MỌI TRANG -->
     <?php include 'header.php'; ?>
-    <!-- header ĐI THEO MỌI TRANG END -->
+    <!-- HEADER ĐI THEO MỌI TRANG END -->
     <!-- PHẦN DANH MỤC SẢN PHẨM -->
     <section class="categories-section-cont">
         <div class="categories-section swiper">
@@ -157,7 +156,7 @@ $categories = [
     <section class="profile-section">
             <div class="profile-section-cont">
                 <?php foreach ($profile_products as $product): ?>
-                    <a href="chi-tiet-san-pham/<?php echo htmlspecialchars($product['id']); ?>">
+                    <a href="product-detail.php?id=<?php echo htmlspecialchars($product['id']); ?>">
                         <div class="profile-card">
                             <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
                             <p><?php echo htmlspecialchars($product['name']); ?></p>
@@ -173,22 +172,22 @@ $categories = [
         <section id="hero-banner" class="swiper hero-banner">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/1.jpg" alt="Hoa 1">
+                    <img class = "hero-banner-img" src="./image/banner-image/1.webp" alt="Hoa 1">
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/2.jpg" alt="Hoa 2">
+                    <img class = "hero-banner-img" src="./image/banner-image/2.webp" alt="Hoa 2">
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/3.jpg" alt="Hoa 3">
+                    <img class = "hero-banner-img" src="./image/banner-image/3.webp" alt="Hoa 3">
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/4.jpg" alt="Hoa 4">
+                    <img class = "hero-banner-img" src="./image/banner-image/4.webp" alt="Hoa 4">
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/5.jpg" alt="Hoa 5">
+                    <img class = "hero-banner-img" src="./image/banner-image/5.webp" alt="Hoa 5">
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/6.jpg" alt="Hoa 6">
+                    <img class = "hero-banner-img" src="./image/banner-image/6.webp" alt="Hoa 6">
                 </div>
                 <!-- Thêm thêm slide nếu cần -->
             </div>
@@ -200,15 +199,15 @@ $categories = [
         </section>
         <section class="banner-divine-to-two">
             <div class="banner-divine-to-two-child">
-                <img src="./image/banner-pc/banner-1.jpg" alt="" />
+                <img src="./image/banner-pc/banner-1.webp" alt="" />
             </div>
             <div class="banner-divine-to-two-child banner-divine-to-two-child-cont">
-                <img src="./image/banner-pc/banner-2.jpg" alt="" />
-                <!-- <a class="banner-divine-to-two-child-btn cta-button" href="product.php">Mua ngay</a> -->
+                <img src="./image/banner-pc/banner-2.webp" alt="" />
+                <!--<a class="banner-divine-to-two-child-btn cta-button" href="product.php">Mua ngay</a>-->
                 <div class = "banner-divine-to-two-child-cont-btn">
                     <h3>Tất cả các đơn hàng từ 15/12 - 24/12</h3>
-                    <a href="/danh-sach/noel">Miễn phí vận chuyển</a>
-                    <a href="/danh-sach/noel">MUA NGAY</a>
+                    <a href="https://tiemhoamimi.com/danh-sach/noel">Miễn phí vận chuyển</a>
+                    <a href="https://tiemhoamimi.com/danh-sach/noel">MUA NGAY</a>
                 </div>
 
             </div>
@@ -223,28 +222,28 @@ $categories = [
         <div class="product-grid">
             <a href="">
                 <div class="product-card">
-                    <img src="./image/noi-bat/noi-bat-1.jpg" alt="Sản phẩm 1" />
+                    <img src="./image/noi-bat/noi-bat-1.webp" alt="Sản phẩm 1" />
                     <h3>Gấu trúc Noel</h3>
                     <button>159.000đ</button>
                 </div>
             </a>
             <a href="">
                 <div class="product-card">
-                    <img src="./image/noi-bat/noi-bat-2.jpg" alt="Sản phẩm 2" />
+                    <img src="./image/noi-bat/noi-bat-2.webp" alt="Sản phẩm 2" />
                     <h3>Capybara Noel</h3>
                     <button>250.000đ</button>
                 </div>
             </a>
             <a href="">
                 <div class="product-card">
-                    <img src="./image/noi-bat/noi-bat-3.jpg" alt="Sản phẩm 3" />
+                    <img src="./image/noi-bat/noi-bat-3.webp" alt="Sản phẩm 3" />
                     <h3>Set quà Noel</h3>
                     <button>129.000đ</button>
                 </div>
             </a>
             <a href="">
                 <div class="product-card">
-                    <img src="./image/noi-bat/noi-bat-4.jpg" alt="Sản phẩm 4" />
+                    <img src="./image/noi-bat/noi-bat-4.webp" alt="Sản phẩm 4" />
                     <h3>Bó hoa gấu Noel</h3>
                     <button>390.000đ</button>
                 </div>
@@ -254,12 +253,12 @@ $categories = [
     <!-- PHẦN SẢN PHẨM NỔI BẬT END -->
 
     <!-- PHẦN SLIDER 1 - DANH SÁCH SẢN PHẨM -->
-    <h2 class= "title-for-all">Sản phẩm này thuộc danh mục gì đó!</h2>
+    <h2 class= "title-for-all">Bộ sưu tập Baby Three siêu hot hit!</h2>
     <div class="swiper-slider-container">
         <div class="swiper slider-container-one">
             <div class="swiper-wrapper">
                 <?php foreach ($slider1_products as $product): ?>
-                    <a href="chi-tiet-san-pham/<?php echo htmlspecialchars($product['id']); ?>" class="swiper-slide slider-item-one">
+                    <a href="product-detail.php?id=<?php echo htmlspecialchars($product['id']); ?>" class="swiper-slide slider-item-one">
                         <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
                         <p><?php echo htmlspecialchars($product['name']); ?></p>
                         <button class="product-slider-btn"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></button>
@@ -275,26 +274,26 @@ $categories = [
     <!-- PHẦN 2 BANNER SẢN PHẨM -->
     <section class="two-product-banner">
         <h2 class="two-product-banner-text">
-            Nghĩ ra 1 tiêu đề gì đó cho 2 cái banner này!!!
+            Mẫu đèn ngủ bán chạy nhất năm nay!
         </h2>
         <div class="two-product-banner-cont">
             <div class="two-product-banner-child">
                 <div class="two-product-banner-child-two">
                     <div class="img-one">
-                        <img src="./image/banner-pc/divine-vuong.jpg" alt="" />
+                        <img src="./image/banner-pc/divine-vuong.webp" alt="" />
                     </div>
                     <div class="img-two">
-                        <img src="image/den-vuong-noel.jpeg" alt="" />
+                        <img src="image/den-vuong-noel.webp" alt="" />
                     </div>
                 </div>
             </div>
             <div class="two-product-banner-child">
                 <div class="two-product-banner-child-two">
                     <div class="img-one">
-                        <img src="./image/banner-pc/divine-tron.jpg" alt="" />
+                        <img src="./image/banner-pc/divine-tron.webp" alt="" />
                     </div>
                     <div class="img-two">
-                        <img src="image/den-tron-hoa-hong.jpg" alt="" />
+                        <img src="image/den-tron-hoa-hong.webp" alt="" />
                     </div>
                 </div>
             </div>
@@ -303,12 +302,12 @@ $categories = [
     <!-- PHẦN 2 BANNER SẢN PHẨM END -->
 
     <!-- PHẦN SLIDER 2 - DANH SÁCH SẢN PHẨM -->
-    <h2 class= "title-for-all">Phàn danh mục sản phẩm chưa đặt tên!</h2>
+    <h2 class= "title-for-all">Combo quà tặng Giáng Sinh 2024!</h2>
     <div class="swiper-slider-container">
       <div class="swiper slider-container-two">
         <div class="swiper-wrapper">
                 <?php foreach ($slider2_products as $product): ?>
-                    <a href="chi-tiet-san-pham/<?php echo htmlspecialchars($product['id']); ?>" class="swiper-slide slider-item-two">
+                    <a href="product-detail.php?id=<?php echo htmlspecialchars($product['id']); ?>" class="swiper-slide slider-item-two">
                         <img src="image/upload/<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
                         <p><?php echo htmlspecialchars($product['name']); ?></p>
                         <button class="product-slider-btn-two"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></button>
@@ -326,9 +325,7 @@ $categories = [
 
     <!-- Bao gồm tệp JavaScript -->
     <script src="home.js" defer></script>
-    <!-- <script src="header.js"></script> -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
-    <script src="index-responsive.js" defer></script>
 
 </body>
 </html>

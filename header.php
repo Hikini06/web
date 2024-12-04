@@ -1,23 +1,25 @@
 <?php
     include '../config/db-connect.php';
 
-    // Fetch categories along with subcategories and items
     $stmt = $pdo->prepare("
-        SELECT 
-            c.id AS category_id, 
-            c.name AS category_name, 
-            sc.id AS subcategory_id, 
-            sc.name AS subcategory_name,
-            i.id AS item_id,
-            i.name AS item_name
-        FROM 
-            categories c
-        LEFT JOIN 
-            subcategories sc ON c.id = sc.category_id
-        LEFT JOIN 
-            items i ON sc.id = i.subcategory_id
-        ORDER BY 
-            c.name ASC, sc.name ASC, i.name ASC
+    SELECT 
+        c.id AS category_id, 
+        c.name AS category_name, 
+        sc.id AS subcategory_id, 
+        sc.name AS subcategory_name,
+        i.id AS item_id,
+        i.name AS item_name
+    FROM 
+        categories c
+    LEFT JOIN 
+        subcategories sc ON c.id = sc.category_id
+    LEFT JOIN 
+        items i ON sc.id = i.subcategory_id
+    ORDER BY 
+        FIELD(c.name, 'ĐÈN NGỦ', 'HOA GẤU BÔNG', 'GẤU BÔNG', 'SET QUÀ TẶNG', 'KHÁC') ASC,
+        c.name ASC,
+        sc.name ASC,
+        i.name ASC
     ");
     $stmt->execute();
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -59,7 +61,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <base href="http://localhost/web-dm-lum/web/">
+    <!-- <base href="http://localhost/web-dm-lum/web/"> -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="header.css"/>
@@ -69,7 +71,7 @@
         <div class="header-floor-one">
             <div class="header-cont">
                 <div class="header-logo-container">
-                    <a href="./trang-chu" class="header-logo"><img src="image/mimi-logo.png" alt="Logo"></a>
+                    <a href="./trang-chu" class="header-logo"><img src="image/mimi-logo.webp" alt="Logo"></a>
                 </div>
                 <div class="header-search-bar-cont">
                     <form action="filter.php" method="GET" class="header-search-form">
@@ -142,7 +144,7 @@
                                 </a>
                             </li>
                         <?php endforeach; ?>
-                        <a href="" class="header-categories-mobi-list-all" style="text-decoration:none">TẤT CẢ SẢN PHẨM</a>
+                        <a href="./tat-ca-san-pham" class="header-categories-mobi-list-all" style="text-decoration:none">TẤT CẢ SẢN PHẨM</a>
                     </ul>
                     <ul class="header-subcategories-mobi">
                         <!-- Subcategories sẽ được thêm động qua JavaScript khi nhấn vào category -->
@@ -151,6 +153,7 @@
             </div>
         </div>
     </section>
-    <script src="header.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"></script>
+    <script src="header.js" defer ></script>
 </body>
 </html>

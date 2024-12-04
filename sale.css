@@ -1,5 +1,16 @@
 
-/* Thêm một số kiểu CSS cơ bản cho sản phẩm */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --header-main-color: rgb(255, 211, 219);
+    --header-text-color: rgb(194, 47, 80);
+    --header-text-color-dark: rgb(0, 32, 77);
+    --header-hover-color: rgb(53, 16, 25);
+    --header-background-color: rgb(255, 248, 249);
+}
 body {
     font-family: 'Nunito', sans-serif;
     background-color: #f9f9f9;
