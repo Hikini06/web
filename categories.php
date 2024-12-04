@@ -9,6 +9,11 @@ if (!isset($_GET['subcategory_id'])) {
     exit; // Dừng thực thi mã PHP sau khi chuyển hướng
 }
 
+ // Tạo chuỗi truy vấn cho items_per_page nếu có
+ $items_per_page_query = '';
+ if (isset($_GET['items_per_page'])) {
+     $items_per_page_query = '?items_per_page=' . htmlspecialchars($_GET['items_per_page']);
+ }
 // Lấy danh sách subcategories từ bảng subcategories
 $query = $pdo->prepare("SELECT * FROM subcategories");
 $query->execute();
@@ -85,6 +90,7 @@ $total_pages = ceil($total_products / $items_per_page);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
     <base href="https://tiemhoamimi.com/">
+    <!-- <base href="http://localhost/web-dm-lum/web/"> -->
     <link rel="icon" href="image/mimi-logo-vuong.png" type="image/png">
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -140,12 +146,12 @@ $total_pages = ceil($total_products / $items_per_page);
         <?php if ($total_pages > 1): ?>
             <!-- Trang đầu tiên -->
             <?php if ($page > 2): ?>
-                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/1">1</a>
+                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/1<?= $items_per_page_query ?>">1</a>
             <?php endif; ?>
 
             <!-- Trang trước -->
             <?php if ($page > 1): ?>
-                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $page - 1 ?>">
+                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $page - 1 ?><?= $items_per_page_query ?>">
                     <?= $page - 1 ?>
                 </a>
             <?php endif; ?>
@@ -156,7 +162,7 @@ $total_pages = ceil($total_products / $items_per_page);
             <!-- Trang sau -->
             <?php if ($page < $total_pages): ?>
                 <?php if ($page + 1 < $total_pages): ?>
-                    <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $page + 1 ?>">
+                    <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $page + 1 ?><?= $items_per_page_query ?>">
                         <?= $page + 1 ?>
                     </a>
                 <?php endif; ?>
@@ -164,7 +170,7 @@ $total_pages = ceil($total_products / $items_per_page);
 
             <!-- Trang cuối cùng -->
             <?php if ($page < $total_pages): ?>
-                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $total_pages ?>">
+                <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>/page/<?= $total_pages ?><?= $items_per_page_query ?>">
                     <?= $total_pages ?>
                 </a>
             <?php endif; ?>
@@ -181,24 +187,43 @@ $total_pages = ceil($total_products / $items_per_page);
     <script>
         // Script để tự động điều chỉnh items_per_page dựa trên kích thước màn hình
         (function() {
-            const urlParams = new URLSearchParams(window.location.search);
+            const url = new URL(window.location.href);
+            const urlParams = url.searchParams;
             const currentItemsPerPage = parseInt(urlParams.get('items_per_page')) || 16;
             const screenWidth = window.innerWidth;
 
-            // Xác định nếu màn hình nhỏ hơn hoặc bằng 768px thì items_per_page = 10
-            if (screenWidth <= 768 && currentItemsPerPage !== 10) {
-                urlParams.set('items_per_page', 10);
-                urlParams.set('page', 1); // Đặt lại trang về 1
-                window.location.search = urlParams.toString();
+            let newItemsPerPage = 16;
+            if (screenWidth <= 768) {
+                newItemsPerPage = 10;
             }
 
-            // Nếu màn hình lớn hơn 768px và items_per_page không phải là 16, cập nhật
-            if (screenWidth > 768 && currentItemsPerPage !== 16) {
-                urlParams.set('items_per_page', 16);
-                urlParams.set('page', 1); // Đặt lại trang về 1
-                window.location.search = urlParams.toString();
+            if (currentItemsPerPage !== newItemsPerPage) {
+                urlParams.set('items_per_page', newItemsPerPage);
+
+                // Reset trang về 1 khi thay đổi items_per_page
+                // Kiểm tra nếu URL có chứa /page/X
+                const pathParts = url.pathname.split('/');
+                const pageIndex = pathParts.indexOf('page');
+                if (pageIndex !== -1 && pathParts.length > pageIndex + 1) {
+                    // Thay thế số trang hiện tại bằng 1
+                    pathParts[pageIndex + 1] = '1';
+                    url.pathname = pathParts.join('/');
+                } else {
+                    // Nếu chưa có /page/X trong đường dẫn, thêm /page/1
+                    if (!url.pathname.endsWith('/')) {
+                        url.pathname += '/';
+                    }
+                    url.pathname += 'page/1';
+                }
+
+                // Loại bỏ tham số 'page' trong query string nếu có
+                url.searchParams.delete('page');
+
+                // Cập nhật URL và tải lại trang
+                window.location.href = url.toString();
             }
         })();
     </script>
+
 </body>
 </html>
