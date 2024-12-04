@@ -104,7 +104,7 @@ $total_pages = ceil($total_products / $items_per_page);
     <?php endif; ?>
     <!-- Categories Filter -->
     <div class="categories-filter-cont">
-        <button class="arrow left-arrow">&lt;</button>
+        <button class="arrow left-arrow"><i class="fa-solid fa-chevron-left"></i></button>
         <div class="categories-filter">
         <ul>
             <?php foreach ($subcategories as $subcategory): ?>
@@ -116,7 +116,7 @@ $total_pages = ceil($total_products / $items_per_page);
             <?php endforeach; ?>
         </ul>
         </div>
-        <button class="arrow right-arrow">&gt;</button>
+        <button class="arrow right-arrow"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
     <!-- Categories Products -->
     <div class="categories">
