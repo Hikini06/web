@@ -28,13 +28,32 @@ $groups = [
     ],
     'set-noel' => [
         'ids' => [277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,267,268,269],
-        'sale_title' => 'Danh sách sản phẩm nổi bật Noel 2024',
+        'sale_title' => 'Set quà Noel siêu cấp đáng yêu',
         'banner_img' => './image/banner-pc/banner-2.webp',
         'banner_h1' => 'NGÀY HỘI MUA SẮM',
         'banner_h3' => 'Siêu SALE NOEL'
     ],
-
-    // THÊM CÁC NHÓM KHÁC
+    'capy-noel' => [
+        'ids' => [341,342],
+        'sale_title' => 'Capybara cho Noel 2024',
+        'banner_img' => './image/banner-pc/banner-2.webp',
+        'banner_h1' => 'NGÀY HỘI MUA SẮM',
+        'banner_h3' => 'Siêu SALE NOEL'
+    ],
+    'gau-truc-noel' => [
+        'ids' => [340,343,344],
+        'sale_title' => 'Gấu trúc Cute mùa Giáng Sinh',
+        'banner_img' => './image/banner-pc/banner-2.webp',
+        'banner_h1' => 'NGÀY HỘI MUA SẮM',
+        'banner_h3' => 'Siêu SALE NOEL'
+    ],
+    'caro-noel' => [
+        'ids' => [345,346,347,348],
+        'sale_title' => 'Mẫu Caro Noel siêu HOT',
+        'banner_img' => './image/banner-pc/banner-2.webp',
+        'banner_h1' => 'NGÀY HỘI MUA SẮM',
+        'banner_h3' => 'Siêu SALE NOEL'
+    ],
 ];
 
 // Lấy tham số 'group' từ URL

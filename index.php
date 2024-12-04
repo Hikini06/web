@@ -221,28 +221,28 @@ $categories = [
     <section id="featured-products">
         <h2>Sản phẩm nổi bật</h2>
         <div class="product-grid">
-            <a href="">
+            <a href="https://tiemhoamimi.com/danh-sach/gau-truc-noel">
                 <div class="product-card">
                     <img src="./image/noi-bat/noi-bat-1.webp" alt="Sản phẩm 1" />
                     <h3>Gấu trúc Noel</h3>
                     <button>159.000đ</button>
                 </div>
             </a>
-            <a href="">
+            <a href="https://tiemhoamimi.com/danh-sach/capy-noel">
                 <div class="product-card">
                     <img src="./image/noi-bat/noi-bat-2.webp" alt="Sản phẩm 2" />
                     <h3>Capybara Noel</h3>
                     <button>250.000đ</button>
                 </div>
             </a>
-            <a href="">
+            <a href="https://tiemhoamimi.com/danh-sach/set-noel">
                 <div class="product-card">
                     <img src="./image/noi-bat/noi-bat-3.webp" alt="Sản phẩm 3" />
                     <h3>Set quà Noel</h3>
                     <button>129.000đ</button>
                 </div>
             </a>
-            <a href="">
+            <a href="https://tiemhoamimi.com/danh-sach/caro-noel">
                 <div class="product-card">
                     <img src="./image/noi-bat/noi-bat-4.webp" alt="Sản phẩm 4" />
                     <h3>Bó hoa gấu Noel</h3>
