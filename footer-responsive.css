@@ -1,8 +1,12 @@
 @media (max-width: 768px) {
+    .footer {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
     /* GUIDE SECTION SLIDER RESPONSIVE */
     .guideSection-slider-wrapper {
-        width: 90%; /* Giãn rộng hơn trên mobile */
-        height: 250px; /* Tăng chiều cao nếu cần */
+        width: 90%; 
+        height: auto; 
     }
 
     .guideSection-image-slider {
@@ -11,9 +15,14 @@
 
     .guideSection-image-card {
         width: 100%; /* Mỗi slide chiếm 100% của container */
-        height: 100%;
+        height: auto;
     }
-
+    .guideSection-h {
+        padding-top: 1rem;
+    }
+    .guideSection-cont {
+        padding: 1rem 0rem;
+    }
     /* Slider Buttons */
     .guideSection-slider-prev-btn,
     .guideSection-slider-next-btn {
@@ -44,17 +53,19 @@
         width: 90%;
         align-items: center;
     }
-
+    .footer .footer-cont p:last-child {
+        padding-bottom: 1rem;
+    }
     .footer .footer-adress,
-    .footer .footer-contact,
     .footer .footer-payment {
         width: 100%;
         text-align: center;
-        margin-bottom: 1rem;
     }
 
     .footer .footer-icon {
-        justify-content: flex-start;
+        padding: 0px;
+        justify-content: space-between;
+        width: 50%;
     }
     .footer .footer-cont p,
     .footer .footer-cont h3,
@@ -63,13 +74,23 @@
     }
     .footer .footer-icon a {
         box-sizing: border-box;
-        padding-right: 2rem;
+        padding-bottom: 1rem;
        
+    }
+    .footer .footer-contact {
+        align-items: flex-start;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 100%;
     }
     .footer-contact h3 {
         width: 100%;
-    }
 
+    }
+    .footer .footer-cont {
+        padding: 0px;
+    }
 
 
 }
