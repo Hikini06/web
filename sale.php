@@ -54,6 +54,13 @@ $groups = [
         'banner_h1' => 'NGÀY HỘI MUA SẮM',
         'banner_h3' => 'Siêu SALE NOEL'
     ],
+    'teddy-noel' => [
+        'ids' => [349,350,351],
+        'sale_title' => 'Mẫu Caro Noel siêu HOT',
+        'banner_img' => './image/banner-pc/banner-2.webp',
+        'banner_h1' => 'NGÀY HỘI MUA SẮM',
+        'banner_h3' => 'Siêu SALE NOEL'
+    ],
 ];
 
 // Lấy tham số 'group' từ URL

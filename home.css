@@ -1236,7 +1236,16 @@ main {
   margin: auto; /* Căn giữa thẻ */
   border-radius: 8px; /* Để làm bo tròn đẹp mắt */
 }
-
+.hero-banner .swiper-wrapper .swiper-slide > a {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+}
+.hero-banner .swiper-wrapper .swiper-slide {
+  width: 100%;
+  height: 100%;
+}
 .swiper-slide img {
   width: 100%;
   aspect-ratio: 1/1;

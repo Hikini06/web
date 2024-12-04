@@ -123,6 +123,7 @@ $categories = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tiệm hoa MiMi</title>
     <base href="https://tiemhoamimi.com/">
+     <!-- <base href="http://localhost/web-dm-lum/web/"> -->
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1081860f2a.js" crossorigin="anonymous"></script>
@@ -173,22 +174,22 @@ $categories = [
         <section id="hero-banner" class="swiper hero-banner">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/1.webp" alt="Hoa 1">
+                    <a href="https://tiemhoamimi.com/danh-sach/teddy-noel"><img class = "hero-banner-img" src="./image/banner-image/1.webp" alt="Hoa 1"></a>
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/2.webp" alt="Hoa 2">
+                    <a href="https://tiemhoamimi.com/danh-sach/gau-truc-noel"><img class = "hero-banner-img" src="./image/banner-image/2.webp" alt="Hoa 2"></a>
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/3.webp" alt="Hoa 3">
+                    <a href="https://tiemhoamimi.com/danh-sach/teddy-noel"><img class = "hero-banner-img" src="./image/banner-image/3.webp" alt="Hoa 3"></a>
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/4.webp" alt="Hoa 4">
+                    <a href="https://tiemhoamimi.com/danh-sach/noel"><img class = "hero-banner-img" src="./image/banner-image/4.webp" alt="Hoa 4"></a>
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/5.webp" alt="Hoa 5">
+                    <a href="https://tiemhoamimi.com/danh-sach/noel"><img class = "hero-banner-img" src="./image/banner-image/5.webp" alt="Hoa 5"></a>
                 </div>
                 <div class="swiper-slide">
-                    <img class = "hero-banner-img" src="./image/banner-image/6.webp" alt="Hoa 6">
+                    <a href="https://tiemhoamimi.com/danh-sach/set-noel"><img class = "hero-banner-img" src="./image/banner-image/6.webp" alt="Hoa 6"></a>
                 </div>
                 <!-- Thêm thêm slide nếu cần -->
             </div>
