@@ -11,6 +11,9 @@ let guideSectionVisibleImages = getVisibleImages(); // Động xác định số
 let guideSectionSlideWidth = guideSectionImageSliderContainer.offsetWidth / guideSectionVisibleImages; // Tính chiều rộng mỗi ảnh
 const guideSectionTotalImages = document.querySelectorAll('.guideSection-image-slider .guideSection-image-card').length;
 let guideSectionAutoSlideInterval; // Biến lưu interval cho auto slide
+let touchStartX = 0;
+let touchEndX = 0;
+const swipeThreshold = 50; // Ngưỡng để xác định swipe
 
 // Hàm xác định số lượng hình ảnh hiển thị dựa trên kích thước màn hình
 function getVisibleImages() {
@@ -84,6 +87,38 @@ function guideSectionResizeHandler() {
         guideSectionUpdateButtons();
     }
 }
+// Hàm xử lý khi bắt đầu touch
+function handleTouchStart(event) {
+    touchStartX = event.changedTouches[0].screenX;
+}
+
+// Hàm xử lý khi kết thúc touch
+function handleTouchEnd(event) {
+    touchEndX = event.changedTouches[0].screenX;
+    handleSwipeGesture();
+}
+
+// Hàm xác định hướng swipe và điều hướng slider
+function handleSwipeGesture() {
+    const swipeDistance = touchEndX - touchStartX;
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance < 0) {
+            // Swipe sang trái -> Next slide
+            if (guideSectionCurrentIndex < guideSectionTotalImages - guideSectionVisibleImages) {
+                guideSectionCurrentIndex++;
+                guideSectionUpdateSlider();
+                guideSectionRestartAutoSlide();
+            }
+        } else {
+            // Swipe sang phải -> Prev slide
+            if (guideSectionCurrentIndex > 0) {
+                guideSectionCurrentIndex--;
+                guideSectionUpdateSlider();
+                guideSectionRestartAutoSlide();
+            }
+        }
+    }
+}
 
 // Hàm khởi động slider
 function guideSectionInitialize() {
@@ -91,6 +126,8 @@ function guideSectionInitialize() {
     guideSectionUpdateSlider();
     guideSectionUpdateButtons();
     guideSectionAutoSlideInterval = setInterval(guideSectionAutoSlide, 3000); // Tự động slide mỗi 3 giây
+    guideSectionImageSliderContainer.addEventListener('touchstart', handleTouchStart, false);
+    guideSectionImageSliderContainer.addEventListener('touchend', handleTouchEnd, false);
 }
 
 // Kích hoạt khi DOM đã tải
