@@ -38,10 +38,11 @@ body {
     padding-top: 4rem;
     width: 60%;
     /* text-align: center; */
-    height: 50rem;
+    height: auto;
 }
 
 .product-detail-pic-img {
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -52,8 +53,8 @@ body {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
-    /* background-color: blue; */
     width: 50%;
+    height: auto;
 }
 .product-detail-pic-img-mainimg {
     width: 100%;
@@ -70,15 +71,13 @@ body {
 }
 .product-detail-pic-img-moreimg {
     width: 100%;
-    height: 30%;
-    /* background-color: bisque; */
+    height: auto;
 }
 .product-detail-pic-text-nameandprice {
-
     padding-left: 1rem;
-width: 100%;
-height: 20%;
-background-color: var(--background-color);
+    width: 100%;
+    height: auto;
+    background-color: var(--background-color);
 }
 .product-detail-pic-text-nameandprice h1 {
     text-align: center;
@@ -91,12 +90,18 @@ background-color: var(--background-color);
 .product-detail-pic-text-nameandprice h3 {
     text-align: center;
     font-weight: 900;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: var(--text-color);
+    padding-bottom: 1rem;
+}
+.product-detail-option-cont {
+    height: auto;
 }
 .product-detail-pic-text-buynow {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    padding: 0.5rem 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     margin-left: auto;
     font-family: "Nunito", sans-serif;
     font-weight: 700;
@@ -106,7 +111,7 @@ background-color: var(--background-color);
     border-radius: 8px;
     margin-right: auto;
     text-align: center;
-    height: 5%;
+    height: auto;
     width: 50%;
 }
 .product-detail-pic-text-buynow:hover {
@@ -119,7 +124,7 @@ background-color: var(--background-color);
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 15%;
+    height: auto;
     background-color: var(--background-color);
 }
 .product-detail-pic-text-quickbuy h4 {
@@ -133,8 +138,7 @@ background-color: var(--background-color);
 }
 .product-detail-pic-text-dis {
     width: 100%;
-    height: 50%;
-    /* background-color:rgb(194, 47, 80); */
+    height: auto;
 }
 .product-detail-pic-text-dis p {
     padding-top: 0.5rem;
@@ -142,6 +146,7 @@ background-color: var(--background-color);
 }
 .product-detail-pic-text-quickbuy-input {
     padding-top: 1rem;
+    padding-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,7 +198,6 @@ background-color: var(--background-color);
 
 /* DANH SÁCH SẢN PHẨM GỢI Ý START */
 .product-detail-common-cont-title {
-    /* margin-top: 4rem; */
     line-height: 1.4;
     font-weight: 900;
     font-size: 2rem;
@@ -203,10 +207,9 @@ background-color: var(--background-color);
 
 .product-detail-common-cont {
     width: 100%;
-    margin-top: 6rem;
+    margin-top: 4rem;
     height: auto;
     display: flex;
-    /* justify-content: center; */
     flex-direction: column;
     align-items: center;
 }
@@ -497,19 +500,19 @@ background-color: var(--background-color);
     font-size: 20px;
 }
 
-/* TEST */
+/* product-detail-option */
 .product-detail-mau-sac,
 .product-detail-so-luong,
 .product-detail-tuy-chon,
 .product-detail-phu-kien {
-    display: block; /* Mặc định ẩn */
+    display: block; 
 }
 
 .product-detail-mau-sac:not(:empty),
 .product-detail-so-luong:not(:empty),
 .product-detail-tuy-chon:not(:empty),
 .product-detail-phu-kien:not(:empty) {
-    display: block; /* Hiển thị khi có dữ liệu */
+    display: block; 
 }
 .option-button {
     padding: 0.5rem 1rem;
@@ -578,10 +581,10 @@ background-color: var(--background-color);
     }
     
     .product-detail-pic-text-buynow {
-        width: 80%; /* Điều chỉnh chiều rộng nút */
-        height: auto; /* Điều chỉnh chiều cao tự động */
-        padding: 0.5rem 0; /* Thêm padding trên và dưới */
-        font-size: 1rem; /* Điều chỉnh kích thước phông chữ */
+        width: 80%; 
+        height: auto; 
+        padding: 0.5rem 0;
+        font-size: 1rem; 
     }
 
     .product-detail-pic-text-quickbuy {
