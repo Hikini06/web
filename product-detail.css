@@ -517,7 +517,7 @@ body {
 .option-button {
     padding: 0.5rem 1rem;
     margin: 0.5rem;
-    border: 2px solid var(--text-color);
+    border: 1px solid var(--text-color);
     background-color: var(--background-color);
     color: var(--text-color);
     border-radius: 5px;

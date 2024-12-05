@@ -553,26 +553,32 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('itemsSelect').addEventListener('change', function() {
         // Khi thay đổi item, reset items_detail
         var itemsDetailSelect = document.getElementById('itemsDetailSelect');
-
+    
         itemsDetailSelect.innerHTML = '<option value="">-- Chọn Items Detail --</option>';
         itemsDetailSelect.disabled = true;
-
+    
         if (this.value) {
             fetchItemsDetail(this.value);
+            fetchItemsOption(this.value); // Thêm dòng này để lấy items_option
         }
-
+    
         updateButtons();
         currentPage = 1;
         fetchAndUpdateProducts();
     });
 
     document.getElementById('itemsDetailSelect').addEventListener('change', function() {
-        // Khi thay đổi items_detail, chỉ cần cập nhật nút delete
+        // Khi thay đổi items_detail, gọi fetchItemsOption với detail_id
+        if (this.value) {
+            console.log('Selected detail_id:', this.value); // Thêm dòng này để kiểm tra
+            fetchItemsOption(this.value);
+        }
+    
         updateButtons();
         currentPage = 1;
         fetchAndUpdateProducts();
-
     });
+    
 
     // Khởi tạo trạng thái ban đầu
     updateButtons();
@@ -1434,5 +1440,157 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     fetchAndUpdateProducts();
+    function fetchItemsOption(detailId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_items_option.php?detail_id=' + encodeURIComponent(detailId), true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        displayItemsOption(response.data);
+                    } else {
+                        alert('Lỗi: ' + response.message);
+                    }
+                } catch (e) {
+                    alert('Phản hồi từ server không hợp lệ.');
+                }
+            } else {
+                alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+            }
+        };
+        xhr.send();
+    }
+    function displayItemsOption(options) {
+        console.log("Received items_option data:", options); // Kiểm tra dữ liệu nhận được
+        var itemsOptionCont = document.getElementById('itemsOptionCont');
+        itemsOptionCont.innerHTML = ''; // Xóa nội dung cũ
+    
+        // Các group_name cố định
+        var groups = ['Màu sắc', 'Số lượng', 'Tùy chọn', 'Phụ kiện'];
+    
+        groups.forEach(function(group) {
+            // Tạo phần tử chứa group
+            var groupDiv = document.createElement('div');
+            groupDiv.classList.add('items-option-group');
+    
+            var groupTitle = document.createElement('h4');
+            groupTitle.textContent = group;
+            groupDiv.appendChild(groupTitle);
+    
+            // Lọc các option thuộc group hiện tại
+            var groupOptions = options.filter(function(option) {
+                return option.group_name.trim() === group; // Sử dụng trim để loại bỏ khoảng trắng
+            });
+    
+            console.log(`Group: ${group}, Options:`, groupOptions); // Kiểm tra groupOptions
+    
+            if (groupOptions.length > 0) {
+                groupOptions.forEach(function(option) {
+                    var optionDiv = document.createElement('div');
+                    optionDiv.classList.add('items-option-item');
+    
+                    // Hiển thị option_name và add_price
+                    var optionInfo = document.createElement('span');
+                    optionInfo.textContent = `${option.option_name} (+ ${formatPrice(option.add_price)})`;
+                    optionDiv.appendChild(optionInfo);
+    
+                    // Hiển thị ảnh và nút tải lên
+                    var img = document.createElement('img');
+                    img.src = option.img ? 'image/option-img/' + option.img : 'path/to/default/image.jpg';
+                    img.alt = option.option_name;
+                    img.style.width = '50px';
+                    img.style.height = '50px';
+                    optionDiv.appendChild(img);
+    
+                    var uploadBtn = document.createElement('button');
+                    uploadBtn.textContent = 'Tải lên ảnh';
+                    uploadBtn.classList.add('upload-option-image-btn');
+                    uploadBtn.setAttribute('data-id', option.id);
+                    optionDiv.appendChild(uploadBtn);
+    
+                    // Tạo input file ẩn để chọn ảnh
+                    var fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.style.display = 'none';
+                    fileInput.classList.add('upload-option-image-input');
+                    fileInput.setAttribute('data-id', option.id);
+                    optionDiv.appendChild(fileInput);
+    
+                    groupDiv.appendChild(optionDiv);
+                });
+            } else {
+                var noOption = document.createElement('p');
+                noOption.textContent = 'Không có tùy chọn cho nhóm này.';
+                groupDiv.appendChild(noOption);
+            }
+    
+            itemsOptionCont.appendChild(groupDiv);
+        });
+    
+        // Thêm sự kiện cho các nút tải lên ảnh
+        initializeOptionUploadButtons();
+    }
+    
+    
+    
+    // Hàm định dạng giá tiền
+    function formatPrice(price) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+    }
+    function initializeOptionUploadButtons() {
+        var uploadBtns = document.querySelectorAll('.upload-option-image-btn');
+        uploadBtns.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var optionId = this.getAttribute('data-id');
+                var fileInput = document.querySelector('.upload-option-image-input[data-id="' + optionId + '"]');
+                if (fileInput) {
+                    fileInput.click();
+                }
+            });
+        });
+    
+        var fileInputs = document.querySelectorAll('.upload-option-image-input');
+        fileInputs.forEach(function(input) {
+            input.addEventListener('change', function() {
+                var optionId = this.getAttribute('data-id');
+                var file = this.files[0];
+    
+                if (file) {
+                    var formData = new FormData();
+                    formData.append('option_id', optionId);
+                    formData.append('image', file);
+    
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'upload_option_image.php', true);
+    
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            try {
+                                var response = JSON.parse(xhr.responseText);
+                                if (response.success) {
+                                    // Cập nhật ảnh trong giao diện
+                                    var imgElement = document.querySelector('.upload-option-image-btn[data-id="' + optionId + '"]').previousElementSibling;
+                                    if (imgElement) {
+                                        imgElement.src = response.image_path + '?' + new Date().getTime();
+                                    }
+                                    alert('Tải lên ảnh thành công!');
+                                } else {
+                                    alert('Lỗi: ' + response.message);
+                                }
+                            } catch (e) {
+                                alert('Phản hồi từ server không hợp lệ.');
+                            }
+                        } else {
+                            alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+                        }
+                    };
+    
+                    xhr.send(formData);
+                }
+            });
+        });
+    }
+    
 
 });

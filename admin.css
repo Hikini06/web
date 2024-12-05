@@ -396,6 +396,67 @@ table tr:nth-child(even) {
     max-height: 300px;
 }
 
+/* Định dạng cho bảng Items Option */
+#itemsOptionContainer {
+    width: 100%;
+    overflow-x: auto; /* Thêm thanh cuộn ngang nếu cần */
+}
+
+#itemsOptionTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1rem;
+    text-align: left;
+}
+
+#itemsOptionTable th, #itemsOptionTable td {
+    padding: 10px 15px;
+    border: 1px solid var(--text-color-dark);
+    vertical-align: middle;
+}
+
+#itemsOptionTable th {
+    background-color: var(--main-color);
+    color: var(--text-color-dark);
+}
+
+#itemsOptionTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#itemsOptionTable img {
+    max-width: 100px;
+    height: auto;
+}
+
+/* Định dạng cho các nút trong Items Option */
+.items-option-action-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.upload-option-image-btn {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.upload-option-image-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-option-btn {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.delete-option-btn:hover {
+    background-color: #d32f2f;
+}
 
 
 /* Responsive Design */
