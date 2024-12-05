@@ -2,6 +2,58 @@
 include '../config/db-connect.php';
 require_once 'functions.php';
 
+// CHỨC NĂNG HIỂN THỊ SẢN PHẨM MAIN
+$product_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
+
+// Lấy dữ liệu từ bảng items_option
+$productOptions = [];
+if ($product_id) {
+    try {
+        $query = "SELECT * FROM items_option WHERE detail_id = :detail_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':detail_id', $product_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $productOptions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Lỗi khi lấy dữ liệu từ bảng items_option: " . $e->getMessage());
+    }
+}
+
+// Phân loại dữ liệu theo group_name
+$groupedOptions = [
+    'Màu sắc' => [],
+    'Số lượng' => [],
+    'Tùy chọn' => [],
+    'Phụ kiện' => [],
+];
+
+foreach ($productOptions as $key => $optionItem) {
+    if (!is_array($optionItem)) {
+        // Nếu $optionItem không phải là mảng, gán giá trị mặc định
+        $optionItem = [
+            'add_price' => 0,
+            'group_name' => '',
+            'option_name' => '',
+        ];
+    } else {
+        // Đảm bảo các khóa tồn tại và xử lý giá trị add_price
+        $optionItem['add_price'] = isset($optionItem['add_price']) && is_numeric($optionItem['add_price']) ? (float)$optionItem['add_price'] : 0;
+        $optionItem['group_name'] = isset($optionItem['group_name']) ? $optionItem['group_name'] : '';
+        $optionItem['option_name'] = isset($optionItem['option_name']) ? $optionItem['option_name'] : '';
+    }
+
+    $groupName = $optionItem['group_name'];
+    if (isset($groupedOptions[$groupName])) {
+        $groupedOptions[$groupName][] = $optionItem['option_name'];
+    }
+
+    // Cập nhật lại mảng $productOptions
+    $productOptions[$key] = $optionItem;
+}
+
+
+
+
 
 // Xử lý dữ liệu từ form Quick Buy
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt']) && isset($_POST['product_id'])) {
@@ -34,9 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt']) && isset($_POS
     }
 }
 
-
-// CHỨC NĂNG HIỂN THỊ SẢN PHẨM MAIN
-$product_id = isset($_GET['id']) ? (int)$_GET['id'] : 1;
 // Truy vấn lấy thông tin sản phẩm chính
 try {
     $query = "SELECT * FROM items_detail WHERE id = :id LIMIT 1";
@@ -50,11 +99,13 @@ try {
         $productPrice = number_format($product['price'], 0, ',', '.') . "đ";
         $productImg = htmlspecialchars($product['img']);
         $currentItemId = $product['id']; // Giả sử bảng items_detail có trường item_id
+        $basePrice = $product['price'] ?? 0; // Gán giá trị mặc định nếu NULL
     } else {
         $productName = "Sản phẩm không tồn tại";
         $productPrice = "0đ";
         $productImg = "default.jpg";
         $currentItemId = null;
+        $basePrice = 0; // Giá mặc định khi không có sản phẩm
     }
 } catch (PDOException $e) {
     die("Lỗi: " . $e->getMessage());
@@ -153,7 +204,8 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
-    <base href="https://tiemhoamimi.com/">
+    <!-- <base href="https://tiemhoamimi.com/"> -->
+    <base href="http://localhost/web-dm-lum/web/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="stylesheet" href="<?php echo asset('product-detail.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -181,8 +233,93 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
             <div class="product-detail-pic-text">
                 <div class="product-detail-pic-text-nameandprice">
                     <h1><?php echo $productName; ?></h1>
-                    <h3><?php echo $productPrice; ?></h3>
+                    <h3><?php echo number_format($basePrice, 0, ',', '.') . "đ"; ?></h3> <!-- Sử dụng $basePrice thay vì $productPrice -->
                 </div>
+
+                
+                <div class="product-detail-option-cont">
+                <!-- Màu sắc -->
+                <?php if (!empty($groupedOptions['Màu sắc'])): ?>
+                    <div class="product-detail-mau-sac">
+                        <h3 class="product-detail-option-title">Màu sắc</h3>
+                        <div>
+                            <?php foreach ($productOptions as $optionItem): ?>
+                                <?php if ($optionItem['group_name'] === 'Màu sắc'): ?>
+                                    <button
+                                        class="option-button"
+                                        data-add-price="<?php echo $optionItem['add_price']; ?>"
+                                        data-type="color">
+                                        <?php echo htmlspecialchars($optionItem['option_name']); ?>
+                                    </button>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+
+
+                    <!-- Số lượng -->
+                    <?php if (!empty($groupedOptions['Số lượng'])): ?>
+                        <div class="product-detail-so-luong">
+                            <h3 class="product-detail-option-title">Số lượng</h3>
+                            <div>
+                                <?php foreach ($productOptions as $optionItem): ?>
+                                    <?php if ($optionItem['group_name'] === 'Số lượng'): ?>
+                                        <button 
+                                            class="option-button" 
+                                            data-add-price="<?php echo $optionItem['add_price']; ?>" 
+                                            data-type="quantity">
+                                            <?php echo htmlspecialchars($optionItem['option_name']); ?>
+                                        </button>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Tùy chọn -->
+                    <?php if (!empty($groupedOptions['Tùy chọn'])): ?>
+                        <div class="product-detail-tuy-chon">
+                            <h3 class="product-detail-option-title">Tùy chọn</h3>
+                            <div>
+                                <?php foreach ($productOptions as $optionItem): ?>
+                                    <?php if ($optionItem['group_name'] === 'Tùy chọn'): ?>
+                                        <button 
+                                            class="option-button" 
+                                            data-add-price="<?php echo $optionItem['add_price']; ?>" 
+                                            data-type="option">
+                                            <?php echo htmlspecialchars($optionItem['option_name']); ?>
+                                        </button>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <!-- Phụ kiện -->
+                    <?php if (!empty($groupedOptions['Phụ kiện'])): ?>
+                        <div class="product-detail-phu-kien">
+                            <h3 class="product-detail-option-title">Phụ kiện</h3>
+                            <div>
+                                <?php foreach ($productOptions as $optionItem): ?>
+                                    <?php if ($optionItem['group_name'] === 'Phụ kiện'): ?>
+                                        <button 
+                                            class="option-button" 
+                                            data-add-price="<?php echo $optionItem['add_price']; ?>" 
+                                            data-type="accessory">
+                                            <?php echo htmlspecialchars($optionItem['option_name']); ?>
+                                        </button>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+
+                </div>
+
+
                 <button class="product-detail-pic-text-buynow">Đặt Hàng</button>
                 <div class="product-detail-pic-text-quickbuy">
                     <h4>MUA HÀNG NHANH</h4>
@@ -274,41 +411,137 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                     
                     <label for="phone">Số điện thoại:</label>
                     <input type="text" id="phone" name="sdt" placeholder="Nhập số điện thoại" required>
-                 
+                
 
                     <label for="address">Địa chỉ:</label>
                     <input type="text" id="address" name="diachi" placeholder="Nhập địa chỉ" required>
                     
                     <button type="submit">Xác nhận</button>
                 </form>
-
-
         </div>
     </div>
 
-    <script src="<?php echo asset('product_detail.js'); ?>"></script>
     
     <script>
-        // JavaScript kiểm tra và hiển thị popup
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            const popup = document.getElementById('order-popup');
+            const openPopupButton = document.querySelector('.product-detail-pic-text-buynow');
+            const closePopupButton = document.getElementById('close-popup');
+            const orderForm = document.getElementById('order-form');
+            const phoneInput = document.getElementById('phone');
+            const phoneError = document.getElementById('phone-error');
+
+            let basePrice = <?php echo json_encode($basePrice); ?>;
+            let selectedOptions = {
+                color: 0,
+                quantity: 0,
+                option: 0,
+                accessory: 0,
+            };
+
+            function updatePrice(addPrice, type) {
+                selectedOptions[type] = addPrice;
+                let totalPrice = parseFloat(basePrice) 
+                    + parseFloat(selectedOptions.color || 0) 
+                    + parseFloat(selectedOptions.quantity || 0) 
+                    + parseFloat(selectedOptions.option || 0) 
+                    + parseFloat(selectedOptions.accessory || 0);
+
+                // Định dạng lại tổng giá theo kiểu tiền tệ Việt Nam
+                document.querySelector('.product-detail-pic-text-nameandprice h3').textContent = 
+                    totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            }
+
+            // Bind click event to all buttons dynamically
+            document.querySelectorAll('.option-button').forEach(button => {
+                button.addEventListener('click', function () {
+                    const addPrice = parseFloat(this.getAttribute('data-add-price') || 0);
+                    const type = this.getAttribute('data-type'); // Sử dụng data-type đã được cập nhật
+
+                    updatePrice(addPrice, type);
+                });
+            });
+
+            // Xử lý form Quick Buy
+            document.getElementById('quick-buy-form').addEventListener('submit', function(event) {
+                var sdtInput = document.querySelector('input[name="sdt"]');
+                var sdtValue = sdtInput.value.trim();
+                var errorMessage = document.querySelector('.error-message');
+
+                // Kiểm tra xem sdtValue có phải là 9 đến 10 chữ số không
+                var phoneRegex = /^\d{9,10}$/;
+                if (!phoneRegex.test(sdtValue)) {
+                    event.preventDefault(); // Ngăn chặn form gửi đi
+                    if (errorMessage) {
+                        errorMessage.textContent = 'Vui lòng nhập đúng số điện thoại';
+                    } else {
+                        var errorDiv = document.createElement('div');
+                        errorDiv.className = 'error-message';
+                        errorDiv.textContent = 'Vui lòng nhập đúng số điện thoại';
+                        sdtInput.parentNode.appendChild(errorDiv);
+                    }
+                } else {
+                    if (errorMessage) {
+                        errorMessage.textContent = '';
+                    }
+                }
+            });
+
+            // Mở popup
+            openPopupButton.addEventListener('click', function () {
+                popup.style.display = 'flex';
+            });
+
+            // Đóng popup
+            closePopupButton.addEventListener('click', function () {
+                popup.style.display = 'none';
+            });
+
+            // Gửi dữ liệu form
+            orderForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Ngăn gửi form mặc định
+
+                const formData = new FormData(orderForm);
+
+                // Gửi AJAX request
+                fetch('order-handler.php', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Đặt hàng thành công!');
+                        } else {
+                            alert('Lỗi: ' + data.message);
+                        }
+                        popup.style.display = 'none'; // Đóng popup
+                    })
+                    .catch(error => {
+                        console.error('Lỗi:', error);
+                        alert('Đã xảy ra lỗi!');
+                    });
+            });
+
+            // Hiển thị popup thông báo thành công nếu có
             <?php if (isset($successMessage)): ?>
-                // Nếu có thông báo thành công từ PHP
                 showPopup("<?php echo htmlspecialchars($successMessage); ?>");
             <?php endif; ?>
+
+            function showPopup(message) {
+                var popupMsg = document.getElementById('popup-message');
+                var popupText = document.getElementById('popup-text');
+                popupText.textContent = message;
+                popupMsg.classList.add('show');
+
+                // Ẩn popup sau 3 giây
+                setTimeout(function() {
+                    popupMsg.classList.remove('show');
+                }, 3000);
+            }
         });
-
-        function showPopup(message) {
-            var popup = document.getElementById('popup-message');
-            var popupText = document.getElementById('popup-text');
-            popupText.textContent = message;
-            popup.classList.add('show');
-
-            // Ẩn popup sau 3 giây
-            setTimeout(function() {
-                popup.classList.remove('show');
-            }, 3000);
-        }
     </script>
+
 
 </body>
 </html>

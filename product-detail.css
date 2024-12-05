@@ -497,6 +497,35 @@ background-color: var(--background-color);
     font-size: 20px;
 }
 
+/* TEST */
+.product-detail-mau-sac,
+.product-detail-so-luong,
+.product-detail-tuy-chon,
+.product-detail-phu-kien {
+    display: block; /* Mặc định ẩn */
+}
+
+.product-detail-mau-sac:not(:empty),
+.product-detail-so-luong:not(:empty),
+.product-detail-tuy-chon:not(:empty),
+.product-detail-phu-kien:not(:empty) {
+    display: block; /* Hiển thị khi có dữ liệu */
+}
+.option-button {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: 2px solid var(--text-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option-button:hover {
+    background-color: var(--text-color);
+    color: white;
+}
 
 
 @media (max-width: 768px) {
