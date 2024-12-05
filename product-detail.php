@@ -422,47 +422,72 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
     </div>
 
     
+<!-- ... Phần mã PHP và HTML trước đó ... -->
+
+<!-- Xóa dòng bao gồm tệp JavaScript không cần thiết -->
+<!-- <script src="<?php echo asset('productabc_detail.js'); ?>"></script> -->
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const popup = document.getElementById('order-popup');
-            const openPopupButton = document.querySelector('.product-detail-pic-text-buynow');
-            const closePopupButton = document.getElementById('close-popup');
-            const orderForm = document.getElementById('order-form');
-            const phoneInput = document.getElementById('phone');
-            const phoneError = document.getElementById('phone-error');
+            console.log('DOM fully loaded and parsed');
 
-            let basePrice = <?php echo json_encode($basePrice); ?>;
-            let selectedOptions = {
+            // Khai báo các phần tử DOM với tiền tố 'productDetail'
+            const productDetailPopup = document.getElementById('order-popup');
+            const productDetailOpenPopupButton = document.querySelector('.product-detail-pic-text-buynow');
+            const productDetailClosePopupButton = document.getElementById('close-popup');
+            const productDetailOrderForm = document.getElementById('order-form');
+            const productDetailPhoneInput = document.getElementById('phone');
+            const productDetailPhoneError = document.getElementById('phone-error');
+
+            // Khai báo biến basePrice với tiền tố 'productDetail' và sử dụng json_encode
+            let productDetailBasePrice = <?php echo json_encode($basePrice); ?>;
+            console.log('productDetailBasePrice:', productDetailBasePrice);
+
+            // Khai báo đối tượng selectedOptions với tiền tố 'productDetail'
+            let productDetailSelectedOptions = {
                 color: 0,
                 quantity: 0,
                 option: 0,
                 accessory: 0,
             };
 
-            function updatePrice(addPrice, type) {
-                selectedOptions[type] = addPrice;
-                let totalPrice = parseFloat(basePrice) 
-                    + parseFloat(selectedOptions.color || 0) 
-                    + parseFloat(selectedOptions.quantity || 0) 
-                    + parseFloat(selectedOptions.option || 0) 
-                    + parseFloat(selectedOptions.accessory || 0);
+            // Hàm cập nhật giá với tiền tố 'productDetail'
+            function productDetailUpdatePrice(addPrice, type) {
+                console.log('productDetailUpdatePrice called with addPrice:', addPrice, 'type:', type);
+                productDetailSelectedOptions[type] = addPrice;
+                let totalPrice = parseFloat(productDetailBasePrice) 
+                    + parseFloat(productDetailSelectedOptions.color || 0) 
+                    + parseFloat(productDetailSelectedOptions.quantity || 0) 
+                    + parseFloat(productDetailSelectedOptions.option || 0) 
+                    + parseFloat(productDetailSelectedOptions.accessory || 0);
 
-                // Định dạng lại tổng giá theo kiểu tiền tệ Việt Nam
+                // Cập nhật hiển thị giá
                 document.querySelector('.product-detail-pic-text-nameandprice h3').textContent = 
                     totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+
+                console.log('Updated price displayed:', totalPrice);
             }
 
-            // Bind click event to all buttons dynamically
+            // Xử lý sự kiện click cho các nút option-button với tiền tố 'productDetail'
             document.querySelectorAll('.option-button').forEach(button => {
                 button.addEventListener('click', function () {
+                    console.log('Option button clicked');
                     const addPrice = parseFloat(this.getAttribute('data-add-price') || 0);
                     const type = this.getAttribute('data-type'); // Sử dụng data-type đã được cập nhật
 
-                    updatePrice(addPrice, type);
+                    console.log('addPrice:', addPrice, 'type:', type);
+
+                    // Cập nhật giá
+                    productDetailUpdatePrice(addPrice, type);
+
+                    // Xử lý trạng thái active với lớp 'productDetailOptionButtonActive'
+                    const buttonsInGroup = document.querySelectorAll(`.option-button[data-type="${type}"]`);
+                    buttonsInGroup.forEach(btn => btn.classList.remove('productDetailOptionButtonActive'));
+                    this.classList.add('productDetailOptionButtonActive');
                 });
             });
 
-            // Xử lý form Quick Buy
+            // Xử lý form Quick Buy với tiền tố 'productDetail'
             document.getElementById('quick-buy-form').addEventListener('submit', function(event) {
                 var sdtInput = document.querySelector('input[name="sdt"]');
                 var sdtValue = sdtInput.value.trim();
@@ -487,21 +512,21 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                 }
             });
 
-            // Mở popup
-            openPopupButton.addEventListener('click', function () {
-                popup.style.display = 'flex';
+            // Mở popup với tiền tố 'productDetail'
+            productDetailOpenPopupButton.addEventListener('click', function () {
+                productDetailPopup.style.display = 'flex';
             });
 
-            // Đóng popup
-            closePopupButton.addEventListener('click', function () {
-                popup.style.display = 'none';
+            // Đóng popup với tiền tố 'productDetail'
+            productDetailClosePopupButton.addEventListener('click', function () {
+                productDetailPopup.style.display = 'none';
             });
 
-            // Gửi dữ liệu form
-            orderForm.addEventListener('submit', function (event) {
+            // Gửi dữ liệu form với tiền tố 'productDetail'
+            productDetailOrderForm.addEventListener('submit', function (event) {
                 event.preventDefault(); // Ngăn gửi form mặc định
 
-                const formData = new FormData(orderForm);
+                const formData = new FormData(productDetailOrderForm);
 
                 // Gửi AJAX request
                 fetch('order-handler.php', {
@@ -515,7 +540,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                         } else {
                             alert('Lỗi: ' + data.message);
                         }
-                        popup.style.display = 'none'; // Đóng popup
+                        productDetailPopup.style.display = 'none'; // Đóng popup
                     })
                     .catch(error => {
                         console.error('Lỗi:', error);
@@ -523,12 +548,13 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                     });
             });
 
-            // Hiển thị popup thông báo thành công nếu có
+            // Hiển thị popup thông báo thành công nếu có với tiền tố 'productDetail'
             <?php if (isset($successMessage)): ?>
-                showPopup("<?php echo htmlspecialchars($successMessage); ?>");
+                productDetailShowPopup("<?php echo htmlspecialchars($successMessage); ?>");
             <?php endif; ?>
 
-            function showPopup(message) {
+            // Hàm hiển thị popup thông báo với tiền tố 'productDetail'
+            function productDetailShowPopup(message) {
                 var popupMsg = document.getElementById('popup-message');
                 var popupText = document.getElementById('popup-text');
                 popupText.textContent = message;
@@ -541,6 +567,8 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
             }
         });
     </script>
+
+
 
 
 </body>

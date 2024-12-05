@@ -526,6 +526,10 @@ background-color: var(--background-color);
     background-color: var(--text-color);
     color: white;
 }
+.option-button.productDetailOptionButtonActive {
+    background-color: var(--text-color);
+    color: white;
+}
 
 
 @media (max-width: 768px) {
