@@ -32,20 +32,38 @@ RewriteRule ^danh-muc/([0-9]+)/([a-zA-Z0-9_-]+)/?$ categories.php?subcategory_id
 
 # --- Quy tắc Rewrite Mới Cho items.php ---
 
-# 1. Xử lý URL dạng /san-pham/1/page/2
+# 1. Xử lý URL dạng /san-pham/1/sort/asc/page/2
+RewriteRule ^san-pham/([0-9]+)/sort/(asc|desc)/page/([0-9]+)/?$ items.php?item_id=$1&sort=$2&page=$3 [L,QSA]
+
+# 2. Xử lý URL dạng /san-pham/1/sort/asc
+RewriteRule ^san-pham/([0-9]+)/sort/(asc|desc)/?$ items.php?item_id=$1&sort=$2 [L,QSA]
+
+# 3. Xử lý URL dạng /san-pham/1/page/2
 RewriteRule ^san-pham/([0-9]+)/page/([0-9]+)/?$ items.php?item_id=$1&page=$2 [L,QSA]
 
-# 2. Xử lý URL dạng /san-pham/1
+# 4. Xử lý URL dạng /san-pham/1
 RewriteRule ^san-pham/([0-9]+)/?$ items.php?item_id=$1 [L,QSA]
 
-# 3. Xử lý URL dạng /san-pham/1/some-name (nếu cần)
+# 5. Xử lý URL dạng /san-pham/1/some-name (nếu cần)
 RewriteRule ^san-pham/([0-9]+)/([a-zA-Z0-9_-]+)/?$ items.php?item_id=$1&name=$2 [L,QSA]
 
-# 4a. Chuyển hướng từ /items.php?item_id=1&page=2 sang /san-pham/1/page/2
+# 6a. Chuyển hướng từ /items.php?item_id=1&sort=desc&page=2 sang /san-pham/1/sort/desc/page/2
+RewriteCond %{THE_REQUEST} ^GET\ /items\.php\?item_id=([0-9]+)&sort=(asc|desc)&page=([0-9]+) [NC]
+RewriteRule ^items\.php$ /san-pham/%1/sort/%2/page/%3? [R=301,L]
+
+# 6b. Chuyển hướng từ /items.php?item_id=1&sort=desc sang /san-pham/1/sort/desc
+RewriteCond %{THE_REQUEST} ^GET\ /items\.php\?item_id=([0-9]+)&sort=(asc|desc) [NC]
+RewriteRule ^items\.php$ /san-pham/%1/sort/%2? [R=301,L]
+
+# 6c. Chuyển hướng từ /items.php?item_id=1&page=2 sang /san-pham/1/page/2
 RewriteCond %{THE_REQUEST} ^GET\ /items\.php\?item_id=([0-9]+)&page=([0-9]+) [NC]
 RewriteRule ^items\.php$ /san-pham/%1/page/%2? [R=301,L]
 
-# 4b. Chuyển hướng từ /items.php?item_id=1 sang /san-pham/1
+# 6d. Chuyển hướng từ /items.php?item_id=1&sort=desc&page=2 sang /san-pham/1/sort/desc/page/2
+RewriteCond %{THE_REQUEST} ^GET\ /items\.php\?item_id=([0-9]+)&sort=(asc|desc)&page=([0-9]+) [NC]
+RewriteRule ^items\.php$ /san-pham/%1/sort/%2/page/%3? [R=301,L]
+
+# 6e. Chuyển hướng từ /items.php?item_id=1 sang /san-pham/1
 RewriteCond %{THE_REQUEST} ^GET\ /items\.php\?item_id=([0-9]+) [NC]
 RewriteRule ^items\.php$ /san-pham/%1? [R=301,L]
 

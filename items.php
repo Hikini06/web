@@ -16,13 +16,19 @@ function build_url($params_to_add = []) {
         }
     }
     
-    // Xây dựng chuỗi truy vấn
-    $query = http_build_query($params);
+    // Xây dựng đường dẫn base
+    $path = "./san-pham/" . htmlspecialchars($params['item_id']);
     
-    // Lấy đường dẫn hiện tại mà không có truy vấn
-    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    // Thêm các tham số sort và page vào đường dẫn nếu có
+    if (isset($params['sort'])) {
+        $path .= "/sort/" . htmlspecialchars($params['sort']);
+    }
     
-    return $path . ($query ? "?$query" : "");
+    if (isset($params['page'])) {
+        $path .= "/page/" . htmlspecialchars($params['page']);
+    }
+    
+    return $path;
 }
 
 // Lấy danh sách item_id từ bảng items
@@ -85,9 +91,6 @@ if ($item_id) {
 $suggestedProducts = [];
 $randomMode = false; // Biến để xác định chế độ hiển thị
 if (!empty($item_id)) {
-    // Bước 1: Lấy subcategory_id của sản phẩm hiện tại từ bảng `items`
-    // (Đã có từ biến $subcategory_id)
-
     if (!empty($subcategory_id)) {
         // Bước 2: Lấy danh sách `id` từ bảng `items` có cùng `subcategory_id`
         $queryItems = $pdo->prepare("
@@ -242,10 +245,10 @@ if (empty($suggestedProducts)) {
     <div class="chuc-nang-loc">
         <!-- Dropdown lọc giá -->
         <div class="sort-dropdown">
-            <select id="sort-select" onchange="location = this.value;">
-                <option value="<?= build_url(['sort' => null, 'page' => null]) ?>" <?php if ($sort === null) echo 'selected'; ?> disabled>-- Lọc sản phẩm --</option>
+            <select id="sort-select" onchange="window.location.href=this.value;">
+                <option value="<?= build_url(['sort' => null, 'page' => null]) ?>" <?php if ($sort === null) echo 'selected'; ?> disabled>-- Lọc giá --</option>
                 <option value="<?= build_url(['sort' => 'asc', 'page' => null]) ?>" <?php if ($sort === 'asc') echo 'selected'; ?>>Giá: Thấp đến Cao</option>
-                <option value="<?= build_url(['sort' => 'desc', 'page' => null]) ?>" <?php if ($sort === 'desc') echo 'selected'; ?>>Giá: Cao xuống Thấp</option>
+                <option value="<?= build_url(['sort' => 'desc', 'page' => null]) ?>" <?php if ($sort === 'desc') echo 'selected'; ?>>Giá: Cao đến Thấp</option>
             </select>
         </div>
     </div>
@@ -272,7 +275,7 @@ if (empty($suggestedProducts)) {
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
                 <div class="product">
-                    <a href="chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
+                    <a href="./chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
                         <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                         <h3><?= htmlspecialchars($product['name']) ?></h3>
                         <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
@@ -284,7 +287,24 @@ if (empty($suggestedProducts)) {
         <?php endif; ?>
     </div>
 </div>
-
+<!-- PHÂN TRANG -->
+<?php if (!empty($products) && $totalPages > 1): ?>
+    <div class="pagination">
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <a href="./san-pham/<?= htmlspecialchars($item_id) ?><?php 
+                if ($sort) {
+                    echo "/sort/" . htmlspecialchars($sort);
+                }
+                if ($i != 1) { // Nếu không phải trang 1, thêm page
+                    echo "/page/" . htmlspecialchars($i);
+                }
+            ?>" 
+                class="<?= $i == $page ? 'active' : '' ?>">
+                <?= $i ?>
+            </a>
+        <?php endfor; ?>
+    </div>
+<?php endif; ?>
 <!-- LẤY SẢN PHẨM GỢI Ý HOẶC NGẪU NHIÊN -->
 <?php if (!empty($suggestedProducts)): ?>
     <div class="suggested-items-cont">
@@ -296,7 +316,7 @@ if (empty($suggestedProducts)) {
                 <div class="suggested-row">
                     <?php foreach ($row as $product): ?>
                         <div class="suggested-product">
-                            <a href="chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
+                            <a href="./chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
                                 <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                                 <h3><?= htmlspecialchars($product['name']) ?></h3>
                                 <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
@@ -311,17 +331,7 @@ if (empty($suggestedProducts)) {
     <p class="no-succgestion">Không có sản phẩm gợi ý nào.</p>
 <?php endif; ?>
 
-<!-- PHÂN TRANG -->
-<?php if (!empty($products) && $totalPages > 1): ?>
-    <div class="pagination">
-        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="/san-pham/<?= htmlspecialchars($item_id) ?>/page/<?= $i ?><?= $sort ? '&sort=' . htmlspecialchars($sort) : '' ?>" 
-                class="<?= $i == $page ? 'active' : '' ?>">
-                <?= $i ?>
-            </a>
-        <?php endfor; ?>
-    </div>
-<?php endif; ?>
+
 
 <?php include 'footer.php'; ?>
 </body>
