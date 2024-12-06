@@ -441,14 +441,36 @@ table tr:nth-child(even) {
 }
 
 .upload-option-image-btn {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
 }
-
+#addOptionBtn {
+    padding: 10px;
+    border: 2px solid var(--text-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+#addOptionBtn:hover {
+    background-color: var(--text-color);
+    color: white;
+    cursor: pointer;
+}
 .upload-option-image-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--text-color);
+    color: white;
+    cursor: pointer;
 }
-
+.upload-image-btn {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+}
+.upload-image-btn:hover {
+    background-color: var(--text-color);
+    color: white;
+    cursor: pointer;
+}
 .delete-option-btn {
     background-color: #f44336;
     color: #fff;
