@@ -588,6 +588,28 @@ try {
             <div class="items-option-cont" id="itemsOptionCont" style="padding: 20px;">
                 <div class="items-option">
                     <h2>Items Option</h2>
+
+                    <!-- Nút thêm tùy chọn mới -->
+                    <button id="addOptionBtn" style="margin-bottom:10px;">Thêm tùy chọn mới</button>
+
+                    <!-- Form thêm tùy chọn mới (ẩn ban đầu) -->
+                    <div id="addOptionForm" style="display:none; margin-bottom:20px;">
+                        <h3>Thêm Tùy Chọn Mới</h3>
+                        <label>Nhóm: 
+                            <select id="newOptionGroup">
+                                <option value="Màu sắc">Màu sắc</option>
+                                <option value="Số lượng">Số lượng</option>
+                                <option value="Tùy chọn">Tùy chọn</option>
+                                <option value="Phụ kiện">Phụ kiện</option>
+                            </select>
+                        </label>
+                        <br><br>
+                        <label>Tên Tùy Chọn: <input type="text" id="newOptionName"></label><br><br>
+                        <label>Giá Thêm: <input type="number" id="newOptionPrice" step="1000" value="0"></label><br><br>
+                        <button id="saveNewOptionBtn">Lưu</button>
+                        <button id="cancelNewOptionBtn">Hủy</button>
+                    </div>
+
                     <table id="itemsOptionTable">
                         <thead>
                             <tr>
@@ -599,11 +621,12 @@ try {
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Nội dung Items Option sẽ được chèn bằng JavaScript -->
+                            <!-- Nội dung Items Option được chèn bằng JavaScript -->
                         </tbody>
                     </table>
                 </div>
             </div>
+
             <!-- PHẦN BẢNG SẢN PHẨM -->
             <div class="product-info">
                 <h2>Danh sách Sản phẩm</h2>

@@ -1,7 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
     var currentPage = 1;
     var totalPages = 1;
+    var addOptionBtn = document.getElementById('addOptionBtn');
+    var addOptionForm = document.getElementById('addOptionForm');
+    var cancelNewOptionBtn = document.getElementById('cancelNewOptionBtn');
+    var saveNewOptionBtn = document.getElementById('saveNewOptionBtn');
 
+    addOptionBtn.addEventListener('click', function() {
+        addOptionForm.style.display = 'block';
+    });
+
+    cancelNewOptionBtn.addEventListener('click', function() {
+        addOptionForm.style.display = 'none';
+        document.getElementById('newOptionName').value = '';
+        document.getElementById('newOptionPrice').value = '0';
+    });
+
+    saveNewOptionBtn.addEventListener('click', function() {
+        var detailId = document.getElementById('itemsDetailSelect').value;
+        if (!detailId) {
+            alert('Vui lòng chọn Items Detail trước khi thêm tùy chọn.');
+            return;
+        }
+
+        var groupName = document.getElementById('newOptionGroup').value;
+        var optionName = document.getElementById('newOptionName').value.trim();
+        var addPrice = parseFloat(document.getElementById('newOptionPrice').value);
+
+        if (optionName === '') {
+            alert('Tên tùy chọn không được để trống.');
+            return;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'add_option.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        alert('Thêm tùy chọn thành công.');
+                        // Ẩn form và reset
+                        addOptionForm.style.display = 'none';
+                        document.getElementById('newOptionName').value = '';
+                        document.getElementById('newOptionPrice').value = '0';
+                        // Load lại danh sách option
+                        fetchItemsOption(detailId);
+                    } else {
+                        alert('Lỗi: ' + response.message);
+                    }
+                } catch (e) {
+                    alert('Phản hồi từ server không hợp lệ.');
+                }
+            } else {
+                alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+            }
+        };
+        xhr.send('detail_id=' + encodeURIComponent(detailId) + 
+                '&group_name=' + encodeURIComponent(groupName) + 
+                '&option_name=' + encodeURIComponent(optionName) + 
+                '&add_price=' + encodeURIComponent(addPrice));
+    });
     var sidebarButtons = document.querySelectorAll('.sidebar-button');
     sidebarButtons.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -1016,7 +1076,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var itemsOptionTableBody = document.querySelector('#itemsOptionTable tbody');
         itemsOptionTableBody.innerHTML = '';
         var groups = ['Màu sắc', 'Số lượng', 'Tùy chọn', 'Phụ kiện'];
+    
         groups.forEach(function(group) {
+            // Tạo dòng tiêu đề cho mỗi nhóm
             var groupHeaderRow = document.createElement('tr');
             groupHeaderRow.classList.add('items-option-group-header');
             var groupCell = document.createElement('td');
@@ -1024,38 +1086,51 @@ document.addEventListener('DOMContentLoaded', function() {
             groupCell.textContent = group;
             groupHeaderRow.appendChild(groupCell);
             itemsOptionTableBody.appendChild(groupHeaderRow);
+    
+            // Lọc các option theo group
             var groupOptions = options.filter(function(option) {
                 return option.group_name.trim() === group;
             });
+    
             if (groupOptions.length > 0) {
                 groupOptions.forEach(function(option) {
                     var row = document.createElement('tr');
                     row.classList.add('items-option-item');
                     row.setAttribute('data-id', option.id);
+    
+                    // Cột nhóm
                     var groupNameCell = document.createElement('td');
                     groupNameCell.textContent = group;
                     row.appendChild(groupNameCell);
+    
+                    // Cột tên tùy chọn (editable)
                     var optionNameCell = document.createElement('td');
                     optionNameCell.textContent = option.option_name;
                     optionNameCell.classList.add('editable');
                     optionNameCell.setAttribute('data-field', 'option_name');
                     row.appendChild(optionNameCell);
+    
+                    // Cột giá thêm (editable)
                     var addPriceCell = document.createElement('td');
                     addPriceCell.textContent = formatPrice(option.add_price);
                     addPriceCell.classList.add('editable');
                     addPriceCell.setAttribute('data-field', 'add_price');
                     row.appendChild(addPriceCell);
+    
+                    // Cột ảnh
                     var imgCell = document.createElement('td');
                     var imgElement = document.createElement('img');
                     imgElement.src = option.img ? 'image/option-img/' + option.img : 'path/to/default/image.jpg';
                     imgElement.style.width = '50px';
                     imgElement.style.height = '50px';
                     imgCell.appendChild(imgElement);
+    
                     var uploadBtn = document.createElement('button');
                     uploadBtn.textContent = 'Tải lên ảnh';
                     uploadBtn.classList.add('upload-option-image-btn');
                     uploadBtn.setAttribute('data-id', option.id);
                     imgCell.appendChild(uploadBtn);
+    
                     var fileInput = document.createElement('input');
                     fileInput.type = 'file';
                     fileInput.style.display = 'none';
@@ -1063,21 +1138,40 @@ document.addEventListener('DOMContentLoaded', function() {
                     fileInput.setAttribute('data-id', option.id);
                     imgCell.appendChild(fileInput);
                     row.appendChild(imgCell);
+    
+                    // Cột hành động (Lưu, Hủy, Xóa)
                     var actionCell = document.createElement('td');
+    
                     var saveBtn = document.createElement('button');
                     saveBtn.textContent = 'Lưu';
                     saveBtn.classList.add('save-btn');
                     saveBtn.style.display = 'none';
+    
                     var cancelBtn = document.createElement('button');
                     cancelBtn.textContent = 'Hủy';
                     cancelBtn.classList.add('cancel-btn');
                     cancelBtn.style.display = 'none';
+    
+                    // Nút Xóa
+                    var deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = 'Xóa';
+                    deleteBtn.classList.add('delete-option-btn');
+                    deleteBtn.addEventListener('click', function () {
+                        var confirmed = confirm('Bạn có chắc muốn xóa tùy chọn này?');
+                        if (confirmed) {
+                            deleteOption(option.id);
+                        }
+                    });
+    
                     actionCell.appendChild(saveBtn);
                     actionCell.appendChild(cancelBtn);
+                    actionCell.appendChild(deleteBtn);
                     row.appendChild(actionCell);
+    
                     itemsOptionTableBody.appendChild(row);
                 });
             } else {
+                // Nếu nhóm này không có tùy chọn
                 var noOptionRow = document.createElement('tr');
                 var noOptionCell = document.createElement('td');
                 noOptionCell.setAttribute('colspan', '5');
@@ -1086,9 +1180,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 itemsOptionTableBody.appendChild(noOptionRow);
             }
         });
+    
+        // Khởi tạo tính năng sửa ô edit
         initializeItemsOptionEditableCells();
+        // Khởi tạo nút upload ảnh cho option
         initializeOptionUploadButtons();
     }
+    
 
     function initializeItemsOptionEditableCells() {
         var editableCells = document.querySelectorAll('#itemsOptionTable .editable');
@@ -1213,4 +1311,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     fetchAndUpdateProducts();
+    function deleteOption(optionId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'delete_option.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        // Xóa thành công, load lại danh sách
+                        var detailId = document.getElementById('itemsDetailSelect').value;
+                        if (detailId) {
+                            fetchItemsOption(detailId);
+                        }
+                    } else {
+                        alert('Lỗi: ' + response.message);
+                    }
+                } catch (e) {
+                    alert('Phản hồi từ server không hợp lệ.');
+                }
+            } else {
+                alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+            }
+        };
+        xhr.send('option_id=' + encodeURIComponent(optionId));
+    }
+    
 });
