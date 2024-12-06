@@ -2,6 +2,29 @@
 require '../config/db-connect.php';
 require_once 'functions.php';
 
+// Hàm để xây dựng URL với các tham số đã có và thêm hoặc sửa đổi các tham số mới
+function build_url($params_to_add = []) {
+    // Lấy các tham số hiện tại từ URL
+    $params = $_GET;
+    
+    // Thêm hoặc sửa đổi các tham số mới
+    foreach ($params_to_add as $key => $value) {
+        if ($value === null) {
+            unset($params[$key]);
+        } else {
+            $params[$key] = $value;
+        }
+    }
+    
+    // Xây dựng chuỗi truy vấn
+    $query = http_build_query($params);
+    
+    // Lấy đường dẫn hiện tại mà không có truy vấn
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    
+    return $path . ($query ? "?$query" : "");
+}
+
 // Lấy danh sách item_id từ bảng items
 $queryItems = $pdo->prepare("SELECT id, name, description FROM items");
 $queryItems->execute();
@@ -9,6 +32,9 @@ $items = $queryItems->fetchAll(PDO::FETCH_ASSOC);
 
 // Lấy item_id được chọn (nếu có)
 $item_id = isset($_GET['item_id']) ? intval($_GET['item_id']) : null;
+
+// Lấy tham số sort (asc hoặc desc) nếu có
+$sort = isset($_GET['sort']) && in_array($_GET['sort'], ['asc', 'desc']) ? $_GET['sort'] : null;
 
 // Lấy thông tin từ bảng items theo item_id, bao gồm subcategory_id
 $itemInfo = [];
@@ -28,12 +54,21 @@ $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $limit = 16; // Hiển thị 16 sản phẩm mỗi trang
 $offset = ($page - 1) * $limit;
 
+// Xác định cách sắp xếp dựa trên tham số sort
+$orderBy = "";
+if ($sort === 'asc') {
+    $orderBy = "ORDER BY price ASC";
+} elseif ($sort === 'desc') {
+    $orderBy = "ORDER BY price DESC";
+}
+
 // Nếu có item_id, lấy danh sách sản phẩm từ items_detail
 $products = [];
 if ($item_id) {
     $queryProducts = $pdo->prepare("
         SELECT * FROM items_detail
         WHERE item_id = ?
+        $orderBy
         LIMIT $limit OFFSET $offset
     ");
     $queryProducts->execute([$item_id]);
@@ -124,17 +159,7 @@ if (!empty($item_id)) {
                     $suggestedProducts = array_merge($suggestedProducts, $additionalSuggested);
                 }
             }
-        } else {
-            // Không tìm thấy item nào trong cùng subcategory_id
-            // Không cần echo ở đây vì có thể gây lỗi giao diện
-            // Thay vào đó, bạn có thể ghi log hoặc xử lý theo cách khác
-            // echo "Không tìm thấy sản phẩm nào trong bảng items với subcategory_id = $subcategory_id.";
         }
-    } else {
-        // Không tìm thấy subcategory_id
-        // Không cần echo ở đây vì có thể gây lỗi giao diện
-        // Thay vào đó, bạn có thể ghi log hoặc xử lý theo cách khác
-        // echo "Không tìm thấy subcategory_id tương ứng.";
     }
 }
 
@@ -162,7 +187,6 @@ if (empty($suggestedProducts)) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -176,6 +200,21 @@ if (empty($suggestedProducts)) {
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="<?php echo asset('items.css'); ?>"/>
+    <!-- Thêm Font Awesome cho biểu tượng -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS cho dropdown lọc giá */
+        .sort-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .sort-dropdown select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
 
@@ -190,14 +229,26 @@ if (empty($suggestedProducts)) {
     </div>
 <?php endif; ?>
 
-<div class="dieu-huong">
-    <a href="/trang-chu"><h3>Trang chủ</h3></a><i class="fa-solid fa-angles-right"></i>
-    <?php if ($subcategory_id): ?>
-        <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>"><h3>Danh mục</h3></a><i class="fa-solid fa-angles-right"></i>
-    <?php else: ?>
-        <a href="#"><h3>Danh mục</h3></a><i class="fa-solid fa-angles-right"></i>
-    <?php endif; ?>
-    <h3>Sản phẩm...</h3>
+<div class="filter-and-scrum">
+    <div class="dieu-huong">
+        <a href="/trang-chu"><h3>Trang chủ</h3></a><i class="fa-solid fa-angles-right"></i>
+        <?php if ($subcategory_id): ?>
+            <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>"><h3>Danh mục</h3></a><i class="fa-solid fa-angles-right"></i>
+        <?php else: ?>
+            <a href="#"><h3>Danh mục</h3></a><i class="fa-solid fa-angles-right"></i>
+        <?php endif; ?>
+        <h3>Sản phẩm...</h3>
+    </div>
+    <div class="chuc-nang-loc">
+        <!-- Dropdown lọc giá -->
+        <div class="sort-dropdown">
+            <select id="sort-select" onchange="location = this.value;">
+                <option value="<?= build_url(['sort' => null, 'page' => null]) ?>" <?php if ($sort === null) echo 'selected'; ?> disabled>-- Lọc sản phẩm --</option>
+                <option value="<?= build_url(['sort' => 'asc', 'page' => null]) ?>" <?php if ($sort === 'asc') echo 'selected'; ?>>Giá: Thấp đến Cao</option>
+                <option value="<?= build_url(['sort' => 'desc', 'page' => null]) ?>" <?php if ($sort === 'desc') echo 'selected'; ?>>Giá: Cao xuống Thấp</option>
+            </select>
+        </div>
+    </div>
 </div>
 
 <!-- FILTER DANH MỤC -->
@@ -264,7 +315,7 @@ if (empty($suggestedProducts)) {
 <?php if (!empty($products) && $totalPages > 1): ?>
     <div class="pagination">
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-            <a href="/san-pham/<?= htmlspecialchars($item_id) ?>/page/<?= $i ?>" 
+            <a href="/san-pham/<?= htmlspecialchars($item_id) ?>/page/<?= $i ?><?= $sort ? '&sort=' . htmlspecialchars($sort) : '' ?>" 
                 class="<?= $i == $page ? 'active' : '' ?>">
                 <?= $i ?>
             </a>
