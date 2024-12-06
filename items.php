@@ -10,13 +10,17 @@ $items = $queryItems->fetchAll(PDO::FETCH_ASSOC);
 // Lấy item_id được chọn (nếu có)
 $item_id = isset($_GET['item_id']) ? intval($_GET['item_id']) : null;
 
-// Lấy thông tin từ bảng items theo item_id
+// Lấy thông tin từ bảng items theo item_id, bao gồm subcategory_id
 $itemInfo = [];
+$subcategory_id = null;
 if ($item_id) {
-    $queryItemInfo = $pdo->prepare("SELECT name, description FROM items WHERE id = :item_id");
+    $queryItemInfo = $pdo->prepare("SELECT name, description, subcategory_id FROM items WHERE id = :item_id");
     $queryItemInfo->bindValue(':item_id', $item_id, PDO::PARAM_INT);
     $queryItemInfo->execute();
     $itemInfo = $queryItemInfo->fetch(PDO::FETCH_ASSOC);
+    if ($itemInfo) {
+        $subcategory_id = $itemInfo['subcategory_id'];
+    }
 }
 
 // Pagination variables
@@ -47,11 +51,7 @@ $suggestedProducts = [];
 $randomMode = false; // Biến để xác định chế độ hiển thị
 if (!empty($item_id)) {
     // Bước 1: Lấy subcategory_id của sản phẩm hiện tại từ bảng `items`
-    $querySubcategory = $pdo->prepare("
-        SELECT subcategory_id FROM items WHERE id = ?
-    ");
-    $querySubcategory->execute([$item_id]);
-    $subcategory_id = $querySubcategory->fetchColumn();
+    // (Đã có từ biến $subcategory_id)
 
     if (!empty($subcategory_id)) {
         // Bước 2: Lấy danh sách `id` từ bảng `items` có cùng `subcategory_id`
@@ -163,20 +163,18 @@ if (empty($suggestedProducts)) {
 }
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
-    <base href="https://tiemhoamimi.com/">
+    <!-- <base href="https://tiemhoamimi.com/"> -->
+    <base href="http://localhost/web_dm_lum/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="<?php echo asset('items.css'); ?>"/>
 </head>
 <body>
@@ -191,13 +189,24 @@ if (empty($suggestedProducts)) {
         <p><?= htmlspecialchars($itemInfo['description']) ?></p>
     </div>
 <?php endif; ?>
+
+<div class="dieu-huong">
+    <a href="/trang-chu"><h3>Trang chủ</h3></a><i class="fa-solid fa-angles-right"></i>
+    <?php if ($subcategory_id): ?>
+        <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>"><h3>Danh mục</h3></a><i class="fa-solid fa-angles-right"></i>
+    <?php else: ?>
+        <a href="#"><h3>Danh mục</h3></a><i class="fa-solid fa-angles-right"></i>
+    <?php endif; ?>
+    <h3>Sản phẩm...</h3>
+</div>
+
 <!-- FILTER DANH MỤC -->
 <div class="items-filter-cont">
     <div class="items-filter">
         <ul>
             <?php foreach ($items as $item): ?>
                 <li>
-                    <a href="./san-pham/<?= $item['id'] ?>">
+                    <a href="./san-pham/<?= htmlspecialchars($item['id']) ?>">
                         <?= htmlspecialchars($item['name']) ?>
                     </a>
                 </li>

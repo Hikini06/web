@@ -239,6 +239,56 @@ body {
   text-align: center;
 }
 
+/* Điều hướng */
+
+.dieu-huong {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.dieu-huong i {
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+  color: var(--text-color-dark);
+  font-size: 0.6rem;
+
+}
+.dieu-huong a {
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: var(--text-color-dark);
+  font-style: italic;
+}
+.dieu-huong h3 {
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5rem;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: var(--text-color-dark);
+  font-style: italic;
+}
+.dieu-huong > a > h3 {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dieu-huong > a > h3:hover {
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+
 @media (max-width: 768px) {
   .item-info { 
     margin-top: 9rem;
