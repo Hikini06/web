@@ -1448,7 +1448,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 try {
                     var response = JSON.parse(xhr.responseText);
                     if (response.success) {
-                        displayItemsOption(response.data);
+                        displayItemsOption(response.data); // Truyền toàn bộ response.data
                     } else {
                         alert('Lỗi: ' + response.message);
                     }
@@ -1461,22 +1461,26 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.send();
     }
+    
     function displayItemsOption(options) {
         console.log("Received items_option data:", options); // Kiểm tra dữ liệu nhận được
-        var itemsOptionCont = document.getElementById('itemsOptionCont');
-        itemsOptionCont.innerHTML = ''; // Xóa nội dung cũ
+        var itemsOptionTableBody = document.querySelector('#itemsOptionTable tbody');
+        itemsOptionTableBody.innerHTML = ''; // Xóa nội dung cũ
     
         // Các group_name cố định
         var groups = ['Màu sắc', 'Số lượng', 'Tùy chọn', 'Phụ kiện'];
     
         groups.forEach(function(group) {
             // Tạo phần tử chứa group
-            var groupDiv = document.createElement('div');
-            groupDiv.classList.add('items-option-group');
+            var groupHeaderRow = document.createElement('tr');
+            groupHeaderRow.classList.add('items-option-group-header');
     
-            var groupTitle = document.createElement('h4');
-            groupTitle.textContent = group;
-            groupDiv.appendChild(groupTitle);
+            var groupCell = document.createElement('td');
+            groupCell.setAttribute('colspan', '5'); // Số cột trong bảng Items Option
+            groupCell.textContent = group;
+            groupHeaderRow.appendChild(groupCell);
+    
+            itemsOptionTableBody.appendChild(groupHeaderRow);
     
             // Lọc các option thuộc group hiện tại
             var groupOptions = options.filter(function(option) {
@@ -1487,50 +1491,171 @@ document.addEventListener('DOMContentLoaded', function() {
     
             if (groupOptions.length > 0) {
                 groupOptions.forEach(function(option) {
-                    var optionDiv = document.createElement('div');
-                    optionDiv.classList.add('items-option-item');
+                    var row = document.createElement('tr');
+                    row.classList.add('items-option-item');
+                    row.setAttribute('data-id', option.id);
     
-                    // Hiển thị option_name và add_price
-                    var optionInfo = document.createElement('span');
-                    optionInfo.textContent = `${option.option_name} (+ ${formatPrice(option.add_price)})`;
-                    optionDiv.appendChild(optionInfo);
+                    // Ô Nhóm
+                    var groupNameCell = document.createElement('td');
+                    groupNameCell.textContent = group;
+                    row.appendChild(groupNameCell);
     
-                    // Hiển thị ảnh và nút tải lên
-                    var img = document.createElement('img');
-                    img.src = option.img ? 'image/option-img/' + option.img : 'path/to/default/image.jpg';
-                    img.alt = option.option_name;
-                    img.style.width = '50px';
-                    img.style.height = '50px';
-                    optionDiv.appendChild(img);
+                    // Ô Tên Tùy Chọn
+                    var optionNameCell = document.createElement('td');
+                    optionNameCell.textContent = option.option_name;
+                    optionNameCell.classList.add('editable');
+                    optionNameCell.setAttribute('data-field', 'option_name');
+                    row.appendChild(optionNameCell);
     
+                    // Ô Giá Thêm
+                    var addPriceCell = document.createElement('td');
+                    addPriceCell.textContent = formatPrice(option.add_price);
+                    addPriceCell.classList.add('editable');
+                    addPriceCell.setAttribute('data-field', 'add_price');
+                    row.appendChild(addPriceCell);
+    
+                    // Ô Ảnh
+                    var imgCell = document.createElement('td');
+                    var imgElement = document.createElement('img');
+                    imgElement.src = option.img ? 'image/option-img/' + option.img : 'path/to/default/image.jpg';
+                    imgElement.style.width = '50px';
+                    imgElement.style.height = '50px';
+                    imgCell.appendChild(imgElement);
+    
+                    // Nút tải lên ảnh
                     var uploadBtn = document.createElement('button');
                     uploadBtn.textContent = 'Tải lên ảnh';
                     uploadBtn.classList.add('upload-option-image-btn');
                     uploadBtn.setAttribute('data-id', option.id);
-                    optionDiv.appendChild(uploadBtn);
+                    imgCell.appendChild(uploadBtn);
     
-                    // Tạo input file ẩn để chọn ảnh
+                    // Input file ẩn
                     var fileInput = document.createElement('input');
                     fileInput.type = 'file';
                     fileInput.style.display = 'none';
                     fileInput.classList.add('upload-option-image-input');
                     fileInput.setAttribute('data-id', option.id);
-                    optionDiv.appendChild(fileInput);
+                    imgCell.appendChild(fileInput);
     
-                    groupDiv.appendChild(optionDiv);
+                    row.appendChild(imgCell);
+    
+                    // Ô Hành Động (Nút Lưu và Hủy)
+                    var actionCell = document.createElement('td');
+                    var saveBtn = document.createElement('button');
+                    saveBtn.textContent = 'Lưu';
+                    saveBtn.classList.add('save-btn');
+                    saveBtn.style.display = 'none';
+    
+                    var cancelBtn = document.createElement('button');
+                    cancelBtn.textContent = 'Hủy';
+                    cancelBtn.classList.add('cancel-btn');
+                    cancelBtn.style.display = 'none';
+    
+                    actionCell.appendChild(saveBtn);
+                    actionCell.appendChild(cancelBtn);
+                    row.appendChild(actionCell);
+    
+                    itemsOptionTableBody.appendChild(row);
                 });
             } else {
-                var noOption = document.createElement('p');
-                noOption.textContent = 'Không có tùy chọn cho nhóm này.';
-                groupDiv.appendChild(noOption);
+                var noOptionRow = document.createElement('tr');
+                var noOptionCell = document.createElement('td');
+                noOptionCell.setAttribute('colspan', '5');
+                noOptionCell.textContent = 'Không có tùy chọn cho nhóm này.';
+                noOptionRow.appendChild(noOptionCell);
+                itemsOptionTableBody.appendChild(noOptionRow);
             }
     
-            itemsOptionCont.appendChild(groupDiv);
+            // Thêm sự kiện cho các ô editable trong bảng Items Option
+            initializeItemsOptionEditableCells();
+            // Thêm sự kiện cho các nút upload ảnh trong bảng Items Option
+            initializeOptionUploadButtons();
         });
-    
-        // Thêm sự kiện cho các nút tải lên ảnh
-        initializeOptionUploadButtons();
     }
+    function initializeItemsOptionEditableCells() {
+        var editableCells = document.querySelectorAll('#itemsOptionTable .editable');
+    
+        editableCells.forEach(function(cell) {
+            cell.addEventListener('click', function() {
+                if (cell.querySelector('input')) return; // Nếu đã có input, không làm gì
+    
+                var currentText = cell.textContent.trim();
+                var field = cell.getAttribute('data-field');
+                var id = cell.parentElement.getAttribute('data-id');
+    
+                var input = document.createElement('input');
+                input.type = (field === 'add_price') ? 'number' : 'text';
+                input.value = (field === 'add_price') ? parseFloat(currentText.replace(/[^0-9.-]+/g,"")) : currentText;
+                input.className = 'edit-input';
+                input.style.width = '100%';
+    
+                cell.textContent = '';
+                cell.appendChild(input);
+                input.focus();
+    
+                // Hiển thị nút "Lưu" và "Hủy"
+                var saveBtn = cell.parentElement.querySelector('.save-btn');
+                var cancelBtn = cell.parentElement.querySelector('.cancel-btn');
+                saveBtn.style.display = 'inline-block';
+                cancelBtn.style.display = 'inline-block';
+    
+                // Xử lý nút "Hủy"
+                cancelBtn.addEventListener('click', function() {
+                    cell.textContent = currentText;
+                    saveBtn.style.display = 'none';
+                    cancelBtn.style.display = 'none';
+                }, { once: true });
+    
+                // Xử lý nút "Lưu"
+                saveBtn.addEventListener('click', function() {
+                    var newValue = input.value.trim();
+                    if (newValue === '') {
+                        alert('Giá trị không được để trống.');
+                        return;
+                    }
+    
+                    // Nếu trường là 'add_price', đảm bảo giá trị là số
+                    if (field === 'add_price' && isNaN(newValue)) {
+                        alert('Giá trị phải là số.');
+                        return;
+                    }
+    
+                    // Gửi yêu cầu AJAX để cập nhật dữ liệu
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'update_items_option.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4) {
+                            console.log('Response Status:', xhr.status);
+                            console.log('Response Text:', xhr.responseText);
+                            if (xhr.status === 200) {
+                                try {
+                                    var response = JSON.parse(xhr.responseText);
+                                    if (response.success) {
+                                        if (field === 'add_price') {
+                                            cell.textContent = formatPrice(parseFloat(newValue));
+                                        } else {
+                                            cell.textContent = newValue;
+                                        }
+                                        saveBtn.style.display = 'none';
+                                        cancelBtn.style.display = 'none';
+                                    } else {
+                                        alert('Lỗi: ' + response.message);
+                                    }
+                                } catch (e) {
+                                    alert('Phản hồi từ server không hợp lệ.');
+                                }
+                            } else {
+                                alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+                            }
+                        }
+                    };
+                    xhr.send('id=' + encodeURIComponent(id) + '&field=' + encodeURIComponent(field) + '&value=' + encodeURIComponent(newValue));
+                }, { once: true });
+            });
+        });
+    }
+    
     
     
     

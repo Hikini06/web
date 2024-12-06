@@ -233,7 +233,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin MiMi</title>
-    <base href="http://localhost/web_dm_lum/">
+    <base href="http://localhost/web-dm-lum/web/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="stylesheet" href="<?php echo asset('admin.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -527,7 +527,6 @@ try {
                         <th>Subcategories</th>
                         <th>Items</th>
                         <th>Items Detail</th>
-                        <th>Items Option</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -582,11 +581,29 @@ try {
                             <button class="add-item-detail-btn" disabled>Add</button>
                             <button class="delete-item-detail-btn" disabled>Delete</button>
                         </td>
-                        <td id="itemsOptionCont"> <!-- Thêm ô chứa items_option -->
-                        </td>
                     </tr>
                 </tbody>
             </table>
+            <!-- Bảng mới cho Items Option -->
+            <div class="items-option-cont" id="itemsOptionCont" style="padding: 20px;">
+                <div class="items-option">
+                    <h2>Items Option</h2>
+                    <table id="itemsOptionTable">
+                        <thead>
+                            <tr>
+                                <th>Nhóm</th>
+                                <th>Tên Tùy Chọn</th>
+                                <th>Giá Thêm</th>
+                                <th>Ảnh</th>
+                                <th>Hành Động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Nội dung Items Option sẽ được chèn bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <!-- PHẦN BẢNG SẢN PHẨM -->
             <div class="product-info">
                 <h2>Danh sách Sản phẩm</h2>
