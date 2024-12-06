@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config/db-connect.php';
+header('Content-Type: application/json; charset=utf-8');
 
 // Kiểm tra quyền admin
 if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
@@ -8,50 +8,135 @@ if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
     exit();
 }
 
+// Bao gồm tệp kết nối cơ sở dữ liệu
+require_once '../config/db-connect.php';
+
+// Kiểm tra yêu cầu POST và tệp ảnh
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $option_id = isset($_POST['option_id']) ? intval($_POST['option_id']) : 0;
+    if (isset($_POST['option_id']) && isset($_FILES['image'])) {
+        $option_id = intval($_POST['option_id']);
+        $image = $_FILES['image'];
 
-    if ($option_id <= 0 || !isset($_FILES['image'])) {
-        echo json_encode(['success' => false, 'message' => 'Dữ liệu không hợp lệ']);
-        exit();
-    }
+        // Kiểm tra lỗi tải lên
+        if ($image['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(['success' => false, 'message' => 'Lỗi tải lên ảnh.']);
+            exit();
+        }
 
-    $image = $_FILES['image'];
-    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-    if (!in_array($image['type'], $allowed_types)) {
-        echo json_encode(['success' => false, 'message' => 'Định dạng ảnh không được hỗ trợ']);
-        exit();
-    }
+        // Kiểm tra loại tệp (cho phép jpg, jpeg, png)
+        $allowed_types = ['image/jpeg', 'image/png'];
+        if (!in_array($image['type'], $allowed_types)) {
+            echo json_encode(['success' => false, 'message' => 'Chỉ cho phép tải lên các định dạng JPG, JPEG, PNG.']);
+            exit();
+        }
 
-    // Tạo thư mục lưu ảnh nếu chưa tồn tại
-    $upload_dir = './image/option-img/';
-    if (!is_dir($upload_dir)) {
-        mkdir($upload_dir, 0755, true);
-    }
+        // Kiểm tra kích thước tệp (ví dụ: tối đa 10MB để đảm bảo sau nén dưới 5MB)
+        $max_size = 10 * 1024 * 1024; // 10MB
+        if ($image['size'] > $max_size) {
+            echo json_encode(['success' => false, 'message' => 'Kích thước ảnh vượt quá giới hạn cho phép (10MB).']);
+            exit();
+        }
 
-    // Tạo tên tệp duy nhất
-    $ext = pathinfo($image['name'], PATHINFO_EXTENSION);
-    $filename = 'option_' . $option_id . '_' . time() . '.' . $ext;
-    $filepath = $upload_dir . $filename;
+        // Tạo thư mục upload nếu chưa tồn tại
+        $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/image/option-img/';
+        if (!is_dir($upload_dir)) {
+            if (!mkdir($upload_dir, 0755, true)) {
+                echo json_encode(['success' => false, 'message' => 'Không thể tạo thư mục upload.']);
+                exit();
+            }
+        }
 
-    // Di chuyển tệp đã tải lên
-    if (move_uploaded_file($image['tmp_name'], $filepath)) {
+        // Lấy phần mở rộng tệp
+        $file_ext = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
+
+        // Xử lý chuyển đổi và nén ảnh bằng GD
+        switch ($file_ext) {
+            case 'jpg':
+            case 'jpeg':
+                $source_image = @imagecreatefromjpeg($image['tmp_name']);
+                break;
+            case 'png':
+                $source_image = @imagecreatefrompng($image['tmp_name']);
+                break;
+            default:
+                echo json_encode(['success' => false, 'message' => 'Định dạng ảnh không được hỗ trợ.']);
+                exit();
+        }
+
+        if (!$source_image) {
+            echo json_encode(['success' => false, 'message' => 'Không thể tạo đối tượng hình ảnh từ tệp tải lên.']);
+            exit();
+        }
+
+        // Thiết lập chất lượng ban đầu
+        $quality = 80;
+        $max_webp_size = 5 * 1024 * 1024; // 5MB
+
+        // Tạo tên tệp WebP duy nhất
+        $new_filename = uniqid('option_img_', true) . '.webp';
+        $destination = $upload_dir . $new_filename;
+
+        // Chuyển đổi sang WebP và nén
+        do {
+            // Xóa tệp nếu đã tồn tại
+            if (file_exists($destination)) {
+                unlink($destination);
+            }
+
+            // Chuyển đổi sang WebP
+            if (!imagewebp($source_image, $destination, $quality)) {
+                imagedestroy($source_image);
+                echo json_encode(['success' => false, 'message' => 'Lỗi khi chuyển đổi ảnh sang WebP.']);
+                exit();
+            }
+
+            clearstatcache(true, $destination);
+            $current_size = filesize($destination);
+
+            // Giảm chất lượng nếu kích thước vẫn lớn hơn giới hạn
+            if ($current_size > $max_webp_size && $quality > 10) {
+                $quality -= 10;
+            } else {
+                break;
+            }
+        } while ($current_size > $max_webp_size && $quality > 10);
+
+        // Giải phóng bộ nhớ
+        imagedestroy($source_image);
+
+        // Kiểm tra kích thước cuối cùng
+        if ($current_size > $max_webp_size) {
+            // Xóa tệp WebP nếu không đạt yêu cầu
+            if (file_exists($destination)) {
+                unlink($destination);
+            }
+            echo json_encode(['success' => false, 'message' => 'Không thể nén ảnh dưới 5MB. Vui lòng tải lại với tệp nhỏ hơn hoặc chất lượng thấp hơn.']);
+            exit();
+        }
+
         // Cập nhật đường dẫn ảnh trong cơ sở dữ liệu
-        $sql = "UPDATE items_option SET img = :img WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':img', $filename, PDO::PARAM_STR);
-        $stmt->bindParam(':id', $option_id, PDO::PARAM_INT);
+        try {
+            $sql = "UPDATE items_option SET img = :img WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':img' => $new_filename, ':id' => $option_id]);
 
-        if ($stmt->execute()) {
-            echo json_encode(['success' => true, 'image_path' => 'image/option-img/' . $filename]);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Cập nhật đường dẫn ảnh không thành công']);
+            echo json_encode(['success' => true, 'image_path' => '/image/option-img/' . $new_filename]);
+            exit();
+        } catch (PDOException $e) {
+            // Xóa tệp nếu có lỗi trong cơ sở dữ liệu
+            if (file_exists($destination)) {
+                unlink($destination);
+            }
+            echo json_encode(['success' => false, 'message' => 'Lỗi cập nhật cơ sở dữ liệu: ' . $e->getMessage()]);
+            exit();
         }
     } else {
-        echo json_encode(['success' => false, 'message' => 'Tải lên ảnh không thành công']);
+        echo json_encode(['success' => false, 'message' => 'Dữ liệu không hợp lệ.']);
+        exit();
     }
 } else {
-    echo json_encode(['success' => false, 'message' => 'Phương thức không hợp lệ']);
+    echo json_encode(['success' => false, 'message' => 'Phương thức yêu cầu không được hỗ trợ.']);
+    exit();
 }
 
 // Đóng kết nối
