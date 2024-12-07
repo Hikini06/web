@@ -239,13 +239,20 @@ body {
   text-align: center;
 }
 
-/* Điều hướng */
-
-.dieu-huong {
+/* Điều hướng-------------------------------------------------------------------------------- */
+.filter-and-scrum {
+  margin-top: 1rem;
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.dieu-huong {
+  
+  /* margin-top: 1rem; */
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -289,6 +296,20 @@ body {
 }
 
 
+.sort-dropdown  {
+  /* border: 1px solid var(--text-color-dark); */
+  border-radius: 5px;
+}
+#sort-select {
+  font-size: 0.8rem;
+  color: var(--text-color-dark);
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid var(--text-color-dark);
+}
+#sort-select:hover {
+  cursor: pointer;
+}
 @media (max-width: 768px) {
   .item-info { 
     margin-top: 9rem;

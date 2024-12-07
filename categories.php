@@ -1,4 +1,3 @@
-
 <?php
 require '../config/db-connect.php';
 require_once 'functions.php';
@@ -9,11 +8,12 @@ if (!isset($_GET['subcategory_id'])) {
     exit; // Dừng thực thi mã PHP sau khi chuyển hướng
 }
 
- // Tạo chuỗi truy vấn cho items_per_page nếu có
- $items_per_page_query = '';
- if (isset($_GET['items_per_page'])) {
-     $items_per_page_query = '?items_per_page=' . htmlspecialchars($_GET['items_per_page']);
- }
+// Tạo chuỗi truy vấn cho items_per_page nếu có
+$items_per_page_query = '';
+if (isset($_GET['items_per_page'])) {
+    $items_per_page_query = '?items_per_page=' . htmlspecialchars($_GET['items_per_page']);
+}
+
 // Lấy danh sách subcategories từ bảng subcategories
 $query = $pdo->prepare("SELECT * FROM subcategories");
 $query->execute();
@@ -43,27 +43,28 @@ $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $page = max(1, $page); // Đảm bảo trang >= 1
 $offset = ($page - 1) * $items_per_page;
 
-// Nếu có subcategory_id, truy vấn danh sách sản phẩm từ bảng items_detail
-$total_products = 0;
+// Nếu có subcategory_id, truy vấn danh sách sản phẩm từ bảng items
+$total_items = 0;
 $products = [];
 if ($subcategory_id) {
-    // Đếm tổng số sản phẩm
+    // Đếm tổng số sản phẩm từ bảng items
     $count_query = $pdo->prepare("
         SELECT COUNT(*) AS total
-        FROM items_detail
-        INNER JOIN items ON items_detail.item_id = items.id
-        WHERE items.subcategory_id = :subcategory_id
+        FROM items
+        WHERE subcategory_id = :subcategory_id
     ");
     $count_query->bindValue(':subcategory_id', $subcategory_id, PDO::PARAM_INT);
     $count_query->execute();
-    $total_products = $count_query->fetch(PDO::FETCH_ASSOC)['total'];
+    $total_items = $count_query->fetch(PDO::FETCH_ASSOC)['total'];
 
-    // Truy vấn sản phẩm có phân trang
+    // Truy vấn sản phẩm có phân trang và lấy giá thấp nhất từ items_detail
     $query = $pdo->prepare("
-        SELECT items_detail.*
-        FROM items_detail
-        INNER JOIN items ON items_detail.item_id = items.id
+        SELECT items.id, items.name, items.img, MIN(items_detail.price) AS min_price
+        FROM items
+        LEFT JOIN items_detail ON items.id = items_detail.item_id
         WHERE items.subcategory_id = :subcategory_id
+        GROUP BY items.id, items.name, items.img
+        ORDER BY items.id ASC
         LIMIT :limit OFFSET :offset
     ");
     $query->bindValue(':subcategory_id', $subcategory_id, PDO::PARAM_INT);
@@ -74,23 +75,16 @@ if ($subcategory_id) {
 }
 
 // Tính tổng số trang
-$total_pages = ceil($total_products / $items_per_page);
+$total_pages = ceil($total_items / $items_per_page);
 ?>
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
-    <base href="https://tiemhoamimi.com/">
-    <!-- <base href="http://localhost/web-dm-lum/web/"> -->
+    <!-- <base href="https://tiemhoamimi.com/"> -->
+    <base href="http://localhost/web-dm-lum/web/">
     <link rel="icon" href="image/mimi-logo-vuong.png" type="image/png">
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -108,31 +102,40 @@ $total_pages = ceil($total_products / $items_per_page);
             <p><?= htmlspecialchars($subcategoryInfo['description']) ?></p>
         </div>
     <?php endif; ?>
+
+    <div class="filter-and-scrum">
+        <div class="dieu-huong">
+            <a href="./trang-chu"><h3>Trang chủ</h3></a><i class="fa-solid fa-angles-right"></i>
+            <h3 style="text-decoration: underline;color:var(--text-color)">Danh mục...</h3>
+        </div>
+    </div>
+
     <!-- Categories Filter -->
     <div class="categories-filter-cont">
         <button class="arrow left-arrow"><i class="fa-solid fa-chevron-left"></i></button>
         <div class="categories-filter">
-        <ul>
-            <?php foreach ($subcategories as $subcategory): ?>
-                <li class="<?= $subcategory['id'] === $subcategory_id ? 'active' : '' ?>">
-                    <a href="./danh-muc/<?= htmlspecialchars($subcategory['id']) ?>">
-                        <?= htmlspecialchars($subcategory['name']) ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+            <ul>
+                <?php foreach ($subcategories as $subcategory): ?>
+                    <li class="<?= $subcategory['id'] === $subcategory_id ? 'active' : '' ?>">
+                        <a href="./danh-muc/<?= htmlspecialchars($subcategory['id']) ?>">
+                            <?= htmlspecialchars($subcategory['name']) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         </div>
         <button class="arrow right-arrow"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
+    
     <!-- Categories Products -->
     <div class="categories">
         <?php if (!empty($products)): ?>
             <?php foreach ($products as $product): ?>
                 <div class="product">
-                    <a href="chi-tiet-san-pham/<?= htmlspecialchars($product['id']) ?>">
+                    <a href="san-pham/<?= htmlspecialchars($product['id']) ?>">
                         <img src="image/upload/<?= htmlspecialchars($product['img']) ?>" alt="<?= htmlspecialchars($product['name']) ?>">
                         <h3><?= htmlspecialchars($product['name']) ?></h3>
-                        <p><?= htmlspecialchars(number_format($product['price'])) ?>đ</p>
+                        <p><?= htmlspecialchars(number_format($product['min_price'])) ?>đ</p>
                     </a>
                 </div>
             <?php endforeach; ?>
@@ -177,11 +180,8 @@ $total_pages = ceil($total_products / $items_per_page);
         <?php endif; ?>
     </div>
 
-
-
     <!-- FOOTER -->
     <?php include 'footer.php'; ?>
-
 
     <script src="<?php echo asset('categories.js'); ?>"></script>
     <script>

@@ -197,7 +197,7 @@ if (empty($suggestedProducts)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
     <!-- <base href="https://tiemhoamimi.com/"> -->
-    <base href="http://localhost/web_dm_lum/">
+    <base href="http://localhost/web-dm-lum/web/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -240,13 +240,13 @@ if (empty($suggestedProducts)) {
         <?php else: ?>
             <a href="#"><h3>Danh mục</h3></a><i class="fa-solid fa-angles-right"></i>
         <?php endif; ?>
-        <h3>Sản phẩm...</h3>
+        <h3 style="text-decoration: underline;color:var(--text-color)">Sản phẩm...</h3>
     </div>
     <div class="chuc-nang-loc">
         <!-- Dropdown lọc giá -->
         <div class="sort-dropdown">
             <select id="sort-select" onchange="window.location.href=this.value;">
-                <option value="<?= build_url(['sort' => null, 'page' => null]) ?>" <?php if ($sort === null) echo 'selected'; ?> disabled>-- Lọc giá --</option>
+                <option value="<?= build_url(['sort' => null, 'page' => null]) ?>" <?php if ($sort === null) echo 'selected'; ?> disabled>-- Lọc sản phẩm --</option>
                 <option value="<?= build_url(['sort' => 'asc', 'page' => null]) ?>" <?php if ($sort === 'asc') echo 'selected'; ?>>Giá: Thấp đến Cao</option>
                 <option value="<?= build_url(['sort' => 'desc', 'page' => null]) ?>" <?php if ($sort === 'desc') echo 'selected'; ?>>Giá: Cao đến Thấp</option>
             </select>

@@ -28,14 +28,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5rem;
     width: 100%;
 }
 .product-detail-pic {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
-    padding-top: 4rem;
+    margin-top: 2rem;
     width: 60%;
     /* text-align: center; */
     height: auto;
@@ -406,8 +405,62 @@ body {
     margin-top: 5px;
 }
 
+/* filter-and-scrum ----------------------------------------------------------------------- */
 
-
+.filter-and-scrum {
+    margin-top: 10rem;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dieu-huong {
+    
+    /* margin-top: 1rem; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .dieu-huong i {
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5rem;
+    color: var(--text-color-dark);
+    font-size: 0.6rem;
+  
+  }
+  .dieu-huong a {
+    font-size: 0.75rem;
+    text-decoration: none;
+    color: var(--text-color-dark);
+    font-style: italic;
+  }
+  .dieu-huong h3 {
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--text-color-dark);
+    font-style: italic;
+  }
+  .dieu-huong > a > h3 {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .dieu-huong > a > h3:hover {
+    cursor: pointer;
+    color: var(--text-color);
+  }
 @keyframes fadeOut {
     0% { opacity: 1; }
     80% { opacity: 1; }

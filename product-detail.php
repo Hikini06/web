@@ -51,10 +51,6 @@ foreach ($productOptions as $key => $optionItem) {
     $productOptions[$key] = $optionItem;
 }
 
-
-
-
-
 // Xử lý dữ liệu từ form Quick Buy
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sdt']) && isset($_POST['product_id'])) {
     $sdt = trim($_POST['sdt']);
@@ -98,13 +94,21 @@ try {
         $productName = htmlspecialchars($product['name']);
         $productPrice = number_format($product['price'], 0, ',', '.') . "đ";
         $productImg = htmlspecialchars($product['img']);
-        $currentItemId = $product['id']; // Giả sử bảng items_detail có trường item_id
+        $item_id = $product['item_id']; // Lấy item_id từ items_detail
         $basePrice = $product['price'] ?? 0; // Gán giá trị mặc định nếu NULL
+
+        // Truy vấn lấy subcategory_id từ items
+        $querySub = "SELECT subcategory_id FROM items WHERE id = :item_id LIMIT 1";
+        $stmtSub = $pdo->prepare($querySub);
+        $stmtSub->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+        $stmtSub->execute();
+        $subcategory_id = $stmtSub->fetchColumn();
     } else {
         $productName = "Sản phẩm không tồn tại";
         $productPrice = "0đ";
         $productImg = "default.jpg";
-        $currentItemId = null;
+        $item_id = null;
+        $subcategory_id = null;
         $basePrice = 0; // Giá mặc định khi không có sản phẩm
     }
 } catch (PDOException $e) {
@@ -175,7 +179,7 @@ function getSimilarItems($pdo, $current_id, $item_id, $limit = 4) {
 }
 
 // Lấy danh sách sản phẩm tương tự
-$similarProducts = ($currentItemId !== null) ? getSimilarItems($pdo, $product_id, $currentItemId, 4) : [];
+$similarProducts = ($item_id !== null) ? getSimilarItems($pdo, $product_id, $item_id, 4) : [];
 
 // CHỨC NĂNG LẤY SẢN PHẨM NGẪU NHIÊN
 function getRandomSuggestItems($pdo, $limit = 4) {
@@ -205,15 +209,114 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
     <!-- <base href="https://tiemhoamimi.com/"> -->
-    <base href="http://localhost/web_dm_lum/">
+    <base href="http://localhost/web-dm-lum/web/">
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="stylesheet" href="<?php echo asset('product-detail.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Thêm Font Awesome cho biểu tượng -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS cho dropdown lọc giá nếu cần */
+        .sort-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .sort-dropdown select {
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .productDetailOptionButtonActive {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.5); 
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-popup {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-popup:hover,
+        .close-popup:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .popup-message {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 50%;
+            top: 20px;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .popup-message.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <!-- HEADER ĐI THEO MỌI TRANG -->
     <?php include 'header.php'; ?>
     <!-- HEADER ĐI THEO MỌI TRANG END -->
+
+    <div class="filter-and-scrum">
+        <div class="dieu-huong">
+            <a href="./trang-chu"><h3>Trang chủ</h3></a><i class="fa-solid fa-angles-right"></i>
+            <a href="./danh-muc/<?= htmlspecialchars($subcategory_id) ?>"><h3>Danh mục</h3></a><i class="fa-solid fa-angles-right"></i>
+            <a href="./san-pham/<?= htmlspecialchars($item_id) ?>"><h3>Sản phẩm</h3></a><i class="fa-solid fa-angles-right"></i>
+            <h3 style="text-decoration: underline;color:var(--text-color)">Chi tiết</h3>
+        </div>
+        <div class="chuc-nang-loc">
+            <!-- Dropdown lọc giá nếu cần -->
+            <div class="sort-dropdown">
+                <!-- Có thể thêm các chức năng lọc khác nếu cần -->
+            </div>
+        </div>
+    </div>
 
     <!-- HIỂN THỊ SẢN PHẨM CHÍNH -->
     <div class="product-detail-pic-cont">
@@ -236,28 +339,25 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                     <h3><?php echo number_format($basePrice, 0, ',', '.') . "đ"; ?></h3> <!-- Sử dụng $basePrice thay vì $productPrice -->
                 </div>
 
-                
                 <div class="product-detail-option-cont">
-                <!-- Màu sắc -->
-                <?php if (!empty($groupedOptions['Màu sắc'])): ?>
-                    <div class="product-detail-mau-sac">
-                        <h3 class="product-detail-option-title">Màu sắc</h3>
-                        <div>
-                            <?php foreach ($productOptions as $optionItem): ?>
-                                <?php if ($optionItem['group_name'] === 'Màu sắc'): ?>
-                                    <button
-                                        class="option-button"
-                                        data-add-price="<?php echo $optionItem['add_price']; ?>"
-                                        data-type="color">
-                                        <?php echo htmlspecialchars($optionItem['option_name']); ?>
-                                    </button>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                    <!-- Màu sắc -->
+                    <?php if (!empty($groupedOptions['Màu sắc'])): ?>
+                        <div class="product-detail-mau-sac">
+                            <h3 class="product-detail-option-title">Màu sắc</h3>
+                            <div>
+                                <?php foreach ($productOptions as $optionItem): ?>
+                                    <?php if ($optionItem['group_name'] === 'Màu sắc'): ?>
+                                        <button
+                                            class="option-button"
+                                            data-add-price="<?php echo $optionItem['add_price']; ?>"
+                                            data-type="color">
+                                            <?php echo htmlspecialchars($optionItem['option_name']); ?>
+                                        </button>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
-                    </div>
-                <?php endif; ?>
-
-
+                    <?php endif; ?>
 
                     <!-- Số lượng -->
                     <?php if (!empty($groupedOptions['Số lượng'])): ?>
@@ -315,10 +415,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                             </div>
                         </div>
                     <?php endif; ?>
-
-
                 </div>
-
 
                 <button class="product-detail-pic-text-buynow">Đặt Hàng</button>
                 <div class="product-detail-pic-text-quickbuy">
@@ -327,7 +424,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                         <form id="quick-buy-form" method="post">
                             <!-- Thêm trường ẩn để gửi product_id -->
                             <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-                            
+
                             <input
                                 type="text"
                                 name="sdt"
@@ -360,7 +457,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
         <div class="product-detail-common">
             <?php if (!empty($similarProducts) && is_array($similarProducts)): ?>
                 <?php foreach ($similarProducts as $item): ?>
-                    <a href="chi-tiet-san-pham/<?php echo htmlspecialchars($item['id']); ?>" class="product-detail-common-items">
+                    <a href="/chi-tiet-san-pham/<?php echo htmlspecialchars($item['id']); ?>" class="product-detail-common-items">
                         <img src="image/upload/<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
                         <h3><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h3>
                         <h4><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h4>
@@ -378,7 +475,7 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
         <div class="product-detail-suggest">
             <?php if (!empty($suggestItems) && is_array($suggestItems)): ?>
                 <?php foreach ($suggestItems as $item): ?>
-                    <a href="chi-tiet-san-pham/<?php echo htmlspecialchars($item['id']); ?>" class="product-detail-suggest-items">
+                    <a href="/chi-tiet-san-pham/<?php echo htmlspecialchars($item['id']); ?>" class="product-detail-suggest-items">
                         <img src="image/upload/<?php echo htmlspecialchars($item['img'] ?? 'default.jpg'); ?>" alt="<?php echo htmlspecialchars($item['name'] ?? 'No Name'); ?>">
                         <h3><?php echo htmlspecialchars($item['name'] ?? 'Sản phẩm không có tên'); ?></h3>
                         <h4><?php echo isset($item['price']) ? number_format($item['price'], 0, ',', '.') . 'đ' : '0đ'; ?></h4>
@@ -411,7 +508,6 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
                     
                     <label for="phone">Số điện thoại:</label>
                     <input type="text" id="phone" name="sdt" placeholder="Nhập số điện thoại" required>
-                
 
                     <label for="address">Địa chỉ:</label>
                     <input type="text" id="address" name="diachi" placeholder="Nhập địa chỉ" required>
@@ -562,9 +658,5 @@ $suggestItems = getRandomSuggestItems($pdo, 4);
             }
         });
     </script>
-
-
-
-
 </body>
 </html>
