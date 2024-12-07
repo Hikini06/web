@@ -60,7 +60,7 @@ body {
 
 /* Căn chỉnh hiển thị sản phẩm */
 .items-cont {
-    margin-top: 2rem;
+    margin-top: 1rem;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -241,7 +241,7 @@ body {
 
 /* Điều hướng-------------------------------------------------------------------------------- */
 .filter-and-scrum {
-  margin-top: 1rem;
+  margin-top: 2rem;
   width: 60%;
   margin-left: auto;
   margin-right: auto;

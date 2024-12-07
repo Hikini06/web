@@ -25,6 +25,7 @@ body {
 /* product-detail-pic-cont HIỂN THỊ 1 SẢN PHẨM CHÍNH */
 
 .product-detail-pic-cont {
+    margin-top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,9 +35,7 @@ body {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
-    margin-top: 2rem;
     width: 60%;
-    /* text-align: center; */
     height: auto;
 }
 
