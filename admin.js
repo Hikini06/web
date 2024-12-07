@@ -5,6 +5,299 @@ document.addEventListener('DOMContentLoaded', function() {
     var addOptionForm = document.getElementById('addOptionForm');
     var cancelNewOptionBtn = document.getElementById('cancelNewOptionBtn');
     var saveNewOptionBtn = document.getElementById('saveNewOptionBtn');
+    // Nút "Chỉnh sửa danh mục"
+    var toggleCategoryEditBtn = document.getElementById('toggleCategoryEdit');
+    var categoryEditCont = document.getElementById('categoryEditCont');
+
+    if (toggleCategoryEditBtn && categoryEditCont) {
+        toggleCategoryEditBtn.addEventListener('click', function () {
+            hideAllSections('categoryEdit');
+            if (categoryEditCont.style.display === 'none' || categoryEditCont.style.display === '') {
+                categoryEditCont.style.display = 'block';
+                toggleCategoryEditBtn.setAttribute('aria-expanded', 'true');
+                loadSubcategoriesForEdit();
+            } else {
+                categoryEditCont.style.display = 'none';
+                toggleCategoryEditBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    // Hàm để tải danh sách Subcategories cho phần chỉnh sửa
+    function loadSubcategoriesForEdit() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_subcategories_for_edit.php', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        populateSubcategoriesDropdown(response.data);
+                    } else {
+                        alert('Lỗi: ' + response.message);
+                    }
+                } catch (e) {
+                    alert('Phản hồi từ server không hợp lệ.');
+                }
+            } else {
+                alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+            }
+        };
+        xhr.send();
+    }
+
+    // Hàm để điền dữ liệu vào dropdown Subcategories
+    function populateSubcategoriesDropdown(subcategories) {
+        var dropdown = document.getElementById('editSubcategoriesSelect');
+        dropdown.innerHTML = '<option value="">-- Chọn Subcategory --</option>';
+        subcategories.forEach(function(subcat) {
+            var option = document.createElement('option');
+            option.value = subcat.id;
+            option.textContent = subcat.name;
+            dropdown.appendChild(option);
+        });
+
+        // Thêm sự kiện khi chọn một Subcategory
+        dropdown.addEventListener('change', function() {
+            var selectedSubcatId = this.value;
+            if (selectedSubcatId) {
+                fetchAndDisplayItemsForEdit(selectedSubcatId);
+            } else {
+                clearItemsTable();
+            }
+        });
+    }
+
+    // Hàm để lấy và hiển thị Items dựa trên Subcategory đã chọn
+    function fetchAndDisplayItemsForEdit(subcatId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'get_items_for_edit.php?subcategory_id=' + encodeURIComponent(subcatId), true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        populateItemsTable(response.data);
+                    } else {
+                        alert('Lỗi: ' + response.message);
+                    }
+                } catch (e) {
+                    alert('Phản hồi từ server không hợp lệ.');
+                }
+            } else {
+                alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+            }
+        };
+        xhr.send();
+    }
+
+    // Hàm để điền dữ liệu vào bảng Items
+    function populateItemsTable(items) {
+        var tableBody = document.querySelector('#categoryEditTable tbody');
+        tableBody.innerHTML = '';
+
+        if (items.length > 0) {
+            items.forEach(function(item) {
+                var row = document.createElement('tr');
+                row.setAttribute('data-id', item.id);
+
+                // Cột ID (không chỉnh sửa)
+                var cellId = document.createElement('td');
+                cellId.textContent = item.id;
+                row.appendChild(cellId);
+
+                // Cột Tên Sản Phẩm (chỉnh sửa)
+                var cellName = document.createElement('td');
+                cellName.textContent = item.name;
+                cellName.classList.add('editable');
+                cellName.setAttribute('data-field', 'name');
+                row.appendChild(cellName);
+
+                // Cột Mô Tả (chỉnh sửa)
+                var cellDescription = document.createElement('td');
+                cellDescription.textContent = item.description;
+                cellDescription.classList.add('editable');
+                cellDescription.setAttribute('data-field', 'description');
+                row.appendChild(cellDescription);
+
+                // Cột Ảnh (tải lên ảnh mới)
+                var cellImg = document.createElement('td');
+                var imgElement = document.createElement('img');
+                imgElement.src = item.img ? './image/items-img/' + item.img : 'path/to/default/image.jpg';
+                imgElement.style.width = '50px';
+                imgElement.style.height = '50px';
+                cellImg.appendChild(imgElement);
+
+                var uploadBtn = document.createElement('button');
+                uploadBtn.textContent = 'Tải lên ảnh';
+                uploadBtn.classList.add('upload-item-image-btn');
+                uploadBtn.setAttribute('data-id', item.id);
+                cellImg.appendChild(uploadBtn);
+
+                var fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.style.display = 'none';
+                fileInput.classList.add('upload-item-image-input');
+                fileInput.setAttribute('data-id', item.id);
+                cellImg.appendChild(fileInput);
+
+                row.appendChild(cellImg);
+
+                // Cột Hành Động (Lưu, Hủy)
+                var cellActions = document.createElement('td');
+                var saveBtn = document.createElement('button');
+                saveBtn.textContent = 'Lưu';
+                saveBtn.classList.add('save-item-btn');
+                saveBtn.style.display = 'none';
+
+                var cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Hủy';
+                cancelBtn.classList.add('cancel-item-btn');
+                cancelBtn.style.display = 'none';
+
+                cellActions.appendChild(saveBtn);
+                cellActions.appendChild(cancelBtn);
+                row.appendChild(cellActions);
+
+                tableBody.appendChild(row);
+            });
+
+            initializeCategoryEditEditableCells();
+            initializeCategoryEditUploadButtons();
+        } else {
+            var row = document.createElement('tr');
+            var cell = document.createElement('td');
+            cell.setAttribute('colspan', '5');
+            cell.textContent = 'Không có dữ liệu';
+            row.appendChild(cell);
+            tableBody.appendChild(row);
+        }
+    }
+
+    // Hàm để xóa bảng Items
+    function clearItemsTable() {
+        var tableBody = document.querySelector('#categoryEditTable tbody');
+        tableBody.innerHTML = '';
+    }
+
+    // Hàm khởi tạo các ô Editable trong phần Chỉnh sửa Danh mục
+    function initializeCategoryEditEditableCells() {
+        var editableCells = document.querySelectorAll('#categoryEditTable .editable');
+        editableCells.forEach(function(cell) {
+            cell.addEventListener('click', function() {
+                if (cell.querySelector('input')) return; // Nếu đã có input, không làm gì
+                var currentText = cell.textContent.trim();
+                var field = cell.getAttribute('data-field');
+                var id = cell.parentElement.getAttribute('data-id');
+
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.value = currentText;
+                input.className = 'edit-input';
+                input.style.width = '100%';
+                cell.textContent = '';
+                cell.appendChild(input);
+                input.focus();
+
+                var saveBtn = cell.parentElement.querySelector('.save-item-btn');
+                var cancelBtn = cell.parentElement.querySelector('.cancel-item-btn');
+                saveBtn.style.display = 'inline-block';
+                cancelBtn.style.display = 'inline-block';
+
+                // Xử lý nút Hủy
+                cancelBtn.addEventListener('click', function() {
+                    cell.textContent = currentText;
+                    saveBtn.style.display = 'none';
+                    cancelBtn.style.display = 'none';
+                }, { once: true });
+
+                // Xử lý nút Lưu
+                saveBtn.addEventListener('click', function() {
+                    var newValue = input.value.trim();
+                    if (newValue === '') {
+                        alert('Giá trị không được để trống.');
+                        return;
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'update_item.php', true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            try {
+                                var response = JSON.parse(xhr.responseText);
+                                if (response.success) {
+                                    cell.textContent = newValue;
+                                    saveBtn.style.display = 'none';
+                                    cancelBtn.style.display = 'none';
+                                } else {
+                                    alert('Lỗi: ' + response.message);
+                                }
+                            } catch (e) {
+                                alert('Phản hồi từ server không hợp lệ.');
+                            }
+                        } else {
+                            alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+                        }
+                    };
+                    xhr.send('id=' + encodeURIComponent(id) + '&field=' + encodeURIComponent(field) + '&value=' + encodeURIComponent(newValue));
+                }, { once: true });
+            });
+        });
+    }
+
+    // Hàm để khởi tạo các nút tải lên ảnh trong phần Chỉnh sửa Danh mục
+    function initializeCategoryEditUploadButtons() {
+        var uploadButtons = document.querySelectorAll('.upload-item-image-btn');
+        uploadButtons.forEach(function(button) {
+            button.onclick = null;
+            button.addEventListener('click', function() {
+                var itemId = this.getAttribute('data-id');
+                var fileInput = document.querySelector('.upload-item-image-input[data-id="' + itemId + '"]');
+                if (fileInput) {
+                    fileInput.click();
+                }
+            });
+        });
+
+        var fileInputs = document.querySelectorAll('.upload-item-image-input');
+        fileInputs.forEach(function(input) {
+            input.onchange = null;
+            input.addEventListener('change', function() {
+                var itemId = this.getAttribute('data-id');
+                var file = this.files[0];
+                if (file) {
+                    var formData = new FormData();
+                    formData.append('item_id', itemId);
+                    formData.append('image', file);
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', 'upload_item_image.php', true);
+                    xhr.onload = function () {
+                        if (xhr.status === 200) {
+                            try {
+                                var response = JSON.parse(xhr.responseText);
+                                if (response.success) {
+                                    var imgElement = document.querySelector('tr[data-id="' + itemId + '"] img');
+                                    if (imgElement) {
+                                        imgElement.src = response.image_path + '?' + new Date().getTime(); // Thêm timestamp để tránh cache
+                                    }
+                                    alert('Tải lên ảnh thành công!');
+                                } else {
+                                    alert('Lỗi: ' + response.message);
+                                }
+                            } catch (e) {
+                                alert('Phản hồi từ server không hợp lệ.');
+                            }
+                        } else {
+                            alert('Yêu cầu không thành công. Mã lỗi: ' + xhr.status);
+                        }
+                    };
+                    xhr.send(formData);
+                }
+            });
+        });
+    }
 
     addOptionBtn.addEventListener('click', function() {
         addOptionForm.style.display = 'block';
@@ -615,6 +908,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (except !== 'profile' && profileSelectionCont) {
             profileSelectionCont.style.display = 'none';
             toggleProfileBtn.setAttribute('aria-expanded', 'false');
+        }
+        if (except !== 'categoryEdit' && categoryEditCont) {
+            categoryEditCont.style.display = 'none';
+            toggleCategoryEditBtn.setAttribute('aria-expanded', 'false');
         }
     }
 

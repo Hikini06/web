@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':img' => $new_filename, ':id' => $option_id]);
 
-            echo json_encode(['success' => true, 'image_path' => '/image/option-img/' . $new_filename]);
+            echo json_encode(['success' => true, 'image_path' => './image/option-img/' . $new_filename]);
             exit();
         } catch (PDOException $e) {
             // Xóa tệp nếu có lỗi trong cơ sở dữ liệu

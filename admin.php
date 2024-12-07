@@ -233,7 +233,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin MiMi</title>
-    <base href="http://localhost/web-dm-lum/web/">
+    <!-- <base href="http://localhost/web_dm_lum/"> -->
     <link rel="icon" href="./image/mimi-logo-vuong.png" type="image/png">
     <link rel="stylesheet" href="<?php echo asset('admin.css'); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -264,6 +264,12 @@ try {
         <div class="product-change-bar">
             <button class="product-change-bar-btn sidebar-button" id="toggleProductChange" aria-expanded="false" aria-controls="productChangeCont">
                 Chỉnh sửa sản phẩm
+            </button>
+        </div>
+        <!-- Thêm nút "Chỉnh sửa danh mục" -->
+        <div class="category-edit-bar">
+            <button class="category-edit-bar-btn sidebar-button" id="toggleCategoryEdit" aria-expanded="false" aria-controls="categoryEditCont">
+                Chỉnh sửa danh mục
             </button>
         </div>
     <div class="logout"><a href="logout.php">Đăng xuất</a></div>
@@ -660,6 +666,36 @@ try {
         </div>
     </div>
     <!-- PHẦN QUẢN LÝ SẢN PHẨM END -->
+    
+    <!-- PHẦN CHỈNH SỬA DANH MỤC -->
+    <div class="category-edit-cont" id="categoryEditCont" style="display: none; padding: 20px;">
+        <div class="category-edit">
+            <h2>Chỉnh sửa Danh mục</h2>
+            <!-- Dropdown chọn Subcategories -->
+            <label for="editSubcategoriesSelect">Subcategories:</label>
+            <select id="editSubcategoriesSelect">
+                <option value="">-- Chọn Subcategory --</option>
+                <!-- Các tùy chọn sẽ được chèn bằng JavaScript -->
+            </select>
+            
+            <!-- Bảng hiển thị Items -->
+            <table id="categoryEditTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Mô Tả</th>
+                        <th>Ảnh</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Các dòng Items sẽ được chèn bằng JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- PHẦN CHỈNH SỬA DANH MỤC END -->
 
     <div id="imagePreview" class="image-preview" style="display: none;">
         <img src="" alt="Image Preview">

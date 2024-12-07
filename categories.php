@@ -84,7 +84,7 @@ $total_pages = ceil($total_items / $items_per_page);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tiệm hoa MiMi</title>
     <!-- <base href="https://tiemhoamimi.com/"> -->
-    <base href="http://localhost/web-dm-lum/web/">
+    <base href="http://localhost/web_dm_lum/">
     <link rel="icon" href="image/mimi-logo-vuong.png" type="image/png">
 
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
