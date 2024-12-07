@@ -280,9 +280,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (response.success) {
                                     var imgElement = document.querySelector('tr[data-id="' + itemId + '"] img');
                                     if (imgElement) {
-                                        imgElement.src = response.image_path + '?' + new Date().getTime(); // Thêm timestamp để tránh cache
+                                        imgElement.src = response.image_path + '?' + new Date().getTime();
                                     }
-                                    alert('Tải lên ảnh thành công!');
+                                    // alert('Tải lên ảnh thành công!');
                                 } else {
                                     alert('Lỗi: ' + response.message);
                                 }
@@ -298,6 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
 
     addOptionBtn.addEventListener('click', function() {
         addOptionForm.style.display = 'block';
