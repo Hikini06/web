@@ -14,7 +14,7 @@
         font-size: 0.9rem;
     }
     .categories-filter-cont {
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
     .subcategory-info {
         margin-top: 9rem;
@@ -56,7 +56,15 @@
     .categories .product:nth-child(-n+10) {
         display: block;
     }
-
+    .filter-and-scrum {
+    margin-top: 2rem;
+    width: 100%;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    }
 
 }
 

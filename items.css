@@ -398,6 +398,10 @@ body {
     align-items: center;
     margin: 0px;
   }
+  .filter-and-scrum {
+    margin-top: 2rem;
+    width: 95%;
+}
 }
 @media (min-width: 769px) and (max-width: 1024px) {
   .items {

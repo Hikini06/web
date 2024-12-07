@@ -31,6 +31,7 @@ body {
     align-items: center;
     width: 100%;
 }
+
 .product-detail-pic {
     display: flex;
     gap: 2rem;
@@ -591,8 +592,7 @@ body {
     /* Điều chỉnh container chính */
     .product-detail-pic-cont {
         flex-direction: column;
-        margin-top: 6rem; /* Giảm khoảng cách trên */
-        padding: 1rem; /* Thêm padding để tạo không gian cho nội dung */
+        margin-top: 0rem;
     }
 
     /* Điều chỉnh layout của phần sản phẩm */
@@ -764,6 +764,15 @@ body {
     }
     .product-detail-suggest-cont-title {
         text-align: center;
+    }
+    .filter-and-scrum {
+        margin-top: 8rem;
+        width: 100%;
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 }
 
