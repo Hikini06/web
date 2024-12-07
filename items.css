@@ -399,9 +399,24 @@ body {
     margin: 0px;
   }
   .filter-and-scrum {
+    flex-direction: column;
+    display: flex;
     margin-top: 2rem;
     width: 95%;
-}
+  }
+  .dieu-huong {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .chuc-nang-loc {
+    margin-right: 1.5rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
   .items {
